@@ -1,0 +1,3501 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<!-- 파일을 새로 올렸을 때 브라우저가 예전 파일을 계속 쓰지 않도록 -->
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>군청년 바라지 안내서 · 서울여행</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@600;700&family=Gowun+Batang:wght@400;700&family=Gowun+Dodum&family=Pretendard&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<style>
+:root{
+  /* 가볍집 방문자앱과 같은 색 (서늘한 초록빛 회백 + 세이지 강조) */
+  --bg:#F1F2EC; --paper:#F1F2EC; --paper-2:#FBFBF7;
+  --ink:#2B2E28; --ink-soft:#5A5F54; --line:#DBDBCF;
+  --sage:#5B7355; --sage-soft:#8A9B82; --sage-wash:#E6EAE0;
+  --accent:#5B7355; --maxw:560px;
+  --shadow:0 1px 0 rgba(43,46,40,.04), 0 10px 30px -18px rgba(43,46,40,.28);
+  --r:18px;
+}
+*{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+html,body{margin:0; background:var(--bg);}
+body{ color:var(--ink); font-family:"Pretendard",-apple-system,system-ui,sans-serif;
+  font-size:16px; line-height:1.75; letter-spacing:-.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; }
+.wrap{ max-width:var(--maxw); margin:0 auto; min-height:100vh; background:var(--paper); position:relative; display:flex; flex-direction:column; }
+.icon{ display:inline-flex; width:1em; height:1em; vertical-align:-0.15em; }
+.icon svg{ width:100%; height:100%; }
+.page{ display:none; flex:1; flex-direction:column; min-height:0; }
+.page.active{ display:flex; animation:fadeIn .35s ease; }
+@keyframes fadeIn{ from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);} }
+.page-scroll{ flex:1; overflow-y:auto; padding:30px 26px 18px; -webkit-overflow-scrolling:touch; }
+.page-footer{ flex:none; padding:16px 26px calc(16px + env(safe-area-inset-bottom)); background:linear-gradient(180deg, rgba(250,249,245,0), var(--paper) 40%); }
+/* 빠른 찾아보기 — 화면 아래 고정 탭바 (가볍집 방문자앱과 같은 형태) */
+.quick-tabbar{ flex:none; display:flex; padding:8px 6px calc(8px + env(safe-area-inset-bottom,0px));
+  border-top:1px solid var(--line); background:rgba(250,249,245,.94); backdrop-filter:blur(10px); }
+.quick-tab{ flex:1; background:none; border:0; cursor:pointer; display:flex; flex-direction:column;
+  align-items:center; gap:4px; padding:6px 2px; color:var(--ink-soft); font-family:inherit;
+  font-size:11px; font-weight:600; transition:.2s; border-radius:12px; }
+.quick-tab svg{ width:23px; height:23px; fill:none; stroke:currentColor; stroke-width:1.7;
+  stroke-linecap:round; stroke-linejoin:round; }
+.quick-tab.on{ color:var(--sage); }
+.quick-tab.on svg{ stroke-width:2; }
+.quick-content{ margin-top:4px; }
+.quick-content .step-slide{ display:block !important; }
+.kicker{ font-size:11px; font-weight:600; letter-spacing:.24em; color:var(--ink-soft); margin-bottom:18px; text-transform:uppercase; }
+h1.title{ font-family:"Gowun Batang",serif; font-size:23px; font-weight:600; margin:0 0 12px; color:var(--ink); line-height:1.5; letter-spacing:-.01em; }
+h2.subtitle{ font-family:"Gowun Batang",serif; font-size:16px; font-weight:600; margin:28px 0 13px; color:var(--ink); display:flex; align-items:center; gap:8px; padding-bottom:10px; border-bottom:1px solid var(--line); }
+p.lead{ font-size:13px; color:var(--ink-soft); margin:0 0 26px; line-height:1.7; }
+.card{ background:var(--paper-2); border:1px solid var(--line); border-radius:var(--r); padding:16px 18px; margin-bottom:14px; box-shadow:var(--shadow); }
+.kitchen-link{ display:flex; align-items:center; gap:12px; padding:12px 14px; border:1px solid var(--line); border-radius:4px; text-decoration:none; color:var(--ink); margin-bottom:18px; }
+.kitchen-link:active{ opacity:.65; }
+.kitchen-link .kicon{ flex:none; width:34px; height:34px; border-radius:50%; border:1px solid var(--line); display:flex; align-items:center; justify-content:center; color:var(--ink); }
+.kitchen-link .kicon svg{ width:16px; height:16px; }
+.kitchen-link .ktext{ flex:1; display:flex; flex-direction:column; }
+.kitchen-link .ktitle{ font-size:14px; font-weight:600; }
+.kitchen-link .ktag{ font-size:11.5px; color:var(--ink-soft); margin-top:2px; }
+.kitchen-link .kchev{ flex:none; width:14px; height:14px; color:var(--ink-soft); }
+.kitchen-link .kchev svg{ width:100%; height:100%; }
+.card p{ font-size:14px; margin:0 0 10px; color:var(--ink); line-height:1.7; }
+.card p:last-child{ margin-bottom:0; }
+.opt-group{ margin-bottom:20px; }
+.opt-group:last-child{ margin-bottom:0; }
+.opt-group-label{ font-family:"Gowun Batang",serif; font-size:13px; font-weight:700; color:var(--sage); margin-bottom:8px; padding-left:4px; }
+.opt-group-head{ display:flex; justify-content:space-between; align-items:center; gap:8px; margin-bottom:8px; }
+.opt-group-head .opt-group-label{ margin-bottom:0; flex:1; }
+.opt-group-del{ flex:none; border:1px solid #c0392b; background:none; color:#c0392b; font-size:11px; padding:4px 9px; border-radius:20px; cursor:pointer; }
+.opt-add-group-row{ display:flex; flex-wrap:wrap; gap:6px; padding:14px 2px 4px; align-items:center; border-top:1px dashed var(--line); margin-top:10px; }
+.opt-add-group-row input{ flex:1; min-width:160px; }
+.opt-add-group-row button{ flex:none; }
+.opt-item{ display:flex; align-items:center; justify-content:space-between; gap:12px; background:var(--paper-2); border:1px solid var(--line); border-radius:12px; padding:14px 16px; margin-bottom:8px; box-shadow:var(--shadow); cursor:pointer; transition:background .15s ease, border-color .15s ease, opacity .15s ease; }
+.opt-item:active{ opacity:.6; }
+.opt-radio{ width:16px; height:16px; border-radius:50%; border:1.4px solid #C7C4B4; flex:none; position:relative; order:2; }
+.opt-item.sel .opt-radio{ border-color:var(--sage); }
+.opt-item.sel .opt-radio::after{ content:''; position:absolute; inset:3.5px; border-radius:50%; background:var(--sage); }
+.opt-text{ font-size:14.5px; font-weight:500; color:var(--ink); }
+.opt-item.sel{ border-color:var(--sage); background:var(--sage-wash); }
+.opt-item.sel .opt-text{ font-weight:700; }
+.btn-next{ display:block; width:100%; padding:16px; text-align:center; background:var(--sage); color:#fff; border:none; border-radius:14px; font-size:15px; font-weight:700; letter-spacing:.01em; cursor:pointer; }
+.btn-next:disabled{ background:#D8D6C8; color:#fff; }
+.btn-back{ display:inline-flex; align-items:center; gap:4px; background:none; border:none; color:var(--ink-soft); font-size:12.5px; padding:2px 0 18px; cursor:pointer; }
+.btn-back .icon{ font-size:11px; }
+.intro-quote{ border-left:2px solid var(--ink); padding:2px 0 2px 18px; margin:16px 0 4px; }
+.intro-quote p{ font-size:14.5px; margin:0 0 15px; color:var(--ink); line-height:1.75; }
+.sec-title{ display:flex; align-items:center; gap:9px; font-family:"Gowun Batang",serif; font-size:14.5px; font-weight:600; color:var(--ink); margin:24px 0 12px; }
+.recipe-block{ background:var(--paper-2); border-radius:8px; padding:14px 16px; margin-bottom:12px; }
+.recipe-block ul.plain{ margin-bottom:0; }
+.recipe-block ul.plain li:last-child{ margin-bottom:0; }
+.prep-group{ padding-bottom:18px; margin-bottom:18px; border-bottom:1px solid var(--line); }
+.prep-group:last-child{ padding-bottom:0; margin-bottom:0; border-bottom:none; }
+.prep-group-label{ font-family:"Gowun Batang",serif; font-size:14px; font-weight:600; color:var(--ink); margin:0 0 8px; }
+.sec-title .icon{ font-size:14px; color:var(--ink-soft); flex:none; }
+ul.plain{ margin:0; padding-left:0; list-style:none; }
+ul.plain li{ font-size:14px; margin-bottom:8px; color:var(--ink); padding-left:14px; position:relative; line-height:1.6; }
+ul.plain li::before{ content:''; position:absolute; left:0; top:9px; width:4px; height:4px; border-radius:50%; background:var(--ink-soft); }
+.meta-row{ display:flex; margin-bottom:20px; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+.meta-chip{ display:flex; align-items:center; gap:8px; color:var(--ink); font-size:12.5px; font-weight:600; padding:13px 0; flex:1; justify-content:center; }
+.meta-chip + .meta-chip{ border-left:1px solid var(--line); }
+.meta-chip .icon{ font-size:14px; color:var(--ink-soft); }
+.recipe-mini{ display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid var(--line); padding:13px 2px; cursor:pointer; }
+.recipe-mini .rm-left{ display:flex; align-items:center; gap:11px; }
+.recipe-mini .rm-dot{ width:4px; height:4px; border-radius:50%; background:var(--ink-soft); flex:none; }
+.recipe-mini .rm-name{ font-size:14px; font-weight:500; }
+.recipe-mini .rm-arrow{ color:var(--ink-soft); font-size:12px; display:flex; align-items:center; gap:3px; }
+.tt-card{ background:var(--paper-2); border:1px solid var(--line); border-radius:var(--r); padding:14px 16px; margin-bottom:12px; box-shadow:var(--shadow); }
+.tt-card .day-label{ margin:0 0 8px; padding-bottom:8px; border-bottom:1px solid var(--line); }
+.tt-card .tt-row:last-child{ border-bottom:none; padding-bottom:0; }
+.day-label{ display:block; font-family:"Gowun Batang",serif; font-size:13.5px; font-weight:700; margin:20px 0 10px; color:var(--sage); }
+.tt-row{ display:flex; gap:10px; padding:10px 0; border-bottom:1px solid var(--line); font-size:13.5px; align-items:flex-start; }
+.tt-row:last-child{ border-bottom:none; }
+.tt-time-wrap{ flex:0 0 62px; min-width:62px; max-width:62px; box-sizing:border-box; }
+.tt-time{ flex:0 0 62px; min-width:62px; max-width:62px; box-sizing:border-box; color:var(--sage); font-weight:700; font-size:11.5px; line-height:1.45; white-space:normal; overflow-wrap:anywhere; padding-top:2px; }
+.tt-time-wrap .tt-time{ flex:none; width:100%; max-width:none; min-width:0; } /* 감싸개 안에서는 감싸개 폭을 그대로 채움 */
+.tt-dur-f{ font-size:10px; color:var(--ink-soft); margin-top:2px; }
+.tt-content{ flex:1 1 0; line-height:1.5; min-width:0; overflow-wrap:break-word; word-break:break-word; padding-top:1px; }
+.tt-content .tt-activity{ display:inline-block; }
+.tt-content b.prog{ color:var(--ink); font-weight:700; }
+.tt-place-f-divider{ display:inline-block; margin:0 8px; color:var(--line); font-weight:400; }
+.tt-place-f{ font-size:12.5px; font-weight:400; color:var(--ink-soft); }
+.tt-content.tt-newline .tt-extra{ display:block; margin-top:3px; }
+.tt-content.tt-newline .tt-extra > .tt-place-f-divider:first-child{ display:none; }
+.tt-row-edit{ position:relative; cursor:default; background:transparent; flex-wrap:wrap; }
+.tt-row-edit.tt-dragging{ opacity:.4; }
+.tt-drag-handle{ flex:none; cursor:grab; color:var(--ink-soft); font-size:15px; padding:2px 4px 0 0; user-select:none; touch-action:none; }
+.tt-row-edit [contenteditable]{ outline:1px dashed var(--sage-soft); outline-offset:2px; border-radius:3px; cursor:text; min-width:20px; display:inline-block; word-break:break-word; overflow-wrap:anywhere; }
+.tt-row-edit [contenteditable]:focus{ outline:2px solid var(--sage); background:#fff; }
+.tt-row-edit .tt-content{ min-width:120px; } /* 좁은 화면에서 다른 요소들에 눌려 세로로 찌그러지지 않도록 최소폭 확보 */
+.tt-del-btn{ flex:none; align-self:flex-start; border:1px solid var(--line); background:var(--paper-2); color:var(--ink-soft); font-size:10.5px; padding:3px 9px; border-radius:20px; cursor:pointer; font-family:inherit; margin-left:6px; white-space:nowrap; }
+.tt-add-btn{ margin-top:6px; }
+.tt-note-row{ display:flex; align-items:baseline; gap:6px; margin-top:5px; flex-wrap:wrap; }
+.tt-note-label{ flex:none; font-size:11px; color:var(--sage); font-weight:700; }
+.tt-note-row .tt-place-f{ min-width:60px; }
+.tt-row-edit [contenteditable]:empty::before{ content:attr(data-ph); color:var(--ink-soft); opacity:.55; }
+
+.footer-link{ display:flex; align-items:center; justify-content:space-between; padding:17px 2px; margin-top:24px; border-top:1px solid var(--line); border-bottom:1px solid var(--line); color:var(--ink); font-size:13.5px; font-weight:600; cursor:pointer; }
+.footer-link .icon{ font-size:12px; color:var(--ink-soft); }
+.foot-note{ text-align:center; font-size:11px; color:var(--ink-soft); margin-top:28px; opacity:.7; padding-bottom:6px; }
+.empty-note{ color:var(--ink-soft); font-size:13.5px; padding:6px 0; }
+/* 스텝(1p씩 넘기기) 네비게이션 */
+.step-track{ flex:1; display:flex; flex-direction:column; min-height:0; }
+.step-slide{ display:none; flex-direction:column; flex:1; overflow-y:auto; -webkit-overflow-scrolling:touch; padding:30px 26px 18px; min-height:0; }
+.step-slide.active{ display:flex; animation:fadeIn .3s ease; }
+.step-count{ font-size:11px; color:var(--ink-soft); font-weight:600; letter-spacing:.06em; margin-bottom:4px; }
+.step-dots{ display:flex; justify-content:center; gap:6px; margin-bottom:12px; }
+.step-dot{ width:6px; height:6px; border-radius:50%; background:var(--line); transition:.25s ease; }
+.step-dot.on{ width:18px; border-radius:3px; background:var(--sage); }
+.step-btnrow{ display:flex; gap:10px; }
+.step-btnrow .btn-next{ flex:1; margin:0; }
+.step-prev-btn{ flex:1; padding:16px; text-align:center; background:none; border:1px solid var(--line); color:var(--ink); border-radius:3px; font-size:14.5px; font-weight:600; cursor:pointer; }
+.step-prev-btn:active, .step-btnrow .btn-next:active{ opacity:.7; }
+.step-placeholder{ background:var(--paper-2); border-radius:3px; padding:16px; font-size:13px; color:var(--ink-soft); line-height:1.7; }
+/* admin */
+body.admin-on .adm-toolbar{ display:flex; }
+.adm-toolbar{ display:none; flex-wrap:wrap; row-gap:8px; column-gap:10px; padding:10px 16px; background:#FFF6D8; border-bottom:1px solid #E9DDA8; font-size:12px; align-items:center; }
+.adm-toolbar > *{ flex:none; min-width:0; }
+.adm-toolbar > span:first-child{ font-weight:700; width:100%; margin-bottom:2px; }
+.adm-toolbar button{ white-space:nowrap; padding:7px 12px; border:1px solid #C9B96A; background:#fff; border-radius:20px; font-family:inherit; font-size:11.5px; cursor:pointer; }
+.adm-program{ white-space:nowrap; }
+.adm-program select{ max-width:150px; }
+.adm-toolbar button{ font-size:11.5px; padding:5px 10px; border-radius:14px; border:1px solid var(--ink); background:#fff; cursor:pointer; }
+.admin-editrow{ display:flex; gap:6px; align-items:center; padding:8px 0; border-bottom:1px dashed var(--line); }
+.admin-editrow input{ flex:1; min-width:0; }
+.admin-editgroup{ margin-bottom:16px; padding-bottom:8px; border-bottom:2px solid var(--line); }
+.admin-editgroup .ce-group{ width:100%; font-weight:700; margin-bottom:4px; }
+.re-label{ display:block; font-size:11.5px; color:var(--ink-soft); margin:10px 0 3px; font-weight:600; }
+.re-input{ width:100%; box-sizing:border-box; padding:8px 10px; border:1px solid var(--line); border-radius:6px; font-family:inherit; font-size:13px; }
+.adm-program{ font-size:12px; display:inline-flex; align-items:center; gap:5px; }
+.adm-program select{ font-size:12px; padding:3px 6px; border-radius:6px; border:1px solid var(--line); font-family:inherit; }
+/* '내 봉사' 화면 — 이번 봉사를 위에 모으고, 참고 정보는 아래로 */
+.home-now{ background:var(--paper-2); border:2px solid var(--sage); border-radius:var(--r);
+  padding:18px; margin-bottom:10px; box-shadow:var(--shadow); }
+.home-badge{ display:inline-block; background:var(--sage); color:#fff; font-size:10.5px;
+  font-weight:700; padding:3px 10px; border-radius:20px; margin-bottom:10px; }
+.home-when{ font-family:"Gowun Batang",serif; font-size:19px; font-weight:700; line-height:1.4; }
+.home-cat{ font-size:12px; color:var(--ink-soft); margin-top:2px; }
+.home-lines{ margin-top:12px; padding-top:10px; border-top:1px solid var(--line); }
+.home-line{ display:flex; gap:8px; font-size:13.5px; padding:4px 0; }
+.home-line b{ color:var(--sage); flex:none; min-width:34px; }
+.home-cap{ font-size:11.5px !important; color:var(--sage); font-weight:700; margin-bottom:6px !important; }
+.soft-body{ color:var(--ink-soft); font-size:13px; margin-top:4px !important; white-space:pre-wrap; }
+.home-divider{ display:flex; align-items:center; gap:10px; margin:22px 0 12px;
+  color:var(--ink-soft); font-size:11.5px; }
+.home-divider::before,.home-divider::after{ content:''; flex:1; height:1px; background:var(--line); }
+.home-mini{ background:var(--paper-2); border:1px solid var(--line); border-radius:12px;
+  padding:13px 16px; margin-bottom:8px; }
+.home-mini .t{ font-size:13.5px; font-weight:600; margin-bottom:2px; }
+.home-mini .d{ font-size:12.5px; color:var(--ink-soft); }
+.home-mini-row{ display:flex; align-items:center; justify-content:space-between; gap:10px; }
+.home-mini-txt{ flex:1; min-width:0; }
+.notify-btn{ flex:none; display:flex; flex-direction:column; align-items:center; gap:2px; cursor:pointer; color:var(--sage); }
+.notify-ring{ width:34px; height:34px; border-radius:50%; border:1px solid var(--sage-soft); display:flex; align-items:center; justify-content:center; }
+.notify-ring svg{ width:17px; height:17px; fill:none; stroke:currentColor; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; }
+.notify-lb{ font-size:9.5px; font-weight:600; }
+.notify-btn:hover .notify-ring, .notify-btn:active .notify-ring{ background:var(--sage-wash); }
+.ny-event-box{ background:var(--sage-wash); border:1px solid var(--sage-soft); border-radius:10px; padding:10px 13px; margin-bottom:14px; }
+.ny-event-label{ font-size:10.5px; color:var(--sage); font-weight:700; margin-bottom:3px; }
+.ny-event-title{ font-size:13.5px; font-weight:600; color:var(--ink); }
+.ny-check-row label{ display:flex; gap:9px; align-items:flex-start; font-size:12.5px; color:var(--ink); padding:9px 0; border-bottom:1px solid var(--line); line-height:1.5; cursor:pointer; }
+.ny-check-row label:last-child{ border-bottom:none; }
+.ny-check-row input[type=checkbox]{ margin-top:2px; flex:none; width:16px; height:16px; accent-color:var(--sage); }
+.notify-btn:hover, .notify-btn:active{ background:var(--sage-wash); }
+/* 활동·준비물 아이콘(메인앱과 같은 원형 아이콘) */
+.act-num-circle{ flex:none; width:34px; height:34px; border-radius:50%; background:none; border:1px solid var(--line); color:var(--ink); display:flex; align-items:center; justify-content:center; margin-top:2px; }
+.act-num-circle svg{ width:18px; height:18px; fill:none; stroke:currentColor; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; }
+.act-row{ display:flex; gap:12px; align-items:flex-start; padding:13px 0; border-bottom:1px solid var(--line); }
+.act-row:last-child{ border-bottom:none; }
+.act-row .act-ct{ flex:1; min-width:0; }
+.act-row .act-ct b{ display:block; font-size:14.5px; font-weight:600; }
+.act-row .act-ct .desc{ font-size:12.5px; color:var(--ink-soft); margin-top:2px; }
+.prep-ic-circle{ flex:none; width:30px; height:30px; border-radius:50%; background:none; border:1px solid var(--line); display:flex; align-items:center; justify-content:center; color:var(--ink-soft); }
+.prep-ic-circle svg{ width:16px; height:16px; fill:none; stroke:currentColor; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; }
+.prep-row-ic{ display:flex; align-items:flex-start; gap:12px; padding:13px 0; border-bottom:1px solid var(--line); }
+.prep-row-ic:last-child{ border-bottom:none; }
+.prep-row-ic .prep-ct{ flex:1; min-width:0; }
+.prep-row-ic .prep-ct b{ display:block; font-size:14.5px; font-weight:600; }
+.prep-row-ic .prep-ct .desc{ font-size:12.5px; color:var(--ink-soft); margin-top:2px; }
+.icon-pick{ display:flex; flex-wrap:wrap; gap:6px; margin-top:6px; }
+.icon-pick button{ width:32px; height:32px; border-radius:50%; border:1px solid var(--line); background:#fff; color:var(--ink-soft); display:flex; align-items:center; justify-content:center; cursor:pointer; padding:0; }
+.icon-pick button svg{ width:16px; height:16px; fill:none; stroke:currentColor; stroke-width:1.6; }
+.icon-pick button.on{ border-color:var(--sage); background:var(--sage-wash); color:var(--sage); }
+.preview-note{ display:flex; gap:10px; align-items:flex-start; background:#F3E4D8; border:1px solid #D9B79E; border-radius:12px; padding:13px 15px; margin-bottom:20px; }
+.preview-note .pn-ico{ flex:none; width:20px; height:20px; border-radius:50%; background:#C0876A; color:#fff; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; margin-top:1px; }
+.preview-note .pn-txt{ font-size:12.5px; color:#6B3E24; line-height:1.6; }
+.preview-note .pn-txt b{ color:#4A2814; }
+/* 화면에서 바로 고치기 — 고칠 수 있는 글자는 점선으로 표시 */
+body.admin-on .plain [contenteditable]{ outline:1px dashed var(--sage-soft); outline-offset:3px; border-radius:3px; min-width:24px; display:inline-block; }
+body.admin-on .prep-group-label[contenteditable]{ outline:1px dashed var(--sage-soft); outline-offset:3px; border-radius:3px; }
+.inline-del{
+  margin-top:8px; width:32px; height:32px; border-radius:50%;
+  border:1px solid var(--line); background:var(--paper-2); color:var(--ink-soft);
+  display:flex; align-items:center; justify-content:center; font-size:13px;
+  cursor:pointer; font-family:inherit; transition:.15s ease;
+}
+.inline-del:hover, .inline-del:active{ border-color:#c0876a; color:#c0876a; background:#fff; }
+.recipe-item-edit{ display:flex; align-items:center; gap:8px; padding-left:0 !important; }
+.recipe-item-edit::before{ display:none; }
+.recipe-item-edit > span[contenteditable]{ flex:1; min-width:0; }
+.recipe-item-edit .inline-del{ width:26px; height:26px; font-size:11px; margin-top:0; flex:none; }
+.admin-add-btn{
+  margin-top:10px; width:100%; padding:11px 14px; border:1px solid var(--sage-soft);
+  border-radius:24px; background:var(--paper-2); font-size:12.5px; font-weight:600;
+  letter-spacing:.02em; cursor:pointer; color:var(--sage);
+  text-align:center; box-shadow:0 1px 2px rgba(43,46,40,.05);
+  transition:.15s ease;
+}
+.admin-add-btn:hover, .admin-add-btn:active{ background:var(--sage-wash); border-color:var(--sage); box-shadow:0 2px 6px rgba(91,115,85,.14); }
+.meal-pick{ display:flex; flex-wrap:wrap; gap:6px; margin-top:4px; }
+.meal-pick-item{ display:flex; align-items:center; gap:5px; border:1px solid var(--line); border-radius:20px; padding:5px 11px; font-size:12.5px; cursor:pointer; background:#fff; }
+.meal-pick-item input{ margin:0; }
+.re-textarea{ width:100%; box-sizing:border-box; padding:8px 10px; border:1px solid var(--line); border-radius:6px; font-family:inherit; font-size:13px; line-height:1.6; resize:vertical; }
+.admin-editrow input{ font-size:12.5px; padding:6px 8px; border:1px solid var(--line); border-radius:6px; }
+.admin-editrow input.time{ width:56px; }
+.admin-editrow input.content{ flex:1; min-width:60px; }
+.admin-editrow input.place{ width:70px; }
+.admin-editrow button.del{ border:1px solid #c0392b; color:#c0392b; background:#fff; border-radius:6px; padding:4px 7px; font-size:11px; cursor:pointer; }
+#adminBadge{ position:fixed; top:8px; right:8px; font-size:10px; background:#0002; color:#fff; padding:4px 8px; border-radius:10px; z-index:50; opacity:.4; }
+.modal{ position:fixed; inset:0; background:rgba(20,20,18,.55); z-index:100; display:none; align-items:flex-end; justify-content:center; }
+.modal.show{ display:flex; }
+.modal-box{ width:100%; max-width:var(--maxw); background:#fff; border-radius:16px 16px 0 0; padding:22px 22px calc(22px + env(safe-area-inset-bottom)); max-height:85vh; overflow-y:auto; }
+.modal-box h3{ font-family:"Gowun Batang",serif; margin:0 0 4px; font-size:19px; }
+.m-actions{ display:flex; gap:10px; margin-top:18px; }
+.m-actions button{ flex:1; padding:12px; border-radius:8px; border:none; font-size:14px; cursor:pointer; }
+.btn-cancel{ background:var(--line); color:var(--ink); }
+.btn-ok{ background:var(--ink); color:#fff; }
+/* 문구 수정 모드 (동기화되지 않는 서브앱 전용 텍스트만 대상) */
+#secretTapZone{ position:fixed; top:0; right:0; width:52px; height:52px; z-index:999; }
+body.text-edit-on [data-editable-key]{
+  outline:1px dashed #B7B29E; outline-offset:3px; border-radius:2px; cursor:text;
+}
+body.text-edit-on [data-editable-key]:focus{ outline:2px solid var(--ink); background:#fff; }
+body.admin-on .opt-text[contenteditable]{ outline:1.5px dashed #C9C4B4; border-radius:3px; padding:2px 4px; margin:-2px -4px; cursor:text; }
+body.admin-on .opt-text[contenteditable]:focus{ outline:2px solid var(--ink); background:#fff; }
+.opt-del{ flex:none; order:3; border:1px solid var(--line); background:none; color:var(--ink-soft); font-size:11px; padding:4px 9px; border-radius:20px; cursor:pointer; }
+.opt-add-row{ display:flex; flex-wrap:wrap; gap:6px; padding:12px 2px 4px; align-items:center; }
+.opt-add-row input[type="text"]{ flex:1 1 160px; min-width:120px; padding:9px 10px; border:1px solid var(--line); border-radius:3px; font-family:'Pretendard'; font-size:13px; background:#fff; }
+.opt-add-row select{ padding:9px 6px; border:1px solid var(--line); border-radius:3px; font-family:'Pretendard'; font-size:12.5px; background:#fff; }
+.opt-add-row button{ flex:none; padding:9px 14px; border:none; border-radius:3px; background:var(--ink); color:#fff; font-family:'Pretendard'; font-size:13px; cursor:pointer; }
+
+/* ============================================================
+   UI/UX 패쉱 v1 — 관리자 입닥 편의성 / 반응형 미세조정 / 지밀리홤 톤앀매니
+   ============================================================ */
+
+/* ---------- 1. 관리자 편집 화맩 — 입닥 편의성 ---------- */
+.re-input, .re-textarea, .admin-editrow input, .opt-add-row input[type="text"] {
+  min-height: 40px;
+  transition: border-color .15s ease, box-shadow .15s ease;
+}
+.re-input:focus, .re-textarea:focus,
+.admin-editrow input:focus, .opt-add-row input:focus {
+  outline: none;
+  border-color: var(--sage);
+  box-shadow: 0 0 0 3px var(--sage-wash);
+}
+.re-label .req-mark { color:#B5543E; font-size:11px; margin-left:4px; }
+.status-chip { display:inline-flex; align-items:center; gap:4px; font-size:11px; font-weight:700;
+  padding:4px 10px; border-radius:20px; flex:none; }
+.status-chip.ok { background:#E4EFE0; color:#3C6B33; }
+.status-chip.pending { background:#FFF3D6; color:#8A6A1D; }
+.status-chip.fail { background:#FBE3DE; color:#B5543E; }
+.admin-add-btn, .m-actions button { min-height: 46px; }
+body.admin-on [contenteditable]:focus,
+body.admin-on .opt-text[contenteditable]:focus,
+body.text-edit-on [data-editable-key]:focus {
+  background: #FBFBF3;
+  outline: 2px solid var(--sage);
+}
+
+/* ---------- 2. 반응형 미세조정 ---------- */
+.quick-tab svg {
+  width: clamp(20px, 6vw, 26px);
+  height: clamp(20px, 6vw, 26px);
+}
+.quick-tab { min-height: 48px; }
+.opt-add-row button, .opt-add-group-row button,
+.admin-editrow button, .quick-tab, .step-prev-btn, .btn-next {
+  min-height: 44px;
+}
+@supports not (backdrop-filter: blur(1px)) {
+  .quick-tabbar { background: rgba(250,249,245,.98); }
+}
+@media (max-width: 360px) {
+  .page-scroll, .step-slide { padding-left: 18px; padding-right: 18px; }
+  h1.title { font-size: 20px; }
+}
+
+/* ---------- 3. 지밀리홤 톤앀매니 강화 ---------- */
+.card, .tt-card, .home-now, .home-mini, .recipe-block {
+  position: relative;
+  background: linear-gradient(165deg, #FBFBF7 0%, #F3F1E6 100%);
+  box-shadow: 0 2px 5px rgba(120,100,50,.08), 0 12px 26px -16px rgba(90,80,40,.24);
+  overflow: hidden;
+}
+.card::after, .tt-card::after, .home-now::after {
+  content: "";
+  position: absolute; inset: 0;
+  background-image:
+    radial-gradient(circle at 15% 20%, rgba(150,130,80,.045) 0, transparent 35%),
+    radial-gradient(circle at 85% 85%, rgba(150,130,80,.035) 0, transparent 40%);
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px) scale(.995); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+h2.subtitle .icon { color: var(--sage); opacity: .85; }
+</style>
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+</head>
+<body>
+<div id="adminBadge" style="display:none;">ADMIN</div>
+<div id="secretTapZone" onclick="handleSecretTap()" title=""></div>
+<div class="wrap" id="mainWrap">
+
+  <div class="adm-toolbar" id="admToolbar">
+    <span>관리자 모드</span>
+    <span id="admSaveStatus" style="font-size:11px;font-weight:600;margin-left:2px;"></span>
+    <button onclick="manualSaveNow()">지금 저장</button>
+    <button onclick="logoutAdmin()">로그아웃 (자동 저장됨)</button>
+  </div>
+
+  <!-- PAGE 0 : 일정 선택 -->
+  <div class="page active" id="page-select">
+    <div class="page-scroll">
+      <div class="kicker" data-editable-key="selectKicker">2026년 7월 군청년 바라지</div>
+      <h1 class="title" data-editable-key="selectTitle">봉사 일정을<br>선택해 주세요</h1>
+      <p class="lead" data-editable-key="selectLead">신청하신 봉사 유형과 날짜를 골라주시면, 그에 맞는 상세 정보를 안내드립니다.</p>
+      <div id="optGroups"></div>
+    </div>
+    <div class="page-footer">
+      <button class="btn-next" id="btnToIntro" disabled onclick="goIntro()">다음</button>
+    </div>
+  </div>
+
+  <!-- PAGE 1 : 소개 -->
+  <div class="page" id="page-intro">
+    <div class="page-scroll">
+      <button class="btn-back" onclick="showPage('page-select')"><span class="icon" id="icBackIntro"></span>일정 다시 선택</button>
+      <div class="kicker">이번 바라지 소개</div>
+      <h1 class="title" id="introTitle" data-editable-key="introTitle"></h1>
+      <div class="intro-quote" id="introBody" data-editable-key="introBody"></div>
+    </div>
+    <div class="page-footer">
+      <button class="btn-next" onclick="goDetail()">다음</button>
+    </div>
+  </div>
+
+  <!-- PAGE 2 : 점심공양 -->
+  <div class="page" id="page-lunch">
+    <div class="step-track">
+      <div class="step-slide" data-step="0">
+        <h1 class="title" data-editable-key="lunchTitle">점심공양지원 · 파트봉사</h1>
+        <h2 class="subtitle" style="margin-top:6px;"><span class="icon" id="icWhyLunch"></span><span data-editable-key="hdgWhyLunch">점심공양지원이 필요한 이유</span></h2>
+        <div class="card">
+          <p data-editable-key="lunchWhy">회관에 머무는 1박 2일 동안 군장병들의 점심공양은 회관 <b>대중공양팀</b>이 책임집니다. 기존에 공양하는 분들에 더해 군장병들, 청년봉사자들, 바라지분들도 <b>대중공양팀</b>이 만들어주신 점심을 공양받게 됩니다. 평소보다 공양인원이 늘어나는 것입니다. 점심공양지원 봉사를 신청해준 분들은 이 대중공양팀과 함께 늘어난 인원 만큼의 음식을 준비하게 됩니다.</p>
+        </div>
+        <div class="meta-row">
+          <div class="meta-chip"><span class="icon" id="icClockLunch"></span><span data-editable-key="lunchTime">09시–14시</span></div>
+          <div class="meta-chip"><span class="icon" id="icPinLunch"></span><span data-editable-key="lunchPlace">지하 1층 공양간</span></div>
+        </div>
+        <p class="lead" data-editable-key="lunchLead"><b>*</b>대중공양팀과 함께 여는나누기, 닫는나누기를 진행하고 귀가합니다.</p>
+        <div id="lunchKitchenBox"></div>
+      </div>
+      <div class="step-slide" data-step="1">
+        <h2 class="subtitle" style="margin-top:0;"><span class="icon" id="icBagLunch"></span><span data-editable-key="hdgBagLunch">준비물</span></h2>
+        <div class="card" id="lunchPrepBox"></div>
+      </div>
+      <div class="step-slide" data-step="2">
+        <h2 class="subtitle" style="margin-top:0;"><span class="icon" id="icCheckLunch"></span><span data-editable-key="hdgCheckLunch">봉사하면서 이것은 꼭 지켜주세요</span></h2>
+        <div class="card" id="lunchRulesBox"></div>
+      </div>
+    </div>
+    <div class="page-footer">
+      <div class="step-dots" id="dots-page-lunch"></div>
+      <div class="step-btnrow">
+        <button class="step-prev-btn" onclick="stepBack('page-lunch')"><span class="icon" id="icBackLunch"></span>이전</button>
+        <button class="btn-next" id="next-page-lunch" onclick="stepFwd('page-lunch')">다음</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE 2-2 : 저녁공양 -->
+  <div class="page" id="page-dinner">
+    <div class="step-track">
+      <div class="step-slide" data-step="0">
+        <h1 class="title" data-editable-key="dinnerTitle">저녁공양지원 · 파트봉사</h1>
+        <div class="meta-row">
+          <div class="meta-chip"><span class="icon" id="icClockDinner"></span><span data-editable-key="dinnerTime">14시–20시</span></div>
+          <div class="meta-chip"><span class="icon" id="icPinDinner"></span><span data-editable-key="dinnerPlace">지하 1층 공양간</span></div>
+        </div>
+        <p class="lead" data-editable-key="dinnerLead">다른 공양바라지분들과 함께 장병들의 저녁공양을 준비하고 공양간을 정리하고 귀가하게 됩니다.</p>
+        <h2 class="subtitle" style="margin-top:6px;"><span class="icon" id="icBowlDinner"></span><span data-editable-key="hdgBowlDinner">저녁공양 메뉴</span></h2>
+        <div class="card" id="dinnerMenuBox"></div>
+        <div id="dinnerKitchenBox"></div>
+      </div>
+      <div class="step-slide" data-step="1">
+        <h2 class="subtitle" style="margin-top:0;"><span class="icon" id="icBagDinner"></span><span data-editable-key="hdgBagDinner">준비물</span></h2>
+        <div class="card" id="dinnerPrepBox"></div>
+      </div>
+      <div class="step-slide" data-step="2">
+        <h2 class="subtitle" style="margin-top:0;"><span class="icon" id="icRuleDinner"></span><span data-editable-key="hdgRuleDinner">봉사하면서 이것은 꼭 지켜주세요</span></h2>
+        <div class="card" id="dinnerRulesBox"></div>
+      </div>
+    </div>
+    <div class="page-footer">
+      <div class="step-dots" id="dots-page-dinner"></div>
+      <div class="step-btnrow">
+        <button class="step-prev-btn" onclick="stepBack('page-dinner')"><span class="icon" id="icBackDinner"></span>이전</button>
+        <button class="btn-next" id="next-page-dinner" onclick="stepFwd('page-dinner')">다음</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE 3 : 1박2일 (13-14) -->
+  <div class="page" id="page-stay1">
+    <div class="step-track">
+      <div class="step-slide" data-step="0">
+        <h1 class="title"><span class="icon" id="icMoonStay1" style="font-size:20px; margin-right:6px;"></span><span data-editable-key="stay1Title">1박 2일 바라지 · 13일(목)–14일(금)</span></h1>
+        <h2 class="subtitle" style="margin-top:6px;"><span class="icon" id="icHandStay1"></span><span data-editable-key="hdgHandStay1">이 봉사에서 우리가 하는 일</span></h2>
+        <div class="card" id="stay1ActivityBox"></div>
+      </div>
+      <div class="step-slide" data-step="1">
+        <h2 class="subtitle" style="margin-top:0;"><span class="icon" id="icCalStay1"></span><span data-editable-key="hdgCalStay1">상세 일정표</span></h2>
+        <div id="stay1ScheduleBox"></div>
+      </div>
+      <div class="step-slide" data-step="2">
+        <h2 class="subtitle" style="margin-top:0;"><span class="icon" id="icBowlStay1"></span><span data-editable-key="hdgBowlStay1">저녁공양 메뉴</span></h2>
+        <div class="card" id="stay1DinnerBox"></div>
+        <div id="stay1KitchenBox"></div>
+      </div>
+      <div class="step-slide" data-step="3">
+        <h2 class="subtitle" style="margin-top:0;"><span class="icon" id="icBagStay1"></span><span data-editable-key="hdgBagStay1">준비물</span></h2>
+        <div class="card" id="stay1PrepBox"></div>
+      </div>
+      <div class="step-slide" data-step="4">
+        <h2 class="subtitle" style="margin-top:0;"><span class="icon" id="icRuleStay1"></span><span data-editable-key="hdgRuleStay1">봉사하면서 이것은 꼭 지켜주세요</span></h2>
+        <div class="card" id="stay1RulesBox"></div>
+      </div>
+    </div>
+    <div class="page-footer">
+      <div class="step-dots" id="dots-page-stay1"></div>
+      <div class="step-btnrow">
+        <button class="step-prev-btn" onclick="stepBack('page-stay1')"><span class="icon" id="icBackStay1"></span>이전</button>
+        <button class="btn-next" id="next-page-stay1" onclick="stepFwd('page-stay1')">다음</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE 6 : 전체 활동 -->
+  <div class="page" id="page-moreinfo">
+    <div class="step-track">
+      <div class="step-slide" data-step="0">
+        <div class="kicker" data-editable-key="moreKicker">바라지 전체 활동</div>
+        <h1 class="title" data-editable-key="moreTitle">바라지 활동 전체가<br>궁금하시다면</h1>
+        <h2 class="subtitle" style="margin-top:6px;"><span class="icon" id="icHandMore"></span><span data-editable-key="hdgHandMore">이 봉사에서 우리가 하는 일</span></h2>
+        <div class="card" id="moreActivityBox"></div>
+      </div>
+      <div class="step-slide" data-step="1">
+        <h2 class="subtitle" style="margin-top:0;"><span class="icon" id="icCalMore"></span><span data-editable-key="hdgCalMore">2박 3일 전체 일정표</span></h2>
+        <p class="empty-note" id="moreScheduleNote" style="display:none; margin-bottom:14px;"></p>
+        <div id="moreScheduleBox"></div>
+      </div>
+      <div class="step-slide" data-step="2">
+        <h2 class="subtitle" style="margin-top:0;"><span class="icon" id="icBowlMore"></span><span data-editable-key="hdgBowlMore">공양 메뉴</span></h2>
+        <div id="moreMenuBoxes"></div>
+      </div>
+      <div class="step-slide" data-step="3">
+        <h2 class="subtitle" style="margin-top:0;"><span class="icon" id="icNextMore"></span><span data-editable-key="hdgNextMore">8월에 예정된 바라지 봉사일정</span></h2>
+        <div id="moreAugustBox"></div>
+        <p class="foot-note" data-editable-key="footNote">나무 한 그루가 숲이 되듯 · 모자이크 붓다</p>
+      </div>
+    </div>
+    <div class="page-footer">
+      <div class="step-dots" id="dots-page-moreinfo"></div>
+      <div class="step-btnrow">
+        <button class="step-prev-btn" onclick="stepBack('page-moreinfo')"><span class="icon" id="icBackMore"></span>이전</button>
+        <button class="btn-next" id="next-page-moreinfo" onclick="stepFwd('page-moreinfo')">다음</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 빠른 찾아보기 : 안내서를 다 읽은 뒤, 현장에서 필요한 것만 바로 찾아보는 화면 -->
+  <div class="page" id="page-quick">
+    <div class="page-scroll" id="quickBody"></div>
+    <div class="quick-tabbar" id="quickTabs"></div>
+  </div>
+
+</div>
+
+<!-- 레시피 모달 -->
+<div class="modal" id="recipeModal">
+  <div class="modal-box" id="recipeModalBox">
+    <div id="recipeModalBody"></div>
+    <div class="m-actions"><button class="btn-cancel" onclick="closeRecipeModal()" style="flex:1;">닫기</button></div>
+  </div>
+</div>
+
+<!-- 군청년 프로그램 알림 신청 모달 (일반 봉사자용) -->
+<div class="modal" id="notifyModal">
+  <div class="modal-box">
+    <h3>알림 신청</h3>
+    <div id="ny_eventBox" class="ny-event-box">
+      <div class="ny-event-label">알림 신청하실 일정</div>
+      <div class="ny-event-title" id="ny_eventTitle"></div>
+    </div>
+    <div class="ny-check-row">
+      <label>
+        <input type="checkbox" id="ny_wantEvent">
+        <span><b>이 일정</b>이 확정되면 알림 받기</span>
+      </label>
+      <label>
+        <input type="checkbox" id="ny_wantGeneral">
+        <span>이 일정 <b>이외에</b>도 군청년 프로그램 소식이 있을 때 알림 받기</span>
+      </label>
+    </div>
+    <div class="admin-editgroup" style="margin-top:14px;">
+      <label class="re-label">이름</label>
+      <input id="ny_name" class="re-input" placeholder="이름">
+      <label class="re-label">전화번호</label>
+      <input id="ny_phone" class="re-input" placeholder="010-0000-0000" inputmode="tel" oninput="autoFormatPhone(this)">
+      <label class="re-label">소속 지부</label>
+      <input id="ny_bu" class="re-input" placeholder="예: 서울">
+      <label class="re-label">소속 지회</label>
+      <input id="ny_ji" class="re-input" placeholder="예: 방배">
+    </div>
+    <p style="font-size:11.5px; color:var(--ink-soft); margin:10px 2px 0; line-height:1.55;">신청하신 연락처로 문자·전화 안내를 드릴 수 있어요.</p>
+    <div class="m-actions">
+      <button class="btn-cancel" onclick="closeNotifyModal()">닫기</button>
+      <button class="btn-ok" onclick="submitNotifySubscribe()">신청하기</button>
+    </div>
+  </div>
+</div>
+
+<!-- 내용 수정 모달 (관리자) — 메뉴·준비물·활동 -->
+<div class="modal" id="contentEditorModal">
+  <div class="modal-box">
+    <h3 id="contentEditorTitle">내용 수정</h3>
+    <p id="contentEditorHint" style="font-size:12.5px; color:var(--ink-soft); margin:0 0 14px;"></p>
+    <div id="contentEditorBody"></div>
+    <div class="m-actions">
+      <button class="btn-cancel" onclick="closeContentEditor()">닫기</button>
+      <button class="btn-ok" onclick="saveContentEditor()">저장</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* =========================================================
+   0. 라인 아이콘 (메인앱과 동일 스타일)
+   ========================================================= */
+const ICONS = {
+  clock: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>',
+  pin: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.4"/></svg>',
+  bowl: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h18a9 8 0 0 1-18 0Z"/><path d="M7 12V8M17 12V8M12 12V6"/></svg>',
+  bag: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l1 12H5L6 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>',
+  check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.5l2.3 2.3 4.7-5.2"/></svg>',
+  calendar: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5.5" width="16" height="15" rx="2.2"/><path d="M8 3.5v4M16 3.5v4M4 10h16"/></svg>',
+  hands: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 11V6.5a1.7 1.7 0 0 1 3.4 0V10"/><path d="M10.4 10V5a1.7 1.7 0 0 1 3.4 0v5"/><path d="M13.8 10V6.3a1.7 1.7 0 0 1 3.4 0V13c0 4-2.8 7-6.6 7-3 0-5.2-1.6-6.4-4l-2-4.2a1.5 1.5 0 0 1 2.7-1.3L6 12"/></svg>',
+  chevron: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>',
+  arrowLeft: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg>',
+  moon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5Z"/></svg>',
+  tent: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 19 12 4l9 15"/><path d="M8 19l4-7 4 7"/><path d="M3 19h18"/></svg>',
+  play: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M10.3 8.7l5 3.3-5 3.3V8.7Z" fill="currentColor" stroke="none"/></svg>'
+};
+function setIcons(map){ Object.keys(map).forEach(id=>{ const el=document.getElementById(id); if(el) el.innerHTML=ICONS[map[id]]; }); }
+setIcons({
+  icBackIntro:'arrowLeft', icBackLunch:'arrowLeft', icBackDinner:'arrowLeft', icBackStay1:'arrowLeft', icBackStay2:'arrowLeft', icBackStay3:'arrowLeft', icBackMore:'arrowLeft',
+  icClockLunch:'clock', icPinLunch:'pin', icWhyLunch:'hands', icBagLunch:'bag', icCheckLunch:'check', icChevLunch:'chevron',
+  icClockDinner:'clock', icPinDinner:'pin', icBowlDinner:'bowl', icBagDinner:'bag', icRuleDinner:'check', icChevDinner:'chevron',
+  icMoonStay1:'moon', icHandStay1:'hands', icCalStay1:'calendar', icBowlStay1:'bowl', icBagStay1:'bag', icRuleStay1:'check', icChevStay1:'chevron',
+  icMoonStay2:'moon', icHandStay2:'hands', icCalStay2:'calendar', icBowlStay2:'bowl', icBagStay2:'bag', icRuleStay2:'check', icChevStay2:'chevron',
+  icTentStay3:'tent', icHandStay3:'hands', icCalStay3:'calendar', icBowlStay3:'bowl', icBagStay3:'bag', icRuleStay3:'check', icAugStay3:'calendar',
+  icHandMore:'hands', icCalMore:'calendar', icBowlMore:'bowl', icNextMore:'calendar'
+});
+
+/* =========================================================
+   1. 설정 영역 — 매달 여기만 고치면 됩니다
+   ========================================================= */
+const APPSSCRIPTURL = "https://script.google.com/macros/s/AKfycbypbINZxPPOTBCSPZL39LOWgZnqcRaxo0akj9fDN4Rsv6kZ3-dkUfhJ0ctV9CBF87Rs/exec";
+// 저장 실패(비밀번호 오류·네트워크 오류 등)를 화면에 조용히 숨기지 않고 바로 알려줍니다.
+function showToast(msg, isError){
+  let el = document.getElementById('subappToast');
+  if(!el){
+    el = document.createElement('div');
+    el.id = 'subappToast';
+    el.style.cssText = 'position:fixed;left:50%;bottom:calc(78px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 18px;border-radius:20px;font-size:13px;z-index:9999;box-shadow:0 4px 16px rgba(0,0,0,.25);max-width:88vw;text-align:center;transition:opacity .2s;pointer-events:none;';
+    document.body.appendChild(el);
+  }
+  el.style.background = isError ? '#c0392b' : 'var(--ink)';
+  el.textContent = msg;
+  el.style.opacity = '1';
+  clearTimeout(el._t);
+  el._t = setTimeout(()=>{ el.style.opacity = '0'; }, isError ? 4500 : 1800);
+}
+
+const PROGRAM_INFO = {
+  title: "2026년 8월 군청년 서울여행 바라지",
+  intro: [
+    "8월 군청년 프로그램은 1박 2일 · <b>서울여행(서행)</b> 프로그램으로 진행됩니다.",
+    "해병대원들이 정토사회문화회관에 머물며 잠시 일상에서 벗어나 쉬어가는 시간을 갖게 됩니다.",
+    "장병들이 편안히 머물고, 잘 먹고, 잘 쉴 수 있도록 많은 청년봉사자들과 공양바라지분들이 함께 하게 됩니다.",
+    "나의 손길 하나가 다른 손길과 어우러져 큰 그림이 됩니다. 우리는 이 봉사를 통해 작은 일들이 모여서 큰 일이 된다는 것을 몸으로 배웁니다.",
+    "<b>\"우리는 모자이크 붓다입니다\" - </b><b>\"내가 세상의 희망입니다\"</b>"
+  ]
+};
+
+// 주방 사용 안내 — 메인앱과 같은 영상 링크 (누르면 새 탭에서 열립니다)
+const KITCHEN_GUIDE = {
+  name: '주방 사용 안내',
+  tag: '공양간 전체 안내 · 영상으로 보기',
+  videoUrl: 'https://www.youtube.com/watch?v=K574n5OGntU'
+};
+
+// 서울여행(1박2일) / 행복학교(2박3일)는 신청 옵션 목록 자체가 서로 다르므로
+// 프로그램별로 완전히 분리해서 저장합니다. changeProgram()이 이 중 하나를 OPTIONS로 스위칭합니다.
+let OPTIONS_BY = {
+  seohaeng: [
+    { group: "점심공양지원 · 파트봉사", items: [
+        { id:"lunch-13", label:"13일(목) 09시–14시", route:"page-lunch" },
+        { id:"lunch-14", label:"14일(금) 09시–14시", route:"page-lunch" }
+    ]},
+    { group: "저녁공양지원 · 파트봉사", items: [
+        { id:"dinner-13", label:"13일(목) 14시–20시", route:"page-dinner", mealKey:"dinner1" }
+    ]},
+    { group: "1박 2일 바라지 신청", items: [
+        { id:"stay-1314", label:"13일(목)–14일(금) · 1박 2일", route:"page-stay1" }
+    ]}
+  ],
+  happy: []
+};
+// 지금 화면에 실제로 그려지는 옵션 목록. 이 파일은 서울여행 전용이라 항상 고정입니다.
+let OPTIONS = OPTIONS_BY['seohaeng'];
+
+// 실제 달력 날짜와 요일. 다음 서울여행 때는 여기 날짜만 바꾸면 전체 화면에 자동 반영됩니다.
+const CALENDAR_DAYS = ["13일(목)", "14일(금)"];
+// 행사를 바꿀 때 날짜 라벨을 되돌리기 위한 기본값 (고쳐둔 값이 없으면 이걸로 돌아간다)
+const DEFAULT_CALENDAR_DAYS = CALENDAR_DAYS.slice();
+
+// 코스(stay-1314)는 TIMETABLES에 자기 날짜만 따로 저장되어 있어서,
+// dayIndex는 그 코스 데이터의 days 배열 인덱스(0,1)를 그대로 가리킵니다.
+const STAY_RANGES = {
+  "stay-1314": [ { dayIndex:0 }, { dayIndex:1 } ]
+};
+
+// 이 파일은 서울여행(1박2일) 전용이라 프로그램 종류가 바뀌지 않습니다.
+let PROGRAM_ID = "seohaeng";
+// 공지사항·다음일정은 행사(서울여행/행복학교)마다 따로 보관한다.
+// { seohaeng:[...], happy:[...] } 형태로 저장되므로 서로 섞이지 않는다.
+// 안내서 문구도 행사(서울여행/행복학교)마다 따로 보관한다.
+// subappTextOverrides는 '지금 행사의 서랍'을 가리키는 참조다.
+let TEXT_BY = { seohaeng:{}, happy:{} };
+let subappTextOverrides = {};
+let NOTICES_BY = { seohaeng:[], happy:[] };
+let NEXT_BY    = { seohaeng:[], happy:[] };
+function curNotices(){ if(!NOTICES_BY[PROGRAM_ID]) NOTICES_BY[PROGRAM_ID]=[]; return NOTICES_BY[PROGRAM_ID]; }
+function curNextEvents(){ if(!NEXT_BY[PROGRAM_ID]) NEXT_BY[PROGRAM_ID]=[]; return NEXT_BY[PROGRAM_ID]; }
+
+/* =========================================================
+   2. 기본 데이터 (동기화 실패해도 최소한 이 데이터로 화면이 채워집니다)
+   ========================================================= */
+// 일정표는 "코스" 단위로 저장합니다. 이 파일은 서울여행 1박2일 코스(stay-1314) 하나만 씁니다.
+let TIMETABLES = {
+  "stay-1314": {
+    label: '서울여행 · 1박 2일 (13일–14일)',
+    days: [
+      { day:'1일차 (목요일)', rows:[
+        {time:'14:00~14:30', dur:'30', content:'여는 모임', place:'지하1층 공양간', note:''},
+        {time:'14:30~19:35', dur:'305', content:'저녁공양준비(공양준비/공양/뒷정리/닫는 나누기)', place:'B1층 공양간', note:''},
+        {time:'19:35~21:00', dur:'85', content:'프로그램(유수스님 일문일답 참관)', place:'6층 국제회의장', note:'', prog:true},
+        {time:'21:00~21:30', dur:'30', content:'프로그램(명상/나누기)', place:'4층 라홀라방', note:'', prog:true},
+        {time:'21:30~22:00', dur:'30', content:'개인정비 후 취침', place:'5층 소강당1', note:'남) 4층 라홀라방'},
+      ]},
+      { day:'2일차 (금요일)', rows:[
+        {time:'04:45~05:45', dur:'60', content:'예불 및 새벽기도', place:'3층 설법전', note:''},
+        {time:'05:45~07:00', dur:'75', content:'프로그램(산책)', place:'대성사', note:'', prog:true},
+        {time:'07:00~08:00', dur:'60', content:'아침공양 및 개인정비', place:'지하1층', note:'공동체 발우공 "묵언"'},
+        {time:'08:00~08:50', dur:'50', content:'공양간 마무리 / 반나절 템플스테이 사전준비', place:'지하1층/7층', note:''},
+        {time:'08:50~10:50', dur:'120', content:'프로그램(법사님 간담회)', place:'5층 소강당1', note:'', prog:true},
+        {time:'10:50~11:40', dur:'50', content:'프로그램(참관:소감문 발표/바라지소개)', place:'6층 국제회의장', note:'', prog:true},
+        {time:'11:40~12:30', dur:'50', content:'점심식사', place:'지하1층', note:''},
+        {time:'12:30~13:30', dur:'60', content:'사용공간 청소&뒷마무리', place:'', note:''},
+        {time:'13:30~14:00', dur:'30', content:'전체 소감 나누기', place:'5층 소강당1', note:''},
+        {time:'14:00~14:30', dur:'30', content:'프로그램(회관둘러보기)', place:'15층', note:'', prog:true},
+        {time:'14:40~', dur:'', content:'귀가', place:'', note:'수고많으셨습니다 ^^'},
+      ]},
+    ]
+  }
+};
+// 관리자가 예전에 저장해둔 값이 있으면 loadLocalShared()/applyLatestData()에서
+// TIMETABLES를 통째로 덮어쓰므로, 위 내용은 "처음 방문 시의 기본값"으로만 쓰입니다.
+
+// 페이지 id ↔ 코스 키 매핑. 이 파일은 서울여행 1박2일 코스 하나만 있습니다.
+const PAGE_TO_STAYKEY = {
+  'page-stay1': 'stay-1314'
+};
+// 지금 활성 프로그램(서울여행 고정)에서 "기본으로 보여줄 코스"가 필요할 때 사용.
+function defaultStayKeyForProgram(programId){
+  return 'stay-1314';
+}
+
+// 활동·준비물 아이콘 — 메인앱과 같은 세트입니다
+const ACTIVITY_ICONS = {
+  bowl:    `<svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 0016 0z"/><path d="M4 12h16M9 12V8M15 12V8"/></svg>`,
+  broom:   `<svg viewBox="0 0 24 24"><path d="M14 3l6 6-8 8-6-2z"/><path d="M9 15l-5 5M6 21l-2-2"/></svg>`,
+  lotus:   `<svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3"/><path d="M5 20c0-3.3 3.1-6 7-6s7 2.7 7 6"/></svg>`,
+  sunrise: `<svg viewBox="0 0 24 24"><circle cx="12" cy="14" r="4"/><path d="M4 18h16M12 4v3M5.6 8.6l1.8 1.8M18.4 8.6l-1.8 1.8"/></svg>`,
+  trail:   `<svg viewBox="0 0 24 24"><path d="M12 3C7 3 4 7 4 12c0 5 3 9 8 9M12 3c5 0 8 4 8 9c0 5-3 9-8 9M4 12h16"/></svg>`,
+  chat:    `<svg viewBox="0 0 24 24"><path d="M5 5h14v10H9l-4 4z"/></svg>`,
+  qa:      `<svg viewBox="0 0 24 24"><path d="M9 9a3 3 0 116 0c0 2-3 2.5-3 5"/><path d="M12 17h.01"/><circle cx="12" cy="12" r="9"/></svg>`,
+  note:    `<svg viewBox="0 0 24 24"><path d="M6 3h9l3 3v15H6z"/><path d="M9 9h6M9 13h6M9 17h4"/></svg>`,
+  home:    `<svg viewBox="0 0 24 24"><path d="M4 11l8-7 8 7"/><path d="M6 10v10h12V10"/></svg>`,
+  camera:  `<svg viewBox="0 0 24 24"><path d="M4 8h3l2-2h6l2 2h3v11H4z"/><circle cx="12" cy="13" r="3.2"/></svg>`,
+};
+const PREP_ICONS = {
+  ban:      '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M6 6l12 12"/></svg>',
+  focus:    '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3.2"/></svg>',
+  bowl:     '<svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 0016 0z"/><path d="M4 12h16M9 12V8M15 12V8"/></svg>',
+  quiet:    '<svg viewBox="0 0 24 24"><path d="M5 9v6h4l5 4V5L9 9H5z"/><path d="M17 15l4-6M21 15l-4-6"/></svg>',
+  shirt:    '<svg viewBox="0 0 24 24"><path d="M8 4l4 2 4-2 4 4-3 3v9H7v-9L4 8z"/></svg>',
+  apron:    '<svg viewBox="0 0 24 24"><path d="M7 4h10v6a5 5 0 01-10 0z"/><path d="M9 10v10h6V10"/></svg>',
+  cup:      '<svg viewBox="0 0 24 24"><path d="M6 3h10l-1 13a4 4 0 01-4 4H11a4 4 0 01-4-4z"/><path d="M6 8h10"/></svg>',
+  towel:    '<svg viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="16" rx="2"/><path d="M9 9h6M9 13h6M9 17h3"/></svg>',
+  mask:     '<svg viewBox="0 0 24 24"><path d="M4 10c2-2 4-3 8-3s6 1 8 3c0 5-3 9-8 9s-8-4-8-9z"/><path d="M8 12h.01M16 12h.01"/></svg>',
+  bottle:   '<svg viewBox="0 0 24 24"><path d="M10 2h4v3l2 2v13a2 2 0 01-2 2h-4a2 2 0 01-2-2V7l2-2z"/><path d="M9 12h6"/></svg>',
+  beads:    '<svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="2"/><circle cx="18" cy="9" r="2"/><circle cx="18" cy="16" r="2"/><circle cx="12" cy="20" r="2"/><circle cx="6" cy="16" r="2"/><circle cx="6" cy="9" r="2"/></svg>',
+  bed:      '<svg viewBox="0 0 24 24"><path d="M3 18v-7a2 2 0 012-2h14a2 2 0 012 2v7"/><path d="M3 14h18M7 9V6M17 6v3"/></svg>',
+};
+const ACTIVITY_ICON_KEYS = Object.keys(ACTIVITY_ICONS);
+const PREP_ICON_KEYS = Object.keys(PREP_ICONS);
+
+let PREPGROUPS = [
+  { group:"공통 준비물", items:[
+      {t:"편안한 복장", s:"활동하기 편한 옷차림", ic:"shirt"},
+      {t:"실내화 또는 슬리퍼", s:"", ic:"focus"},
+      {t:"세면도구 · 수건", s:"1박 이상 신청자만", ic:"bottle", stayOnly:true},
+      {t:"개인 컵", s:"", ic:"cup"}
+  ]},
+  { group:"봉사하면서 지켜주세요", rules:true, items:[
+      {t:"휴대폰은 진동으로 전환해 주세요", s:"", ic:"quiet"},
+      {t:"공양간 내에서는 위생모를 착용해 주세요", s:"", ic:"apron"},
+      {t:"군장병들과의 대화는 밝고 편안하게 나눠주세요", s:"", ic:"bowl"},
+      {t:"사진 촬영 시 군장병 얼굴이 나오지 않도록 주의해 주세요", s:"", ic:"ban"}
+  ]}
+];
+
+let ACTIVITIES = [
+  { title:"공양 준비 및 배식", desc:"대중공양팀과 함께 식사를 준비하고 배식합니다.", emoji:"bowl" },
+  { title:"프로그램 진행 보조", desc:"참관·법사님 간담회 등 프로그램 진행을 돕습니다.", emoji:"note" },
+  { title:"숙소 환경 정돈", desc:"군장병들이 편안히 쉴 수 있도록 숙소를 정돈합니다.", emoji:"home" },
+  { title:"조별 나누기 진행", desc:"저녁 나누기 시간에 조원들과 이야기를 나눕니다." }
+];
+
+let MENUS = [
+  {emoji:'🍣', name:'유부초밥', tag:'점심 공양', recipe:{
+    serving:'',
+    ingredients:[
+      '조미유부 60장',
+      '비건햄 1kg',
+      '당근 중간크기 2개',
+      '표고버섯 기둥 (적당량)',
+      '파프리카 (빨강·노랑) 중간크기 2개',
+      '꼬들단무지 (적당량)',
+      '밥이랑 2봉지',
+      '소금 약간',
+    ],
+    steps:[
+      {title:'재료 준비', items:[
+        '밥 = 공양하는 총 인원수를 계산해서 밥을 짓는다',
+        '유부 = 살짝 짜서 볼에 담아둔다',
+        '비건햄 = 손으로 주물러서 잘게 으깨준다',
+        '당근·파프리카·표고버섯 기둥·꼬들단무지 = 잘게 다진다 (표고버섯 기둥 끝의 시커멓고 딱딱한 부분은 잘라낸다)',
+      ]},
+      {title:'조리하기', items:[
+        '단촛물 = 한 사람이 만들어 식혀둔다 · 비율은 식초 10 : 설탕 8 : 소금 1 · 약불에서 설탕·소금을 녹인 뒤 식힌다',
+        '당근 = 살짝만 볶고 소금 약간',
+        '표고버섯 기둥 = 살짝 갈색빛이 돌 정도로 볶고 소금 약간',
+        '비건햄 = 스팸 구울 때처럼 갈색이 날 정도로 볶는다 (소금간 ❌)',
+        '파프리카·꼬들단무지 = 꾹 짜서 물기를 빼준다 (볶지 않음)',
+      ]},
+      {title:'초밥 만들기', items:[
+        '큰 양푼(다라이) 2개를 준비한다',
+        '다 된 밥을 주걱으로 조금씩 퍼 양푼에 옮기며 단촛물을 부어준다',
+        '부채질을 해가며 밥을 식힌다',
+        '나머지 재료를 넣고 골고루 섞는다 (밥이랑도 함께)',
+        '유부 1–2개에 넣어 최종 간을 본다',
+        '유부가 찢어지지 않게 속을 적당히 채운다',
+      ]},
+      {title:'요리 내놓기', items:[
+        '큰 접시 2개에 나누어 담는다',
+        '위에 검정깨를 조금 뿌린다',
+        '주방에 두었다가 군청년들이 내려오기 전 배식대에 차려낸다',
+      ]},
+    ]
+  }},
+  {emoji:'🍙', name:'미니주먹밥', tag:'점심 공양', recipe:{
+    serving:'유부초밥 후 남은 밥으로',
+    ingredients:[
+      '유부초밥을 하고 남은 밥',
+      '김가루',
+      '검정깨',
+      '참기름',
+      '소금 (부족한 간만큼)',
+    ],
+    steps:[
+      {title:'주먹밥 만들기', items:[
+        '유부초밥 양념간이 된 밥에 김가루를 섞는다',
+        '1차 간이 되어 있으므로 김가루를 가감해 간을 맞춘다',
+        '참기름(또는 들기름)을 접시에 담아 손에 묻혀가며 주먹밥을 만든다',
+        '주먹밥을 김가루에 둥글려 최종 마무리한다',
+      ]},
+      {title:'요리 내놓기', items:[
+        '접시 2개에 정갈하게 담아 주방에 준비해둔다',
+        '군청년들이 내려오기 직전에 배식대에 차려낸다',
+      ]},
+    ]
+  }},
+  {emoji:'🍤', name:'표고버섯탕수육', tag:'든든한 한 그릇', recipe:{
+    serving:'',
+    ingredients:[
+      '표고버섯 2kg',
+      '찹쌀가루',
+      '감자전분',
+      '소금 (반죽용)',
+      '소스: 물 500 · 설탕 250 · 식초 140 · 간장 35 · 케첩 100',
+      '소스 농도: 감자전분 100 · 물 100',
+      '소스 야채: 파프리카·오이·당근·적채',
+    ],
+    steps:[
+      {title:'재료 준비', items:[
+        '표고버섯은 세척 금지!',
+        '표고 기둥 = 따내서 따로 모아둔다 (유부초밥에 다져 넣을 예정)',
+        '표고버섯 = 큰 것만 반으로 자르고, 작은 것은 그대로 둔다',
+      ]},
+      {title:'조리하기', items:[
+        '손질한 표고를 감자전분에 가볍게 버무려 놓는다',
+        '찹쌀반죽을 만든다 (찹쌀가루 3컵 · 물 1.5컵 · 소금 1.5작은술 정도) · 너무 질면 눅눅해지므로 질지 않게',
+        '오목한 팬에 기름을 넉넉히 붓고 온도를 올린다 (온도가 오른 뒤 튀길 것)',
+        '전분에 버무린 표고를 찹쌀반죽에 묻혀 튀긴다 · 2–3개 먼저 튀겨 반죽 농도와 소금간을 조정한 뒤 나머지를 튀긴다',
+      ]},
+      {title:'탕수육 만들기', items:[
+        '튀김은 총 2번 튀겨 마무리한다',
+        '1차 튀김 = 살짝만 튀긴다 (처음부터 많이 튀기면 2차에 탄다)',
+        '2차 튀김 = 17:20쯤 시작',
+        '소스 = 17:20쯤 물·설탕·식초·간장·케첩을 넣고 끓인다',
+        '17:40쯤 끓인 소스에 썰어놓은 야채를 넣고 전분물로 농도를 맞춘다 · 야채가 푹 익지 않게 나가기 직전에 한다',
+      ]},
+      {title:'요리 내놓기', items:[
+        '기름을 뺀 튀김을 접시 2개에 나누어 담는다',
+        '탕수육 소스는 소스 전용 볼에 담아 내놓는다',
+        '군청년들이 내려오기 직전에 배식대에 차려낸다',
+      ]},
+    ]
+  }},
+  {emoji:'🥬', name:'야채튀김', tag:'바삭한 별미', recipe:{
+    serving:'',
+    ingredients:[
+      '고구마 1.5kg',
+      '당근 중간크기 1개',
+      '고추 (적당량)',
+      '튀김가루',
+      '콩기름',
+      '소금 (반죽용)',
+    ],
+    steps:[
+      {title:'재료 준비', items:[
+        '고구마·당근·고추 = 세척해서 얇게 채썬다',
+        '채썬 재료 = 튀김가루를 약간 넣고 골고루 버무려둔다 (튀김가루는 너무 많이 넣지 말 것!)',
+        '반죽 = 튀김가루로 만들고 소금간을 한다 · 반죽 양이 너무 많으면 튀긴 후 눅눅해지므로 양 조절',
+      ]},
+      {title:'조리하기', items:[
+        '반죽에 재료를 넣어 잘 버무린다',
+        '튀김팬에 기름을 붓고 온도를 올린다',
+        '처음 2–3개를 시식용으로 튀겨 먹어본다 · 간이 부족하면 소금을 더한다 (청년들은 조금 간이 있는 것을 좋아함)',
+      ]},
+      {title:'야채튀김 만들기', items:[
+        '튀김은 총 2번 튀겨 마무리한다',
+        '1차 튀김 = 살짝만 튀긴다 (처음부터 많이 튀기면 2차에 탄다)',
+        '2차 튀김 = 17:20쯤 시작',
+      ]},
+      {title:'요리 내놓기', items:[
+        '기름을 뺀 튀김을 접시 2개에 나누어 담는다',
+        '군청년들이 내려오기 직전에 배식대에 차려낸다',
+      ]},
+    ]
+  }},
+  {emoji:'🌶️', name:'떡볶이', tag:'청년 인기 메뉴', recipe:{
+    serving:'',
+    ingredients:[
+      '밀떡 4kg',
+      '물 5L',
+      '떡볶이 소스 780g',
+    ],
+    steps:[
+      {title:'재료 준비', items:[
+        '17:20 = 물 5리터를 큰 냄비에 담아 끓인다',
+        '떡볶이떡 = 찬물에 2–3번 씻은 후 물기를 뺀다',
+      ]},
+      {title:'조리하기', items:[
+        '끓는 물에 간을 봐가며 떡볶이 소스를 넣고 끓인다',
+        '간이 적당하고 팔팔 끓으면 약불로 낮춘다 · 불은 끄지 않고 소스를 살짝 졸인다',
+        '17:40 = 강불로 올리고 떡을 넣어 끓인다 · 가끔 휘저어 냄비 아래 달라붙지 않게 한다',
+        '떡이 부풀어 떠오르면 4–5분 더 끓이고 불을 끈다',
+      ]},
+      {title:'요리 내놓기', items:[
+        '군청년들이 내려오기 직전에 국물과 떡을 그릇 2개에 나누어 담아낸다',
+      ]},
+    ]
+  }},
+  {emoji:'🍜', name:'비건잡채', tag:'정성 가득', recipe:{
+    serving:'',
+    ingredients:[
+      '당면 1kg',
+      '비건어묵 1kg',
+      '콩나물 1kg',
+      '피망 2~3개',
+      '당근 1.5개',
+      '양념장: 간장·설탕·들기름·깨소금·소금',
+    ],
+    steps:[
+      {title:'재료 준비', items:[
+        '당면 = 찬물에 3시간 담가 충분히 불린다 (흐물흐물해야 함)',
+        '비건어묵·피망·당근 = 비슷한 크기로 채썬다',
+        '콩나물 = 소금 약간 넣은 물에 3–4분 데친 후 간을 한다',
+      ]},
+      {title:'조리하기', items:[
+        '피망·비건어묵·콩나물을 볶는다 · 기름은 조금만, 살짝 숨만 죽이게 (너무 익히면 물이 생겨 질어짐) · 소금간은 살짝만!',
+        '5시쯤 = 불린 당면을 2–3분 삶는다 (익었는지 확인)',
+        '삶은 당면은 채반에 건져 찬물에 헹구지 않고, 참기름을 둘러 서로 붙지 않게 한다',
+        '간장·설탕·후추로 면에 먼저 양념한다',
+        '당면과 재료를 큰 볼에 넣고 간을 봐가며 양념한다',
+      ]},
+      {title:'요리 내놓기', items:[
+        '접시 2개에 나누어 준비해두었다가 내놓는다',
+      ]},
+    ]
+  }},
+  {emoji:'🥒', name:'오이절임', tag:'개운한 반찬', recipe:{
+    serving:'',
+    ingredients:[
+      '오이 10개',
+      '소금',
+      '설탕',
+      '식초',
+    ],
+    steps:[
+      {title:'재료 준비', items:[
+        '굵은 소금으로 오이를 세척한다',
+        '오이를 적당한 크기로 자른다 · 세로로 반 갈라 손가락 한 마디 길이로 자르거나, 잔 칼집을 낸 후 3cm 간격으로 자른다',
+      ]},
+      {title:'오이절임 만들기', items:[
+        '따로 절이지 않고 생오이에 바로 양념해 버무린다',
+        '소금·식초·설탕을 넣고 버무린다 (소금 1.5 · 설탕 5 · 식초 4)',
+        '냉장고에 넣어둔다 · 중간에 가서 뒤적여준다',
+      ]},
+      {title:'요리 내놓기', items:[
+        '최종 간을 보고 작은 볼 2개에 담는다',
+        '군청년들이 내려오기 직전에 배식대에 차려낸다',
+      ]},
+    ]
+  }},
+  {emoji:'🥣', name:'아침 (시리얼·우유·토스트)', tag:'간단한 아침'},
+  {emoji:'🍝', name:'펜네파스타', tag:'둘째 날 저녁', recipe:{
+    serving:'',
+    ingredients:[
+      '펜네',
+      '토마토소스',
+      '홀토마토',
+      '모짜렐라치즈',
+    ],
+    steps:[
+      {title:'재료 준비', items:[
+        '펜네 = 소금을 넣고 삶는다 · 찬물에 헹구지 않고 체에 올려 김만 뺀다 · 삶은 후 올리브오일로 버무려 놓는다',
+        '소스 = 새송이를 볶고 버터가 남은 팬을 그대로 쓴다 · 그 팬에 토마토소스와 홀토마토소스 두 가지를 섞는다',
+      ]},
+      {title:'파스타 만들기', items:[
+        '17:30 = 펜네와 소스를 섞어 약불에 올리고 치즈를 맨 위에 올린다',
+        '뚜껑을 덮고 약불에서 10분 정도 뭉근하게 데우며 치즈를 녹인다',
+      ]},
+      {title:'요리 내놓기', items:[
+        '군청년들이 내려오면 조리한 팬을 그대로 내놓는다',
+      ]},
+    ]
+  }},
+  {emoji:'🍳', name:'비건햄야채볶음', tag:'둘째 날 저녁', recipe:{
+    serving:'',
+    ingredients:[
+      '비건햄',
+      '양배추',
+      '피망 & 파프리카 (초록·빨강·노랑)',
+      '소금',
+      '올리고당',
+      '참깨',
+    ],
+    steps:[
+      {title:'재료 준비', items:[
+        '비건햄·양배추·파프리카·피망 = 새끼손가락 크기로 썬다',
+      ]},
+      {title:'조리하기', items:[
+        '재료별로 따로 볶는다',
+        '볶을 때 살짝 소금간을 한다 (햄은 소금간 ❌)',
+      ]},
+      {title:'요리 내놓기', items:[
+        '군청년들이 내려오기 직전에 볶은 재료를 다 같이 섞어 살짝 볶아 내놓는다',
+        '접시 2개에 나누어 담는다',
+      ]},
+    ]
+  }},
+  {emoji:'🥗', name:'사라다(모닝)빵', tag:'둘째 날 저녁', recipe:{
+    serving:'',
+    ingredients:[
+      '모닝빵',
+      '감자',
+      '당근',
+      '백오이',
+      '사과',
+      '건포도',
+      '마요네즈',
+      '머스타드소스',
+      '소금 (부족한 간 맞추는 용도)',
+    ],
+    steps:[
+      {title:'재료 준비', items:[
+        '빵 = 반으로 갈라 팬에 살짝 구워둔다',
+        '감자 = 가로 또는 세로로 칼집을 낸 후 삶는다 (칼집을 내면 껍질이 잘 벗겨짐)',
+        '오이 = 강판에 얇게 저며 새콤달콤하게 절인 후 꽉 짠다',
+        '사과·당근 = 작게 썬다',
+      ]},
+      {title:'속 만들기', items:[
+        '삶은 감자를 뜨거울 때 으깬다',
+        '으깬 감자에 다른 재료를 섞는다',
+        '양념을 버무린다 = 마요네즈·소금·설탕·머스타드(살짝) · 마요네즈를 많이 넣으면 질어지므로 주의 · 추가 간은 소금으로!',
+      ]},
+      {title:'모닝빵 만들기', items:[
+        '구워놓은 모닝빵에 적당량의 속을 넣어 완성한다',
+      ]},
+      {title:'요리 내놓기', items:[
+        '접시 2개에 나누어 담아둔다',
+        '군청년들이 내려오기 직전에 배식대에 차려낸다',
+      ]},
+    ]
+  }},
+  {emoji:'🍄', name:'새송이버터구이', tag:'둘째 날 저녁', recipe:{
+    serving:'파스타보다 먼저 조리',
+    ingredients:[
+      '새송이버섯',
+      '버터',
+      '소스 = 물·간장·맛술·설탕·올리고당(또는 물엿)',
+    ],
+    steps:[
+      {title:'재료 준비', items:[
+        '새송이버섯을 3cm 두께로 썬다',
+        '한 면에만 벌집 칼집을 낸다',
+        '소스 = 대접에 미리 만들어 놓는다 (비율: 물 3 · 간장 2 · 맛술 1 · 설탕 0.5)',
+      ]},
+      {title:'조리하기', items:[
+        '팬에 버터를 녹인다',
+        '버섯을 넣고 중약불에서 노릇하게 굽는다 · 물이 생기지 않게 노릇노릇(갈색·딱딱한 느낌)하게',
+        '버섯이 다 익어갈 때 소스를 넣고 약불에서 졸인다',
+        '마지막에 올리고당을 둘러 윤기를 낸다',
+      ]},
+      {title:'요리 내놓기', items:[
+        '접시 2개에 나누어 담는다',
+        '군청년들이 내려오기 직전에 배식대에 차려낸다',
+        '조리한 팬은 닦지 않는다 — 이 팬으로 파스타를 만든다',
+      ]},
+    ]
+  }},
+];
+
+let MEALS = {
+  dinner1: { label:'첫날 저녁', menus:['유부초밥','미니주먹밥','표고버섯탕수육','야채튀김','떡볶이','비건잡채','오이절임'] },
+  morning: { label:'아침', menus:['아침 (시리얼·우유·토스트)'] },
+};
+
+let dataLoaded = true; // 기본 데이터가 있으므로 처음부터 화면을 채웁니다
+let isAdmin = false;
+
+/* =========================================================
+   3. 로컬 저장 / 시트 동기화
+   ========================================================= */
+const BUILD_TAG = '2026-08-08-u'; // 이 파일의 버전 — 화면 맨 아래에서 확인할 수 있습니다
+const DATA_VERSION = 3; // 기본 데이터를 크게 바꿀 때마다 올려주세요. 오래된 기기 캐시를 자동으로 무시하게 됩니다.
+function loadLocalShared(){
+  try{
+    const raw = localStorage.getItem('barajidata');
+    if(!raw) return false;
+    const d = JSON.parse(raw);
+    if(d.version !== DATA_VERSION) return false; // 옛 버전 캐시는 쓰지 않고 최신 기본값을 사용합니다
+    if(d.menus) MENUS = d.menus;
+    if(d.meals) MEALS = d.meals;
+    if(d.timetables) Object.assign(TIMETABLES, d.timetables);
+    if(d.prep_groups) PREPGROUPS = d.prep_groups;
+    if(d.activities) ACTIVITIES = d.activities;
+    return true;
+  }catch(e){ console.warn('local load failed', e); return false; }
+}
+function saveLocalShared(){
+  localStorage.setItem('barajidata', JSON.stringify({
+    version:DATA_VERSION, menus:MENUS, meals:MEALS, timetables:TIMETABLES, prep_groups:PREPGROUPS, activities:ACTIVITIES
+  }));
+}
+// 편집 중(문구 수정 모드로 필드에 커서가 가 있거나, 일정 수정창이 열려있는 동안)에는
+// 동기화가 화면을 갈아엎지 않도록 잠깐 건너뜁니다.
+let isEditingNow = false;
+let _subappDirty = false; // 아직 서버에 못 보낸 수정이 있는지 (선언 순서상 여기에 둔다)
+// 저장이 지금 어떤 상태인지 화면 아래에 항상 보여준다.
+// 그동안 "저장된 줄 알았는데 아니었던" 일이 반복돼서, 상태를 감추지 않고 계속 드러낸다.
+function setSaveStatus(text, kind){
+  // 예전엔 화면 아래에 떠 있는 버튼이었지만, 탭바와 겹치는 문제가 있었고
+  // 로그아웃할 때 자동으로 저장되므로 굳이 눌러야 하는 버튼은 없앴습니다.
+  // 지금은 관리자 툴바 안의 작은 글자로만 저장 상태를 보여줍니다.
+  let el = document.getElementById('admSaveStatus');
+  if(!el) return; // 관리자 모드가 아니면 툴바 자체가 없음
+  const colors = {
+    ok:      '#2E7D32',
+    saving:  '#777',
+    fail:    '#B5543E',
+    pending: '#B08E3A'
+  };
+  el.style.color = colors[kind] || colors.saving;
+  el.textContent = text;
+  el.title = kind === 'fail' ? '저장에 실패했습니다. "지금 저장" 버튼을 다시 눌러보세요.' : '';
+  clearTimeout(el._hideTimer);
+  if(kind === 'ok'){
+    el._hideTimer = setTimeout(()=>{ el.textContent = ''; }, 2500);
+  }
+}
+// 관리자 툴바의 "지금 저장" 버튼 — 로그아웃하지 않고도 바로 저장하고 싶을 때 누릅니다.
+async function manualSaveNow(){
+  if(!_subappDirty){ showToast('저장할 변경 내용이 없습니다'); return; }
+  const ok = await flushSubappSync();
+  if(ok){ showToast('저장했습니다'); }
+  else{
+    // 서버 저장이 계속 안 되면, 고친 내용을 파일로 내려받아 둘 수 있게 안내한다.
+    showToast('저장에 실패했습니다. 파일로 내려받습니다', true);
+    exportSubappEdits();
+  }
+}
+// 서버 저장이 계속 안 될 때, 고친 내용을 파일로 뽑아둘 수 있게 한다.
+// 이 파일을 주시면 제가 직접 반영해드릴 수 있습니다.
+function exportSubappEdits(){
+  const data = { subapp_text_overrides: subappTextOverrides, subapp_options: OPTIONS, savedAt: new Date().toISOString() };
+  const blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = '서브앱_수정내용.json';
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+// 서버에서 최신 내용을 받아오기만 한다(화면에 적용하지는 않음).
+// 페이지가 열리자마자 가장 먼저 호출해서, 다른 준비 작업과 동시에 진행되게 한다.
+async function fetchLatestData(){
+  if(!APPSSCRIPTURL || APPSSCRIPTURL.indexOf('http')!==0) return null;
+  try{
+    const res = await fetch(APPSSCRIPTURL + '?t=' + Date.now() + '&program=' + encodeURIComponent(PROGRAMID), {cache:'no-store'}); // t= : 캐시된 옛 응답이 오지 않도록
+    const json = await res.json();
+    return json.ok ? json.data : null;
+  }catch(e){ console.warn('sync failed', e); return null; }
+}
+// 받아온 내용을 화면에 적용한다.
+async function applyLatestData(d){
+  if(!d){
+    if(!dataLoaded) showSyncBadge('서버 연결 실패 — 옛 내용이 보이는 중', false);
+    return false;
+  }
+  if(isEditingNow || _subappDirty) return false; // 고치는 중이면 덮어쓰지 않는다
+  try{
+    // 서브앱은 이제 메인앱과 데이터를 나눠 쓴다. subapp_* 전용 칸을 먼저 보고,
+    // 아직 없으면(처음 분리한 직후) 예전에 함께 쓰던 칸에서 이어받는다.
+    // 이렇게 하면 서브앱에서 뭘 고쳐도 메인앱 데이터가 안 바뀌고, 그 반대도 마찬가지다.
+    const pick = (own, shared) => {
+      if(own !== undefined && own !== null){
+        if(Array.isArray(own) ? own.length : Object.keys(own).length) return own;
+      }
+      return shared;
+    };
+    const menus_      = pick(d.subapp_menus,       d.menus);
+    const meals_      = pick(d.subapp_meals,       d.meals);
+    const timetables_ = pick(d.subapp_timetables,  d.timetables);
+    const prep_       = pick(d.subapp_prep_groups, d.prep_groups);
+    const acts_       = pick(d.subapp_activities,  d.activities);
+
+    if(menus_ && menus_.length) MENUS = menus_;
+    if(meals_ && Object.keys(meals_).length) MEALS = meals_;
+    if(timetables_ && Object.keys(timetables_).length) Object.assign(TIMETABLES, timetables_);
+    if(prep_ && prep_.length) PREPGROUPS = prep_;
+    if(acts_ && acts_.length) ACTIVITIES = acts_;
+    // 이 파일은 서울여행 전용이라 PROGRAM_ID를 클라우드 값으로 바꾸지 않습니다.
+    // (예전 버그: 공유 시트의 subapp_program 값이 두 파일에 서로 영향을 줬습니다)
+    if(d.subapp_text_overrides && Object.keys(d.subapp_text_overrides).length){
+      const got = d.subapp_text_overrides;
+      // 새 형식은 {seohaeng:{...}, happy:{...}}, 옛 형식은 문구가 바로 들어있는 평평한 객체다
+      TEXT_BY = (got.seohaeng || got.happy)
+        ? got
+        : { seohaeng: Object.assign({}, got), happy: Object.assign({}, got) };
+      switchTextOverrides();
+      saveTextOverrides();
+    }
+    if(d.subapp_options_by && typeof d.subapp_options_by === 'object'){
+      OPTIONS_BY = d.subapp_options_by;
+      localStorage.setItem('subappOptionsBy', JSON.stringify(OPTIONS_BY));
+    }else if(d.subapp_options && Array.isArray(d.subapp_options) && d.subapp_options.length){
+      // 예전 버전(프로그램 구분 없이 옵션 하나만 쓰던 시절) 호환
+      OPTIONS_BY[PROGRAM_ID] = d.subapp_options;
+      localStorage.setItem('subappOptionsBy', JSON.stringify(OPTIONS_BY));
+    }
+    if(!OPTIONS_BY[PROGRAM_ID]) OPTIONS_BY[PROGRAM_ID] = [];
+    OPTIONS = OPTIONS_BY[PROGRAM_ID];
+    // 예전엔 행사 구분 없이 배열 하나로 저장했으므로, 그런 형식이면 지금 행사 것으로 옮겨 받는다
+    if(d.subapp_next_events){
+      NEXT_BY = Array.isArray(d.subapp_next_events)
+        ? { seohaeng:d.subapp_next_events, happy:d.subapp_next_events.slice() }
+        : d.subapp_next_events;
+    }
+    if(d.subapp_notices){
+      NOTICES_BY = Array.isArray(d.subapp_notices)
+        ? { seohaeng:d.subapp_notices, happy:d.subapp_notices.slice() }
+        : d.subapp_notices;
+    }
+    dataLoaded = true;
+    saveLocalShared();
+    // 화면 그리는 중 오류가 나더라도 통신 문제로 잘못 표시되지 않도록 따로 감싼다.
+    try{ renderAllContent(); }
+    catch(err){ console.error('화면 그리기 실패:', err); }
+    return true;
+  }catch(e){
+    console.error('내용 적용 실패:', e);
+    return false;
+  }
+}
+// 주기적으로(1분마다) 바뀐 내용이 있는지 확인한다.
+// 실제로 바뀐 게 있을 때만 화면을 다시 그리고, 아무 알림도 띄우지 않는다.
+let _lastDataSignature = null;
+async function syncFromSheetShared(){
+  if(isEditingNow || _subappDirty) return false;
+  const d = await fetchLatestData();
+  if(!d) return false;
+  const sig = JSON.stringify([d.subapp_text_overrides, d.subapp_options, d.subapp_timetables,
+                              d.subapp_meals, d.subapp_prep_groups, d.subapp_activities, d.subapp_program, d.subapp_next_events, d.subapp_notices]);
+  if(sig === _lastDataSignature) return true; // 바뀐 게 없으면 아무것도 하지 않는다
+  _lastDataSignature = sig;
+  return applyLatestData(d);
+}
+// 서버에서 최신 내용을 받아왔는지 화면 위에 잠깐 보여준다.
+// (그동안 실패해도 아무 표시가 없어서, 옛 내용을 보면서도 모르고 계셨습니다)
+function showSyncBadge(text, ok){
+  // 이 안내는 관리자에게만 필요합니다. 일반 신청자에게는 보이지 않게 합니다.
+  if(!isAdmin) return;
+  let el = document.getElementById('syncBadge');
+  if(!el){
+    el = document.createElement('div');
+    el.id = 'syncBadge';
+    el.style.cssText = 'position:fixed;top:8px;left:50%;transform:translateX(-50%);z-index:9998;font-size:11px;padding:5px 14px;border-radius:20px;font-family:inherit;box-shadow:0 2px 8px rgba(0,0,0,.2);';
+    document.body.appendChild(el);
+  }
+  el.style.background = ok ? '#2E7D32' : '#B5543E';
+  el.style.color = '#fff';
+  el.textContent = text;
+  el.style.display = 'block';
+  clearTimeout(el._t);
+  if(ok) el._t = setTimeout(()=>{ el.style.display='none'; }, 2500); // 성공은 잠깐만 보여주고 사라짐
+}
+// 지금 이 기기에서 서버 저장이 실제로 되는 상태인지 기억해둔다.
+// null = 아직 모름, true = 저장 가능, false = 저장 불가(비번 문제 등)
+let canSaveToServer = null;
+let _warnedCannotSave = false;
+function markCannotSave(reason){
+  canSaveToServer = false;
+  if(_warnedCannotSave) return; // 같은 경고를 반복해서 띄우지 않는다
+  _warnedCannotSave = true;
+  showToast('저장 안 됨 — ' + reason, true);
+}
+async function saveToSheetShared(key, value){
+  saveLocalShared();
+  if(!APPSSCRIPTURL || APPSSCRIPTURL.indexOf('http')!==0){ setSaveStatus('저장 주소가 설정되지 않음', 'fail'); return false; }
+  const pw = sessionStorage.getItem('barajiadminpw');
+  if(!pw){
+    setSaveStatus('저장 안 됨 · 로그인 정보 없음', 'fail');
+    markCannotSave('관리자 로그인 상태가 아닙니다');
+    return false;
+  }
+  setSaveStatus('저장 중…', 'saving');
+  try{
+    const res = await fetch(APPSSCRIPTURL, { method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'}, body: JSON.stringify({ password: pw, key: key, value: value, program: PROGRAMID }) });
+    const txt = await res.text();
+    let json;
+    try{ json = JSON.parse(txt); }
+    catch(e){
+      // 서버가 JSON이 아닌 걸 돌려준 경우 — 실제로 뭘 받았는지 알아야 원인을 잡을 수 있다
+      console.error('[저장 실패] 서버 응답 전문:', txt);
+      const hint = txt.indexOf('<')===0 ? '로그인/권한 페이지가 돌아옴' : ('응답 앞부분: '+txt.slice(0,60));
+      setSaveStatus('저장 실패 · ' + hint, 'fail');
+      markCannotSave('서버가 이상한 응답을 보냈습니다');
+      return false;
+    }
+    if(!json.ok){
+      setSaveStatus('저장 실패 · ' + (json.error||'원인 불명'), 'fail');
+      markCannotSave(json.error || '비밀번호가 맞지 않습니다');
+      return false;
+    }
+    canSaveToServer = true;
+    _warnedCannotSave = false; // 다시 저장이 되기 시작하면 경고 상태를 푼다
+    setSaveStatus('저장됨 · ' + new Date().toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit',second:'2-digit'}), 'ok');
+    return true;
+  }catch(e){
+    console.warn('sheet save failed', e);
+    setSaveStatus('저장 실패 · 네트워크 오류', 'fail');
+    markCannotSave('네트워크 오류로 서버에 저장하지 못했습니다');
+    return false;
+  }
+}
+// 수정한 내용은 우선 이 기기에만 모아둡니다.
+// 시트에는 [저장] 버튼을 눌렀을 때 한 번만 기록합니다 —
+// 글자 하나 고칠 때마다 기록하면 시트의 백업 기록이 금세 넘쳐서
+// 정작 중요한 옛 기록이 밀려나가기 때문입니다.
+// 어떤 항목이 바뀌었는지 표시해둔다 — 저장할 때 바뀐 것만 시트에 기록하기 위해서
+let _dirtyKeys = new Set();
+function queueSubappSync(kind){
+  _subappDirty = true;
+  if(kind) _dirtyKeys.add(kind);
+  else _dirtyKeys.add('text'); // 어디서 왔는지 안 알려주면 문구 수정으로 본다
+  saveLocalShared();
+  setSaveStatus('수정한 내용 있음 · 눌러서 저장', 'pending');
+}
+// 지금까지 고친 것을 시트에 한꺼번에 기록합니다. 바뀐 항목만 기록해서
+// 시트의 백업 기록이 불필요하게 쌓이지 않게 합니다.
+async function flushSubappSync(){
+  if(!_subappDirty) return true;
+  setSaveStatus('저장 중…', 'saving');
+  OPTIONS_BY[PROGRAM_ID] = OPTIONS; // 저장 직전, 현재 보고 있는 옵션을 서랍에 반영
+  const targets = {
+    text:     ['subapp_text_overrides', TEXT_BY],
+    options:  ['subapp_options_by',     OPTIONS_BY],
+    timetable:['subapp_timetables',     TIMETABLES],
+    meals:    ['subapp_meals',          MEALS],
+    prep:     ['subapp_prep_groups',    PREPGROUPS],
+    activity: ['subapp_activities',     ACTIVITIES],
+    menus:    ['subapp_menus',          MENUS],
+    program:  ['subapp_program',        PROGRAM_ID],
+    nextevents:['subapp_next_events',   NEXT_BY],
+    notices:  ['subapp_notices',        NOTICES_BY]
+  };
+  const jobs = [...(_dirtyKeys.size ? _dirtyKeys : Object.keys(targets))]
+    .filter(k => targets[k])
+    .map(k => saveToSheetShared(targets[k][0], targets[k][1]));
+  const results = await Promise.all(jobs);
+  if(results.every(Boolean)){
+    _subappDirty = false;
+    _dirtyKeys.clear();
+    setSaveStatus('저장됨 · ' + new Date().toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit'}), 'ok');
+    return true;
+  }
+  setSaveStatus('저장 실패 · 눌러서 다시 시도', 'fail');
+  return false;
+}
+// 창을 닫거나 새로고침할 때, 아직 안 보낸 수정이 있으면 마지막으로 보낸다
+window.addEventListener('beforeunload', function(e){
+  if(!_subappDirty) return;
+  const pw = sessionStorage.getItem('barajiadminpw');
+  if(pw && navigator.sendBeacon){
+    // 페이지가 닫히는 중에도 확실히 전송되는 방식
+    navigator.sendBeacon(APPSSCRIPTURL, new Blob([JSON.stringify({ password:pw, key:'subapp_text_overrides', value:TEXT_BY })], {type:'text/plain;charset=utf-8'}));
+    OPTIONS_BY[PROGRAM_ID] = OPTIONS;
+    navigator.sendBeacon(APPSSCRIPTURL, new Blob([JSON.stringify({ password:pw, key:'subapp_options_by', value:OPTIONS_BY })], {type:'text/plain;charset=utf-8'}));
+  }
+});
+
+function findMenu(name){ return MENUS.find(m=>m.name===name); }
+
+/* =========================================================
+   4. 페이지 이동 (스크롤 최상단 고정)
+   ========================================================= */
+let selectedOptionId = null;
+let selectedRoute = null;
+
+/* =========================================================
+   4-1. 스텝(1p씩 넘기기) 네비게이션 + 뒤로가기(히스토리) 통합관리
+   페이지 전환, 스텝 전환, 모달 열기를 전부 하나의 브라우저 히스토리
+   상태로 관리합니다. 그래서 폰의 물리적 뒤로가기를 눌러도 항상
+   "한 단계"씩만 정확히 되돌아가고, 앱 밖으로 튕기거나 첫 화면으로
+   갑자기 점프하지 않습니다.
+   ========================================================= */
+const STEP_PAGES = {
+  'page-lunch': { steps:3, backTo:'page-intro' },
+  'page-dinner': { steps:3, backTo:'page-intro' },
+  'page-stay1': { steps:5, backTo:'page-intro' },
+  'page-moreinfo': { steps:4, backTo:null },
+};
+const stepIndex = {};
+let cameFromRoute = null;
+let moreInfoHiddenSteps = [];
+
+function hiddenStepsFor(pageId){
+  return pageId==='page-moreinfo' ? moreInfoHiddenSteps : [];
+}
+function currentPageId(){
+  const el = document.querySelector('.page.active');
+  return el ? el.id : 'page-select';
+}
+function buildNavState(overrides){
+  return Object.assign({
+    page: currentPageId(),
+    step: stepIndex[currentPageId()] || 0,
+    cameFromRoute: cameFromRoute,
+    hidden: moreInfoHiddenSteps,
+    modal: null
+  }, overrides || {});
+}
+function pushNav(overrides){
+  history.pushState(buildNavState(overrides), '');
+}
+function renderPageAndStep(pageId, stepNo){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  const target = document.getElementById(pageId) || document.getElementById('page-select');
+  target.classList.add('active');
+  window.scrollTo(0,0);
+  if(STEP_PAGES[pageId]){
+    const cfg = STEP_PAGES[pageId];
+    const hidden = hiddenStepsFor(pageId);
+    let idx = (stepNo!=null) ? stepNo : 0;
+    while(hidden.includes(idx) && idx < cfg.steps-1) idx++;
+    stepIndex[pageId] = idx;
+    renderStepUI(pageId);
+    if(pageId==='page-moreinfo') renderMoreSchedule();
+  }else{
+    const scroller = target.querySelector('.page-scroll');
+    if(scroller){
+      scroller.scrollTop = 0;
+      requestAnimationFrame(()=>{ scroller.scrollTop = 0; window.scrollTo(0,0); });
+    }
+  }
+}
+function applyNavState(state){
+  state = state || {page:'page-select', step:0, cameFromRoute:null, hidden:[], modal:null};
+  cameFromRoute = state.cameFromRoute || null;
+  moreInfoHiddenSteps = state.hidden || [];
+  // 같은 화면에서 모달만 닫는 경우라면 화면을 다시 그리지 않는다.
+  // (다시 그리면 스크롤이 맨 위로 올라가서, 보던 자리를 잃어버린다)
+  const curPage = document.querySelector('.page.active');
+  const samePlace = curPage && curPage.id === state.page
+                    && (!STEP_PAGES[state.page] || stepIndex[state.page] === state.step);
+  if(!samePlace) renderPageAndStep(state.page, state.step);
+  document.getElementById('recipeModal').classList.toggle('show', state.modal==='recipe');
+}
+window.addEventListener('popstate', function(e){
+  applyNavState(e.state);
+});
+
+function initSteps(pageId){
+  const cfg = STEP_PAGES[pageId];
+  const hidden = hiddenStepsFor(pageId);
+  let start = 0;
+  while(hidden.includes(start) && start < cfg.steps-1) start++;
+  stepIndex[pageId] = start;
+  renderStepUI(pageId);
+}
+function renderStepUI(pageId){
+  const cfg = STEP_PAGES[pageId];
+  if(!cfg) return;
+  const idx = stepIndex[pageId] || 0;
+  const hidden = hiddenStepsFor(pageId);
+  const page = document.getElementById(pageId);
+  page.querySelectorAll('.step-slide').forEach(s=>{
+    s.classList.toggle('active', parseInt(s.dataset.step,10)===idx);
+  });
+  window.scrollTo(0,0);
+  const activeSlide = page.querySelector('.step-slide.active');
+  if(activeSlide){
+    activeSlide.scrollTop = 0;
+    requestAnimationFrame(()=>{ activeSlide.scrollTop = 0; window.scrollTo(0,0); });
+  }
+  const dotsBox = document.getElementById('dots-'+pageId);
+  if(dotsBox){
+    const visible = Array.from({length:cfg.steps}, (_,i)=>i).filter(i=>!hidden.includes(i));
+    dotsBox.innerHTML = visible.map(i=>`<span class="step-dot${i===idx?' on':''}"></span>`).join('');
+  }
+  const nextBtn = document.getElementById('next-'+pageId);
+  if(nextBtn){
+    // 실제로 보이는 단계 중 마지막인지 판단한다 (숨겨진 단계가 있을 수 있으므로)
+    let lastVisible = cfg.steps-1;
+    while(lastVisible > 0 && hidden.includes(lastVisible)) lastVisible--;
+    const isLast = (idx === lastVisible);
+    // 안내가 끝났으면, 필요한 정보를 바로 찾아볼 수 있는 화면으로 넘어가는 버튼을 보여준다
+    if(isLast && pageId !== 'page-moreinfo'){
+      nextBtn.style.display = 'block';
+      nextBtn.textContent = '다음';
+    }else if(isLast){
+      nextBtn.style.display = 'none';
+    }else{
+      nextBtn.style.display = 'block';
+      nextBtn.textContent = '다음';
+    }
+  }
+}
+/* =========================================================
+   빠른 찾아보기 — 안내서를 끝까지 읽은 뒤 나오는 화면.
+   각 그룹(점심·저녁·1박2일·2박3일)의 안내 단계를 그대로 탭으로 만들어,
+   현장에서 필요한 것만 바로 찾아볼 수 있게 합니다.
+   내용은 안내서와 같은 것을 그대로 옮겨오므로, 관리자가 한 곳만 고치면 양쪽에 반영됩니다.
+   ========================================================= */
+// 꼭지 공지사항 — 관리자가 직접 적는 안내입니다
+
+// '내 봉사' 화면에서 관리자가 직접 고칠 수 있는 항목들.
+// 신청한 일정 종류(점심·저녁·1박2일·2박3일)마다 따로 저장되므로, 각각 다른 안내를 적을 수 있습니다.
+// 저장 키에 행사 종류(서울여행/행복학교)와 일정 종류(점심/저녁/1박2일/2박3일)를 모두 넣는다.
+// 그래야 두 행사의 집합 시간·장소가 서로 섞이지 않는다.
+// 문구 서랍 자체가 이미 행사별로 나뉘어 있으므로, 키에는 일정 종류만 넣으면 된다
+function homeKey(name){ return 'home_' + (quickFromPage||'') + '_' + name; }
+function homeVal(name, fallback){
+  const v = subappTextOverrides[homeKey(name)];
+  return (v !== undefined && v !== '') ? v : (fallback || '');
+}
+// 홈 화면(내 봉사) — 지금 확인해야 할 것들을 한눈에
+function quickHomeHTML(){
+  const opt = findOptionById(selectedOptionId);
+  const group = OPTIONS.find(g => g.items.some(it => it.id === selectedOptionId));
+  const timeTxt  = homeVal('time');
+  const placeTxt = homeVal('place');
+
+  // 공지사항 — 이번 봉사에 필요한 안내이므로 위쪽에 둔다
+  const noticeList = curNotices();
+  const noticeHTML = noticeList.length
+    ? noticeList.map(n=>`<div class="card">
+        <p class="home-cap">${homeVal('hdgNotice','꼭지 공지사항')}</p>
+        <p><b>${n.title||''}</b></p>
+        ${n.body?`<p class="soft-body">${n.body}</p>`:''}
+      </div>`).join('')
+    : (isAdmin ? '<div class="step-placeholder">아직 공지사항이 없습니다.</div>' : '');
+
+  // 다음 봉사 일정 — 지금 당장 필요한 게 아니므로 구분선 아래 참고 정보로 둔다
+  const nextList = curNextEvents();
+  const nextHTML = nextList.length
+    ? nextList.map(s=>{
+        // "서울여행"/"행복학교"만 남기고 "바라지"는 빼며, 기간(1박2일 등)은 날짜만 봐도 알 수 있으니 뺀다.
+        const cleanTitle = (s.title||'').replace(/\s*바라지\s*/g,'').trim();
+        const fullLabel = [cleanTitle, s.date?`· ${s.date}`:''].filter(Boolean).join(' ');
+        return `<div class="home-mini">
+        <div class="home-mini-row">
+          <div class="home-mini-txt">
+            <div class="t">${s.title||''}${s.dur?` · ${s.dur}`:''}</div>
+            ${s.date?`<div class="d">${s.date}</div>`:''}
+            ${s.place?`<div class="d">${s.place}</div>`:''}
+          </div>
+          ${!isAdmin?`<div class="notify-btn" onclick="openNotifyModal('${fullLabel.replace(/'/g,"\\'")}')">
+            <div class="notify-ring"><svg viewBox="0 0 24 24"><path d="M6 8a6 6 0 0112 0c0 5 2 6 2 6H4s2-1 2-6z"/><path d="M9.5 18a2.5 2.5 0 005 0"/></svg></div>
+            <div class="notify-lb">신청</div>
+          </div>`:''}
+        </div>
+      </div>`;
+      }).join('')
+    : (isAdmin ? '<div class="step-placeholder">다음 일정은 아직 확정 전입니다.</div>' : '');
+
+  return `
+    <h1 class="title" style="margin-bottom:4px">${homeVal('pageTitle','내 봉사')}</h1>
+    <p class="lead" style="margin-bottom:18px">${homeVal('pageLead','신청하신 일정과 꼭 확인하실 안내입니다.')}</p>
+
+    <div class="home-now">
+      <span class="home-badge">${homeVal('hdgApplied','이번 봉사')}</span>
+      ${opt ? `
+        <div class="home-when">${opt.label}</div>
+        ${group ? `<div class="home-cat">${group.group}</div>` : ''}
+      ` : '<div class="home-when" style="font-size:15px;color:var(--ink-soft)">신청하신 일정을 먼저 선택해주세요.</div>'}
+      ${(timeTxt||placeTxt) ? `
+        <div class="home-lines">
+          ${timeTxt?`<div class="home-line"><b>시간</b><span>${timeTxt}</span></div>`:''}
+          ${placeTxt?`<div class="home-line"><b>장소</b><span>${placeTxt}</span></div>`:''}
+        </div>` : (isAdmin ? '<div class="home-lines"><div class="home-line" style="color:var(--ink-soft)">모이는 시간·장소가 아직 입력되지 않았습니다</div></div>' : '')}
+    </div>
+
+    ${noticeHTML}
+
+    ${(nextList.length || isAdmin) ? `<div class="home-divider">${homeVal('hdgNext','다음에 참여하실 수 있는 봉사')}</div>` : ''}
+    ${nextHTML}
+
+    ${isAdmin ? `
+      <div class="admin-add-btn" onclick="openHomeEditor()">이 화면 내용 수정하기</div>
+      <div class="admin-add-btn" onclick="openNoticesEditor()">공지사항 수정하기</div>
+      <div class="admin-add-btn" onclick="openNextEventsEditor()">다음 일정 수정하기</div>
+      <div class="admin-add-btn" onclick="openTabNamesEditor()">아래 단추 이름 수정하기</div>
+    ` : ''}
+    <a class="footer-link" onclick="showPage('page-select')">다시 일정 선택하기<span class="icon">›</span></a>
+  `;
+}
+// '내 봉사' 화면 수정창 — 제목들과 모이는 시간·장소
+function openHomeEditor(){
+  if(!isAdmin) return;
+  isEditingNow = true;
+  contentEditorKind = 'home';
+  document.getElementById('contentEditorTitle').textContent = '내 봉사 화면 수정';
+  document.getElementById('contentEditorHint').textContent = '지금 선택하신 일정 종류에만 적용됩니다. 비우면 기본 문구가 나옵니다.';
+  const fields = [
+    ['pageTitle','화면 제목','내 봉사'],
+    ['pageLead','안내 문구','신청하신 일정과 꼭 확인하실 안내입니다.'],
+    ['time','모이는 시간','예: 13:30까지'],
+    ['place','모이는 장소','예: 정토사회문화회관 4층 라훌라방'],
+    ['hdgApplied','초록 카드 위 작은 표시','이번 봉사'],
+    ['hdgNotice','공지 카드 위 작은 제목','꼭지 공지사항'],
+    ['hdgNext','아래 구분선 문구','다음에 참여하실 수 있는 봉사'],
+  ];
+  document.getElementById('contentEditorBody').innerHTML = fields.map(([k,label,ph])=>`
+    <div class="admin-editgroup">
+      <label class="re-label">${label}</label>
+      <input class="hm-input re-input" data-name="${k}" value="${escAttr(subappTextOverrides[homeKey(k)]||'')}" placeholder="${escAttr(ph)}">
+    </div>`).join('');
+  document.getElementById('contentEditorModal').classList.add('show');
+}
+function saveHomeEditor(){
+  document.querySelectorAll('#contentEditorBody .hm-input').forEach(inp=>{
+    const key = homeKey(inp.dataset.name);
+    const v = inp.value.trim();
+    if(v) subappTextOverrides[key] = v;
+    else delete subappTextOverrides[key];
+  });
+  saveTextOverrides();
+  queueSubappSync('text');
+}
+// 공지사항 수정창
+function openNoticesEditor(){
+  if(!isAdmin) return;
+  isEditingNow = true;
+  contentEditorKind = 'notices';
+  document.getElementById('contentEditorTitle').textContent = '꼭지 공지사항 수정';
+  document.getElementById('contentEditorHint').textContent = '제목을 비우면 그 공지가 삭제됩니다.';
+  document.getElementById('contentEditorBody').innerHTML = `
+    <div id="nt_list">${curNotices().map(n=>ntRowHTML(n)).join('')}</div>
+    <button class="admin-add-btn" onclick="ntAddRow()">+ 공지 추가</button>`;
+  document.getElementById('contentEditorModal').classList.add('show');
+}
+function ntRowHTML(n){
+  n = n || {};
+  return `<div class="admin-editgroup nt-row">
+    <label class="re-label">제목</label>
+    <input class="nt-title re-input" value="${escAttr(n.title||'')}" placeholder="예: 집결 시간 안내">
+    <label class="re-label">내용</label>
+    <textarea class="nt-body re-textarea" rows="4">${escAttr(n.body||'')}</textarea>
+    <button class="admin-add-btn" style="margin-top:8px;border-color:#c0392b;color:#c0392b;" onclick="this.closest('.nt-row').remove()">이 공지 삭제</button>
+  </div>`;
+}
+function ntAddRow(){
+  const wrap = document.getElementById('nt_list');
+  const div = document.createElement('div');
+  div.innerHTML = ntRowHTML({});
+  wrap.appendChild(div.firstElementChild);
+}
+function saveNoticesEditor(){
+  NOTICES_BY[PROGRAM_ID] = [...document.querySelectorAll('#nt_list .nt-row')].map(el=>({
+    title: el.querySelector('.nt-title').value.trim(),
+    body:  el.querySelector('.nt-body').value.trim()
+  })).filter(n=>n.title);
+  queueSubappSync('notices');
+}
+
+let quickFromPage = null;
+let quickTabIndex = 0;
+
+// 각 단계에 붙일 탭 이름과 아이콘
+const QUICK_TABS = {
+  '이 봉사에서 우리가 하는 일': { name:'하는 일',
+    icon:'<path d="M12 21s7-5.6 7-11a7 7 0 10-14 0c0 5.4 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/>' },
+  '상세 일정표': { name:'일정표',
+    icon:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>' },
+  '저녁공양 메뉴': { name:'공양',
+    icon:'<path d="M4 3v8a3 3 0 003 3v7M7 3v6M10 3v6M17 3c-1.5 2-2 4-2 7 0 2 .7 3 2 3v8"/>' },
+  '점심공양지원이 필요한 이유': { name:'봉사 안내',
+    icon:'<circle cx="12" cy="12" r="9"/><path d="M12 16v-5M12 8h.01"/>' },
+  '준비물': { name:'준비물',
+    icon:'<path d="M6 2h9l5 5v13a1 1 0 01-1 1H6a1 1 0 01-1-1V3a1 1 0 011-1z"/><path d="M14 2v6h6M9 13h6M9 17h4"/>' },
+  '봉사하면서 이것은 꼭 지켜주세요': { name:'지켜주세요',
+    icon:'<path d="M12 3l7 3v6c0 4.5-3 8-7 9-4-1-7-4.5-7-9V6l7-3z"/><path d="M9 12l2 2 4-4"/>' }
+};
+function quickTabInfo(fullTitle){
+  const t = (fullTitle||'').trim();
+  if(QUICK_TABS[t]) return QUICK_TABS[t];
+  return { name: t.length > 5 ? t.slice(0,5) : (t || '내용'),
+           icon: '<circle cx="12" cy="12" r="9"/>' };
+}
+// 그 페이지에 실제로 있는 단계들만 모아온다 (숨겨진 단계는 제외)
+// 맨 앞에는 항상 "내 봉사"(홈) 탭이 붙는다.
+function quickStepsOf(pageId){
+  const page = document.getElementById(pageId);
+  if(!page) return [];
+  const home = { index:-1, title:'내 봉사', name:'내 봉사', home:true,
+    icon:'<path d="M12 12a4 4 0 100-8 4 4 0 000 8zM5 20c0-3.3 3.1-6 7-6s7 2.7 7 6"/>' };
+  const hidden = hiddenStepsFor(pageId);
+  const rest = [...page.querySelectorAll('.step-slide')]
+    .map((el, i) => ({ el, i }))
+    .filter(({i}) => !hidden.includes(i))
+    .map(({el, i}) => {
+      const h = el.querySelector('h2 span[data-editable-key], h1.title');
+      const title = h ? h.textContent.trim() : ('' + (i+1));
+      const info = quickTabInfo(title);
+      return { index:i, title, name: info.name, icon: info.icon, html: el.innerHTML };
+    });
+  // "전체 활동" 탭 — 부분만 참여하시는 분도 전체 흐름을 볼 수 있게 붙인다.
+  // 다만 서울여행(1박2일) 전체 참가자는 안내서에 이미 전체가 담기므로 제외한다.
+  const isFullStay = (quickFromPage === 'page-stay1');
+  const tabs = [home, ...rest];
+  if(!(PROGRAM_ID === 'seohaeng' && isFullStay)){
+    // 파트봉사로 신청하신 분께는 "이게 내 일정"으로 오해하지 않도록 다른 이름을 씁니다.
+    // 전체(1박2일·2박3일) 참가자에게는 실제로 본인 일정이므로 그대로 "전체 활동"입니다.
+    const tabName = isFullStay ? '바라지 전체 활동' : '전체참여하면';
+    tabs.push({ index:-2, title:'바라지 전체 활동', name:tabName, all:true, isPreview:!isFullStay,
+      icon:'<circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/>' });
+  }
+  return tabs;
+}
+function openQuickView(fromPageId){
+  quickFromPage = fromPageId;
+  quickTabIndex = 0;
+  renderQuickView();
+  showPage('page-quick');
+}
+function selectQuickTab(i){
+  quickTabIndex = i;
+  renderQuickView();
+  // 전체 활동 탭이면 일정표를 채워 넣는다 — 지금 보고 있던 코스(quickFromPage)의 일정만 보여준다
+  const sch = document.getElementById('quickAllSchedule');
+  if(sch){
+    const stayKey = PAGE_TO_STAYKEY[quickFromPage] || defaultStayKeyForProgram(PROGRAM_ID);
+    const t = TIMETABLES[stayKey];
+    sch.innerHTML = (t && t.days)
+      ? t.days.map((day,di)=>`<div class="tt-card"><div class="day-label">${dayLabel(stayKey, di)}</div>${day.rows.map((r,ri)=>formatRow(r, {stayKey, dayIdx:di, rowIdx:ri})).join('')}${isAdmin?`<div class="admin-add-btn tt-add-btn" onclick="addScheduleRow('${stayKey}', ${di})">+ 일정 추가</div>`:''}</div>`).join('')
+      : '<p class="empty-note">일정 정보가 아직 등록되지 않았습니다.</p>';
+    // 상세일정표와 똑같이 장소를 다음 줄로 내려준다 (안 하면 내용과 장소가 붙어 보인다)
+    adjustPlaceWrap(sch);
+    if(document.fonts && document.fonts.ready) document.fonts.ready.then(()=>adjustPlaceWrap(sch));
+  }
+  document.getElementById('quickBody').scrollTop = 0;
+}
+// 탭 이름 — 관리자가 바꾼 이름이 있으면 그것을 쓴다
+// 탭 이름 저장 키. 카테고리(점심·저녁·1박2일·2박3일)마다 따로 저장되도록
+// 어느 화면의 탭인지를 키에 함께 넣는다. (번호만 쓰면 서로 덮어쓴다)
+function tabNameKey(s){
+  const which = s.home ? 'home' : s.all ? 'all' : s.index;
+  return 'tabName_' + (quickFromPage||'') + '_' + which;
+}
+function quickTabLabel(s){
+  return subappTextOverrides[tabNameKey(s)] || s.name;
+}
+// 탭 이름 수정창
+// 군청년 프로그램 알림 신청 — 일반 봉사자가 다음 일정 소식을 계속 받아보고 싶을 때 씁니다.
+let notifyFromEvent = '';
+// 전화번호를 입력하는 대로 000-0000-0000 형식으로 맞춰준다.
+function autoFormatPhone(el){
+  const digits = el.value.replace(/[^0-9]/g, '').slice(0, 11);
+  let out = digits;
+  if(digits.startsWith('02')){
+    // 서울 지역번호(02)는 자릿수가 다르므로 따로 처리
+    out = digits.length > 6 ? digits.slice(0,2)+'-'+digits.slice(2,6)+'-'+digits.slice(6,10)
+        : digits.length > 2 ? digits.slice(0,2)+'-'+digits.slice(2)
+        : digits;
+  }else if(digits.length > 7){
+    out = digits.slice(0,3)+'-'+digits.slice(3,7)+'-'+digits.slice(7);
+  }else if(digits.length > 3){
+    out = digits.slice(0,3)+'-'+digits.slice(3);
+  }
+  el.value = out;
+}
+function openNotifyModal(eventTitle){
+  notifyFromEvent = eventTitle || '';
+  isEditingNow = true;
+  document.getElementById('ny_eventTitle').textContent = notifyFromEvent;
+  ['ny_name','ny_phone','ny_bu','ny_ji'].forEach(id=>{ const el=document.getElementById(id); if(el) el.value=''; });
+  const ce = document.getElementById('ny_wantEvent'); if(ce) ce.checked = true; // 이 일정 알림은 기본 체크
+  const cg = document.getElementById('ny_wantGeneral'); if(cg) cg.checked = false;
+  document.getElementById('notifyModal').classList.add('show');
+}
+function closeNotifyModal(){
+  document.getElementById('notifyModal').classList.remove('show');
+  isEditingNow = false;
+}
+async function submitNotifySubscribe(){
+  const name = document.getElementById('ny_name').value.trim();
+  const phone = document.getElementById('ny_phone').value.trim();
+  const bu = document.getElementById('ny_bu').value.trim();
+  const ji = document.getElementById('ny_ji').value.trim();
+  const wantEvent = document.getElementById('ny_wantEvent').checked;
+  const wantGeneral = document.getElementById('ny_wantGeneral').checked;
+  if(!name || !phone){ alert('이름과 전화번호를 입력해주세요.'); return; }
+  if(!wantEvent && !wantGeneral){ alert('알림받고 싶으신 항목을 하나 이상 선택해주세요.'); return; }
+  try{
+    const res = await fetch(APPSSCRIPTURL, {
+      method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'},
+      body: JSON.stringify({ action:'subscribeNotify', value:{
+        name, phone, bu, ji,
+        fromEvent: wantEvent ? notifyFromEvent : '',
+        wantEvent, wantGeneral
+      } })
+    });
+    const json = await res.json();
+    if(json.ok){
+      closeNotifyModal();
+      showToast('신청되었습니다. 소식이 있을 때 연락드릴게요 🙏');
+    }else{
+      alert(json.error || '신청에 실패했습니다. 다시 시도해주세요.');
+    }
+  }catch(e){
+    alert('네트워크 오류로 신청하지 못했습니다. 다시 시도해주세요.');
+  }
+}
+function openTabNamesEditor(){
+  if(!isAdmin) return;
+  isEditingNow = true;
+  contentEditorKind = 'tabnames';
+  const steps = quickStepsOf(quickFromPage);
+  document.getElementById('contentEditorTitle').textContent = '탭 이름 수정';
+  document.getElementById('contentEditorHint').textContent = '아래 단추에 표시될 이름입니다. 짧을수록 보기 좋습니다.';
+  document.getElementById('contentEditorBody').innerHTML = steps.map(s=>{
+    const key = tabNameKey(s);
+    return `<div class="admin-editgroup">
+      <label class="re-label">${s.title}</label>
+      <input class="tn-input re-input" data-key="${key}" value="${escAttr(quickTabLabel(s))}" placeholder="${escAttr(s.name)}">
+    </div>`;
+  }).join('');
+  document.getElementById('contentEditorModal').classList.add('show');
+}
+function saveTabNamesEditor(){
+  document.querySelectorAll('#contentEditorBody .tn-input').forEach(inp=>{
+    const v = inp.value.trim();
+    if(v) subappTextOverrides[inp.dataset.key] = v;
+    else delete subappTextOverrides[inp.dataset.key]; // 비우면 기본 이름으로 되돌아감
+  });
+  saveTextOverrides();
+  queueSubappSync('text');
+}
+function renderQuickView(){
+  const body = document.getElementById('quickBody');
+  const tabs = document.getElementById('quickTabs');
+  if(!body || !tabs || !quickFromPage) return;
+  const steps = quickStepsOf(quickFromPage);
+  if(!steps.length){ body.innerHTML = '<p class="empty-note">보여드릴 내용이 없습니다.</p>'; tabs.innerHTML=''; return; }
+  if(quickTabIndex >= steps.length) quickTabIndex = 0;
+
+  const cur = steps[quickTabIndex];
+  body.innerHTML = cur.home ? quickHomeHTML()
+                 : cur.all  ? quickAllHTML()
+                 : `<div class="quick-content">${cur.html}</div>`;
+  tabs.innerHTML = steps.map((s,i)=>`
+    <button class="quick-tab ${i===quickTabIndex?'on':''}" onclick="selectQuickTab(${i})">
+      <svg viewBox="0 0 24 24">${s.icon}</svg><span>${quickTabLabel(s)}</span>
+    </button>
+  `).join('');
+}
+// 전체 활동 탭 — 2박3일 참가자가 전체 흐름을 볼 때
+function quickAllHTML(){
+  const isSeo = (PROGRAM_ID === 'seohaeng');
+  const isFullStay = (quickFromPage === 'page-stay1');
+  const dur = isSeo ? '1박 2일' : '2박 3일';
+  // 파트봉사자에게는 "이게 내 일정"으로 오해하지 않도록, 이건 미리보기라는 걸 먼저 밝힙니다.
+  const previewNote = isFullStay ? '' :
+    `<div class="preview-note"><div class="pn-ico">!</div><div class="pn-txt"><b>지금은 파트봉사</b>로 함께해주고 계세요. 아래는 ${dur}로 신청하시면 경험하시게 될 전체 일정과 활동이에요.</div></div>`;
+  return `
+    <h1 class="title" style="margin-bottom:4px">바라지 전체 활동</h1>
+    ${isFullStay ? `<p class="lead" style="margin-bottom:20px">${dur} 전체 일정과 활동입니다.</p>` : ''}
+    ${previewNote}
+    <h2 class="subtitle" style="margin-top:0">이 봉사에서 우리가 하는 일</h2>
+    <div class="card">${activityListHTML()}</div>
+    <h2 class="subtitle">공양 메뉴</h2>
+    <div class="card"><p><b>${MEALS.dinner1 ? (MEALS.dinner1.label||'첫날 저녁') : '첫날 저녁'}</b></p>${menuListHTML('dinner1')}</div>
+    ${!isSeo ? `<div class="card"><p><b>${MEALS.dinner2 ? (MEALS.dinner2.label||'둘째 날 저녁') : '둘째 날 저녁'}</b></p>${menuListHTML('dinner2')}</div>` : ''}
+    <h2 class="subtitle">전체 일정표</h2>
+    <div id="quickAllSchedule"></div>
+  `;
+}
+
+function stepFwd(pageId){
+  const cfg = STEP_PAGES[pageId];
+  if(!cfg) return;
+  const hidden = hiddenStepsFor(pageId);
+  const idx = stepIndex[pageId] || 0;
+  let next = idx+1;
+  while(next < cfg.steps && hidden.includes(next)) next++;
+  if(next < cfg.steps){
+    stepIndex[pageId] = next;
+    renderStepUI(pageId);
+    pushNav();
+  }else if(pageId !== 'page-moreinfo'){
+    // 안내서를 끝까지 읽었으면, 필요한 정보를 바로 찾아볼 수 있는 화면으로 넘어간다
+    openQuickView(pageId);
+  }
+}
+function stepBack(pageId){
+  const cfg = STEP_PAGES[pageId];
+  if(!cfg) return;
+  const hidden = hiddenStepsFor(pageId);
+  let idx = stepIndex[pageId] || 0;
+  let prev = idx-1;
+  while(prev >= 0 && hidden.includes(prev)) prev--;
+  if(prev >= 0){
+    stepIndex[pageId] = prev;
+    renderStepUI(pageId);
+    pushNav();
+  }else if(pageId==='page-moreinfo'){
+    goToPageKeepingStep(cameFromRoute || 'page-intro');
+  }else{
+    goToPageKeepingStep(cfg.backTo);
+  }
+}
+// 원래 있던 페이지로 돌아갈 때는 그 페이지의 스텝(몇 번째 화면이었는지)을 그대로 유지합니다
+function goToPageKeepingStep(id){
+  const keepStep = STEP_PAGES[id] ? (stepIndex[id] || 0) : 0;
+  renderPageAndStep(id, keepStep);
+  pushNav();
+}
+function goToMoreInfo(fromPageId){
+  cameFromRoute = fromPageId;
+  // 1박2일 신청자는 자기 페이지에 '하는 일'이 이미 있으므로 전체활동에서는 생략합니다
+  moreInfoHiddenSteps = (fromPageId==='page-stay1') ? [0] : [];
+  renderMoreSchedule();
+  showPage('page-moreinfo');
+}
+function goToAugustSchedule(fromPageId){
+  cameFromRoute = fromPageId;
+  moreInfoHiddenSteps = [0,1,2];
+  renderMoreSchedule();
+  showPage('page-moreinfo');
+}
+
+/* 밀어서 스텝 넘기기 — 터치(모바일)와 마우스 드래그(PC) 모두 지원 */
+function attachSwipe(el, onLeft, onRight){
+  let sx=0, sy=0, tracking=false;
+  function start(x,y){ sx=x; sy=y; tracking=true; }
+  function end(x,y){
+    if(!tracking) return;
+    tracking = false;
+    // 글자를 드래그로 선택한 것이라면(PC에서 마우스로 텍스트 드래그) 스와이프로 취급하지 않습니다
+    const sel = window.getSelection ? window.getSelection() : null;
+    if(sel && sel.toString().length > 0) return;
+    const dx = x - sx, dy = y - sy;
+    if(Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy)*1.5){
+      if(dx < 0) onLeft(); else onRight();
+    }
+  }
+  el.addEventListener('touchstart', e=>{ if(e.touches.length===1) start(e.touches[0].clientX, e.touches[0].clientY); }, {passive:true});
+  el.addEventListener('touchend', e=>{ end(e.changedTouches[0].clientX, e.changedTouches[0].clientY); }, {passive:true});
+  let mouseDown = false;
+  el.addEventListener('mousedown', e=>{ mouseDown = true; start(e.clientX, e.clientY); });
+  el.addEventListener('mouseup', e=>{ if(mouseDown){ mouseDown=false; end(e.clientX, e.clientY); } });
+  el.addEventListener('mouseleave', ()=>{ mouseDown = false; tracking = false; });
+}
+document.querySelectorAll('.step-track').forEach(track=>{
+  const pageId = track.closest('.page').id;
+  attachSwipe(track, ()=>stepFwd(pageId), ()=>stepBack(pageId));
+});
+
+function showPage(id){
+  if(document.activeElement && document.activeElement.blur) document.activeElement.blur(); // 옮기기 전에 지금 쓰던 칸을 확실히 저장
+  renderPageAndStep(id, 0);
+  pushNav();
+}
+function goIntro(){ showPage('page-intro'); }
+function goDetail(){
+  if(selectedRoute === 'page-dinner') renderDinnerContent();
+  showPage(selectedRoute || 'page-lunch');
+}
+
+/* =========================================================
+   5. 옵션(일정 선택) 렌더링
+   ========================================================= */
+const ROUTE_LABELS = {
+  'page-lunch': '점심공양지원 페이지',
+  'page-dinner': '저녁공양지원 페이지',
+  'page-stay1': '1박2일(13–14) 페이지'
+};
+function renderOptions(){
+  const box = document.getElementById('optGroups');
+  box.innerHTML = OPTIONS.map((g,gi)=>`
+    <div class="opt-group">
+      <div class="opt-group-head">
+        <div class="opt-group-label"${textEditMode?` contenteditable="true" onclick="event.stopPropagation()" onfocus="isEditingNow=true" onblur="saveGroupLabel(${gi},this)"`:''}>${g.group}</div>
+        ${textEditMode?`<button class="opt-group-del" onclick="deleteGroup(${gi})">카테고리 삭제</button>`:''}
+      </div>
+      ${g.items.map((it,ii)=>`
+        <div class="opt-item${it.id===selectedOptionId?' sel':''}" data-id="${it.id}" onclick="selectOption('${it.id}','${it.route}')">
+          <div class="opt-radio"></div>
+          <div class="opt-text"${textEditMode?` contenteditable="true" onfocus="isEditingNow=true" onblur="saveOptionLabel(${gi},${ii},this)"`:''}>${it.label}</div>
+          ${textEditMode?`<button class="opt-del" onclick="event.stopPropagation(); deleteOption(${gi},${ii})">삭제</button>`:''}
+        </div>
+      `).join('')}
+      ${textEditMode?`
+        <div class="opt-add-row">
+          <input type="text" id="optAddLabel-${gi}" placeholder="새 일정 이름 (예: 18일(토) 09시–14시)" onfocus="isEditingNow=true" onblur="isEditingNow=false">
+          <select id="optAddRoute-${gi}">
+            ${Object.keys(ROUTE_LABELS).map(r=>`<option value="${r}">${ROUTE_LABELS[r]}</option>`).join('')}
+          </select>
+          <select id="optAddMeal-${gi}" title="저녁공양 페이지를 고른 경우에만 사용됩니다">
+            <option value="dinner1">첫날 저녁 메뉴</option>
+            <option value="dinner2">둘째 날 저녁 메뉴</option>
+          </select>
+          <button onclick="addOption(${gi})">+ 추가</button>
+        </div>
+      `:''}
+    </div>
+  `).join('') + (textEditMode?`
+    <div class="opt-add-group-row">
+      <input type="text" id="optAddGroupLabel" placeholder="새 카테고리 이름 (예: 아침공양지원 · 파트봉사)" onfocus="isEditingNow=true" onblur="isEditingNow=false">
+      <button onclick="addGroup()">+ 카테고리 추가</button>
+    </div>
+  `:'');
+}
+function saveGroupLabel(gi, el){
+  OPTIONS[gi].group = el.textContent.trim();
+  saveOptionsToStorage();
+  isEditingNow = false;
+}
+function deleteGroup(gi){
+  const g = OPTIONS[gi];
+  if(!confirm(`"${g.group}" 카테고리를 통째로 삭제할까요?\n안에 있는 선택지 ${g.items.length}개도 함께 사라집니다.`)) return;
+  OPTIONS.splice(gi,1);
+  saveOptionsToStorage();
+  renderOptions();
+}
+function addGroup(){
+  const input = document.getElementById('optAddGroupLabel');
+  const label = input.value.trim();
+  if(!label){ alert('카테고리 이름을 입력해주세요.'); return; }
+  OPTIONS.push({ group: label, items: [] });
+  saveOptionsToStorage();
+  renderOptions();
+}
+function saveOptionsToStorage(){
+  // OPTIONS는 현재 프로그램(서울여행/행복학교)의 옵션 서랍을 가리키는 참조이므로,
+  // 여기에 저장하면 곧 OPTIONS_BY[PROGRAM_ID]도 함께 최신 상태가 된다.
+  OPTIONS_BY[PROGRAM_ID] = OPTIONS;
+  localStorage.setItem('subappOptionsBy', JSON.stringify(OPTIONS_BY));
+  queueSubappSync('options');
+}
+function loadOptionsOverride(){
+  try{
+    const raw = localStorage.getItem('subappOptionsBy');
+    if(raw){
+      const parsed = JSON.parse(raw);
+      if(parsed && typeof parsed === 'object'){
+        OPTIONS_BY = parsed;
+      }
+    } else {
+      // 예전 버전(프로그램 구분 없이 옵션 하나만 저장하던 시절)과의 호환.
+      const legacy = localStorage.getItem('subappOptions');
+      if(legacy){
+        const parsedLegacy = JSON.parse(legacy);
+        if(Array.isArray(parsedLegacy) && parsedLegacy.length) OPTIONS_BY[PROGRAM_ID] = parsedLegacy;
+      }
+    }
+  }catch(e){ console.warn('옵션 불러오기 실패', e); }
+  if(!OPTIONS_BY[PROGRAM_ID]) OPTIONS_BY[PROGRAM_ID] = [];
+  OPTIONS = OPTIONS_BY[PROGRAM_ID];
+}
+function saveOptionLabel(gi, ii, el){
+  OPTIONS[gi].items[ii].label = el.textContent.trim();
+  saveOptionsToStorage();
+  isEditingNow = false;
+}
+function deleteOption(gi, ii){
+  if(!confirm('이 일정 선택지를 삭제할까요?')) return;
+  OPTIONS[gi].items.splice(ii,1);
+  saveOptionsToStorage();
+  renderOptions();
+}
+function addOption(gi){
+  const labelInput = document.getElementById('optAddLabel-'+gi);
+  const routeSelect = document.getElementById('optAddRoute-'+gi);
+  const mealSelect = document.getElementById('optAddMeal-'+gi);
+  const label = labelInput.value.trim();
+  if(!label){ alert('일정 이름을 입력해주세요.'); return; }
+  const route = routeSelect.value;
+  const item = { id:'opt-'+Date.now(), label, route };
+  if(route === 'page-dinner') item.mealKey = mealSelect.value;
+  OPTIONS[gi].items.push(item);
+  saveOptionsToStorage();
+  renderOptions();
+}
+function selectOption(id, route){
+  selectedOptionId = id;
+  selectedRoute = route;
+  document.querySelectorAll('.opt-item').forEach(el=>{
+    el.classList.toggle('sel', el.dataset.id===id);
+  });
+  document.getElementById('btnToIntro').disabled = false;
+}
+
+/* =========================================================
+   6. 콘텐츠 렌더링
+   ========================================================= */
+function renderIntro(){
+  // 고쳐서 저장해둔 문구가 있으면 그것을 우선한다.
+  // (예전엔 여기서 파일에 박힌 기본값으로 무조건 덮어써서, 새로고침하면 늘 옛 내용으로 돌아갔습니다)
+  const savedTitle = subappTextOverrides['introTitle'];
+  const savedBody  = subappTextOverrides['introBody'];
+  const titleEl = document.getElementById('introTitle');
+  const bodyEl  = document.getElementById('introBody');
+  if(savedTitle !== undefined) titleEl.innerHTML = savedTitle;
+  else titleEl.textContent = PROGRAM_INFO.title;
+  if(savedBody !== undefined) bodyEl.innerHTML = savedBody;
+  else bodyEl.innerHTML = PROGRAM_INFO.intro.map(t=>`<p>${t}</p>`).join('');
+}
+
+const LOADING = '<p class="empty-note">불러오는 중입니다…</p>';
+
+// 숙박이 필요 없는(당일) 봉사자에게는 stayOnly 표시가 붙은 항목뿐 아니라,
+// 그룹명·항목명에 '숙박'이나 '1박 이상' 같은 문구가 들어간 것도 함께 걸러냅니다.
+// (구글시트에 옛 구조의 데이터가 남아있어도 놓치지 않도록 이름 기반으로도 한 번 더 확인합니다)
+function looksStayOnly(s){ return /숙박|1박\s*이상/.test(s||''); }
+// 관리자일 때만 각 목록 아래에 수정 버튼을 붙인다
+function ceBtn(kind, label){
+  if(!isAdmin) return '';
+  return `<div class="admin-add-btn" onclick="openContentEditor('${kind}')">${label}</div>`;
+}
+function prepListHTML(filterFn, excludeStayOnly){
+  if(!dataLoaded) return LOADING;
+  if(!PREPGROUPS.length) return '<p class="empty-note">준비물 정보가 아직 등록되지 않았습니다.</p>';
+  let groups = PREPGROUPS.filter(g=>!filterFn||filterFn(g));
+  if(excludeStayOnly) groups = groups.filter(g=>!looksStayOnly(g.group));
+  if(!groups.length) return '<p class="empty-note">준비물 정보가 아직 등록되지 않았습니다.</p>';
+  const blocks = groups.map(g=>{
+    const items = excludeStayOnly ? g.items.filter(it=>!it.stayOnly && !looksStayOnly(it.t) && !looksStayOnly(it.s)) : g.items;
+    if(!items.length) return '';
+    const gi = PREPGROUPS.indexOf(g);
+    return `<div class="prep-group">
+      <p class="prep-group-label"${isAdmin?` contenteditable="true" onfocus="isEditingNow=true" onblur="editPrepGroup(${gi},this)"`:''}>${g.group}</p>
+      <div class="prep-items">${items.map(it=>prepItemHTML(gi, g.items.indexOf(it), it)).join('')}</div>
+      ${isAdmin?`<div class="admin-add-btn" onclick="addPrepItem(${gi})">+ 항목 추가</div>`:''}
+    </div>`;
+  }).filter(Boolean);
+  if(!blocks.length && !isAdmin) return '<p class="empty-note">준비물 정보가 아직 등록되지 않았습니다.</p>';
+  return blocks.join('') + (isAdmin?`<div class="admin-add-btn" onclick="addPrepGroup()">+ 준비물 묶음 추가</div>`:'');
+}
+function kitchenGuideHTML(){
+  return `<a class="kitchen-link" href="${KITCHEN_GUIDE.videoUrl}" target="_blank" rel="noopener">
+    <span class="kicon">${ICONS.play}</span>
+    <span class="ktext">
+      <span class="ktitle" data-editable-key="kitchenGuideTitle">${KITCHEN_GUIDE.name}</span>
+      <span class="ktag">${KITCHEN_GUIDE.tag}</span>
+    </span>
+    <span class="kchev">${ICONS.chevron}</span>
+  </a>`;
+}
+function rulesListHTML(){
+  if(!dataLoaded) return LOADING;
+  const ruleGroup = PREPGROUPS.find(g=>g.rules);
+  if(!ruleGroup) return '<p class="empty-note">안내가 아직 등록되지 않았습니다.</p>';
+  const gi = PREPGROUPS.indexOf(ruleGroup);
+  return `<div class="prep-items">${ruleGroup.items.map((it,ii)=>prepItemHTML(gi, ii, it)).join('')}</div>` +
+    (isAdmin?`<div class="admin-add-btn" onclick="addPrepItem(${gi})">+ 항목 추가</div>`:'');
+}
+function activityListHTML(limit){
+  if(!dataLoaded) return LOADING;
+  if(!ACTIVITIES.length && !isAdmin) return '<p class="empty-note">활동 정보가 아직 등록되지 않았습니다.</p>';
+  const arr = limit ? ACTIVITIES.slice(0,limit) : ACTIVITIES;
+  // 관리자는 팝업 없이 글자를 바로 눌러서 고칠 수 있게 한다
+  const ed = isAdmin
+    ? (i, field) => ` contenteditable="true" onfocus="isEditingNow=true" onblur="editActivity(${i},'${field}',this)"`
+    : () => '';
+  const rows = arr.map((a,i)=>{
+    const icon = ACTIVITY_ICONS[a.emoji] || ACTIVITY_ICONS.bowl;
+    const iconPick = isAdmin ? `<div class="icon-pick">${ACTIVITY_ICON_KEYS.map(k=>
+      `<button class="${k===a.emoji?'on':''}" onclick="setActivityIcon(${i},'${k}')" title="${k}">${ACTIVITY_ICONS[k]}</button>`).join('')}</div>` : '';
+    return `<div class="act-row">
+      <div class="act-num-circle">${icon}</div>
+      <div class="act-ct">
+        <b${ed(i,'title')}>${a.title||''}</b>
+        <div class="desc"${ed(i,'desc')}>${a.desc||''}</div>
+        ${iconPick}
+        ${isAdmin?`<button class="inline-del" onclick="deleteActivity(${i})" title="이 활동 삭제">🗑</button>`:''}
+      </div>
+    </div>`;
+  }).join('');
+  return rows +
+    (isAdmin ? `<div class="admin-add-btn" onclick="addActivityInline()">+ 활동 추가</div>` : '');
+}
+function setActivityIcon(i, key){
+  if(!ACTIVITIES[i]) return;
+  ACTIVITIES[i].emoji = key;
+  queueSubappSync('activity');
+  renderAllContent(); refreshQuickIfOpen();
+}
+// 활동 소개 — 글자를 고치면 바로 반영
+function editActivity(i, field, el){
+  if(!ACTIVITIES[i]) return;
+  ACTIVITIES[i][field] = el.innerHTML.trim(); // innerHTML로 저장해야 볼드·밑줄·색 서식이 유지됩니다
+  queueSubappSync('activity');
+  isEditingNow = false;
+}
+function deleteActivity(i){
+  if(!confirm('이 활동을 삭제할까요?')) return;
+  ACTIVITIES.splice(i,1);
+  queueSubappSync('activity');
+  renderAllContent(); refreshQuickIfOpen();
+}
+function addActivityInline(){
+  ACTIVITIES.push({ title:'새 활동', desc:'', emoji:'bowl' });
+  queueSubappSync('activity');
+  renderAllContent(); refreshQuickIfOpen();
+}
+// 준비물·약속 항목 하나를 그린다 (관리자는 글자를 바로 눌러 고칠 수 있다)
+function prepItemHTML(gi, ii, it){
+  const ed = isAdmin
+    ? (field) => ` contenteditable="true" onfocus="isEditingNow=true" onblur="editPrepItem(${gi},${ii},'${field}',this)"`
+    : () => '';
+  const icon = PREP_ICONS[it.ic] || PREP_ICONS.focus;
+  const iconPick = isAdmin ? `<div class="icon-pick">${PREP_ICON_KEYS.map(k=>
+    `<button class="${k===it.ic?'on':''}" onclick="setPrepIcon(${gi},${ii},'${k}')" title="${k}">${PREP_ICONS[k]}</button>`).join('')}</div>` : '';
+  return `<div class="prep-row-ic">
+    <div class="prep-ic-circle">${icon}</div>
+    <div class="prep-ct">
+      <b${ed('t')}>${it.t||''}</b>
+      <div class="desc"${ed('s')}>${it.s||''}</div>
+      ${iconPick}
+      ${isAdmin?`<button class="inline-del" onclick="deletePrepItem(${gi},${ii})" title="이 항목 삭제">🗑</button>`:''}
+    </div>
+  </div>`;
+}
+function setPrepIcon(gi, ii, key){
+  if(!PREPGROUPS[gi] || !PREPGROUPS[gi].items[ii]) return;
+  PREPGROUPS[gi].items[ii].ic = key;
+  queueSubappSync('prep');
+  renderAllContent(); refreshQuickIfOpen();
+}
+function editPrepItem(gi, ii, field, el){
+  if(!PREPGROUPS[gi] || !PREPGROUPS[gi].items[ii]) return;
+  PREPGROUPS[gi].items[ii][field] = el.innerHTML.trim(); // innerHTML로 저장해야 볼드·밑줄·색 서식이 유지됩니다
+  queueSubappSync('prep');
+  isEditingNow = false;
+}
+function editPrepGroup(gi, el){
+  if(!PREPGROUPS[gi]) return;
+  PREPGROUPS[gi].group = el.innerHTML.trim();
+  queueSubappSync('prep');
+  isEditingNow = false;
+}
+function deletePrepItem(gi, ii){
+  if(!confirm('이 항목을 삭제할까요?')) return;
+  PREPGROUPS[gi].items.splice(ii,1);
+  queueSubappSync('prep');
+  renderAllContent(); refreshQuickIfOpen();
+}
+function addPrepItem(gi){
+  if(!PREPGROUPS[gi]) return;
+  PREPGROUPS[gi].items.push({ t:'새 항목', s:'', ic:'focus' });
+  queueSubappSync('prep');
+  renderAllContent(); refreshQuickIfOpen();
+}
+function addPrepGroup(){
+  const name = prompt('새 묶음 이름을 적어주세요 (예: 숙박자 준비물)');
+  if(!name || !name.trim()) return;
+  PREPGROUPS.push({ group:name.trim(), items:[] });
+  queueSubappSync('prep');
+  renderAllContent(); refreshQuickIfOpen();
+}
+// 빠른 찾아보기 화면을 보고 있다면 거기도 다시 그린다
+function refreshQuickIfOpen(){
+  const q = document.getElementById('page-quick');
+  if(q && q.classList.contains('active')) renderQuickView();
+}
+function menuMiniHTML(name){
+  const m = findMenu(name);
+  if(!m) return `<div class="recipe-mini"><div class="rm-left"><span class="rm-dot"></span><span class="rm-name">${name}</span></div></div>`;
+  return `<div class="recipe-mini" onclick="openRecipeModal('${name.replace(/'/g,"\\'")}')">
+    <div class="rm-left"><span class="rm-dot"></span><span class="rm-name">${m.name}</span></div>
+    <span class="rm-arrow">레시피 보기<span class="icon">${ICONS.chevron}</span></span>
+  </div>`;
+}
+function menuListHTML(mealKey){
+  if(!dataLoaded) return LOADING;
+  const printBtn = isAdmin ? `<div class="admin-add-btn" onclick="printRecipes()">🖨️ 전체 레시피 인쇄용으로 저장 (냉장고 부착용)</div>` : '';
+  const meal = MEALS[mealKey];
+  if(!meal || !meal.menus || !meal.menus.length) return '<p class="empty-note">메뉴 정보가 아직 등록되지 않았습니다.</p>' + ceBtn('meals','메뉴 수정하기') + printBtn;
+  return meal.menus.map(n=>menuMiniHTML(n)).join('') + ceBtn('meals','메뉴 수정하기') + printBtn;
+}
+// '표고버섯 2kg 기준' 처럼 분량 숫자만 반복하는 문구는 위의 "50인분 기준" 안내와 중복이라 표시하지 않습니다.
+// (실제 시트에 옛날 데이터가 남아있어도, 화면에는 항상 걸러져서 나갑니다)
+function isRedundantServingNote(s){
+  if(!s) return false;
+  const t = s.trim();
+  return /^[가-힣a-zA-Z()·・\s]{0,10}\d+(\.\d+)?\s*(kg|g|킬로|리터|l|ml|개|장|봉지|병|통|컵|모|대|줌|알|큰술|작은술)\s*기준\.?$/i.test(t);
+}
+function recipeEsc(s){ return String(s==null?'':s).replace(/'/g,"\\'"); }
+function openRecipeModal(name){
+  const m = findMenu(name);
+  if(!m) return;
+  if(isAdmin && !m.recipe) m.recipe = { serving:'', ingredients:[], steps:[] };
+  if(!m.recipe){
+    document.getElementById('recipeModalBody').innerHTML = `
+      <h2 style="font-family:'Gowun Batang',serif; margin:0 0 16px; font-size:20px;">${m.name}</h2>
+      <p class="empty-note">레시피가 아직 등록되지 않았습니다.</p>`;
+    document.getElementById('recipeModal').classList.add('show');
+    pushNav({modal:'recipe'});
+    return;
+  }
+  renderRecipeModalBody(name);
+  document.getElementById('recipeModal').classList.add('show');
+  const box = document.getElementById('recipeModalBox');
+  if(box) box.scrollTop = 0;
+  pushNav({modal:'recipe'});
+}
+// 레시피 화면을 다시 그린다. 관리자는 글자를 바로 눌러 고치고,
+// 재료·조리 항목은 손잡이(⠿)를 끌어 순서를 바꿀 수 있습니다. (메인앱과 같은 방식)
+function renderRecipeModalBody(name){
+  const m = findMenu(name);
+  if(!m || !m.recipe) return;
+  const r = m.recipe;
+  const showNote = r.serving && !isRedundantServingNote(r.serving);
+  const en = recipeEsc(name);
+  const nameField = isAdmin
+    ? `<span contenteditable="true" data-rfield="menuName" data-name="${en}" onfocus="isEditingNow=true" onblur="saveRecipeField(this)">${m.name}</span>`
+    : m.name;
+  const servingField = isAdmin
+    ? `<div style="margin:0 0 16px;">
+        <span class="tt-note-label" style="display:block;margin-bottom:2px;">분량 안내 (예: 유부 60장 기준)</span>
+        <span contenteditable="true" data-rfield="serving" data-name="${en}" onfocus="isEditingNow=true" onblur="saveRecipeField(this)"
+          style="font-size:12.5px;color:var(--ink-soft);" data-ph="분량을 적어주세요">${r.serving||''}</span>
+      </div>`
+    : (showNote ? `<p style="font-size:12.5px; color:var(--ink-soft); margin:0 0 16px;">${r.serving}</p>` : '');
+
+  document.getElementById('recipeModalBody').innerHTML = `
+    <h2 style="font-family:'Gowun Batang',serif; margin:0 0 4px; font-size:20px;">${nameField}</h2>
+    <p style="font-size:12.5px; color:var(--ink-soft); margin:0 0 ${isAdmin?4:(showNote?4:16)}px;">50인분 기준 · 인원수에 따라 가감해주세요</p>
+    ${servingField}
+    <div class="recipe-block">
+      <div class="sec-title" style="margin-top:0;"><span class="icon">${ICONS.bowl}</span>재료</div>
+      <ul class="plain recipe-ing-list">
+        ${(r.ingredients||[]).map((x,ii)=>recipeIngHTML(en,ii,x)).join('')}
+      </ul>
+      ${isAdmin?`<div class="admin-add-btn" onclick="addIngredient('${en}')">+ 재료 추가</div>`:''}
+    </div>
+    ${(r.steps||[]).map((s,si)=>`
+      <div class="recipe-block">
+        <div class="sec-title" style="margin-top:0; display:flex; align-items:center; gap:8px;">
+          <span style="flex:1">${isAdmin
+            ? `<span contenteditable="true" data-rfield="stepTitle" data-name="${en}" data-si="${si}" onfocus="isEditingNow=true" onblur="saveRecipeField(this)">${s.title||''}</span>`
+            : (s.title||'')}</span>
+          ${isAdmin?`<button class="inline-del" onclick="removeStep('${en}',${si})" title="이 단계 삭제">🗑</button>`:''}
+        </div>
+        <ul class="plain recipe-step-list">
+          ${(s.items||[]).map((x,ii)=>recipeStepItemHTML(en,si,ii,x)).join('')}
+        </ul>
+        ${isAdmin?`<div class="admin-add-btn" onclick="addStepItem('${en}',${si})">+ 항목 추가</div>`:''}
+      </div>
+    `).join('')}
+    ${isAdmin?`<div class="admin-add-btn" onclick="addStep('${en}')">+ 조리 단계 추가</div>`:''}
+  `;
+}
+function recipeIngHTML(en, ii, text){
+  if(!isAdmin) return `<li>${text}</li>`;
+  return `<li class="recipe-item-edit" draggable="true"
+      ondragstart="onIngDragStart(event,'${en}',${ii})" ondragover="onIngDragOver(event)" ondrop="onIngDrop(event,'${en}',${ii})">
+    <span class="tt-drag-handle" title="끌어서 순서 바꾸기">⠿</span>
+    <span contenteditable="true" data-rfield="ingredient" data-name="${en}" data-idx="${ii}" onfocus="isEditingNow=true" onblur="saveRecipeField(this)">${text||''}</span>
+    <button class="inline-del" onclick="removeIngredient('${en}',${ii})" title="이 재료 삭제">🗑</button>
+  </li>`;
+}
+function recipeStepItemHTML(en, si, ii, text){
+  if(!isAdmin) return `<li>${text}</li>`;
+  return `<li class="recipe-item-edit" draggable="true"
+      ondragstart="onStepItemDragStart(event,'${en}',${si},${ii})" ondragover="onIngDragOver(event)" ondrop="onStepItemDrop(event,'${en}',${si},${ii})">
+    <span class="tt-drag-handle" title="끌어서 순서 바꾸기">⠿</span>
+    <span contenteditable="true" data-rfield="stepItem" data-name="${en}" data-si="${si}" data-idx="${ii}" onfocus="isEditingNow=true" onblur="saveRecipeField(this)">${text||''}</span>
+    <button class="inline-del" onclick="removeStepItem('${en}',${si},${ii})" title="이 항목 삭제">🗑</button>
+  </li>`;
+}
+// 글자를 고치면 바로 저장한다 (메인앱과 같은 방식 — 팝업·별도 저장버튼 없음)
+function saveRecipeField(el){
+  const m = findMenu(el.dataset.name);
+  if(!m || !m.recipe) return;
+  const field = el.dataset.rfield;
+  const val = el.innerHTML.trim(); // innerHTML로 저장해야 볼드·밑줄·색 서식이 유지됩니다
+  if(field === 'menuName'){ m.name = val; }
+  else if(field === 'serving'){ m.recipe.serving = val; }
+  else if(field === 'ingredient'){ m.recipe.ingredients[+el.dataset.idx] = val; }
+  else if(field === 'stepTitle'){ m.recipe.steps[+el.dataset.si].title = val; }
+  else if(field === 'stepItem'){ m.recipe.steps[+el.dataset.si].items[+el.dataset.idx] = val; }
+  queueSubappSync('menus');
+  isEditingNow = false;
+}
+function addIngredient(name){
+  const m = findMenu(name); if(!m) return;
+  m.recipe.ingredients.push('새 재료');
+  queueSubappSync('menus'); renderRecipeModalBody(name);
+}
+function removeIngredient(name, ii){
+  const m = findMenu(name); if(!m) return;
+  m.recipe.ingredients.splice(ii,1);
+  queueSubappSync('menus'); renderRecipeModalBody(name);
+}
+function addStep(name){
+  const m = findMenu(name); if(!m) return;
+  m.recipe.steps.push({ title:'새 단계', items:[] });
+  queueSubappSync('menus'); renderRecipeModalBody(name);
+}
+function removeStep(name, si){
+  if(!confirm('이 단계를 통째로 삭제할까요?')) return;
+  const m = findMenu(name); if(!m) return;
+  m.recipe.steps.splice(si,1);
+  queueSubappSync('menus'); renderRecipeModalBody(name);
+}
+function addStepItem(name, si){
+  const m = findMenu(name); if(!m) return;
+  m.recipe.steps[si].items.push('새 항목');
+  queueSubappSync('menus'); renderRecipeModalBody(name);
+}
+function removeStepItem(name, si, ii){
+  const m = findMenu(name); if(!m) return;
+  m.recipe.steps[si].items.splice(ii,1);
+  queueSubappSync('menus'); renderRecipeModalBody(name);
+}
+// 재료 끌어서 순서 바꾸기
+let _recipeDragIng = null;
+function onIngDragStart(e, name, ii){ _recipeDragIng = {name, ii}; e.dataTransfer.effectAllowed='move'; }
+function onIngDragOver(e){ e.preventDefault(); }
+function onIngDrop(e, name, targetIi){
+  e.preventDefault();
+  if(!_recipeDragIng || _recipeDragIng.name !== name) return;
+  const m = findMenu(name); if(!m) return;
+  const arr = m.recipe.ingredients;
+  const [moved] = arr.splice(_recipeDragIng.ii, 1);
+  arr.splice(targetIi, 0, moved);
+  _recipeDragIng = null;
+  queueSubappSync('menus'); renderRecipeModalBody(name);
+}
+// 조리 단계 안 항목 끌어서 순서 바꾸기
+let _recipeDragStepItem = null;
+function onStepItemDragStart(e, name, si, ii){ _recipeDragStepItem = {name, si, ii}; e.dataTransfer.effectAllowed='move'; }
+function onStepItemDrop(e, name, si, targetIi){
+  e.preventDefault();
+  if(!_recipeDragStepItem || _recipeDragStepItem.name !== name || _recipeDragStepItem.si !== si) return;
+  const m = findMenu(name); if(!m) return;
+  const arr = m.recipe.steps[si].items;
+  const [moved] = arr.splice(_recipeDragStepItem.ii, 1);
+  arr.splice(targetIi, 0, moved);
+  _recipeDragStepItem = null;
+  queueSubappSync('menus'); renderRecipeModalBody(name);
+}
+function closeRecipeModal(){
+  history.back();
+}
+
+
+function formatRow(r, ctx){
+  ctx = ctx || {};
+  const editable = !!(isAdmin && ctx.stayKey && ctx.dayIdx != null && ctx.rowIdx != null);
+  // 장소/비고는 구분선 없이 항상 다음 줄에 통일해서 보여줍니다.
+  const placeHTML = r.place ? `<span class="tt-place-f">${r.place}</span>` : '';
+  const noteHTML = r.note ? `<span class="tt-place-f">${r.note}</span>` : '';
+  const extra = [placeHTML, noteHTML].filter(Boolean).join('<span class="tt-place-f-divider">|</span>');
+  if(!editable){
+    const activityHTML = `${r.prog?'<b class="prog">':''}${r.content}${r.prog?'</b>':''}`;
+    return `<div class="tt-row">
+      <div class="tt-time">${r.time.replace(/~/g,"~<wbr>")}</div>
+      <div class="tt-content tt-newline"><span class="tt-activity">${activityHTML}</span>${extra?`<span class="tt-extra">${extra}</span>`:''}</div>
+    </div>`;
+  }
+  // 관리자 모드: 팝업 없이 화면에서 바로 클릭해 고치고, 손잡이(⠿)를 끌어 순서를 바꿀 수 있습니다.
+  return `<div class="tt-row tt-row-edit" draggable="true"
+      data-stay="${ctx.stayKey}" data-day="${ctx.dayIdx}" data-row="${ctx.rowIdx}"
+      ondragstart="ttDragStart(event)" ondragover="ttDragOver(event)" ondrop="ttDrop(event)" ondragend="ttDragEnd(event)">
+    <span class="tt-drag-handle" title="끌어서 순서 바꾸기">⠿</span>
+    <div class="tt-time-wrap">
+      <div class="tt-time" contenteditable="true" data-field="time" onfocus="isEditingNow=true" onblur="saveScheduleField(this)">${r.time||''}</div>
+      <div class="tt-dur-f">${(function(){const d=calcDurationFromTime(r.time);return d?d+'분':'';})()}</div>
+    </div>
+    <div class="tt-content tt-newline">
+      <span class="tt-activity" contenteditable="true" data-field="content" onfocus="isEditingNow=true" onblur="saveScheduleField(this)">${r.content||''}</span>
+      <span class="tt-extra">
+        <span class="tt-place-f" contenteditable="true" data-field="place" onfocus="isEditingNow=true" onblur="saveScheduleField(this)" data-ph="장소">${r.place||''}</span>
+      </span>
+      <div class="tt-note-row">
+        <span class="tt-note-label">비고</span>
+        <span class="tt-place-f" contenteditable="true" data-field="note" onfocus="isEditingNow=true" onblur="saveScheduleField(this)" data-ph="예: 12층 샤워실 사용가능">${r.note||''}</span>
+      </div>
+    </div>
+    <button class="tt-del-btn" onclick="deleteScheduleRow(this)" title="이 일정 삭제">삭제</button>
+  </div>`;
+}
+// 활동명이 혼자서도 1줄을 넘기면(이미 줄바꿈 되면) 장소·비고를 그 줄 끝에 자연스럽게 붙이고,
+// 활동명이 원래 1줄로 끝나는 경우에는 장소·비고를 다음 줄로 내려서 항상 안정적으로 보이게 합니다.
+function adjustPlaceWrap(container){
+  if(!container) return;
+  container.querySelectorAll('.tt-content').forEach(el=>{
+    const activityEl = el.querySelector('.tt-activity');
+    const extraEl = el.querySelector('.tt-extra');
+    if(!activityEl || !extraEl) return;
+    const prevDisplay = extraEl.style.display;
+    extraEl.style.display = 'none';
+    const lineHeight = parseFloat(getComputedStyle(activityEl).lineHeight) || 20;
+    const isMultiline = activityEl.getBoundingClientRect().height > lineHeight * 1.4;
+    extraEl.style.display = prevDisplay;
+    el.classList.toggle('tt-newline', !isMultiline);
+  });
+}
+// stayKey(코스)의 dayIdx번째 날 일정 행을 그대로 반환합니다.
+// 이제 각 코스가 자기 날짜만 따로 저장하고 있으므로 시간으로 잘라낼 필요가 없습니다.
+// 일정표를 이미지(PNG)로 저장 — 메인앱과 같은 방식입니다
+// 소요시간 표시 (예: "30" → "30분") — 메인앱과 같은 형식
+function formatDurationForImage(dur){
+  const m = parseInt(dur, 10);
+  if(!m || isNaN(m)) return '';
+  return m + '분';
+}
+function exportTTImage(stayKey){
+  if(typeof html2canvas === 'undefined'){
+    showToast('이미지 저장 기능을 불러오지 못했어요. 인터넷 연결을 확인해주세요.');
+    return;
+  }
+  const t = TIMETABLES[stayKey];
+  if(!t || !t.days){ showToast('저장할 일정표가 없습니다.'); return; }
+
+  const wrap = document.createElement('div');
+  wrap.style.cssText = 'position:fixed;left:-9999px;top:0;width:700px;background:#ffffff;padding:28px;font-family:"Gowun Dodum","맑은 고딕",sans-serif;color:#222;';
+
+  // 제목의 "(15일–16일)" 같은 날짜 부분은 실제로 고친 날짜(dayLabel)를 기준으로 다시 만든다.
+  // t.label은 파일에 처음 만들 때 박힌 문구라, 날짜만 고쳐도 여기엔 반영되지 않기 때문이다.
+  const firstDay = dayLabel(stayKey, 0);
+  const lastDay = dayLabel(stayKey, t.days.length-1);
+  const courseName = (t.label||'상세 일정').replace(/\s*\([^)]*\)\s*$/,'').trim(); // 맨 끝 괄호(날짜)만 떼어낸다
+  const titleHTML = `<div style="text-align:center;font-family:'Gowun Batang';font-size:26px;font-weight:800;color:#222;margin-bottom:6px;">${courseName}</div>
+    <div style="text-align:center;font-size:14px;color:#666;margin-bottom:18px;">${firstDay}${t.days.length>1?' ~ '+lastDay:''}</div>`;
+
+  const bandColors = ['#cdc2e6', '#f2e8c8']; // 메인앱과 같은 보라·베이지 번갈아 색
+  const daysHTML = t.days.map((d, dayIdx)=>{
+    const band = bandColors[dayIdx % bandColors.length];
+    const rowsHTML = d.rows.map(r=>{
+      const isProg = !!r.prog;
+      const contentStyle = isProg ? 'color:#2745c9;font-weight:700;' : 'color:#222;';
+      const noteStyle = r.note ? 'color:#c0392b;font-weight:700;' : 'color:#222;';
+      return `<tr>
+        <td style="padding:10px 8px;border:1px solid #ddd;text-align:center;font-size:13.5px;white-space:nowrap;">${r.time||''}</td>
+        <td style="padding:10px 8px;border:1px solid #ddd;text-align:center;font-size:13.5px;">${formatDurationForImage(calcDurationFromTime(r.time))}</td>
+        <td style="padding:10px 12px;border:1px solid #ddd;font-size:13.5px;${contentStyle}">${r.content||''}</td>
+        <td style="padding:10px 8px;border:1px solid #ddd;text-align:center;font-size:13.5px;">${r.place||''}</td>
+        <td style="padding:10px 8px;border:1px solid #ddd;text-align:center;font-size:12.5px;${noteStyle}">${r.note||''}</td>
+      </tr>`;
+    }).join('');
+    return `<div style="margin-bottom:22px;">
+      <div style="background:${band};text-align:center;font-family:'Gowun Batang';font-weight:800;font-size:16px;padding:10px 0;border:1px solid #ccc;border-bottom:none;">${dayLabel(stayKey, dayIdx)}</div>
+      <table style="width:100%;border-collapse:collapse;table-layout:fixed;">
+        <thead>
+          <tr style="background:#faf6ec;">
+            <th style="padding:8px;border:1px solid #ddd;font-size:13px;width:15%;">시간</th>
+            <th style="padding:8px;border:1px solid #ddd;font-size:13px;width:12%;">소요시간</th>
+            <th style="padding:8px;border:1px solid #ddd;font-size:13px;width:38%;">내용</th>
+            <th style="padding:8px;border:1px solid #ddd;font-size:13px;width:17%;">장소</th>
+            <th style="padding:8px;border:1px solid #ddd;font-size:13px;width:18%;">비고</th>
+          </tr>
+        </thead>
+        <tbody>${rowsHTML}</tbody>
+      </table>
+    </div>`;
+  }).join('');
+
+  wrap.innerHTML = titleHTML + daysHTML;
+  document.body.appendChild(wrap);
+
+  html2canvas(wrap, {backgroundColor:'#ffffff', scale:2}).then(canvas=>{
+    document.body.removeChild(wrap);
+    const link = document.createElement('a');
+    link.download = `${courseName.replace(/[^\w가-힣]/g,'')}_${firstDay.replace(/[^\w가-힣0-9]/g,'')}.png`;
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+    showToast('이미지가 저장되었어요.');
+  }).catch(()=>{
+    document.body.removeChild(wrap);
+    showToast('이미지 저장에 실패했어요.');
+  });
+}
+// 전체 레시피를 인쇄용(A4)으로 만들어 인쇄창을 띄운다 — 메뉴 1개당 A4 1장, 메인앱과 같은 방식
+function printRecipes(){
+  const order = ['dinner1','dinner2','morning'];
+  let html = '';
+  const seen = new Set(); // 같은 메뉴가 여러 끼니에 겹쳐 있어도 한 장만 나오게
+  order.forEach(key=>{
+    const meal = MEALS[key];
+    if(!meal) return;
+    meal.menus.forEach(name=>{
+      if(seen.has(name)) return;
+      const m = findMenu(name);
+      if(!m || !m.recipe) return;
+      seen.add(name);
+      const r = m.recipe;
+      html += `<div class="print-page"><div class="print-page-inner">
+        <div class="print-header">
+          <div class="print-name">${m.emoji||''} ${m.name}</div>
+        </div>
+        <div class="print-block">
+          <div class="print-sec-title">재료</div>
+          <div class="print-ing-grid">${(r.ingredients||[]).map(x=>`<div class="print-ing-item">${x}</div>`).join('')}</div>
+        </div>
+        ${(r.steps||[]).map(s=>`
+          <div class="print-block">
+            <div class="print-sec-title">${s.title}</div>
+            <ul class="print-steps">${(s.items||[]).map(x=>`<li>${x}</li>`).join('')}</ul>
+          </div>
+        `).join('')}
+      </div></div>`;
+    });
+  });
+
+  if(!html){ showToast('인쇄할 레시피가 없습니다. 먼저 레시피를 등록해주세요.'); return; }
+
+  const w = window.open('', '_blank');
+  w.document.write(`<!DOCTYPE html><html lang="ko"><head><meta charset="UTF-8">
+    <title>바라지 공양 레시피</title>
+    <style>
+      @page { size: A4; margin: 10mm; }
+      * { box-sizing:border-box; }
+      html, body { margin:0; padding:0; }
+      body { font-family: 'Malgun Gothic','맑은 고딕',sans-serif; color:#1a1a1a; line-height:1.55; font-size:13pt; }
+      .print-page { page-break-after:always; display:flex; }
+      .print-page:last-child { page-break-after:auto; }
+      .print-page-inner { width:100%; height:277mm; overflow:hidden; display:flex; flex-direction:column; flex-shrink:0; transform-origin:top left; }
+      .print-header { display:flex; align-items:baseline; gap:4mm; margin-bottom:5mm; flex:none; flex-wrap:wrap; }
+      .print-name { font-size:21pt; font-weight:800; color:#3d4a2c; }
+      .print-block { border:0.4mm solid #d8ddc9; border-radius:2.5mm; padding:3.5mm 5mm; margin-bottom:4mm; flex:none; }
+      .print-sec-title { font-size:13pt; font-weight:800; color:#3d4a2c; padding-bottom:2mm; margin-bottom:2.5mm; border-bottom:0.5mm solid #7a8b5f; }
+      .print-ing-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:2mm 4mm; }
+      .print-ing-item { font-size:12pt; padding:1mm 2mm; background:#f6f7f1; border-radius:1.2mm; }
+      .print-steps { font-size:12.5pt; padding-left:5mm; margin:0; }
+      .print-steps li { margin-bottom:2mm; }
+      @media print { .noprint{display:none;} }
+    </style></head><body>
+    <div class="noprint" style="text-align:center;margin:14px 0;padding:14px;background:#f4efe6;">
+      <button onclick="window.print()" style="font-size:17px;padding:12px 28px;background:#5f6e49;color:#fff;border:none;border-radius:8px;cursor:pointer;">이 문서를 PDF로 저장 / 인쇄하기</button>
+      <p style="font-size:13px;color:#666;margin-top:8px;">버튼을 누른 뒤 '대상'에서 'PDF로 저장'을 고르세요. (메뉴 1개당 A4 1장)</p>
+    </div>
+    ${html}
+  </body></html>`);
+  w.document.close();
+}
+function ttRowsForDay(stayKey, dayIdx){
+  const t = TIMETABLES[stayKey];
+  if(!t || !t.days || !t.days[dayIdx]) return null;
+  return t.days[dayIdx].rows.slice();
+}
+// 날짜 라벨은 코스별로 다르므로(예: 1516코스의 1일차=15일, 1617코스의 1일차=16일)
+// 코스+일차별로 따로 저장합니다. 관리자가 안 고쳤으면 그 코스에 저장된 day.day 문구를 씁니다.
+function dayLabel(stayKey, dayIdx){
+  const key = `calDay_${stayKey}_${dayIdx}`;
+  if(subappTextOverrides[key] !== undefined) return subappTextOverrides[key];
+  const t = TIMETABLES[stayKey];
+  if(t && t.days && t.days[dayIdx] && t.days[dayIdx].day) return t.days[dayIdx].day;
+  return `${dayIdx+1}일차`;
+}
+
+function ttRowsHTMLByStayKey(stayKey){
+  if(!dataLoaded) return LOADING;
+  const t = TIMETABLES[stayKey];
+  if(!t || !t.days) return '<p class="empty-note">일정 정보가 아직 등록되지 않았습니다.</p>';
+  let html = '';
+  t.days.forEach((day, dayIdx)=>{
+    const rows = ttRowsForDay(stayKey, dayIdx);
+    if(!rows) return;
+    html += `<div class="tt-card"><div class="day-label" data-editable-key="calDay_${stayKey}_${dayIdx}">${dayLabel(stayKey, dayIdx)}</div>`
+      + rows.map((r,ri)=>formatRow(r, {stayKey, dayIdx, rowIdx:ri})).join('')
+      + (isAdmin ? `<div class="admin-add-btn tt-add-btn" onclick="addScheduleRow('${stayKey}', ${dayIdx})">+ 일정 추가</div>` : '')
+      + `</div>`;
+  });
+  if(!html) return '<p class="empty-note">일정 정보가 아직 등록되지 않았습니다.</p>';
+  if(isAdmin) html += `<div class="admin-add-btn" onclick="exportTTImage('${stayKey}')">🖼️ 이 일정표 이미지로 저장</div>`;
+  return html;
+}
+function ttFullHTML(stayKey){
+  if(!dataLoaded) return LOADING;
+  const t = TIMETABLES[stayKey];
+  if(!t || !t.days) return '<p class="empty-note">일정 정보가 아직 등록되지 않았습니다.</p>';
+  return t.days.map((day,idx)=>`
+    <div class="tt-card">
+      <div class="day-label" data-editable-key="calDay_${stayKey}_${idx}">${dayLabel(stayKey, idx)}</div>
+      ${day.rows.map(r=>formatRow(r)).join('')}
+    </div>
+  `).join('');
+}
+
+// 저녁공양지원은 15일/16일 중 어떤 날을 선택했는지에 따라 보여줄 메뉴가 다릅니다
+function findOptionById(id){
+  for(const g of OPTIONS){
+    const found = g.items.find(it=>it.id===id);
+    if(found) return found;
+  }
+  return null;
+}
+function renderDinnerContent(){
+  const box = document.getElementById('dinnerMenuBox');
+  if(!box) return;
+  const opt = findOptionById(selectedOptionId);
+  const mealKey = (opt && opt.mealKey) || 'dinner1';
+  box.innerHTML = menuListHTML(mealKey);
+  document.getElementById('dinnerPrepBox').innerHTML = prepListHTML(g=>!g.rules, true);
+  document.getElementById('dinnerRulesBox').innerHTML = rulesListHTML();
+  document.getElementById('dinnerKitchenBox').innerHTML = kitchenGuideHTML();
+}
+function renderAllContent(){
+  renderIntro();
+  renderOptions();
+
+  document.getElementById('lunchPrepBox').innerHTML = prepListHTML(g=>!g.rules, true);
+  document.getElementById('lunchRulesBox').innerHTML = rulesListHTML();
+  document.getElementById('lunchKitchenBox').innerHTML = kitchenGuideHTML();
+
+  renderDinnerContent();
+
+  document.getElementById('stay1ActivityBox').innerHTML = activityListHTML();
+  document.getElementById('stay1ScheduleBox').innerHTML = ttRowsHTMLByStayKey('stay-1314');
+  document.getElementById('stay1DinnerBox').innerHTML = menuListHTML('dinner1');
+  document.getElementById('stay1PrepBox').innerHTML = prepListHTML(g=>!g.rules);
+  document.getElementById('stay1RulesBox').innerHTML = rulesListHTML();
+  document.getElementById('stay1KitchenBox').innerHTML = kitchenGuideHTML();
+
+  document.getElementById('moreActivityBox').innerHTML = activityListHTML();
+  renderMoreSchedule();
+  // 서울여행(1박2일)은 저녁이 한 번뿐이므로 둘째날 저녁 메뉴는 보여주지 않는다
+  document.getElementById('moreMenuBoxes').innerHTML = `
+    <div class="card"><p><b data-editable-key="dinnerLabel1">첫날 저녁공양</b></p>${menuListHTML('dinner1')}</div>
+  `;
+  renderAugustSchedule();
+
+  applyAdminUI();
+  applyTextOverrides();
+
+  ['stay1ScheduleBox'].forEach(id=>{
+    const box = document.getElementById(id);
+    adjustPlaceWrap(box);
+    if(document.fonts && document.fonts.ready) document.fonts.ready.then(()=>adjustPlaceWrap(box));
+  });
+}
+
+// 1박2일 신청자가 전체활동에서 일정표를 볼 때, 본인이 직접 겪지 않는 날짜는 흐리게 표시합니다
+function renderMoreSchedule(){
+  const box = document.getElementById('moreScheduleBox');
+  const noteEl = document.getElementById('moreScheduleNote');
+  if(!box) return;
+  if(!dataLoaded){ box.innerHTML = LOADING; return; }
+  // "전체 활동" 화면은 지금 어느 코스에서 들어왔는지(cameFromRoute)를 우선 따르고,
+  // 없으면 지금 고른 프로그램의 기본 코스를 보여줍니다.
+  const stayKey = PAGE_TO_STAYKEY[cameFromRoute] || defaultStayKeyForProgram(PROGRAM_ID);
+  const t = TIMETABLES[stayKey];
+  if(!t || !t.days){ box.innerHTML = '<p class="empty-note">일정 정보가 아직 등록되지 않았습니다.</p>'; return; }
+  if(noteEl) noteEl.style.display = 'none';
+  box.innerHTML = t.days.map((day,dayIdx)=>`
+    <div class="tt-card">
+      <div class="day-label" data-editable-key="calDay_${stayKey}_${dayIdx}">${dayLabel(stayKey, dayIdx)}</div>
+      ${day.rows.map((r,ri)=>formatRow(r, {stayKey, dayIdx, rowIdx:ri})).join('')}
+      ${isAdmin ? `<div class="admin-add-btn tt-add-btn" onclick="addScheduleRow('${stayKey}', ${dayIdx})">+ 일정 추가</div>` : ''}
+    </div>
+  `).join('');
+  adjustPlaceWrap(box);
+  if(document.fonts && document.fonts.ready) document.fonts.ready.then(()=>adjustPlaceWrap(box));
+}
+
+const WEEKDAY_KO = ['일','월','화','수','목','금','토'];
+function scheduleDayInfo(s){
+  // 날짜가 "15-17" 같은 글자일 수도, 13 같은 숫자일 수도 있다.
+  // (메인앱과 신청앱이 서로 다른 형식으로 저장해와서 두 종류가 섞여 있음)
+  // 숫자를 그대로 .match()하면 오류가 나면서 화면 그리기 전체가 멈춘다.
+  const dayStr = (s.day == null) ? '' : String(s.day);
+  const nums = dayStr.match(/\d+/g);
+  const info = { sortKey: s.month*100, dayLabel:'', durLabel:'' };
+  if(s.program==='seohaeng') info.durLabel = '1박 2일';
+  else if(s.program==='happy') info.durLabel = '2박 3일';
+  if(!nums || !nums.length) return info;
+  const startDay = parseInt(nums[0],10);
+  const endDay = nums.length>1 ? parseInt(nums[nums.length-1],10) : startDay;
+  info.sortKey = s.month*100 + startDay;
+  if(!info.durLabel && nums.length>1){
+    const nights = endDay - startDay;
+    if(nights===1) info.durLabel = '1박 2일';
+    else if(nights===2) info.durLabel = '2박 3일';
+    else if(nights>0) info.durLabel = `${nights}박 ${nights+1}일`;
+  }
+  try{
+    const w1 = WEEKDAY_KO[new Date(2026, s.month-1, startDay).getDay()];
+    if(nums.length>1){
+      const w2 = WEEKDAY_KO[new Date(2026, s.month-1, endDay).getDay()];
+      info.dayLabel = `${s.month}월 ${startDay}일(${w1})–${endDay}일(${w2})`;
+    }else{
+      info.dayLabel = `${s.month}월 ${startDay}일(${w1})`;
+    }
+  }catch(e){}
+  return info;
+}
+// 다음 봉사 일정 — 관리자가 직접 등록·수정·삭제할 수 있습니다.
+function renderAugustSchedule(){
+  const box = document.getElementById('moreAugustBox');
+  if(!box) return;
+  if(!dataLoaded){ box.innerHTML = LOADING; return; }
+  const editBtn = isAdmin ? `<div class="admin-add-btn" onclick="openNextEventsEditor()">다음 일정 수정하기</div>` : '';
+  const _ne = curNextEvents();
+  if(!_ne.length){
+    box.innerHTML = '<div class="step-placeholder">다음 일정은 아직 확정 전입니다. 확정되는 대로 이 자리에 안내해드릴게요.</div>' + editBtn;
+    return;
+  }
+  box.innerHTML = _ne.map(s=>`
+    <div class="card">
+      <p><b>${s.title||''}</b>${s.dur?` · ${s.dur}`:''}</p>
+      ${s.date?`<p style="color:var(--ink-soft); font-size:12.5px;">${s.date}</p>`:''}
+      ${s.place?`<p style="color:var(--ink-soft); font-size:12.5px;">${s.place}</p>`:''}
+    </div>
+  `).join('') + editBtn;
+}
+// 다음 봉사 일정 수정창
+function openNextEventsEditor(){
+  if(!isAdmin) return;
+  isEditingNow = true;
+  contentEditorKind = 'nextevents';
+  document.getElementById('contentEditorTitle').textContent = '다음 봉사 일정 수정';
+  document.getElementById('contentEditorHint').textContent = '행사 이름을 비우면 그 일정이 삭제됩니다.';
+  document.getElementById('contentEditorBody').innerHTML = `
+    <div id="ne_list">
+      ${curNextEvents().map(s=>neRowHTML(s)).join('')}
+    </div>
+    <button class="admin-add-btn" onclick="neAddRow()">+ 일정 추가</button>`;
+  document.getElementById('contentEditorModal').classList.add('show');
+}
+function neProgramLabel(id){
+  return id==='seohaeng' ? '서울여행' : (id==='happy' ? '행복학교' : '');
+}
+function neDurForProgram(id){
+  return id==='seohaeng' ? '1박 2일' : (id==='happy' ? '2박 3일' : '');
+}
+function neNightsForProgram(id){
+  return id==='seohaeng' ? 1 : (id==='happy' ? 2 : 0);
+}
+function neFormatDateLabel(startDateStr, nights){
+  if(!startDateStr) return '';
+  const start = new Date(startDateStr+'T00:00:00');
+  if(isNaN(start.getTime())) return '';
+  const end = new Date(start);
+  end.setDate(end.getDate()+nights);
+  const w1 = WEEKDAY_KO[start.getDay()];
+  const w2 = WEEKDAY_KO[end.getDay()];
+  const sm = start.getMonth()+1, sd = start.getDate();
+  const em = end.getMonth()+1, ed = end.getDate();
+  if(nights<=0) return `${sm}월 ${sd}일(${w1})`;
+  if(sm===em) return `${sm}월 ${sd}일(${w1})–${ed}일(${w2})`;
+  return `${sm}월 ${sd}일(${w1})–${em}월 ${ed}일(${w2})`;
+}
+function neRowHTML(s){
+  s = s || {};
+  const program = s.program || 'seohaeng';
+  const startDate = s.startDate || '';
+  const dur = s.dur || neDurForProgram(program);
+  const dateLabel = s.date || neFormatDateLabel(startDate, neNightsForProgram(program));
+  const place = (s.place !== undefined && s.place !== null && s.place !== '') ? s.place : '정토사회문화회관';
+  return `<div class="admin-editgroup ne-row">
+    <label class="re-label">일정 선택</label>
+    <select class="ne-program re-input" onchange="neOnProgramChange(this)">
+      <option value="seohaeng" ${program==='happy'?'':'selected'}>서울여행 (1박 2일)</option>
+      <option value="happy" ${program==='happy'?'selected':''}>행복학교 (2박 3일)</option>
+    </select>
+    <label class="re-label">시작 날짜</label>
+    <input type="date" class="ne-startdate re-input" value="${escAttr(startDate)}" onchange="neOnDateChange(this)">
+    <label class="re-label">기간 (자동)</label>
+    <input class="ne-dur re-input" value="${escAttr(dur)}" readonly style="background:#f4f3ee;color:var(--ink-soft);">
+    <label class="re-label">날짜 표시 (자동)</label>
+    <input class="ne-date re-input" value="${escAttr(dateLabel)}" readonly style="background:#f4f3ee;color:var(--ink-soft);">
+    <label class="re-label">장소</label>
+    <input class="ne-place re-input" value="${escAttr(place)}" placeholder="예: 정토사회문화회관">
+    <button class="admin-add-btn" style="margin-top:8px;border-color:#c0392b;color:#c0392b;" onclick="this.closest('.ne-row').remove()">이 일정 삭제</button>
+  </div>`;
+}
+function neOnProgramChange(select){
+  const row = select.closest('.ne-row');
+  const dur = row.querySelector('.ne-dur');
+  const dateInp = row.querySelector('.ne-startdate');
+  const dateLabelInp = row.querySelector('.ne-date');
+  const program = select.value;
+  dur.value = neDurForProgram(program);
+  dateLabelInp.value = neFormatDateLabel(dateInp.value, neNightsForProgram(program));
+}
+function neOnDateChange(input){
+  const row = input.closest('.ne-row');
+  const select = row.querySelector('.ne-program');
+  const dur = row.querySelector('.ne-dur');
+  const dateLabelInp = row.querySelector('.ne-date');
+  const program = select.value;
+  dur.value = neDurForProgram(program);
+  dateLabelInp.value = neFormatDateLabel(input.value, neNightsForProgram(program));
+}
+function neAddRow(){
+  const wrap = document.getElementById('ne_list');
+  const div = document.createElement('div');
+  div.innerHTML = neRowHTML({});
+  wrap.appendChild(div.firstElementChild);
+}
+function saveNextEventsEditor(){
+  NEXT_BY[PROGRAM_ID] = [...document.querySelectorAll('#ne_list .ne-row')].map(el=>{
+    const program = el.querySelector('.ne-program').value;
+    const startDate = el.querySelector('.ne-startdate').value;
+    const place = el.querySelector('.ne-place').value.trim();
+    return {
+      title: neProgramLabel(program),
+      program: program,
+      startDate: startDate,
+      dur: neDurForProgram(program),
+      date: neFormatDateLabel(startDate, neNightsForProgram(program)),
+      place: place
+    };
+  }).filter(s=>s.startDate); // 시작 날짜가 없으면 삭제된 것으로 본다
+  queueSubappSync('nextevents');
+}
+
+
+/* =========================================================
+   7. 관리자 모드 — 2박3일 원본 일정표를 수정하면
+      1박/2박 참가자 화면에도 즉시 반영됩니다.
+      우측 상단 5번 탭 → 비밀번호 입력 (다른 앱들과 동일한 방식).
+      예전처럼 ?admin=1&pw=... 링크로 바로 들어오는 것도 계속 됩니다.
+   ========================================================= */
+async function checkAdminFromURL(){
+  const params = new URLSearchParams(location.search);
+  if(params.get('admin')==='1'){
+    if(params.get('pw')){
+      // 예전엔 여기서 주소의 pw값을 확인 없이 그냥 믿었지만, 그러면 비밀번호가 틀려도
+      // 화면은 관리자처럼 보이면서 저장만 조용히 실패했습니다. 이제는 5번 탭 로그인과
+      // 똑같이 서버에 먼저 확인합니다.
+      const pw = params.get('pw');
+      try{
+        const res = await fetch(APPSSCRIPTURL, { method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'}, body: JSON.stringify({ password: pw, action:'verify' }) });
+        const json = await res.json();
+        if(json.ok){
+          isAdmin = true;
+          canSaveToServer = true; // 방금 확인했으므로 다시 확인할 필요 없다
+          sessionStorage.setItem('barajiadminpw', pw);
+        }else{
+          // 틀린 비번으로 들어오면, 예전에 저장돼 있던 로그인 기록도 지운다.
+          // 안 그러면 틀린 링크인데도 옛 기록 때문에 관리자 모드가 켜져버린다.
+          isAdmin = false;
+          sessionStorage.removeItem('barajiadminpw');
+          setTimeout(()=>showToast('비밀번호가 맞지 않습니다', true), 300);
+        }
+      }catch(e){
+        setTimeout(()=>showToast('네트워크 오류', true), 300);
+      }
+    }else{
+      setTimeout(()=>showToast('링크에 비밀번호가 없습니다', true), 300);
+    }
+  }
+  if(sessionStorage.getItem('barajiadminpw') && !params.get('pw')) isAdmin = true; // 세션에 이미 로그인되어 있던 경우(재확인 불필요)
+}
+// 이번 달 행사 종류를 바꾼다. 저장하면 링크를 가진 모든 분이 그 행사 내용을 보게 된다.
+function changeProgram(id){
+  if(id !== 'seohaeng' && id !== 'happy') return;
+  // 지금까지 고친 문구를 현재 행사 서랍에 확실히 넣어둔 뒤에 바꾼다
+  saveTextOverrides();
+  PROGRAM_ID = id;
+  // 옵션 목록(신청 화면 선택지)도 프로그램에 맞는 서랍으로 완전히 교체한다.
+  if(!OPTIONS_BY[id]) OPTIONS_BY[id] = [];
+  OPTIONS = OPTIONS_BY[id];
+  localStorage.setItem('subappOptionsBy', JSON.stringify(OPTIONS_BY));
+  // 안내서 문구·날짜 라벨도 그 행사 것으로 바꾼다 (이게 없으면 화면이 안 바뀐다)
+  switchTextOverrides();
+  // 이전 프로그램에서 고르고 있던 선택지는 지금 프로그램에 없을 수 있으니 초기화한다.
+  selectedOptionId = null;
+  selectedRoute = null;
+  const nextBtn = document.getElementById('btnToIntro');
+  if(nextBtn) nextBtn.disabled = true;
+  queueSubappSync('program');
+  queueSubappSync('options');
+  renderAllContent();
+  showToast(id === 'seohaeng' ? '서울여행(1박2일)으로 바꿨습니다' : '행복학교(2박3일)로 바꿨습니다');
+}
+async function logoutAdmin(){
+  // 아직 안 보낸 수정이 있으면 먼저 저장을 끝낸다.
+  // (예전엔 저장 예약이 남은 채로 비밀번호부터 지워서, 그 수정이 그대로 날아갔습니다)
+  if(_subappDirty){
+    showToast('저장 중입니다…');
+    const ok = await flushSubappSync();
+    if(!ok){
+      alert('⚠️ 수정하신 내용을 서버에 저장하지 못했습니다.\n\n지금 나가시면 새로고침했을 때 원래대로 돌아갑니다.\n로그아웃하지 않고 이 상태로 두었다가, 잠시 후 다시 시도해보세요.\n\n(계속 실패하면 관리자 비밀번호가 맞는지 확인이 필요합니다)');
+      return; // 저장 실패하면 나가지 않는다 — 다시 시도할 기회를 남긴다
+    }
+    showToast('저장했습니다');
+  }
+  isAdmin = false;
+  sessionStorage.removeItem('barajiadminpw');
+  canSaveToServer = null;
+  _warnedCannotSave = false;
+  // 관리자 모드를 나가면 저장 상태 표시도 함께 치운다
+  const sb = document.getElementById('admSaveStatus');
+  if(sb) sb.textContent = '';
+  const yb = document.getElementById('syncBadge');
+  if(yb) yb.style.display = 'none';
+  setTextEditMode(false); // 관리자 모드를 나가면 문구 수정도 같이 꺼서 헷갈리지 않게
+  applyAdminUI();
+  renderAllContent(); // 관리자 전용 버튼들이 확실히 사라지도록 화면 전체를 다시 그린다
+  refreshQuickIfOpen(); // 빠른 찾아보기 화면에 있었다면 거기도 다시 그린다
+}
+function applyAdminUI(){
+  document.body.classList.toggle('admin-on', isAdmin);
+  document.getElementById('adminBadge').style.display = isAdmin ? 'block' : 'none';
+  const ps = document.getElementById('programSelect');
+  if(ps) ps.value = PROGRAM_ID; // 지금 고른 행사 종류가 선택 상자에 보이도록
+}
+
+/* =========================================================
+   7-1. 문구 수정 모드 — 관리자 모드에서만 켜집니다. 관리자 로그인
+   직후엔 자동으로 켜져 있고, 우측 상단 5번 탭으로 껐다 켰다 할 수
+   있습니다(관리자가 아닐 땐 같은 5번 탭이 로그인 창을 띄웁니다).
+   메인앱과 동기화되지 않는, 이 서브앱에만 있는 고정 문구(제목/소개/
+   안내 문구 등)를 그 자리에서 바로 고칠 수 있고, 공용 시트로도
+   동기화됩니다. 메인앱에서 관리하는 일정표·레시피·준비물·활동
+   목록 등은 여기서 손댈 수 없습니다 — 그런 항목은 메인앱에서
+   고쳐야 한다는 뜻입니다.
+   ========================================================= */
+let textEditMode = false;
+let _secretTapCount = 0, _secretTapTimer = null;
+function handleSecretTap(){
+  _secretTapCount++;
+  clearTimeout(_secretTapTimer);
+  _secretTapTimer = setTimeout(()=>{ _secretTapCount = 0; }, 1200);
+  if(_secretTapCount >= 5){
+    _secretTapCount = 0;
+    if(isAdmin) toggleTextEditMode();
+    else loginAdmin();
+  }
+}
+// 우측 상단을 5번 탭하면 비밀번호를 물어보고, 서버에 바로 맞는지 확인한 뒤
+// 관리자 모드로 들어갑니다. 다른 앱들(공양꼭지 콘솔 등)과 같은 방식입니다.
+async function loginAdmin(){
+  const pw = prompt('관리자 비밀번호를 입력해주세요');
+  if(!pw) return;
+  showToast('확인 중…');
+  try{
+    const res = await fetch(APPSSCRIPTURL, { method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'}, body: JSON.stringify({ password: pw, action:'verify' }) });
+    const json = await res.json();
+    if(json.ok){
+      isAdmin = true;
+      canSaveToServer = true; // 방금 비밀번호를 확인했으므로 저장 가능한 상태가 확실하다
+      sessionStorage.setItem('barajiadminpw', pw);
+      applyAdminUI();
+      setTextEditMode(true, true); // 중복 확인 건너뛰기
+      renderAllContent(); // 수정 버튼들이 나타나도록 화면 전체를 다시 그린다
+      refreshQuickIfOpen(); // 빠른 찾아보기 화면에 있었다면 거기도 다시 그린다
+      showToast('관리자 모드로 들어왔습니다');
+    }else{
+      showToast('비밀번호가 맞지 않습니다', true);
+    }
+  }catch(e){
+    showToast('네트워크 오류', true);
+  }
+}
+function toggleTextEditMode(){
+  setTextEditMode(!textEditMode);
+}
+function setTextEditMode(on, skipCheck){
+  textEditMode = on;
+  document.body.classList.toggle('text-edit-on', textEditMode);
+  document.querySelectorAll('[data-editable-key]').forEach(el=>{
+    el.contentEditable = textEditMode ? 'true' : 'false';
+  });
+  renderOptions();
+  // 방금 비밀번호를 확인하고 들어온 경우엔 또 확인할 필요가 없다(그만큼 기다리게 되므로)
+  if(on && !skipCheck) checkSaveability();
+}
+// 수정을 시작하기 전에 "지금 저장이 되는 상태인가"를 미리 확인한다.
+// 예전엔 다 고치고 나서야 저장 실패를 알게 돼서, 그동안 작업한 게 날아갔다.
+async function checkSaveability(){
+  const pw = sessionStorage.getItem('barajiadminpw');
+  if(!pw){ setSaveStatus('저장 불가 · 로그인 정보 없음', 'fail'); markCannotSave('관리자 로그인 상태가 아닙니다'); return; }
+  setSaveStatus('저장 가능 여부 확인 중…', 'saving');
+  try{
+    const res = await fetch(APPSSCRIPTURL, { method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'}, body: JSON.stringify({ password: pw, action:'verify' }) });
+    const txt = await res.text();
+    let json;
+    try{ json = JSON.parse(txt); }
+    catch(e){ setSaveStatus('저장 불가 · 서버 응답 이상 (배포 권한 확인 필요)', 'fail'); markCannotSave('서버가 이상한 응답을 보냈습니다'); return; }
+    if(json.ok){
+      canSaveToServer = true;
+      _warnedCannotSave = false;
+      setSaveStatus('저장 준비됨', 'ok');
+    }else{
+      setSaveStatus('저장 불가 · 비밀번호 불일치', 'fail');
+      markCannotSave('비밀번호가 맞지 않습니다');
+    }
+  }catch(e){
+    setSaveStatus('저장 불가 · 서버 연결 실패', 'fail');
+    markCannotSave('서버에 연결하지 못했습니다');
+  }
+}
+function loadTextOverrides(){
+  try{
+    const raw = localStorage.getItem('subappTextBy');
+    if(raw){
+      TEXT_BY = JSON.parse(raw);
+    }else{
+      // 예전엔 행사 구분 없이 하나로 저장했으므로, 그런 값이 있으면 양쪽에 복사해 이어받는다
+      const legacy = JSON.parse(localStorage.getItem('subappTextOverrides')||'{}');
+      TEXT_BY = { seohaeng: Object.assign({}, legacy), happy: Object.assign({}, legacy) };
+    }
+  }catch(e){ TEXT_BY = { seohaeng:{}, happy:{} }; }
+  switchTextOverrides();
+}
+// 지금 행사의 문구 서랍을 바라보게 하고, 날짜 라벨도 그에 맞춰 다시 읽는다
+function switchTextOverrides(){
+  if(!TEXT_BY[PROGRAM_ID]) TEXT_BY[PROGRAM_ID] = {};
+  subappTextOverrides = TEXT_BY[PROGRAM_ID];
+  CALENDAR_DAYS.forEach((_,i)=>{
+    CALENDAR_DAYS[i] = (subappTextOverrides['calDay'+i] !== undefined)
+      ? subappTextOverrides['calDay'+i] : DEFAULT_CALENDAR_DAYS[i];
+  });
+}
+function saveTextOverrides(){
+  TEXT_BY[PROGRAM_ID] = subappTextOverrides;
+  localStorage.setItem('subappTextBy', JSON.stringify(TEXT_BY));
+}
+function applyTextOverrides(){
+  document.querySelectorAll('[data-editable-key]').forEach(el=>{
+    if(el === document.activeElement) return; // 지금 편집 중인 필드는 건드리지 않습니다
+    const key = el.dataset.editableKey;
+    if(subappTextOverrides[key] !== undefined) el.innerHTML = subappTextOverrides[key];
+  });
+}
+// 날짜 라벨은 여러 화면(1박2일 각 페이지, 전체활동 등)에 똑같이 쓰이므로,
+// 한 곳에서 고치면 전부 다시 그려서 바로 맞춰줍니다.
+function refreshAllSchedules(){
+  const s1 = document.getElementById('stay1ScheduleBox');
+  if(s1) s1.innerHTML = ttRowsHTMLByStayKey('stay-1314');
+  renderMoreSchedule();
+}
+document.addEventListener('focusin', function(e){
+  if(textEditMode && e.target && e.target.dataset && e.target.dataset.editableKey){
+    isEditingNow = true;
+  }
+});
+// 여러 일정에 똑같이 등장하는 제목들 — 한 곳에서 고치면 나머지도 같이 바뀝니다
+const LINKED_KEY_GROUPS = [
+  ['hdgBagLunch','hdgBagDinner','hdgBagStay1'],
+  ['hdgCheckLunch','hdgRuleDinner','hdgRuleStay1'],
+];
+function linkedKeysFor(key){
+  const group = LINKED_KEY_GROUPS.find(g=>g.includes(key));
+  return group || [key];
+}
+// 저장 로직을 함수로 분리 — blur(칸을 벗어날 때) 뿐 아니라 input(글자를 치는 즉시)에도 써서,
+// 페이지를 옮기다가 blur가 제때 안 걸려도 이미 저장이 끝나있게 만듭니다.
+function saveEditableField(el, alsoRefreshCalendar){
+  if(!el || !el.dataset || !el.dataset.editableKey) return;
+  const key = el.dataset.editableKey;
+  const val = el.innerHTML;
+  linkedKeysFor(key).forEach(k=>{ subappTextOverrides[k] = val; });
+  saveTextOverrides();
+  queueSubappSync('text'); // 시트에는 [저장]을 누를 때 한 번만 기록됩니다
+  const m = key.match(/^calDay(\d+)$/);
+  if(m){
+    CALENDAR_DAYS[parseInt(m[1],10)] = el.textContent;
+    if(alsoRefreshCalendar!==false) refreshAllSchedules();
+  }
+}
+document.addEventListener('input', function(e){
+  if(!textEditMode) return;
+  const el = e.target;
+  if(el && el.dataset && el.dataset.editableKey){
+    saveEditableField(el, false); // 타이핑 중엔 달력 재계산까지는 매 글자마다 할 필요 없음
+    applyTextOverrides(); // 지금 포커스된 칸은 건너뛰므로, 같은 문구를 쓰는 다른 화면에만 바로 반영됨
+  }
+});
+document.addEventListener('blur', function(e){
+  if(!textEditMode) return;
+  const el = e.target;
+  if(el && el.dataset && el.dataset.editableKey){
+    saveEditableField(el, true);
+    applyTextOverrides();
+  }
+  isEditingNow = false;
+}, true);
+loadTextOverrides();
+
+// 일정표를 화면에서 바로 클릭해서 고칩니다(팝업 없음). 날짜 라벨은 day-label을 그대로 두 번 눌러 고칩니다.
+function findScheduleRow(stayKey, dayIdx, rowIdx){
+  const t = TIMETABLES[stayKey];
+  if(!t || !t.days || !t.days[dayIdx] || !t.days[dayIdx].rows) return null;
+  return t.days[dayIdx].rows[rowIdx] || null;
+}
+function saveScheduleField(el){
+  const rowEl = el.closest('.tt-row-edit');
+  if(!rowEl) return;
+  const stayKey = rowEl.dataset.stay;
+  const dayIdx = parseInt(rowEl.dataset.day, 10);
+  const rowIdx = parseInt(rowEl.dataset.row, 10);
+  const field = el.dataset.field;
+  const row = findScheduleRow(stayKey, dayIdx, rowIdx);
+  if(!row) return;
+  // 시간은 소요시간을 계산해야 하므로 순수 글자로, 나머지(내용·장소·비고)는
+  // 볼드·밑줄·색 서식이 유지되도록 innerHTML로 저장합니다.
+  row[field] = (field === 'time') ? el.textContent.trim() : el.innerHTML.trim();
+  if(field === 'time'){
+    row.dur = calcDurationFromTime(row.time); // 시간을 고치면 소요시간을 자동으로 다시 계산
+    const durEl = rowEl.querySelector('.tt-dur-f');
+    if(durEl) durEl.textContent = row.dur ? row.dur+'분' : '';
+  }
+  saveLocalShared();
+  queueSubappSync('timetable');
+  isEditingNow = false;
+}
+// "13:30~14:30", "13:30-14:30", "13:30 ~ 14:30" 등을 인식해 분 단위 소요시간을 계산합니다.
+// 끝나는 시간이 없으면(예: "14:30~") 계산하지 않고 빈 값을 돌려줍니다.
+function calcDurationFromTime(timeStr){
+  if(!timeStr) return '';
+  const nums = String(timeStr).match(/\d{1,2}:\d{2}/g);
+  if(!nums || nums.length < 2) return '';
+  const toMin = (t)=>{ const [h,m] = t.split(':').map(Number); return h*60+m; };
+  let start = toMin(nums[0]), end = toMin(nums[1]);
+  if(end < start) end += 24*60; // 자정을 넘기는 일정(예: 23:30~00:30) 대비
+  const diff = end - start;
+  return diff > 0 ? String(diff) : '';
+}
+function deleteScheduleRow(btn){
+  const rowEl = btn.closest('.tt-row-edit');
+  if(!rowEl) return;
+  const stayKey = rowEl.dataset.stay;
+  const dayIdx = parseInt(rowEl.dataset.day, 10);
+  const rowIdx = parseInt(rowEl.dataset.row, 10);
+  const t = TIMETABLES[stayKey];
+  if(!t || !t.days[dayIdx]) return;
+  if(!confirm('이 일정을 삭제할까요?')) return;
+  t.days[dayIdx].rows.splice(rowIdx, 1);
+  queueSubappSync('timetable');
+  renderAllContent(); refreshQuickIfOpen();
+}
+function addScheduleRow(stayKey, dayIdx){
+  if(!TIMETABLES[stayKey]) TIMETABLES[stayKey] = { label: stayKey, days: [] };
+  if(!TIMETABLES[stayKey].days[dayIdx]) TIMETABLES[stayKey].days[dayIdx] = { day:`${dayIdx+1}일차`, rows:[] };
+  TIMETABLES[stayKey].days[dayIdx].rows.push({ time:'00:00', content:'새 일정', place:'' });
+  queueSubappSync('timetable');
+  renderAllContent(); refreshQuickIfOpen();
+}
+// 일정 줄을 끌어서(드래그) 순서를 바꿉니다 — PC 마우스와 모바일 터치 모두 지원합니다.
+let _ttDragEl = null;
+function ttDragStart(e){
+  _ttDragEl = e.currentTarget;
+  e.currentTarget.classList.add('tt-dragging');
+  if(e.dataTransfer){ e.dataTransfer.effectAllowed = 'move'; try{ e.dataTransfer.setData('text/plain',''); }catch(err){} }
+}
+function ttDragOver(e){
+  e.preventDefault();
+  const target = e.currentTarget;
+  if(!_ttDragEl || target === _ttDragEl) return;
+  if(target.dataset.stay !== _ttDragEl.dataset.stay || target.dataset.day !== _ttDragEl.dataset.day) return;
+  const rect = target.getBoundingClientRect();
+  const before = (e.clientY - rect.top) < rect.height/2;
+  target.parentNode.insertBefore(_ttDragEl, before ? target : target.nextSibling);
+}
+function ttDrop(e){ e.preventDefault(); }
+function ttDragEnd(e){
+  const rowEl = e.currentTarget;
+  rowEl.classList.remove('tt-dragging');
+  const stayKey = rowEl.dataset.stay;
+  const dayIdx = parseInt(rowEl.dataset.day, 10);
+  const t = TIMETABLES[stayKey];
+  if(!t || !t.days[dayIdx]) return;
+  const container = rowEl.parentNode;
+  const newOrder = [...container.querySelectorAll(`.tt-row-edit[data-day="${dayIdx}"]`)]
+    .map(el => parseInt(el.dataset.row, 10))
+    .map(oldRi => t.days[dayIdx].rows[oldRi]);
+  t.days[dayIdx].rows = newOrder;
+  _ttDragEl = null;
+  queueSubappSync('timetable');
+  renderAllContent(); refreshQuickIfOpen();
+}
+// 모바일 터치 환경에서도 손잡이를 눌러 끌 수 있도록 보조합니다 (draggable 속성은 터치에서 기본 동작하지 않는 브라우저가 있음)
+let _ttTouchEl = null, _ttTouchStartY = 0;
+document.addEventListener('touchstart', function(e){
+  const handle = e.target.closest && e.target.closest('.tt-drag-handle');
+  if(!handle) return;
+  _ttTouchEl = handle.closest('.tt-row-edit');
+  if(_ttTouchEl){ _ttTouchEl.classList.add('tt-dragging'); _ttTouchStartY = e.touches[0].clientY; }
+}, {passive:true});
+document.addEventListener('touchmove', function(e){
+  if(!_ttTouchEl) return;
+  const touch = e.touches[0];
+  const els = document.elementsFromPoint(touch.clientX, touch.clientY);
+  const overRow = els.find(el => el.classList && el.classList.contains('tt-row-edit') && el !== _ttTouchEl);
+  if(overRow && overRow.dataset.stay === _ttTouchEl.dataset.stay && overRow.dataset.day === _ttTouchEl.dataset.day){
+    const rect = overRow.getBoundingClientRect();
+    const before = (touch.clientY - rect.top) < rect.height/2;
+    overRow.parentNode.insertBefore(_ttTouchEl, before ? overRow : overRow.nextSibling);
+  }
+}, {passive:true});
+document.addEventListener('touchend', function(e){
+  if(!_ttTouchEl) return;
+  const rowEl = _ttTouchEl;
+  rowEl.classList.remove('tt-dragging');
+  const stayKey = rowEl.dataset.stay;
+  const dayIdx = parseInt(rowEl.dataset.day, 10);
+  const t = TIMETABLES[stayKey];
+  _ttTouchEl = null;
+  if(!t || !t.days[dayIdx]) return;
+  const container = rowEl.parentNode;
+  const newOrder = [...container.querySelectorAll(`.tt-row-edit[data-day="${dayIdx}"]`)]
+    .map(el => parseInt(el.dataset.row, 10))
+    .map(oldRi => t.days[dayIdx].rows[oldRi]);
+  t.days[dayIdx].rows = newOrder;
+  queueSubappSync('timetable');
+  renderAllContent(); refreshQuickIfOpen();
+});
+
+
+/* =========================================================
+   내용 수정 (관리자) — 준비물 · 활동 · 공양메뉴
+   메인앱과 데이터를 나눠 쓰므로, 여기서 고친 것은 서브앱에만 반영됩니다.
+   ========================================================= */
+// 레시피는 이제 화면에서 바로 고치므로(openRecipeModal 참고) 별도 팝업 편집기는 없습니다.
+let contentEditorKind = null;
+function openContentEditor(kind){
+  if(!isAdmin) return;
+  contentEditorKind = kind;
+  isEditingNow = true;
+  const titleEl = document.getElementById('contentEditorTitle');
+  const hintEl  = document.getElementById('contentEditorHint');
+  const body    = document.getElementById('contentEditorBody');
+  let html = '';
+
+  if(kind === 'prep'){
+    titleEl.textContent = '준비물 · 약속 수정';
+    hintEl.textContent = '묶음별로 항목을 고치거나 지울 수 있습니다. 제목을 비우면 그 항목이 삭제됩니다.';
+    html = PREPGROUPS.map((g,gi)=>`
+      <div class="admin-editgroup">
+        <input class="ce-group" data-gi="${gi}" value="${escAttr(g.group)}" placeholder="묶음 이름">
+        ${g.items.map((it,ii)=>`
+          <div class="admin-editrow" data-gi="${gi}" data-ii="${ii}">
+            <input class="ce-t" value="${escAttr(it.t)}" placeholder="항목">
+            <input class="ce-s" value="${escAttr(it.s||'')}" placeholder="설명(선택)">
+          </div>`).join('')}
+        <button class="admin-add-btn" onclick="ceAddRow(${gi})">+ 항목 추가</button>
+      </div>`).join('');
+
+  }else if(kind === 'activity'){
+    titleEl.textContent = '바라지 활동 소개 수정';
+    hintEl.textContent = '제목을 비우면 그 활동이 삭제됩니다.';
+    html = ACTIVITIES.map((a,ai)=>`
+      <div class="admin-editrow" data-ai="${ai}">
+        <input class="ce-t" value="${escAttr(a.title)}" placeholder="활동 제목">
+        <input class="ce-s" value="${escAttr(a.desc||'')}" placeholder="설명">
+      </div>`).join('') + `<button class="admin-add-btn" onclick="ceAddActivity()">+ 활동 추가</button>`;
+
+  }else if(kind === 'meals'){
+    titleEl.textContent = '공양 메뉴 수정';
+    hintEl.textContent = '체크한 요리가 그 끼니에 나옵니다. 새 요리는 아래에서 추가하세요.';
+    html = Object.keys(MEALS).map(k=>{
+      const cur = MEALS[k].menus || [];
+      return `
+      <div class="admin-editgroup" data-mealkey="${k}">
+        <label class="re-label">끼니 이름</label>
+        <input class="ce-t re-input" value="${escAttr(MEALS[k].label||k)}">
+        <label class="re-label">이 끼니에 낼 요리 (체크)</label>
+        <div class="meal-pick">
+          ${MENUS.map(m=>`
+            <label class="meal-pick-item">
+              <input type="checkbox" value="${escAttr(m.name)}" ${cur.includes(m.name)?'checked':''}>
+              <span>${m.name}</span>
+            </label>`).join('')}
+        </div>
+      </div>`;
+    }).join('') + `
+      <div class="admin-editgroup">
+        <label class="re-label">새 요리 추가 (이름만 넣고, 레시피는 나중에 채울 수 있습니다)</label>
+        <div style="display:flex;gap:6px">
+          <input id="newMenuName" class="re-input" placeholder="예: 감자조림" style="flex:1">
+          <button class="admin-add-btn" style="margin:0;white-space:nowrap" onclick="addNewMenu()">+ 추가</button>
+        </div>
+      </div>`;
+  }
+
+  body.innerHTML = html;
+  document.getElementById('contentEditorModal').classList.add('show');
+}
+// 새 요리를 목록에 추가한다 (레시피는 나중에 채울 수 있음)
+function addNewMenu(){
+  const inp = document.getElementById('newMenuName');
+  const name = inp.value.trim();
+  if(!name){ alert('요리 이름을 입력해주세요.'); return; }
+  if(MENUS.some(m=>m.name===name)){ alert('이미 같은 이름의 요리가 있습니다.'); return; }
+  MENUS.push({ emoji:'', name:name, tag:'', recipe:{ serving:'', ingredients:[], steps:[] } });
+  queueSubappSync('menus');
+  openContentEditor('meals'); // 새 요리가 목록에 보이도록 편집창을 다시 연다
+}
+function escAttr(s){ return String(s==null?'':s).replace(/"/g,'&quot;').replace(/</g,'&lt;'); }
+function ceAddRow(gi){
+  const groups = document.querySelectorAll('#contentEditorBody .admin-editgroup');
+  const g = groups[gi];
+  const div = document.createElement('div');
+  div.className = 'admin-editrow';
+  div.dataset.gi = gi;
+  div.innerHTML = `<input class="ce-t" placeholder="항목"><input class="ce-s" placeholder="설명(선택)">`;
+  g.insertBefore(div, g.querySelector('.admin-add-btn'));
+}
+function ceAddActivity(){
+  const body = document.getElementById('contentEditorBody');
+  const div = document.createElement('div');
+  div.className = 'admin-editrow';
+  div.innerHTML = `<input class="ce-t" placeholder="활동 제목"><input class="ce-s" placeholder="설명">`;
+  body.insertBefore(div, body.querySelector('.admin-add-btn'));
+}
+function closeContentEditor(){
+  document.getElementById('contentEditorModal').classList.remove('show');
+  isEditingNow = false;
+  contentEditorKind = null;
+}
+async function saveContentEditor(){
+  const body = document.getElementById('contentEditorBody');
+
+  // 준비물·활동은 이제 화면에서 바로 고치므로 여기서 처리하지 않는다
+  if(contentEditorKind === 'home'){
+    saveHomeEditor();
+
+  }else if(contentEditorKind === 'tabnames'){
+    saveTabNamesEditor();
+
+  }else if(contentEditorKind === 'notices'){
+    saveNoticesEditor();
+
+  }else if(contentEditorKind === 'nextevents'){
+    saveNextEventsEditor();
+
+  }else if(contentEditorKind === 'meals'){
+    [...body.querySelectorAll('.admin-editgroup[data-mealkey]')].forEach(g=>{
+      const k = g.dataset.mealkey;
+      if(!MEALS[k]) MEALS[k] = {};
+      MEALS[k].label = g.querySelector('.ce-t').value.trim();
+      MEALS[k].menus = [...g.querySelectorAll('input[type=checkbox]:checked')].map(cb=>cb.value);
+    });
+    queueSubappSync('meals');
+  }
+
+  closeContentEditor();
+  renderAllContent();
+  // 빠른 찾아보기 화면을 보고 있었다면 그 화면도 다시 그린다
+  if(document.getElementById('page-quick').classList.contains('active')) renderQuickView();
+}
+
+(async function initApp(){
+  // 서버 최신 내용 받아오기를 가장 먼저 시작한다. 관리자 비밀번호 확인과 동시에 진행되므로,
+  // 링크를 여신 분들이 옛 내용을 보고 있는 시간이 없어진다.
+  const dataPromise = fetchLatestData();
+
+  loadOptionsOverride();
+  loadLocalShared();
+  // 예전엔 여기서 이 기기의 옛 값으로 먼저 화면을 그렸는데, 그러면 "다른 행사가 잠깐 보였다가
+  // 최근 저장한 걸로 바뀌는" 것처럼 보이는 문제가 있었습니다. 이제 서버 최신 값이 올 때까지
+  // 로딩 표시만 두고, 한 번에 정확한 내용으로 그립니다.
+  const latest = await dataPromise;
+  await applyLatestData(latest);  // 서버 내용이 오면 그걸로 딱 한 번 그린다
+  if(!latest) renderAllContent(); // 서버 연결이 안 됐을 때만 이 기기의 옛 값으로라도 보여준다
+  if(latest){
+    _lastDataSignature = JSON.stringify([latest.subapp_text_overrides, latest.subapp_options,
+      latest.subapp_timetables, latest.subapp_meals, latest.subapp_prep_groups, latest.subapp_activities, latest.subapp_program, latest.subapp_next_events, latest.subapp_notices]);
+  }
+
+  await checkAdminFromURL();   // 관리자 확인은 화면이 다 뜬 뒤에 해도 늦지 않다
+  if(isAdmin){
+    setTextEditMode(true, canSaveToServer === true); // 이미 확인됐으면 중복 확인 건너뛰기
+    renderAllContent(); // 관리자용 수정 버튼들이 나타나도록 화면을 다시 그린다
+    refreshQuickIfOpen(); // 빠른 찾아보기 화면에 있었다면 거기도 다시 그린다
+  }
+  history.replaceState(buildNavState(), '');
+  setInterval(syncFromSheetShared, 60000);
+})();
+</script>
+</body>
+</html>
