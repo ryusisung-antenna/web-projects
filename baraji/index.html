@@ -1,0 +1,1357 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#F7F2E8">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<title>군청년 바라지 — 스토리 흐름 v0.9</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Pretendard:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f7f2e8;--paper2:#fffdf8;--ink:#292720;--soft:#756e63;--line:#ddd2c1;
+  --orange:#b9652b;--orange2:#d58a4c;--sage:#6e7d62;--sageWash:#e9eee5;
+  --red:#a65240;--max:520px;--shadow:0 16px 42px rgba(65,50,30,.08)
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{background:#171717;scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{margin:0;font-family:Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo",sans-serif;color:var(--ink);background:#171717;line-height:1.65}
+button,input,textarea{font:inherit}
+button{cursor:pointer}
+.app{width:min(100%,var(--max));margin:0 auto;min-height:100svh;background:var(--paper);position:relative;overflow:hidden}
+.view{display:none;min-height:100svh;background:var(--paper)}
+.view.active{display:block;animation:fade .32s ease}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.topbar{position:sticky;top:0;z-index:30;display:flex;align-items:center;justify-content:space-between;padding:13px 17px;background:rgba(247,242,232,.94);backdrop-filter:blur(10px);border-bottom:1px solid rgba(221,210,193,.68)}
+.brand{font-family:"Gowun Batang",serif;font-size:14px;font-weight:700}
+.topbar button{border:0;background:none;color:var(--soft);font-size:12px;padding:6px 3px}
+.hero{min-height:100svh;padding:12vh 28px 34px;display:flex;flex-direction:column;justify-content:center}
+.eyebrow{font-size:10px;letter-spacing:.22em;font-weight:700;color:var(--orange);margin-bottom:17px}
+h1,h2,h3{font-family:"Gowun Batang",serif;letter-spacing:-.035em}
+.hero h1{font-size:35px;line-height:1.38;margin:0 0 14px;font-weight:700}
+.hero .lead{font-family:"Gowun Batang",serif;font-size:17px;color:var(--soft);margin:0 0 44px}
+.choice{display:grid;gap:12px}
+.choice button,.primary,.secondary{width:100%;border-radius:18px;padding:18px;text-align:left}
+.choice button strong{display:block;font-family:"Gowun Batang",serif;font-size:18px;margin-bottom:4px}
+.choice button span{font-size:12.5px;line-height:1.55}
+.choice .first{background:var(--ink);color:#fff;border:1px solid var(--ink);box-shadow:var(--shadow)}
+.choice .return{background:rgba(255,255,255,.44);color:var(--ink);border:1px solid var(--line)}
+.choice .return span{color:var(--soft)}
+.micro{text-align:center;color:#999185;font-size:11px;margin-top:24px}
+
+.section{padding:56px 24px 80px}
+.section-head{text-align:center;margin:0 auto 30px;max-width:410px}
+.section-head .eyebrow{margin-bottom:11px}
+.section-head h2{font-size:29px;line-height:1.43;margin:0 0 13px}
+.section-head p{font-size:14px;color:var(--soft);margin:0;line-height:1.75}
+.primary{display:block;border:0;background:var(--orange);color:#fff;font-weight:700;text-align:center;padding:16px;margin-top:22px}
+.secondary{display:block;border:1px solid var(--line);background:rgba(255,255,255,.44);color:var(--ink);font-weight:600;text-align:center;padding:15px;margin-top:10px}
+
+.origin-lead{font-family:"Gowun Batang",serif;font-size:22px;line-height:1.65;margin:8px 0 26px}
+.origin-lead em{font-style:normal;color:var(--orange)}
+.timeline{display:grid;gap:0;margin:26px 0 42px}
+.tl{display:grid;grid-template-columns:34px 1fr;gap:12px;position:relative;padding-bottom:24px}
+.tl:not(:last-child)::before{content:"";position:absolute;left:16px;top:31px;bottom:0;width:1px;background:var(--line)}
+.tl-n{width:33px;height:33px;border-radius:50%;display:grid;place-items:center;background:var(--paper2);border:1px solid var(--line);font-family:"Gowun Batang",serif;font-size:12px;color:var(--orange);z-index:1}
+.tl b{display:block;font-family:"Gowun Batang",serif;font-size:16px;margin-bottom:5px}
+.tl p{margin:0;font-size:13.5px;line-height:1.72;color:var(--soft)}
+.callout{margin:4px 0 42px;padding:23px 20px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);text-align:center;font-family:"Gowun Batang",serif;font-size:18px;line-height:1.7}
+.callout strong{color:var(--orange)}
+
+.subhead{font-family:"Gowun Batang",serif;font-size:22px;margin:44px 0 8px}
+.subcopy{font-size:13.5px;color:var(--soft);margin:0 0 20px;line-height:1.72}
+.map-visual{display:grid;gap:11px;margin:20px 0 34px}
+.place{background:rgba(255,255,255,.48);border:1px solid var(--line);border-radius:18px;padding:17px;display:grid;grid-template-columns:48px 1fr;gap:13px;align-items:center}
+.place .pin{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--line);font-family:"Gowun Batang",serif;color:var(--orange);font-weight:700;background:var(--paper2);font-size:12px}
+.place b{display:block;font-family:"Gowun Batang",serif;font-size:17px}
+.place span{font-size:12.5px;color:var(--soft)}
+.program-grid{display:grid;gap:13px;margin:20px 0}
+.program-card{border:1px solid var(--line);border-radius:20px;background:rgba(255,255,255,.5);padding:20px}
+.program-card .tag{font-size:11px;color:var(--orange);font-weight:700;margin-bottom:6px}
+.program-card h3{font-size:21px;margin:0 0 8px}
+.program-card p{font-size:13.5px;color:var(--soft);margin:0;line-height:1.73}
+.program-card .meta{margin-top:14px;padding-top:12px;border-top:1px solid var(--line);font-size:12px;font-weight:700;color:var(--sage)}
+
+.story-wrap{padding:0 0 70px}
+.story-intro{padding:62px 24px 36px;text-align:center}
+.story-intro h2{font-size:30px;margin:0 0 12px}
+.story-intro p{font-size:14px;color:var(--soft);margin:0 auto;max-width:370px;line-height:1.75}
+.story-card{position:relative;margin:0;background:var(--paper);overflow:hidden}
+.story-copy{position:absolute;left:0;right:0;top:0;z-index:2;padding:26px 28px 0;text-align:left}
+.story-num{font-size:10px;letter-spacing:.22em;color:var(--orange);font-weight:700;margin-bottom:9px}
+.story-copy h3{margin:0;font-size:24px;line-height:1.4;max-width:385px}
+.story-copy p{margin:10px 0 0;font-size:15px;line-height:1.72;color:#5f594f;max-width:390px;font-weight:500;word-break:keep-all}
+.story-card img{display:block;width:100%;height:auto}
+
+.meal-hero{width:100%;border-radius:22px;display:block;margin:22px 0;border:1px solid rgba(221,210,193,.55)}
+.live-bar{display:flex;align-items:center;gap:8px;margin:12px 0 18px;padding:10px 12px;border-radius:12px;background:var(--sageWash);font-size:11.5px;color:var(--sage)}
+.live-dot{width:7px;height:7px;border-radius:50%;background:var(--sage);flex:none}
+.live-bar.fail{background:#f3e8e3;color:var(--red)} .live-bar.fail .live-dot{background:var(--red)}
+.tabs{display:flex;gap:7px;margin:16px 0}
+.tab{flex:1;border:1px solid var(--line);background:rgba(255,255,255,.45);padding:11px 6px;border-radius:12px;font-weight:700;color:var(--soft)}
+.tab.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.menu-slot{border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.52);padding:17px;margin:11px 0}
+.menu-slot h3{font-size:16px;margin:0 0 11px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+.dish{padding:9px 0;border-bottom:1px solid rgba(221,210,193,.65);font-size:14px;display:flex;justify-content:space-between;gap:10px}
+.dish:last-child{border-bottom:0}
+.dish small{color:var(--soft)}
+.menu-note{font-size:13px;color:var(--soft);line-height:1.75;text-align:center;margin:18px 8px}
+
+.quote{border-left:2px solid var(--orange2);padding:7px 0 7px 16px;margin:25px 0}
+.quote p{font-family:"Gowun Batang",serif;font-size:17px;line-height:1.75;margin:0 0 9px}
+.quote small{color:var(--soft)}
+.review-empty{display:grid;gap:13px}
+.review-card{border:1px dashed #c9baa3;border-radius:18px;padding:19px;background:rgba(255,255,255,.28)}
+.review-card b{font-family:"Gowun Batang",serif;display:block;margin-bottom:6px}
+.review-card p{font-size:12.5px;color:var(--soft);margin:0}
+
+.schedule-list{display:grid;gap:13px;margin-top:18px}
+.event-card{border:1px solid var(--line);border-radius:20px;padding:19px;background:rgba(255,255,255,.54);box-shadow:0 10px 28px rgba(65,50,30,.04)}
+.event-card .event-top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.event-card h3{font-size:19px;margin:0}
+.pill{font-size:10.5px;border-radius:99px;background:var(--sageWash);color:var(--sage);font-weight:700;padding:4px 9px;white-space:nowrap}
+.event-date{font-weight:700;font-size:14px;margin:12px 0 4px}
+.event-time,.event-place{font-size:12.5px;color:var(--soft)}
+.event-card button{width:100%;border:0;border-radius:12px;padding:12px;margin-top:14px;background:var(--ink);color:#fff;font-weight:700}
+.empty{border:1px dashed #c9baa3;border-radius:18px;padding:22px;text-align:center;color:var(--soft);font-size:13px;background:rgba(255,255,255,.28)}
+
+.apply-wrap{padding:34px 20px 70px}
+.apply-intro{text-align:center;margin:0 auto 28px}
+.apply-intro h2{font-size:28px;margin:0 0 9px}
+.apply-intro p{font-size:13.5px;color:var(--soft);margin:0}
+.real-warning{border-radius:14px;background:#f3e8e3;color:#7e4639;padding:12px 14px;font-size:11.5px;margin:18px 0}
+.form-section{border:1px solid var(--line);border-radius:20px;background:rgba(255,255,255,.52);padding:18px;margin:13px 0}
+.form-title{font-family:"Gowun Batang",serif;font-size:17px;font-weight:700;margin-bottom:15px}
+.field{margin:14px 0}
+.field label{display:block;font-size:12.5px;font-weight:700;margin-bottom:7px}
+.field input,.field textarea{width:100%;border:1px solid var(--line);border-radius:11px;background:#fff;padding:12px 13px;color:var(--ink)}
+.field textarea{min-height:82px;resize:vertical}
+.radio-grid{display:flex;flex-wrap:wrap;gap:7px}
+.radio-chip{border:1px solid var(--line);background:#fff;border-radius:99px;padding:8px 12px;font-size:12px}
+.radio-chip.on{background:var(--sage);border-color:var(--sage);color:#fff}
+.group-label{font-weight:800;font-size:12.5px;margin:19px 0 8px}
+.group-desc{font-size:11.5px;color:var(--soft);line-height:1.6;margin-bottom:9px}
+.opt-list{display:grid;gap:8px}
+.opt-item{border:1px solid var(--line);border-radius:14px;padding:13px;background:#fff;display:flex;gap:10px;align-items:flex-start}
+.opt-item.sel{border-color:var(--sage);background:var(--sageWash)}
+.opt-item.full{opacity:.48}
+.opt-check{width:18px;height:18px;border-radius:5px;border:1.5px solid #bdb4a7;flex:none;margin-top:1px;display:grid;place-items:center;font-size:11px}
+.opt-item.sel .opt-check{background:var(--sage);border-color:var(--sage);color:#fff}
+.opt-text{font-size:12.7px;line-height:1.55;flex:1}
+.cap{display:inline-block;margin-left:5px;font-size:10px;padding:1px 6px;border:1px solid var(--line);border-radius:99px;color:var(--soft)}
+.cap.full{color:var(--red);border-color:var(--red)}
+.error{display:none;color:var(--red);font-size:12px;margin:10px 2px}
+.submit{width:100%;border:0;border-radius:14px;background:var(--orange);color:#fff;padding:16px;font-weight:800;margin-top:16px}
+.submit:disabled{opacity:.55}
+.done-card{display:none;padding:54px 23px 75px;text-align:center}
+.done-card.show{display:block}
+.done-card h2{font-size:28px;margin:0 0 10px}
+.done-card>p{font-size:13px;color:var(--soft)}
+.guide-card{margin:28px 0 18px;border:1px solid var(--line);background:var(--paper2);border-radius:24px;padding:26px 21px;text-align:left;box-shadow:var(--shadow)}
+.guide-card .gc-k{font-size:10px;letter-spacing:.2em;color:var(--orange);font-weight:700}
+.guide-card h3{font-size:24px;margin:10px 0}
+.gc-name{font-size:13px;color:var(--soft);margin-bottom:18px}
+.gc-schedules{font-size:13px;line-height:1.8;padding:14px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.gc-flow{display:grid;gap:10px;margin-top:17px;font-size:12.5px}
+.save-btn{width:100%;border:1px solid var(--line);border-radius:14px;background:#fff;padding:14px;font-weight:700}
+
+.return-hero{padding:66px 24px 54px}
+.return-hero img{width:100%;display:block;border-radius:22px;margin:26px 0 30px;border:1px solid rgba(221,210,193,.58)}
+.return-hero h2{font-size:30px;margin:0 0 10px;text-align:center}
+.return-hero>p{text-align:center;color:var(--soft);font-size:13.5px;margin:0}
+.quick{display:grid;gap:10px;margin-top:28px}
+.quick button{border-radius:16px;padding:17px;border:1px solid var(--line);background:rgba(255,255,255,.45);text-align:left;color:var(--ink)}
+.quick button:first-child{background:var(--orange);border-color:var(--orange);color:#fff}
+.quick b{font-family:"Gowun Batang",serif;font-size:16px;display:block}
+.quick span{font-size:11.8px;opacity:.78}
+
+.archive-hero{padding:48px 20px 28px;text-align:center}
+.archive-hero h2{font-size:29px;margin:0 0 10px}
+.archive-hero p{font-size:13.5px;color:var(--soft);margin:0 auto;max-width:390px}
+.archive-collage{width:100%;display:block;border-radius:20px;border:1px solid var(--line);margin:25px 0 12px}
+.archive-body{padding:0 22px 72px}
+.archive-note{font-family:"Gowun Batang",serif;font-size:18px;line-height:1.75;text-align:center;margin:28px 8px 38px}
+.archive-records{display:grid;gap:12px}
+.archive-card{border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.48);padding:18px}
+.archive-card small{color:var(--orange);font-weight:700}
+.archive-card h3{font-size:18px;margin:5px 0 8px}
+.archive-card p{font-size:12.5px;color:var(--soft);margin:0;line-height:1.7}
+.moment-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:17px}
+.moment{border-radius:14px;overflow:hidden;position:relative;background:#eee}
+.moment img{width:100%;display:block}
+.moment span{position:absolute;left:8px;right:8px;bottom:8px;background:rgba(40,36,30,.68);color:#fff;border-radius:8px;padding:5px 7px;font-size:9.5px}
+
+.video{position:fixed;inset:0;z-index:1000;background:#000;display:none;align-items:center;justify-content:center}
+.video.show{display:flex}
+.video iframe{width:100%;height:100%;border:0}
+.video .skip{position:absolute;right:18px;bottom:calc(24px + env(safe-area-inset-bottom));z-index:5;border:1px solid rgba(255,255,255,.42);background:rgba(0,0,0,.38);color:#fff;border-radius:99px;padding:9px 15px;font-size:12px}
+.toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%) translateY(18px);z-index:1200;background:#2d2a25;color:#fff;border-radius:12px;padding:10px 15px;font-size:12px;opacity:0;transition:.25s;pointer-events:none;white-space:nowrap}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.prototype-tag{position:fixed;z-index:60;left:50%;bottom:9px;transform:translateX(-50%);font-size:9px;letter-spacing:.08em;color:#9b9386;background:rgba(247,242,232,.9);border:1px solid rgba(221,210,193,.7);padding:4px 9px;border-radius:99px;pointer-events:none}
+.hidden{display:none!important}
+@media (min-width:521px){.video{left:50%;right:auto;width:520px;transform:translateX(-50%)}}
+
+/* ===== v0.3 ===== */
+.network-map{margin:18px 0 46px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:26px 0 28px}
+.network-map svg{display:block;width:100%;height:auto}
+.network-note{text-align:center;font-family:"Gowun Batang",serif;font-size:16px;line-height:1.75;color:var(--soft);margin:16px auto 0;max-width:360px}
+.network-note strong{color:var(--ink)}
+.map-label-big{font-family:"Gowun Batang",serif;font-size:20px;font-weight:700;fill:#292720}
+.map-label-small{font-family:Pretendard,sans-serif;font-size:11px;fill:#756e63}
+.map-place{fill:#b9652b}
+.map-route{fill:none;stroke:#d5c8b5;stroke-width:1.5;stroke-dasharray:4 7}
+.map-peninsula{fill:#efe7da;stroke:#d8ccba;stroke-width:1.2}
+
+.program-card p{font-size:14.5px;line-height:1.78}
+.program-card .meta{font-size:11.5px}
+
+.meal-table-visual{position:relative;min-height:420px;margin:22px 0 18px;border:1px solid var(--line);border-radius:26px;background:
+radial-gradient(circle at 50% 49%,rgba(255,255,255,.96) 0 26%,rgba(247,242,232,0) 26.5%),
+linear-gradient(135deg,#fffdf8,#f2ebde);overflow:hidden;padding:24px}
+.meal-center{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:150px;height:150px;border-radius:50%;border:1.5px solid #cdbda7;background:#fffdf8;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;box-shadow:0 12px 34px rgba(70,50,30,.06)}
+.meal-center:before{content:"";width:72px;height:34px;border:2px solid #b9652b;border-top:0;border-radius:0 0 50px 50px;margin-bottom:12px}
+.meal-center b{font-family:"Gowun Batang",serif;font-size:17px}
+.meal-center small{font-size:10.5px;color:var(--soft);margin-top:3px}
+.meal-dish-cloud{position:relative;height:370px}
+.meal-dish{position:absolute;min-width:112px;max-width:145px;padding:13px 12px 12px;border:1px solid var(--line);background:rgba(255,255,255,.78);border-radius:18px;text-align:center;box-shadow:0 9px 24px rgba(70,50,30,.05)}
+.meal-dish:before{content:"";display:block;width:38px;height:18px;border:1.8px solid #6e7d62;border-top:0;border-radius:0 0 30px 30px;margin:0 auto 8px}
+.meal-dish b{font-family:"Gowun Batang",serif;font-size:14px;line-height:1.45;display:block}
+.meal-dish small{font-size:10px;color:var(--soft)}
+.meal-dish:nth-child(1){left:3%;top:4%}.meal-dish:nth-child(2){right:2%;top:7%}
+.meal-dish:nth-child(3){left:1%;bottom:9%}.meal-dish:nth-child(4){right:1%;bottom:8%}
+.meal-dish:nth-child(5){left:50%;top:2%;transform:translateX(-50%)}
+.meal-dish:nth-child(6){left:50%;bottom:0;transform:translateX(-50%)}
+.meal-dish:nth-child(n+7){display:none}
+.menu-slot{margin-top:16px}
+
+.review-list{display:grid;gap:0}
+.real-review{padding:26px 2px 27px;border-bottom:1px solid var(--line)}
+.real-review:first-child{border-top:1px solid var(--line)}
+.real-review .mark{font-family:"Gowun Batang",serif;color:var(--orange);font-size:28px;line-height:1}
+.real-review p{font-family:"Gowun Batang",serif;font-size:18px;line-height:1.82;margin:4px 0 0;word-break:keep-all}
+
+.program-schedule{border:1px solid var(--line);border-radius:22px;background:rgba(255,255,255,.52);padding:20px;margin:14px 0;box-shadow:0 10px 28px rgba(65,50,30,.04)}
+.ps-top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;margin-bottom:16px}
+.ps-kicker{font-size:10px;font-weight:800;letter-spacing:.12em;color:var(--orange);margin-bottom:4px}
+.ps-top h3{margin:0;font-size:22px;line-height:1.4}
+.duration-badge{flex:none;border-radius:99px;padding:6px 11px;background:var(--sageWash);color:var(--sage);font-size:11px;font-weight:800}
+.ps-event{padding:13px 0;border-top:1px solid var(--line)}
+.ps-date{font-family:"Gowun Batang",serif;font-size:16px;font-weight:700}
+.ps-time,.ps-place{font-size:12.5px;color:var(--soft);margin-top:3px}
+.ps-event button{width:100%;border:0;border-radius:12px;background:var(--ink);color:#fff;padding:12px;margin-top:12px;font-weight:700}
+.combo-box{margin:26px 0 0;padding:20px;border-radius:20px;background:#efe6d9;text-align:center}
+.combo-box b{font-family:"Gowun Batang",serif;font-size:17px;display:block;margin-bottom:4px}
+.combo-box span{font-size:12px;color:var(--soft)}
+.combo-box button{width:100%;border:0;border-radius:12px;background:var(--orange);color:#fff;padding:13px;margin-top:14px;font-weight:800}
+
+.apply-program-group{margin:18px 0 24px}
+.apply-program-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 1px 10px}
+.apply-program-head h4{font-family:"Gowun Batang",serif;font-size:17px;margin:0}
+.apply-duration{font-size:10.5px;font-weight:800;color:var(--sage);background:var(--sageWash);border-radius:99px;padding:4px 9px}
+.apply-schedule-card{border:1px solid var(--line);border-radius:17px;background:#fff;padding:15px;margin-bottom:9px;display:grid;grid-template-columns:25px 1fr;gap:10px;align-items:start}
+.apply-schedule-card.sel{border-color:var(--sage);background:var(--sageWash)}
+.apply-schedule-card.blocked{opacity:.47}
+.schedule-check{width:20px;height:20px;border:1.5px solid #bdb4a7;border-radius:6px;margin-top:3px;display:grid;place-items:center;font-size:11px}
+.apply-schedule-card.sel .schedule-check{background:var(--sage);border-color:var(--sage);color:#fff}
+.as-title{font-family:"Gowun Batang",serif;font-size:15px;font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.as-date-row{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:baseline}
+.as-date{font-size:15px;font-weight:800;letter-spacing:-.02em}
+.as-time{font-size:12px;color:var(--soft);font-weight:600}
+.as-arrow{font-size:12px;color:var(--orange);padding:3px 0 3px 4px}
+.as-place{font-size:11.5px;color:var(--soft);margin-top:8px}
+.status-mini{font-family:Pretendard,sans-serif;font-size:9.5px;border:1px solid var(--line);color:var(--soft);border-radius:99px;padding:2px 6px}
+
+.part-category{margin:20px 0 10px;border-top:1px solid var(--line);padding-top:17px}
+.part-cat-head{display:flex;justify-content:space-between;gap:12px;align-items:baseline;margin-bottom:10px}
+.part-cat-head h4{font-family:"Gowun Batang",serif;font-size:17px;margin:0}
+.part-cat-head span{font-size:11px;color:var(--soft);font-weight:700}
+.part-date-row{border:1px solid var(--line);background:#fff;border-radius:14px;padding:12px 13px;margin:7px 0;display:flex;align-items:center;gap:10px}
+.part-date-row.sel{border-color:var(--sage);background:var(--sageWash)}
+.part-date-row.blocked{opacity:.47}
+.part-date-main{flex:1;min-width:0}
+.part-date-main b{font-size:14px}
+.part-date-main small{display:block;color:var(--soft);font-size:10.5px;margin-top:2px}
+.part-date-badge{font-size:9.5px;border-radius:99px;padding:2px 6px;border:1px solid var(--line);color:var(--soft);white-space:nowrap}
+.part-date-badge.full{color:var(--red);border-color:var(--red)}
+
+.apply-choice-note{font-size:12px;color:var(--soft);line-height:1.65;margin:4px 0 16px}
+
+
+/* ===== v0.4 ===== */
+.section-head p{font-size:15px}
+.program-card p{font-size:15px;line-height:1.82}
+.program-card h3{font-size:22px}
+.map-label-big{font-size:18px}
+.map-label-small{font-size:10.5px}
+.meal-illust-block{margin:22px 0 32px}
+.meal-illust-label{display:flex;justify-content:space-between;align-items:center;margin:0 2px 9px}
+.meal-illust-label b{font-family:"Gowun Batang",serif;font-size:18px}
+.meal-illust-label span{font-size:10.5px;color:var(--orange);font-weight:800;letter-spacing:.05em}
+.meal-illust{width:100%;display:block;border-radius:24px;border:1px solid rgba(221,210,193,.7);background:#fff;box-shadow:0 16px 38px rgba(66,49,29,.06)}
+.meal-illust-note{font-size:11.5px;color:var(--soft);line-height:1.7;margin:9px 4px 0}
+.menu-slot h3{font-size:17px}.dish{font-size:15px}
+.real-review p{font-size:19px;line-height:1.86}.real-review .mark{font-size:34px}
+.apply-wrap{padding:36px 18px 80px}
+.form-section{padding:20px 18px;margin:16px 0;border-radius:22px}
+.form-title{font-size:19px;margin-bottom:16px}
+.apply-choice-note{font-size:13.5px;line-height:1.75;margin:3px 0 18px}
+.apply-duration{font-size:12px;padding:5px 10px}
+.apply-program-head h4{font-size:18px}
+.as-title{font-size:16px}.as-date{font-size:17px}.as-time{font-size:14px}
+.part-cat-head h4{font-size:18px}.part-cat-head span{font-size:12.5px}
+.part-date-main b{font-size:15.5px}
+.radio-chip{font-size:13px;padding:9px 13px}
+.field label{font-size:13.5px}.field input,.field textarea{font-size:15px;padding:13px 14px}
+.group-label{font-size:14px;margin:4px 0 8px}
+.guide-card{padding:30px 22px;border-radius:28px}
+.guide-card .gc-k{font-size:11px;letter-spacing:.22em}
+.guide-card h3{font-size:29px;margin:10px 0 4px}
+.gc-name{font-size:17px;margin-bottom:23px}
+.gc-section-title{font-family:"Gowun Batang",serif;font-size:17px;font-weight:700;margin:22px 0 10px}
+.gc-schedules{border:0;padding:0;display:grid;gap:10px}
+.guide-sched-card{border:1px solid var(--line);background:#fff;border-radius:16px;padding:14px 14px 13px}
+.guide-sched-top{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:8px}
+.guide-sched-top b{font-family:"Gowun Batang",serif;font-size:15px}
+.guide-sched-badge{font-size:10px;font-weight:800;color:var(--sage);background:var(--sageWash);border-radius:99px;padding:3px 7px;white-space:nowrap}
+.guide-sched-date{font-size:15px;font-weight:800;line-height:1.65}
+.guide-sched-time{font-size:12.5px;color:var(--soft);margin-left:5px}
+.gc-flow{display:grid;gap:0;margin-top:6px}
+.flow-step{display:grid;grid-template-columns:38px 1fr;gap:12px;position:relative;padding:0 0 20px}
+.flow-step:not(:last-child)::before{content:"";position:absolute;left:18px;top:34px;bottom:0;width:1px;background:var(--line)}
+.flow-no{width:37px;height:37px;border-radius:50%;background:#fff;border:1px solid var(--line);display:grid;place-items:center;color:var(--orange);font-size:11px;font-weight:800;z-index:1}
+.flow-step b{display:block;font-family:"Gowun Batang",serif;font-size:16px;margin:2px 0 4px}
+.flow-step small{display:block;font-size:12.5px;color:var(--soft);line-height:1.65}
+.save-btn{font-size:15px;padding:15px}
+.archive-hero{padding-bottom:18px}
+.archive-section{margin:36px 0 0}
+.archive-section h3{font-family:"Gowun Batang",serif;font-size:22px;margin:0 0 8px}
+.archive-section>p{font-size:13px;color:var(--soft);line-height:1.7;margin:0 0 15px}
+.words-list{display:grid;gap:11px}
+.word-card{border-left:2px solid var(--orange);padding:12px 12px 12px 17px;background:rgba(255,255,255,.34)}
+.word-card small{display:block;color:var(--orange);font-size:10px;font-weight:800;margin-bottom:5px}
+.word-card p{font-family:"Gowun Batang",serif;font-size:17px;line-height:1.7;margin:0}
+.soldier-review{border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.46);padding:18px;margin:9px 0}
+.soldier-review p{font-family:"Gowun Batang",serif;font-size:16px;line-height:1.72;margin:0}
+.soldier-review small{display:block;color:var(--soft);font-size:10.5px;margin-top:8px}
+@media(max-width:380px){.section{padding-left:20px;padding-right:20px}.story-copy h3{font-size:23px}.story-copy p{font-size:15px}.guide-card h3{font-size:27px}}
+
+
+/* ===== v0.5 ===== */
+.done-card{display:none;padding:36px 18px 84px;text-align:left}
+.done-card.show{display:block}
+.done-card h2{font-size:46px;line-height:1.25;margin:8px 0 14px;text-align:center;word-break:keep-all}
+.done-card>p{font-size:17px;line-height:1.72;color:var(--soft);margin:0 0 26px;text-align:center;word-break:keep-all}
+.guide-card{margin:20px 0 20px;border-radius:26px;padding:28px 18px 30px}
+.guide-card .gc-k{font-size:12px;letter-spacing:.18em}
+.guide-card h3{font-size:30px;line-height:1.24;margin:10px 0 8px}
+.gc-name{font-size:17px;line-height:1.72;margin-bottom:18px}
+.gc-section-title{font-size:19px;margin:24px 0 12px}
+.guide-sched-card{padding:16px 15px 15px}
+.guide-sched-top b{font-size:17px}
+.guide-sched-badge{font-size:11px;padding:4px 9px}
+.guide-sched-date{font-size:18px;line-height:1.7}
+.guide-sched-time{font-size:15px}
+.gc-flow{margin-top:4px}
+.flow-step{grid-template-columns:42px 1fr;gap:13px;padding:0 0 24px}
+.flow-step:not(:last-child)::before{left:20px;top:38px}
+.flow-no{width:40px;height:40px;font-size:12px}
+.flow-step b{font-size:18px}
+.flow-step small{font-size:14px;line-height:1.72}
+.save-btn{font-size:16px;padding:16px}
+.return-hero{padding:24px 22px 58px}
+.return-hero>p,.return-hero>.eyebrow,.return-hero>h2{display:none}
+.return-cover{position:relative;margin:14px 0 28px}
+.return-cover img{width:100%;display:block;border-radius:24px;margin:0;border:1px solid rgba(221,210,193,.58)}
+.return-cover-copy{position:absolute;left:16px;right:16px;bottom:16px;padding:18px 18px 16px;background:linear-gradient(180deg,rgba(33,30,27,.15),rgba(33,30,27,.62));border:1px solid rgba(255,255,255,.24);border-radius:20px;backdrop-filter:blur(2px)}
+.return-cover-copy .eyebrow{display:block!important;color:#fff;opacity:.84;text-align:left;font-size:11px;letter-spacing:.14em;margin:0}
+.return-cover-copy h2{display:block!important;color:#fff;text-align:left;font-size:31px;line-height:1.22;margin:8px 0 0;text-shadow:0 2px 10px rgba(0,0,0,.14)}
+.quick{margin-top:0}
+.quick b{font-size:18px}
+.quick span{font-size:13.5px;line-height:1.55;display:block;margin-top:5px}
+.archive-hero{padding:42px 22px 14px;text-align:left}
+.archive-hero h2{font-size:31px;line-height:1.28;margin:0 0 10px}
+.archive-hero p{font-size:15px;max-width:none;margin:0;color:var(--soft);line-height:1.78}
+.archive-collage{display:none}
+.archive-intro-card{margin-top:18px;padding:18px 18px 17px;border:1px solid var(--line);border-radius:20px;background:rgba(255,255,255,.45);font-family:"Gowun Batang",serif;font-size:18px;line-height:1.72}
+.archive-body{padding:0 22px 88px}
+.archive-section{margin-top:28px}
+.archive-section h3{font-size:24px;margin-bottom:10px}
+.archive-section>p{font-size:14px;line-height:1.72;margin-bottom:14px}
+.gallery-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.gallery-item{position:relative;border-radius:16px;overflow:hidden;cursor:pointer;background:#ede7dc;border:1px solid rgba(221,210,193,.7)}
+.gallery-item img{width:100%;height:100%;display:block;object-fit:cover;aspect-ratio:1/1}
+.gallery-item b{position:absolute;left:10px;right:10px;bottom:10px;color:#fff;background:rgba(34,30,26,.66);padding:7px 9px;border-radius:10px;font-size:12px;line-height:1.4}
+.archive-variants{margin-top:16px}
+.variant-tabs{display:flex;gap:8px;overflow:auto;padding-bottom:4px}
+.variant-tab{flex:none;border:1px solid var(--line);background:#fff;border-radius:999px;padding:10px 14px;font-size:13px}
+.variant-tab.on{background:var(--orange);border-color:var(--orange);color:#fff}
+.variant-view{display:none;margin-top:14px}
+.variant-view.show{display:block}
+.feature-quote{border-radius:22px;padding:24px 18px;background:linear-gradient(180deg,#fffdf8,#f2ebde);border:1px solid var(--line)}
+.feature-quote small{display:block;color:var(--orange);font-size:11px;font-weight:800;margin-bottom:10px}
+.feature-quote p{font-family:"Gowun Batang",serif;font-size:25px;line-height:1.58;margin:0}
+.quote-column{display:grid;gap:12px}
+.quote-tile{border-left:3px solid var(--orange);background:rgba(255,255,255,.54);padding:14px 14px 14px 16px;border-radius:0 16px 16px 0}
+.quote-tile small{display:block;color:var(--orange);font-size:11px;font-weight:800;margin-bottom:6px}
+.quote-tile p{font-family:"Gowun Batang",serif;font-size:17px;line-height:1.68;margin:0}
+.soldier-wall{display:grid;gap:12px;margin-top:14px}
+.soldier-review{padding:18px 16px}
+.soldier-review p{font-size:18px;line-height:1.72}
+.magazine-card{border:1px solid var(--line);border-radius:20px;background:rgba(255,255,255,.5);padding:18px}
+.magazine-card h4{font-family:"Gowun Batang",serif;font-size:18px;margin:0 0 10px}
+.magazine-card p{font-size:14px;line-height:1.72;color:var(--soft);margin:0}
+.archive-cta{margin-top:28px}.archive-cta .primary{width:100%}
+.lightbox{position:fixed;inset:0;background:rgba(18,17,15,.88);z-index:1400;display:none;align-items:center;justify-content:center;padding:20px}
+.lightbox.show{display:flex}
+.lightbox-inner{max-width:520px;width:100%;position:relative}.lightbox-inner img{width:100%;display:block;border-radius:20px;box-shadow:0 20px 60px rgba(0,0,0,.4)}
+.lightbox-cap{color:#fff;text-align:center;font-size:14px;line-height:1.6;margin-top:12px}
+.lightbox-close{position:absolute;right:0;top:-48px;border:1px solid rgba(255,255,255,.28);background:rgba(255,255,255,.08);color:#fff;border-radius:999px;padding:9px 14px;font-size:13px}
+.apply-program-head{margin-bottom:10px}.as-title{display:none}.as-date-row{align-items:baseline}.as-date{font-size:19px}.as-time{font-size:15px}
+@media(max-width:380px){.done-card h2{font-size:40px}.return-cover-copy h2{font-size:28px}.feature-quote p{font-size:22px}.guide-sched-date{font-size:17px}.soldier-review p{font-size:17px}}
+
+
+/* ===== v0.7 UI/UX fixes ===== */
+.meal-actual-card{border:1px solid var(--line);border-radius:24px;background:rgba(255,255,255,.56);padding:16px;margin:18px 0 24px;box-shadow:0 10px 28px rgba(65,50,30,.045)}
+.meal-actual-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;margin-bottom:13px}
+.meal-kicker{font-size:11px;color:var(--orange);font-weight:800;letter-spacing:.08em}
+.meal-actual-head h3{font-family:"Gowun Batang",serif;font-size:21px;margin:4px 0 0}
+.meal-badge{font-size:10.5px;font-weight:800;color:var(--sage);background:var(--sageWash);padding:5px 9px;border-radius:99px;white-space:nowrap}
+.meal-actual-visual{width:100%;display:block;border-radius:18px;border:1px solid rgba(221,210,193,.7);background:#fff}
+.meal-menu-title{font-family:"Gowun Batang",serif;font-size:16px;font-weight:700;margin:16px 1px 10px}
+.meal-menu-chips{display:flex;flex-wrap:wrap;gap:7px}
+.meal-menu-chips span{font-size:12.5px;line-height:1.2;border:1px solid var(--line);background:#fffdf8;border-radius:99px;padding:8px 10px}
+.meal-current-wrap{margin:26px 0 8px;padding-top:22px;border-top:1px solid var(--line)}
+.meal-current-title{font-family:"Gowun Batang",serif;font-size:19px;font-weight:700;margin-bottom:10px}
+
+/* 3-1 일정 글자 크기를 3-2와 같은 밀도로 조정 */
+.apply-program-head h4{font-size:17px}
+.apply-duration{font-size:11px;padding:4px 8px}
+.as-date{font-size:15.5px}
+.as-time{font-size:12.5px}
+.as-arrow{font-size:11px;padding:2px 0}
+.apply-schedule-card{padding:13px 12px}
+
+/* 신청완료 화면: 다른 페이지와 같은 여백/폰트 균형 */
+.done-card{display:none;padding:32px 0 68px;text-align:left}
+.done-card.show{display:block}
+.done-card>div:first-child{font-size:36px!important;text-align:center}
+.done-card h2{font-size:30px;line-height:1.3;margin:8px 0 10px;text-align:center}
+.done-card>p{font-size:14.5px;line-height:1.7;margin:0 8px 20px;text-align:center;color:var(--soft)}
+.guide-card{margin:16px 0 18px;border-radius:22px;padding:24px 18px 26px}
+.guide-card .gc-k{font-size:10.5px;letter-spacing:.18em}
+.guide-card h3{font-size:24px;line-height:1.3;margin:8px 0 5px}
+.gc-name{font-size:14px;line-height:1.65;margin-bottom:18px}
+.gc-section-title{font-size:17px;margin:20px 0 10px}
+.guide-sched-card{padding:14px 13px}
+.guide-sched-top b{font-size:15px}
+.guide-sched-badge{font-size:10px}
+.guide-sched-date{font-size:15px;line-height:1.65}
+.guide-sched-time{font-size:12.5px}
+.flow-step{grid-template-columns:38px 1fr;gap:11px;padding-bottom:19px}
+.flow-no{width:36px;height:36px;font-size:10.5px}
+.flow-step:not(:last-child)::before{left:17px;top:34px}
+.flow-step b{font-size:15.5px;margin-top:2px}
+.flow-step small{font-size:12.5px;line-height:1.65}
+.save-btn{font-size:14px;padding:14px}
+
+/* 다시 오신 분: 문구는 그림 상단의 흰 여백 안에, 인물은 가리지 않음 */
+.return-cover-clean{position:relative;margin:14px 0 28px}
+.return-cover-clean img{width:100%;display:block;border-radius:24px;margin:0;border:1px solid rgba(221,210,193,.58)}
+.return-white-copy{position:absolute;left:26px;right:26px;top:7.5%;z-index:2;text-align:left}
+.return-white-copy .eyebrow{display:block!important;color:var(--orange);margin:0 0 8px;text-align:left;font-size:10.5px;letter-spacing:.16em}
+.return-white-copy h2{display:block!important;color:var(--ink);font-size:31px;line-height:1.23;margin:0;text-align:left;text-shadow:none}
+.return-cover-copy{display:none}
+
+/* 지난 바라지: B 균형형만 남김 */
+.archive-balanced-final .magazine-card{margin:0}
+.balanced-archive-block{display:grid;gap:13px;margin-top:14px}
+.balanced-quote-card{background:#fffdf8}
+.balanced-review-card{background:rgba(255,255,255,.5)}
+.balanced-archive-block h4{font-family:"Gowun Batang",serif;font-size:19px;margin:0 0 12px}
+.balanced-archive-block .word-card p{font-size:17px}
+.balanced-archive-block .soldier-review p{font-size:17px}
+
+/* 제출 대기 상태 */
+.submit-progress{display:flex;align-items:center;gap:12px;margin:12px 0 0;padding:13px 14px;border:1px solid var(--line);border-radius:14px;background:#fffdf8}
+.submit-progress b{display:block;font-size:13.5px;margin-bottom:2px}
+.submit-progress small{display:block;font-size:11.5px;color:var(--soft);line-height:1.55}
+.submit-spinner{width:20px;height:20px;border-radius:50%;border:2px solid #e2d7c6;border-top-color:var(--orange);animation:spin .8s linear infinite;flex:none}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+@media(max-width:380px){
+  .return-white-copy{left:22px;right:22px;top:6.5%}
+  .return-white-copy h2{font-size:28px}
+  .done-card h2{font-size:28px}
+  .guide-card{padding-left:15px;padding-right:15px}
+}
+
+
+/* ===== v0.7 UI/UX fixes ===== */
+/* 1. 발원문을 프로그램 소개의 첫 헤드라인으로 */
+.origin-headline{
+  margin:10px 0 30px;
+  font-family:"Gowun Batang",serif;
+  font-size:clamp(29px,7.4vw,36px);
+  line-height:1.48;
+  font-weight:700;
+  letter-spacing:-.035em;
+  text-align:left;
+  word-break:keep-all;
+}
+.origin-headline em{font-style:normal;color:var(--orange)}
+
+/* 3. 공양: 사진 대신 작은 메뉴 일러스트 카드 */
+.meal-illustrated-slot{
+  margin:18px 0 24px;
+  padding:18px;
+  border:1px solid var(--line);
+  border-radius:22px;
+  background:rgba(255,255,255,.52);
+  box-shadow:0 10px 28px rgba(65,50,30,.04);
+}
+.meal-slot-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;margin-bottom:14px}
+.meal-slot-head .meal-kicker{display:block;font-size:10.5px;color:var(--orange);font-weight:800;letter-spacing:.09em;margin-bottom:4px}
+.meal-slot-head h3{margin:0;font-family:"Gowun Batang",serif;font-size:20px;line-height:1.35}
+.meal-slot-badge{flex:none;font-size:10.5px;font-weight:800;color:var(--sage);background:var(--sageWash);padding:5px 9px;border-radius:999px}
+.food-illust-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.food-illust-card{
+  min-width:0;
+  border:1px solid rgba(221,210,193,.78);
+  border-radius:17px;
+  background:#fffdf8;
+  padding:11px 9px 10px;
+  text-align:center;
+}
+.food-illust-icon{width:100%;aspect-ratio:1.22/1;border-radius:13px;background:#f8f2e7;display:grid;place-items:center;overflow:hidden;margin-bottom:8px}
+.food-illust-icon svg{width:92%;height:92%;display:block}
+.food-illust-card b{display:block;font-family:"Gowun Batang",serif;font-size:13.5px;line-height:1.42;word-break:keep-all}
+.meal-menu-caption{margin:16px 1px 7px;font-family:"Gowun Batang",serif;font-size:15px;font-weight:700}
+.meal-menu-list{display:flex;flex-wrap:wrap;gap:7px}
+.meal-menu-list span{font-size:12px;line-height:1.2;border:1px solid var(--line);background:#fff;border-radius:999px;padding:7px 9px;color:var(--ink)}
+.meal-menu-list small{color:var(--soft);font-size:10.5px;margin-left:4px}
+.meal-note-card{margin:14px 0 0;padding:13px 14px;border-radius:15px;background:var(--sageWash);color:var(--soft);font-size:12.5px;line-height:1.7;text-align:center}
+
+/* 4. 3-1 프로그램 일정: 날짜/시간 한 줄 압축 */
+.apply-schedule-card{
+  position:relative;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  min-height:54px;
+  padding:11px 12px;
+}
+.schedule-inline-wrap{flex:1;min-width:0}
+.schedule-inline{
+  display:flex;
+  align-items:baseline;
+  gap:4px;
+  white-space:nowrap;
+  overflow:hidden;
+  font-size:clamp(11.2px,3.2vw,13.5px);
+  letter-spacing:-.035em;
+  line-height:1.4;
+}
+.schedule-inline .date{font-weight:800;color:var(--ink)}
+.schedule-inline .time{font-weight:500;color:var(--soft)}
+.schedule-inline .range{color:var(--orange);font-weight:700;margin:0 1px}
+.schedule-inline-meta{display:flex;justify-content:flex-end;gap:5px;margin-top:4px;min-height:0}
+.schedule-inline-meta:empty{display:none}
+.apply-program-head h4{font-size:16px}
+.apply-duration{font-size:10.5px;padding:4px 8px}
+.as-date-row,.as-arrow{display:none!important}
+@media(max-width:390px){
+  .apply-schedule-card{padding:10px 10px;gap:8px;min-height:52px}
+  .schedule-inline{font-size:11.1px;gap:3px;letter-spacing:-.045em}
+  .schedule-check{flex:0 0 auto}
+}
+@media(max-width:360px){
+  .schedule-inline{font-size:10.6px;gap:2px}
+}
+
+/* 5. 아카이브 CTA는 공통 primary 버튼과 동일하게 */
+.archive-cta{position:static;margin-top:26px;padding:0}
+.archive-cta .primary{
+  width:100%;
+  border:0;
+  border-radius:18px;
+  background:var(--orange);
+  color:#fff;
+  padding:16px;
+  margin-top:0;
+  font-weight:700;
+  text-align:center;
+  box-shadow:none;
+}
+
+/* 저장 이미지와 화면 카드의 글자 위계도 겹치지 않도록 조금 더 안정적으로 */
+.guide-sched-date{word-break:keep-all}
+
+
+/* ===== v0.8 saved guide date alignment ===== */
+.guide-inline-date{display:flex;align-items:baseline;gap:4px;white-space:nowrap;overflow:hidden;font-size:clamp(12px,3.45vw,14.5px);line-height:1.45;letter-spacing:-.035em}
+.guide-inline-date .g-date{font-weight:800;color:var(--ink)}
+.guide-inline-date .g-time{font-weight:600;color:var(--soft)}
+.guide-inline-date .g-range{font-weight:800;color:var(--orange);margin:0 1px}
+@media(max-width:380px){.guide-inline-date{font-size:11.6px;gap:3px;letter-spacing:-.045em}}
+
+
+/* ===== v0.9 finalized meal illustrations ===== */
+.meal-final-card{
+  margin:18px 0 24px;
+  border:1px solid var(--line);
+  border-radius:24px;
+  background:rgba(255,255,255,.52);
+  padding:15px;
+  box-shadow:0 10px 28px rgba(65,50,30,.045);
+}
+.meal-final-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;margin-bottom:12px}
+.meal-final-head .meal-kicker{display:block;font-size:10.5px;color:var(--orange);font-weight:800;letter-spacing:.09em;margin-bottom:4px}
+.meal-final-head h3{margin:0;font-family:"Gowun Batang",serif;font-size:20px;line-height:1.35}
+.meal-final-badge{flex:none;font-size:10.5px;font-weight:800;color:var(--sage);background:var(--sageWash);padding:5px 9px;border-radius:999px}
+.meal-final-illust{width:100%;display:block;border-radius:19px;border:1px solid rgba(221,210,193,.72);background:#fffdf8}
+.meal-final-caption{margin:14px 1px 8px;font-family:"Gowun Batang",serif;font-size:15px;font-weight:700}
+.meal-final-menu{display:flex;flex-wrap:wrap;gap:7px}
+.meal-final-menu span{font-size:12px;line-height:1.25;border:1px solid var(--line);background:#fff;border-radius:999px;padding:7px 9px;color:var(--ink)}
+.meal-final-menu small{color:var(--soft);font-size:10.5px;margin-left:4px}
+@media(max-width:380px){
+  .meal-final-card{padding:12px;border-radius:20px}
+  .meal-final-head h3{font-size:18px}
+  .meal-final-illust{border-radius:16px}
+}
+
+
+/* ===== v1.1 requested updates ===== */
+.program-intro-restored{margin-bottom:20px}
+.program-intro-restored h2{font-size:29px}
+.origin-quote-restored{margin:8px 0 28px;padding:22px 18px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);font-family:"Gowun Batang",serif;font-size:22px;line-height:1.65;text-align:center}
+.apply-program-head h4,.part-cat-head h4{font-size:16px}
+.schedule-inline{font-size:13px}
+.part-date-main b{font-size:13px}
+.part-cat-head span{font-size:12px}
+.apply-schedule-card,.part-date-row{min-height:54px}
+.conflict-disabled{opacity:.38!important;filter:grayscale(.35);cursor:not-allowed!important;background:#f1eee8!important}
+.conflict-note{display:block;margin-top:3px;color:#9b9386;font-size:10px;font-weight:600}
+.done-card{padding:30px 0 66px}.done-card>div:first-child{font-size:34px!important}.done-card h2{font-size:28px}.done-card>p{font-size:14px}
+.guide-card{padding:22px 16px 24px}.guide-card h3{font-size:23px}.gc-name{font-size:13.5px}
+.complete-subcard{border:1px solid var(--line);background:#fffdf8;border-radius:18px;padding:15px 14px}.complete-schedule-block{margin-top:18px}.complete-flow-block{margin-top:20px}
+.complete-subcard .gc-section-title{margin:0 0 10px;font-size:16px}.complete-subcard .gc-schedules{padding:0}.complete-subcard .gc-flow{margin-top:0}
+.flow-step b{font-size:15px}.flow-step small{font-size:12.5px}
+.archive-simple-body{padding-top:30px}.archive-section-first{margin-top:0}.archive-simple-body .archive-section{padding-bottom:30px;border-bottom:1px solid var(--line);margin-top:30px}.archive-simple-body .archive-section:first-child{margin-top:0}.archive-simple-body .archive-section:nth-last-child(2){border-bottom:0;padding-bottom:0}.archive-simple-body .archive-section h3{font-size:23px;margin-bottom:15px}.archive-simple-body .magazine-card{padding:16px}
+@media(max-width:390px){.schedule-inline{font-size:11.1px}.part-date-main b{font-size:13px}.done-card h2{font-size:26px}}
+
+
+/* ===== v1.3 exact date font synchronization =====
+   3-1/3-2 날짜 텍스트는 부모 상속이 아니라 같은 px 값을 직접 지정한다.
+   Android Chrome의 text autosizing도 위 html 규칙으로 고정한다. */
+.schedule-inline .date,
+.part-date-main b{
+  font-family:Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo",sans-serif!important;
+  font-size:15px!important;
+  line-height:1.35!important;
+  font-weight:800!important;
+  letter-spacing:-.025em!important;
+}
+.schedule-inline .time{
+  font-size:14px!important;
+  line-height:1.35!important;
+  font-weight:500!important;
+}
+.schedule-inline .range{font-size:14px!important;line-height:1.35!important}
+@media(max-width:390px){
+  .schedule-inline .date,.part-date-main b{font-size:14.5px!important}
+  .schedule-inline .time,.schedule-inline .range{font-size:13.5px!important}
+}
+@media(max-width:360px){
+  .schedule-inline .date,.part-date-main b{font-size:14px!important}
+  .schedule-inline .time,.schedule-inline .range{font-size:13px!important}
+}
+
+</style>
+</head>
+<body>
+<main class="app">
+
+<section id="entry" class="view active">
+  <div class="hero">
+    <div class="eyebrow">GUN YOUTH BARAJI</div>
+    <h1>밥은<br><span style="color:var(--orange)">먹었니?</span></h1>
+    <p class="lead">군청년 바라지에 오신 것을 환영합니다.</p>
+    <div class="choice">
+      <button class="first" onclick="startFirst()"><strong>처음 왔어요</strong><span>군청년 프로그램이 시작된 이야기부터 천천히 만나봅니다.</span></button>
+      <button class="return" onclick="visitorType='returning';showView('returning')"><strong>다시 왔어요</strong><span>반갑습니다. 현재 일정을 확인하고 바로 신청하셔도 좋아요.</span></button>
+    </div>
+    <div class="micro">처음인 분과 다시 오신 분에게 서로 다른 길을 안내합니다.</div>
+  </div>
+</section>
+
+<section id="program" class="view">
+  <div class="topbar"><button onclick="showView('entry')">← 처음</button><div class="brand">군청년 프로그램</div><span style="width:42px"></span></div>
+  <div class="section">
+    <div class="section-head program-intro-restored">
+      <div class="eyebrow">HOW IT BEGAN</div>
+      <h2>한 사람의 마음에서 시작되었습니다</h2>
+      <p>법사님 스토리로 어떻게 시작되었고, 지금은 여러 지역에서 어떻게 이어지고 있는지를 간결하게 보여주는 자리입니다.</p>
+    </div>
+    <div class="origin-quote-restored">“한 명이라도 살릴 수 있다면 무엇이든 하겠습니다.”</div>
+
+    <div class="timeline">
+      <div class="tl"><div class="tl-n">01</div><div><b>군부대에서 들은 한마디</b><p>군부대 강의에서 “우리 여단에서만 한 해 일곱 명이 죽는다”는 이야기를 듣고, 그 말이 오래도록 마음의 숙제로 남았습니다.</p></div></div>
+      <div class="tl"><div class="tl-n">02</div><div><b>겨울밤 3,000배의 발원</b><p>정진 중 “한 명이라도 살릴 수 있다면 무엇이든 하겠다”는 마음을 냈고, 군청년을 위해 할 수 있는 일을 찾아가기 시작했습니다.</p></div></div>
+      <div class="tl"><div class="tl-n">03</div><div><b>책을 보내고, 사람을 만나고</b><p>책 보내기와 모금, 군부대와 군종스님을 직접 찾아가는 일이 이어졌고, 군전법의 인연이 조금씩 넓어졌습니다.</p></div></div>
+      <div class="tl"><div class="tl-n">04</div><div><b>프로그램으로 이어지다</b><p>그 인연들이 군청년 행복학교와 서행(서울여행), 그리고 여러 부대의 군청년 프로그램으로 이어지고 있습니다.</p></div></div>
+    </div>
+
+    <div class="callout">군청년이 조금 더 <strong>행복하게 군생활</strong>을 하고,<br>전역 뒤에도 좋은 인연이 이어지도록.</div>
+
+    <h3 class="subhead">지금은 여러 곳에서 만납니다</h3>
+    <div class="network-map">
+      <svg viewBox="0 0 420 420" role="img" aria-label="군청년 프로그램을 만나는 여러 지역">
+        <path class="map-peninsula" d="M219 22c-19 14-22 37-36 52-12 13-35 18-39 38-4 20 18 37 14 55-4 20-29 31-29 53 0 20 23 31 34 45 12 15 11 38 30 49 21 12 45 4 59-12 15-17 12-41 28-55 15-13 41-17 47-37 7-23-17-40-20-61-3-18 12-38 3-55-10-19-34-20-47-35-13-15-19-48-44-37z"/>
+        <path class="map-route" d="M220 84 C182 120 167 171 176 245"/>
+        <path class="map-route" d="M222 86 C270 116 306 156 309 211"/>
+        <path class="map-route" d="M224 88 C285 178 286 280 250 337"/>
+        <path class="map-route" d="M215 90 C245 155 230 230 206 305"/>
+        <circle class="map-place" cx="220" cy="82" r="7"/>
+        <text class="map-label-big" x="236" y="80">서울 서초동</text>
+        <text class="map-label-small" x="236" y="98">정토사회문화회관</text>
+        <circle class="map-place" cx="176" cy="248" r="7"/>
+        <text class="map-label-big" x="62" y="245">전남 장성</text>
+        <text class="map-label-small" x="62" y="263">상무대</text>
+        <circle class="map-place" cx="309" cy="214" r="7"/>
+        <text class="map-label-big" x="322" y="211">강원 홍천</text>
+        <text class="map-label-small" x="322" y="229">11사단</text>
+        <circle class="map-place" cx="249" cy="340" r="7"/>
+        <text class="map-label-big" x="264" y="338">진해</text>
+        <text class="map-label-small" x="264" y="356">해군 · 협의중</text>
+        <circle class="map-place" cx="206" cy="309" r="7"/>
+        <text class="map-label-big" x="78" y="307">공군비행단</text>
+        <text class="map-label-small" x="78" y="325">군청년 프로그램 · 협의중</text>
+      </svg>
+      <div class="network-note">서로 다른 곳에서 만나지만,<br><strong>군청년의 마음을 살피고 좋은 인연을 잇는 일</strong>은 이어집니다.</div>
+    </div>
+
+    <h3 class="subhead">정토사회문화회관에서는 두 프로그램이 열립니다</h3>
+    <p class="subcopy">정토사회문화회관을 거점으로 군청년 서울여행과 행복학교가 운영됩니다.</p>
+
+    <div class="program-grid">
+      <article class="program-card">
+        <div class="tag">1박 2일</div>
+        <h3>군청년 서울여행</h3>
+        <p id="introSeohaeng">서울여행은 군청년들의 온전한 쉼을 위해 마련된 프로그램입니다. 군청년들은 1박 2일 동안 정토사회문화회관에 머물며 예술의 전당을 산책하고, 봉은사 탐방도 다녀오면서 짧은 서울여행을 하게 됩니다.</p>
+        <div class="meta">정토사회문화회관</div>
+      </article>
+      <article class="program-card">
+        <div class="tag">2박 3일</div>
+        <h3>군청년 행복학교</h3>
+        <p id="introHappy">행복학교는 “행복도 배울 수 있다”는 것을 체험할 수 있게 해주는 프로그램입니다. 군청년들은 2박 3일 동안 정토사회문화회관에 머물며 행복학교 4강에 참여하게 됩니다.</p>
+        <div class="meta">정토사회문화회관</div>
+      </article>
+    </div>
+
+    <button class="primary" onclick="showView('activities')">그럼 바라지는 무엇을 할까요? →</button>
+  </div>
+</section>
+
+<section id="activities" class="view">
+  <div class="topbar"><button onclick="showView('program')">← 이전</button><div class="brand">우리가 하는 일</div><button onclick="showView('meal')">공양 →</button></div>
+  <div class="story-wrap">
+    <div class="story-intro">
+      <div class="eyebrow">ACTIVITY</div>
+      <h2>이 봉사에서<br>우리가 하는 일</h2>
+      <p>밥을 짓는 시간을 넘어 함께 나누고, 수행하고, 군청년의 시간을 곁에서 바라봅니다.</p>
+    </div>
+
+    <article class="story-card"><div class="story-copy"><div class="story-num">01</div><h3>군장병들을 위한<br>공양을 만들어요</h3><p>정성껏 준비한 음식이 장병들에게 따뜻하고 편안한 한 끼가 되도록 함께 손을 보탭니다.</p></div><img src="assets/media-3abf81b9cfac.jpg" alt="공양 준비"></article>
+    <article class="story-card"><div class="story-copy"><div class="story-num">02</div><h3>만물에는 다<br>제자리가 있대요</h3><p>우리가 썼던 공간을 함께 청소하고 정리합니다. 보이지 않는 곳까지 돌아보는 마음을 연습합니다.</p></div><img src="assets/media-2cac4c074d1a.jpg" alt="청소와 뒷정리"></article>
+    <article class="story-card"><div class="story-copy"><div class="story-num">03</div><h3>짧지만<br>우리도 명상!</h3><p>바쁜 손길을 잠시 멈추고 호흡과 몸을 살핍니다. 일정을 마친 뒤에는 조금 가벼워진 마음을 바라봅니다.</p></div><img src="assets/media-257ab904c06f.jpg" alt="명상"></article>
+    <article class="story-card"><div class="story-copy"><div class="story-num">04</div><h3>다같이 아침<br>기도정진에 참여해요</h3><p>설법전에서 많은 대중과 함께 하루를 여는 정진의 시간을 갖습니다.</p></div><img src="assets/media-59ecb37acbcb.jpg" alt="아침기도정진"></article>
+    <article class="story-card"><div class="story-copy"><div class="story-num">05</div><h3>우면산 · 대성사<br>산책</h3><p>숲길을 천천히 걸으며 몸과 마음을 가볍게 하고, 용성조사님과 인연이 깊은 대성사에도 들릅니다.</p></div><img src="assets/media-5e02ad795e81.jpg" alt="우면산 대성사 산책"></article>
+    <article class="story-card"><div class="story-copy"><div class="story-num">06</div><h3>법사님과의<br>찐~한 간담회</h3><p>공양바라지들이 둘러앉아 마음에 있던 이야기를 내놓고, 법사님과 함께 이야기를 나눕니다.</p></div><img src="assets/media-01e678a8fc34.jpg" alt="법사님 간담회"></article>
+    <article class="story-card"><div class="story-copy"><div class="story-num">07</div><h3>청년들이 묻고<br>유수스님이 답해요</h3><p>군청년들의 솔직한 질문과 스님의 답을 곁에서 참관하며 그들의 고민과 마음을 가까이 만납니다.</p></div><img src="assets/media-597405d9157f.jpg" alt="유수스님 일문일답"></article>
+    <article class="story-card"><div class="story-copy"><div class="story-num">08</div><h3>프로그램 소감<br>나누기에 참관</h3><p>군청년들이 프로그램을 지나며 무엇을 느꼈는지, 그 변화와 이야기를 함께 듣습니다.</p></div><img src="assets/media-ad98264f5453.jpg" alt="군청년 소감 나누기"></article>
+    <article class="story-card"><div class="story-copy"><div class="story-num">09</div><h3>정토사회문화회관에서<br>숙박을 할 수 있어요</h3><p>일정에 따라 하룻밤 또는 이틀밤을 머물며 바라지들과 함께 생활합니다.</p></div><img src="assets/media-85fb01793750.jpg" alt="회관 숙박"></article>
+    <article class="story-card"><div class="story-copy"><div class="story-num">10</div><h3>15층 법당 구경<br>&amp; 기념사진</h3><p>법당을 둘러보고 함께했던 시간을 한 장의 사진으로 남깁니다.</p></div><img src="assets/media-2a810142ad37.jpg" alt="법당 기념사진"></article>
+
+    <div style="padding:12px 24px 0"><button class="primary" onclick="showView('meal')">우리가 만드는 공양 보기 →</button></div>
+  </div>
+</section>
+
+<section id="meal" class="view">
+  <div class="topbar"><button onclick="goBack()">← 이전</button><div class="brand">공양</div><button onclick="showView('reviews')">후기 →</button></div>
+  <div class="section">
+    <div class="section-head">
+      <div class="eyebrow">MEAL</div>
+      <h2>군청년에게 건네는<br>따뜻한 한 끼</h2>
+      <p>실제 공양 메뉴를 기준으로, 음식 하나하나가 잘 보이도록 따뜻한 작은 일러스트 카드로 정리했습니다.</p>
+    </div>
+    <div id="mealLiveBar" class="live-bar"><span class="live-dot"></span><span>현재 메뉴를 불러오는 중입니다.</span></div>
+    <div id="mealTabs" class="tabs"></div>
+    <div id="mealContent"><div class="empty">메뉴 데이터를 불러오는 중입니다.</div></div>
+    <button class="primary" onclick="showView('reviews')">먼저 다녀온 분들의 이야기 →</button>
+  </div>
+</section>
+
+<section id="reviews" class="view">
+  <div class="topbar"><button onclick="goBack()">← 이전</button><div class="brand">바라지 후기</div><button onclick="openApplication()">신청 →</button></div>
+  <div class="section">
+    <div class="section-head"><div class="eyebrow">VOICES</div><h2>먼저 다녀온 사람들의<br>이야기</h2></div>
+    <div class="review-list">
+      <article class="real-review"><div class="mark">“</div><p>아들 같은 군 청년들이 행복하기를 바라는 엄마들의 마음을 표현할 수 있어 좋았고, 우리가 지은 공양을 맛있게 드셔주니 무척 뿌듯했습니다.</p></article>
+      <article class="real-review"><div class="mark">“</div><p>공양간에서 일감을 하면서 내 고집, 비교분석, 분별하는 마음이 일어났지만 끌려가지 않고 알아차리는 수행정진이 되어 감사했습니다.</p></article>
+      <article class="real-review"><div class="mark">“</div><p>법사님과의 간담회, 유수스님 일문일답, 도반들과의 나누기를 통해 생각지 못한 깨달음을 얻고 마음이 정화되는 기분이었습니다.</p></article>
+    </div>
+    <button class="primary" onclick="openApplication()">바라지 신청하기 →</button>
+  </div>
+</section>
+
+
+<section id="apply" class="view">
+  <div class="topbar"><button onclick="goBack()">← 이전</button><div class="brand">바라지 신청</div><span style="width:42px"></span></div>
+  <div class="apply-wrap">
+    <div class="apply-intro"><div class="eyebrow">APPLY</div><h2>군청년 바라지<br>신청하기</h2></div>
+    <div class="real-warning">이 시안의 제출 버튼은 실제 신청 데이터에 연결됩니다. 확인창에서 한 번 더 동의해야 실제로 접수됩니다.</div>
+    <div id="formArea">
+      <div class="form-section">
+        <div class="form-title">1. 소속지부</div>
+        <div class="radio-grid" data-key="bu">
+          <button type="button" class="radio-chip" data-val="서울제주">서울제주</button><button type="button" class="radio-chip" data-val="강원경기동부">강원경기동부</button>
+          <button type="button" class="radio-chip" data-val="인천경기서부">인천경기서부</button><button type="button" class="radio-chip" data-val="대전충청">대전충청</button>
+          <button type="button" class="radio-chip" data-val="광주전라">광주전라</button><button type="button" class="radio-chip" data-val="대구경북">대구경북</button>
+          <button type="button" class="radio-chip" data-val="부산울산">부산울산</button><button type="button" class="radio-chip" data-val="경남">경남</button>
+          <button type="button" class="radio-chip" data-val="해외">해외</button><button type="button" class="radio-chip" data-val="국제">국제</button>
+          <button type="button" class="radio-chip" data-val="청년">청년</button><button type="button" class="radio-chip" data-val="공동체">공동체</button>
+          <button type="button" class="radio-chip" data-val="행복본부">행복본부</button><button type="button" class="radio-chip" data-val="기타">기타</button>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <div class="form-title">2. 기본 정보</div>
+        <div class="field"><label>소속지회 ('지회' 빼고)</label><input id="ji" type="text" placeholder="예) 안양"></div>
+        <div class="field"><label>거주지 (시·군·구 단위까지)</label><input id="addr" type="text" placeholder="예) 경기 안양시"></div>
+        <div class="field"><label>이름</label><input id="name" type="text" placeholder="이름"></div>
+        <div class="field"><label>연락처</label><input id="phone" type="tel" placeholder="010-1234-5678" maxlength="13" oninput="formatPhoneInput(this)"></div>
+        <div class="field"><label>회원구분</label><div class="radio-grid" data-key="memberType"><button type="button" class="radio-chip" data-val="전법">전법</button><button type="button" class="radio-chip" data-val="일반">일반</button></div></div>
+        <div class="field"><label>성별</label><div class="radio-grid" data-key="gender"><button type="button" class="radio-chip" data-val="남">남</button><button type="button" class="radio-chip" data-val="여">여</button></div></div>
+      </div>
+
+      <div class="form-section">
+        <div class="form-title">3-1. 바라지 프로그램으로 참여</div>
+        <div class="apply-choice-note">1박 2일 서울여행 또는 2박 3일 행복학교 전체 바라지 일정에 참여하는 방식입니다. 행복학교 바라지는 1박 2일 부분 참여 일정이 열릴 수도 있습니다. 지금 가능한 날짜와 시간을 보고 선택해주세요. 복수 선택도 가능합니다.</div>
+        <div id="applyMainList"><div class="empty">일정 불러오는 중...</div></div>
+        <div id="pendingNotice" class="empty hidden" style="margin-top:14px">선택한 일정은 아직 확정 전입니다. 기본정보를 남기면 일정 확정 후 안내받는 예약 접수로 처리됩니다.</div>
+      </div>
+      <div class="form-section">
+        <div class="form-title">3-2. 하루만 공양봉사로 참여</div>
+        <div class="apply-choice-note">공양간 봉사만 함께하는 파트봉사입니다. 점심공양 지원과 저녁공양 봉사를 날짜별로 선택할 수 있고, 복수 선택도 가능합니다.</div>
+        <div id="applyPartList"><div class="empty">일정 불러오는 중...</div></div>
+      </div>
+      <div class="form-section" id="confirmedFields">
+        <div class="form-title">4. 바라지 신청</div>
+        <div class="field"><label>바라지 신청 동기</label><textarea id="motive" placeholder="신청 동기를 자유롭게 적어주세요"></textarea></div>
+        <div class="field"><label>바라지 신청 경로</label><input id="route" type="text" placeholder="예) 정토회 홈페이지, 텔레그램, 소개 등"></div>
+      </div>
+      <div id="errorMsg" class="error">필수 항목을 모두 확인해주세요.</div>
+      <div id="submitProgress" class="submit-progress hidden"><span class="submit-spinner"></span><div><b>신청을 접수하고 있습니다</b><small>안전하게 저장되는 동안 몇 초 정도 걸릴 수 있어요.</small></div></div>
+      <button id="submitBtn" class="submit" onclick="submitApply()">신청 제출하기</button>
+    </div>
+
+    <div id="doneScreen" class="done-card">
+      <div style="font-size:42px">🙏</div>
+      <h2 id="doneTitle">신청이 완료되었습니다</h2>
+      <p id="doneDesc">신청해주셔서 감사합니다.</p>
+      <div id="guideCard" class="guide-card">
+        <div class="gc-k">MY BARAJI</div>
+        <h3>나의 바라지 안내</h3>
+        <div id="guideName" class="gc-name"></div>
+        <div class="complete-subcard complete-schedule-block">
+          <div class="gc-section-title">신청한 일정</div>
+          <div id="guideSchedules" class="gc-schedules"></div>
+        </div>
+        <div class="complete-subcard complete-flow-block">
+          <div class="gc-section-title">앞으로 이렇게 진행됩니다</div>
+          <div class="gc-flow">
+          <div class="flow-step"><div class="flow-no">01</div><div><b>신청 완료</b><small>신청하신 내용이 접수되었습니다.</small></div></div>
+          <div class="flow-step"><div class="flow-no">02</div><div><b>신청 일정 확인 연락</b><small>신청하신 일정이 맞는지, 변동사항은 없는지 메시지로 확인드려요.</small></div></div>
+          <div class="flow-step"><div class="flow-no">03</div><div><b>텔레그램 소통방 초대</b><small>소통방에서 준비물과 세부일정을 안내하고, 중간에 생기는 변동사항도 함께 소통합니다.</small></div></div>
+          <div class="flow-step"><div class="flow-no">04</div><div><b>바라지에서 만나요</b><small>건강히 잘 지내다가 약속한 날 만나 함께 바라지를 시작합니다.</small></div></div>
+          </div>
+        </div>
+      </div>
+      <button class="save-btn" onclick="saveGuideImage()">나의 참가 안내 이미지로 저장</button>
+    </div>
+  </div>
+</section>
+
+<section id="returning" class="view">
+  <div class="topbar"><button onclick="goBack()">← 이전</button><div class="brand">다시 오신 분</div><span style="width:42px"></span></div>
+  <div class="return-hero">
+    <div class="return-cover return-cover-clean">
+      <img src="assets/media-2a810142ad37.jpg" alt="바라지 기념사진 일러스트">
+      <div class="return-white-copy">
+        <div class="eyebrow">WELCOME BACK</div>
+        <h2>다시 만나<br>반가워요</h2>
+      </div>
+    </div>
+    <div class="quick">
+      <button onclick="visitorType='returning';openApplication()"><b>이번 바라지 바로 신청하기</b><span>현재 신청할 수 있는 날짜와 시간을 바로 확인합니다.</span></button>
+      <button onclick="showView('activities')"><b>바라지 활동 다시 둘러보기</b><span>활동 · 공양 · 후기를 다시 살펴봅니다.</span></button>
+      <button onclick="showView('archive');renderArchive()"><b>지난 바라지 기록 보기</b><span>지난 일정과 함께 남은 장면들을 모아봅니다.</span></button>
+    </div>
+  </div>
+</section>
+
+<section id="archive" class="view">
+  <div class="topbar"><button onclick="goBack()">← 이전</button><div class="brand">지난 바라지</div><button onclick="visitorType='returning';openApplication()">신청 →</button></div>
+  <div class="archive-body archive-simple-body">
+    <div class="archive-section archive-section-first">
+      <h3>지난 바라지에서 남은 몇 장면</h3>
+      <div class="gallery-grid">
+        <button class="gallery-item" onclick="openLightbox('assets/media-3abf81b9cfac.jpg','함께 만든 한 끼')"><img src="assets/media-3abf81b9cfac.jpg" alt="함께 만든 한 끼"><b>함께 만든 한 끼</b></button>
+        <button class="gallery-item" onclick="openLightbox('assets/media-ad98264f5453.jpg','군청년들의 이야기')"><img src="assets/media-ad98264f5453.jpg" alt="군청년들의 이야기"><b>군청년들의 이야기</b></button>
+        <button class="gallery-item" onclick="openLightbox('assets/media-01e678a8fc34.jpg','마음을 나눈 시간')"><img src="assets/media-01e678a8fc34.jpg" alt="마음을 나눈 시간"><b>마음을 나눈 시간</b></button>
+        <button class="gallery-item" onclick="openLightbox('assets/media-2a810142ad37.jpg','마지막 한 장')"><img src="assets/media-2a810142ad37.jpg" alt="마지막 한 장"><b>마지막 한 장</b></button>
+      </div>
+    </div>
+    <div class="archive-section">
+      <h3>우리에게 다가온 말말말</h3>
+      <div class="magazine-card balanced-quote-card"><div id="archiveWordsB" class="words-list"></div></div>
+    </div>
+    <div class="archive-section">
+      <h3>군청년들이 남긴 몇몇 후기들</h3>
+      <div class="magazine-card balanced-review-card"><div id="soldierReviewsB" class="soldier-wall" style="margin-top:0"></div></div>
+    </div>
+    <div class="archive-cta"><button class="primary" onclick="visitorType='returning';openApplication()">이번 바라지 신청하러 가기 →</button></div>
+  </div>
+</section>
+
+<div id="lightbox" class="lightbox" onclick="closeLightbox()">
+    <div class="lightbox-inner" onclick="event.stopPropagation()">
+      <button class="lightbox-close" onclick="closeLightbox()">닫기</button>
+      <img id="lightboxImg" src="" alt="확대 이미지">
+      <div id="lightboxCap" class="lightbox-cap"></div>
+    </div>
+  </div>
+</main>
+
+<div id="video" class="video">
+  <div id="ytHost" style="width:100%;height:100%"></div>
+  <button class="skip" onclick="finishVideo()">건너뛰기 →</button>
+</div>
+<div id="toast" class="toast"></div>
+<script>
+const APPSSCRIPTURL = "https://script.google.com/macros/s/AKfycbypbINZxPPOTBCSPZL39LOWgZnqcRaxo0akj9fDN4Rsv6kZ3-dkUfhJ0ctV9CBF87Rs/exec";
+const YTVIDEOID = "eQWuKJ79RMo";
+const WD = ["일","월","화","수","목","금","토"];
+let REMOTE_DATA = {meals:{},menus:[],activities:[],schedules:[],siteconfig:{},reviews:[],archive_quotes:[],soldier_reviews:[]};
+let SCHEDULE_COUNTS = {};
+let selectedMains = [], selectedParts = [], selectedIsPending = false, pendingScheduleTitle = "";
+let selectedMealProgram = null;
+let ytPlayer = null;
+let fromReturning = false;
+let visitorType = 'first';
+let applyMode = 'both';
+let dataLoaded = false;
+let currentView = "entry";
+let viewStack = ["entry"];
+
+function showView(id, push=true){
+  document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));
+  const el=document.getElementById(id); if(el)el.classList.add("active");
+  currentView=id;
+  if(push){
+    if(viewStack[viewStack.length-1]!==id)viewStack.push(id);
+    history.pushState({view:id},"",`#${id}`);
+  }
+  window.scrollTo({top:0,behavior:"instant"});
+  if(id==="meal") renderMeals();
+  if(id==="apply") renderApplySchedules();
+  if(id==="archive") renderArchive();
+}
+function goBack(){
+  if(viewStack.length>1){history.back();return;}
+  showView("entry",false);
+}
+function initHistory(){
+  history.replaceState({view:"entry"},"",'#entry');
+  viewStack=["entry"]; currentView="entry";
+  window.addEventListener("popstate",e=>{
+    const target=(e.state&&e.state.view)||"entry";
+    if(viewStack.length>1)viewStack.pop();
+    showView(target,false);
+    if(viewStack.length===1&&target!=="entry")viewStack=[target];
+  });
+}
+
+function showToast(msg){
+  const t=document.getElementById("toast"); t.textContent=msg; t.classList.add("show");
+  setTimeout(()=>t.classList.remove("show"),1900);
+}
+function wd(month,day){ if(!month||!day)return ""; return WD[new Date(new Date().getFullYear(),month-1,day).getDay()]; }
+function isPastMain(s){
+  if(!s.month||!s.endDay)return false;
+  return new Date(new Date().getFullYear(),s.month-1,s.endDay,23,59,59).getTime()<Date.now();
+}
+function isPastPart(s){
+  if(!s.month||!s.day)return false;
+  return new Date(new Date().getFullYear(),s.month-1,s.day,23,59,59).getTime()<Date.now();
+}
+function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+function formatMain(s){return `${s.month}/${s.startDay}(${wd(s.month,s.startDay)}) ${s.startTime||""} ~ ${s.month}/${s.endDay}(${wd(s.month,s.endDay)}) ${s.endTime||""}${s.nights?` (${s.nights})`:""}`;}
+function formatPart(s){return `${s.month}/${s.day}(${wd(s.month,s.day)}) ${s.startTime||""} ~ ${s.endTime||""} : ${s.activity||""}`;}
+function hasCap(s){return !!(s&&s.cap&&Number(s.cap)>0)}
+function capCount(s){return (s&&SCHEDULE_COUNTS[s.id])||0}
+function isFull(s){return !!(s&&s.closed===true)||(hasCap(s)&&capCount(s)>=Number(s.cap))}
+function capHtml(s){
+  if(isFull(s))return '<span class="cap full">마감</span>';
+  if(hasCap(s))return `<span class="cap">잔여 ${Math.max(0,Number(s.cap)-capCount(s))}자리</span>`;
+  return "";
+}
+function setLiveBar(id, ok, text){
+  const e=document.getElementById(id); if(!e)return;
+  e.classList.toggle("fail",!ok); e.querySelector("span:last-child").textContent=text;
+}
+
+async function loadRemoteData(){
+  try{
+    const controller=new AbortController();
+    const timeout=setTimeout(()=>controller.abort(),8000);
+    const res=await fetch(APPSSCRIPTURL+"?t="+Date.now(),{cache:"no-store",signal:controller.signal});
+    clearTimeout(timeout);
+    if(!res.ok)throw new Error('HTTP '+res.status);
+    const json=await res.json();
+    if(!json.ok)throw new Error(json.error||"load fail");
+    const d=json.data||{};
+    REMOTE_DATA.meals=d.meals||{};
+    REMOTE_DATA.menus=d.menus||[];
+    REMOTE_DATA.activities=d.activities||[];
+    REMOTE_DATA.schedules=d.apply_schedules||[];
+    REMOTE_DATA.siteconfig=d.siteconfig||{};
+    REMOTE_DATA.reviews=d.reviews||[];
+    REMOTE_DATA.archive_quotes=d.archive_quotes||[];
+    REMOTE_DATA.soldier_reviews=d.soldier_reviews||[];
+    dataLoaded=true;
+    setLiveBar("scheduleLiveBar",true,"현재 신청앱의 모집 일정과 연결되었습니다.");
+    setLiveBar("mealLiveBar",true,"현재 공양 메뉴 데이터와 연결되었습니다.");
+  }catch(e){
+    console.warn('live data load failed',e);
+    setLiveBar("scheduleLiveBar",false,"실시간 일정 데이터를 불러오지 못했습니다. 네트워크 연결 후 다시 열어주세요.");
+    setLiveBar("mealLiveBar",false,"실시간 메뉴 데이터를 불러오지 못했습니다. 네트워크 연결 후 다시 열어주세요.");
+  }
+  renderProgramIntros(); renderMeals(); renderApplySchedules(); renderReviews(); renderArchive();
+  loadScheduleCounts();
+}
+async function loadScheduleCounts(){
+  try{
+    const res=await fetch(APPSSCRIPTURL+"?action=getScheduleCounts&t="+Date.now(),{cache:"no-store"});
+    const json=await res.json(); if(json.ok)SCHEDULE_COUNTS=json.data||{};
+  }catch(e){}
+  renderApplySchedules();
+}
+
+function startFirst(){
+  visitorType="first";
+  document.getElementById("video").classList.add("show");
+  function makePlayer(){
+    document.getElementById("ytHost").innerHTML='<div id="ytPlayer"></div>';
+    ytPlayer=new YT.Player("ytPlayer",{videoId:YTVIDEOID,playerVars:{autoplay:1,playsinline:1,rel:0,modestbranding:1},events:{onReady:e=>e.target.playVideo(),onStateChange:e=>{if(e.data===YT.PlayerState.ENDED)finishVideo();}}});
+  }
+  if(window.YT&&window.YT.Player){makePlayer();return;}
+  window.onYouTubeIframeAPIReady=makePlayer;
+  if(!document.querySelector("script[data-ytapi]")){const t=document.createElement("script");t.src="https://www.youtube.com/iframe_api";t.dataset.ytapi="1";document.head.appendChild(t);}
+}
+function finishVideo(){
+  try{if(ytPlayer&&ytPlayer.stopVideo)ytPlayer.stopVideo();}catch(e){}
+  document.getElementById("ytHost").innerHTML="";
+  document.getElementById("video").classList.remove("show");
+  showView("program");
+}
+
+const PROGRAMS=[
+  {id:"seohaeng",label:"서울여행",nights:"1박2일",meals:["dinner1","morning"]},
+  {id:"happy",label:"행복학교",nights:"2박3일",meals:["dinner1","morning","dinner2"]}
+];
+function activePrograms(){
+  const mains=REMOTE_DATA.schedules.filter(s=>s.type==="main"&&s.status!=="cancelled"&&!isPastMain(s)&&(s.status||"recruiting")==="recruiting");
+  const nights=new Set(mains.map(s=>s.nights));
+  const a=PROGRAMS.filter(p=>nights.has(p.nights));
+  return a.length?a:PROGRAMS;
+}
+function findMenu(name){return (REMOTE_DATA.menus||[]).find(m=>m.name===name)}
+function dishIllustration(name){
+  const n=String(name||"");
+  const frame=(body)=>`<svg viewBox="0 0 180 130" aria-hidden="true"><ellipse cx="90" cy="105" rx="66" ry="14" fill="#e7dac6" opacity=".6"/><ellipse cx="90" cy="82" rx="62" ry="35" fill="#fffaf0" stroke="#cdbda7" stroke-width="2"/>${body}</svg>`;
+  if(/오이/.test(n)) return frame(`<g fill="#6f9a58" stroke="#4f7541" stroke-width="2">${[[56,76],[78,68],[101,76],[121,67],[67,89],[91,88],[114,89]].map(([x,y])=>`<ellipse cx="${x}" cy="${y}" rx="14" ry="7"/>`).join("")}</g><g fill="#b9d694">${[[56,76],[78,68],[101,76],[121,67],[67,89],[91,88],[114,89]].map(([x,y])=>`<ellipse cx="${x}" cy="${y}" rx="8" ry="4"/>`).join("")}</g>`);
+  if(/떡볶이/.test(n)) return `<svg viewBox="0 0 180 130" aria-hidden="true"><ellipse cx="90" cy="105" rx="62" ry="12" fill="#e7dac6" opacity=".6"/><path d="M35 58 Q90 42 145 58 L136 103 Q90 118 44 103Z" fill="#a9472f" stroke="#773523" stroke-width="2"/><path d="M44 60 Q90 49 136 60 Q90 75 44 60Z" fill="#c85a38"/><g fill="#f2d6a3">${[[60,67,18],[87,63,17],[114,69,18],[72,84,18],[103,86,18],[126,82,14]].map(([x,y,w])=>`<rect x="${x-w/2}" y="${y-4}" width="${w}" height="8" rx="4"/>`).join("")}</g></svg>`;
+  if(/유부|주먹밥/.test(n)) return frame(`<g>${[[45,77],[64,68],[83,75],[102,66],[122,76]].map(([x,y],i)=> i%2?`<circle cx="${x}" cy="${y}" r="13" fill="#2e3a2c"/><circle cx="${x}" cy="${y}" r="7" fill="#f4e9c6"/>`:`<path d="M${x-12} ${y+8} Q${x} ${y-18} ${x+12} ${y+8}Z" fill="#d98d3d" stroke="#b56d2c" stroke-width="2"/>`).join("")}</g>`);
+  if(/두부피|무침/.test(n)) return frame(`<g fill="none" stroke="#cb7d45" stroke-width="7" stroke-linecap="round">${[[55,70,92,83],[62,88,115,69],[75,62,126,84],[52,82,103,65]].map(a=>`<path d="M${a[0]} ${a[1]} Q${(a[0]+a[2])/2} ${a[1]-12} ${a[2]} ${a[3]}"/>`).join("")}</g><g stroke="#5e8650" stroke-width="4" stroke-linecap="round"><path d="M62 62l-12-10M105 91l14 8M119 63l13-10"/></g>`);
+  if(/튀김|탕수/.test(n)) return frame(`<g fill="#d6a34d" stroke="#aa7934" stroke-width="2">${[[54,76],[72,63],[88,82],[104,65],[122,79],[67,90],[107,91]].map(([x,y],i)=>`<path d="M${x-11} ${y} q4-13 13-9 q10-4 14 7 q-3 12-14 12 q-11 2-13-10Z"/>`).join("")}</g><g fill="#816c46">${[[75,62],[107,64],[123,78]].map(([x,y])=>`<circle cx="${x}" cy="${y}" r="3"/>`).join("")}</g>`);
+  if(/버섯|새송이/.test(n)) return frame(`<g fill="#d6aa72" stroke="#a87a48" stroke-width="2">${[[62,79],[88,65],[114,80],[96,90]].map(([x,y])=>`<path d="M${x-14} ${y} Q${x} ${y-20} ${x+14} ${y}Z"/><rect x="${x-4}" y="${y}" width="8" height="16" rx="3" fill="#efe1c6"/>`).join("")}</g>`);
+  if(/파스타|펜네/.test(n)) return frame(`<g fill="none" stroke="#d58a3b" stroke-width="8" stroke-linecap="round">${[[54,72,72,79],[78,62,98,70],[102,80,125,72],[66,89,89,84],[98,62,118,58]].map(a=>`<path d="M${a[0]} ${a[1]}L${a[2]} ${a[3]}"/>`).join("")}</g><g fill="#628c50"><circle cx="73" cy="70" r="4"/><circle cx="112" cy="82" r="4"/><circle cx="95" cy="91" r="4"/></g>`);
+  if(/빵/.test(n)) return frame(`<path d="M48 86 Q50 60 70 59 Q83 47 96 59 Q118 55 130 79 Q126 96 90 98 Q56 98 48 86Z" fill="#d8a15d" stroke="#aa7440" stroke-width="2"/><path d="M70 65q5 8 1 17M92 61q5 9 1 19M113 65q5 8 1 16" fill="none" stroke="#f4d4a4" stroke-width="4" stroke-linecap="round"/>`);
+  if(/볶음/.test(n)) return frame(`<g fill="#c86d42"><rect x="50" y="70" width="25" height="8" rx="4"/><rect x="83" y="62" width="28" height="8" rx="4"/></g><g fill="#6f9457"><circle cx="67" cy="84" r="7"/><circle cx="103" cy="82" r="7"/><circle cx="121" cy="72" r="6"/></g><g fill="#e0a74e"><rect x="76" y="80" width="21" height="7" rx="3"/><rect x="111" y="91" width="18" height="7" rx="3"/></g>`);
+  return frame(`<path d="M55 79 Q90 54 125 79 Q112 99 90 100 Q68 99 55 79Z" fill="#e0b35e" stroke="#ba8b42" stroke-width="2"/><g fill="#688b52"><circle cx="76" cy="76" r="5"/><circle cx="98" cy="71" r="5"/><circle cx="111" cy="84" r="5"/></g>`);
+}
+const FINAL_MEAL_ILLUSTRATIONS = {
+  dinner1: "assets/media-acf13f070848.jpg",
+  dinner2: "assets/media-8a4819b1881e.jpg"
+};
+
+function renderMeals(){
+  const tabs=document.getElementById("mealTabs"), content=document.getElementById("mealContent");
+  if(!tabs||!content)return;
+  const meals=REMOTE_DATA.meals||{};
+  const firstFallback=["오이절임","두부피무침","떡볶이","야채튀김","표고버섯탕수육","미니주먹밥","유부초밥"];
+  const secondFallback=["감자샐러드빵","새송이버터구이","펜네파스타","비건햄야채볶음","양송이스프"];
+  const active=activePrograms();
+  if(!selectedMealProgram||!active.some(p=>p.id===selectedMealProgram))selectedMealProgram=active[0].id;
+  tabs.innerHTML=active.length>1?active.map(p=>`<button class="tab ${p.id===selectedMealProgram?"on":""}" onclick="selectedMealProgram='${p.id}';renderMeals()">${p.label}</button>`).join(""):"";
+  const prog=active.find(p=>p.id===selectedMealProgram)||active[0];
+  const usedSlots=prog.meals.filter(k=>k!=="morning");
+  const slots=usedSlots.map(k=>{
+    const m=meals[k]||{};
+    let names=m.menus||((m.dishes||[]).map(d=>d.name));
+    if(!names||!names.length) names=k==="dinner1"?firstFallback:(k==="dinner2"?secondFallback:[]);
+    names=(names||[]).filter(Boolean);
+    const title=k==="dinner1"?"첫 번째 공양":k==="dinner2"?"두 번째 공양":(m.label||"공양");
+    const context=k==="dinner1"?"서울여행 · 행복학교 공통":"행복학교";
+    const menuList=names.map(name=>{const mm=findMenu(name);const amt=mm&&mm.amount?`<small>${esc(mm.amount)}</small>`:"";return `<span>${esc(name)}${amt}</span>`}).join("");
+    const img=FINAL_MEAL_ILLUSTRATIONS[k]||"";
+    return `<section class="meal-final-card">
+      <div class="meal-final-head"><div><span class="meal-kicker">${esc(title)}</span><h3>${esc(context)}</h3></div><span class="meal-final-badge">저녁공양</span></div>
+      ${img?`<img class="meal-final-illust" src="${img}" alt="${esc(title)} 메뉴 일러스트">`:'<div class="empty" style="margin:0">메뉴 일러스트 준비 중입니다.</div>'}
+      <div class="meal-final-caption">공양 메뉴</div>
+      <div class="meal-final-menu">${menuList||'<span>메뉴 준비 중</span>'}</div>
+    </section>`;
+  }).join("");
+  const note=REMOTE_DATA.siteconfig.mealNote||"아침은 토스트, 시리얼 등을 간단히 준비합니다.\n점심은 회관 대중공양팀에서 준비해주십니다.";
+  content.innerHTML=(slots||'<div class="empty">등록된 공양 메뉴가 없습니다.</div>')+`<div class="meal-note-card">${esc(note).replace(/\n/g,"<br>")}</div>`;
+}
+
+function renderProgramIntros(){
+  const a=document.getElementById("introSeohaeng"), b=document.getElementById("introHappy");
+  if(a) a.textContent="서울여행은 군청년들의 온전한 쉼을 위해 마련된 프로그램입니다. 군청년들은 1박 2일 동안 정토사회문화회관에 머물며 예술의 전당을 산책하고, 봉은사 탐방도 다녀오면서 짧은 서울여행을 하게 됩니다.";
+  if(b) b.textContent="행복학교는 ‘행복도 배울 수 있다’는 것을 체험할 수 있게 해주는 프로그램입니다. 군청년들은 2박 3일 동안 정토사회문화회관에 머물며 행복학교 4강에 참여하게 됩니다.";
+}
+
+function renderReviews(){
+  const host=document.querySelector("#reviews .review-list"); if(!host)return;
+  const fallback=[
+    "아들 같은 군 청년들이 행복하기를 바라는 엄마들의 마음을 표현할 수 있어 좋았고, 우리가 지은 공양을 맛있게 드셔주니 무척 뿌듯했습니다.",
+    "공양간에서 일감을 하면서 내 고집, 비교분석, 분별하는 마음이 일어났지만 끌려가지 않고 알아차리는 수행정진이 되어 감사했습니다.",
+    "법사님과의 간담회, 유수스님 일문일답, 도반들과의 나누기를 통해 생각지 못한 깨달음을 얻고 마음이 정화되는 기분이었습니다."
+  ];
+  const pool=(REMOTE_DATA.reviews||[]).map(r=>typeof r==="string"?r:(r.text||r.quote||"")).filter(Boolean);
+  const work=[...pool],picked=[];
+  while(work.length&&picked.length<3){const i=Math.floor(Math.random()*work.length);picked.push(work.splice(i,1)[0]);}
+  const list=picked.length>=3?picked:fallback;
+  host.innerHTML=list.slice(0,3).map(t=>`<article class="real-review"><div class="mark">“</div><p>${esc(t)}</p></article>`).join("");
+}
+
+function openApplication(){
+  selectedMains=[];selectedParts=[];
+  showView("apply");renderApplySchedules();
+}
+function backFromApply(){goBack();}
+
+
+function durationLabel(nights){
+  const n=String(nights||"").replace(/\s+/g,"");
+  if(n==="1박2일")return "1박 2일 봉사";
+  if(n==="2박3일")return "2박 3일 봉사";
+  return nights?String(nights).replace(/(\d)박(\d)일/,"$1박 $2일"):"바라지 일정";
+}
+function hmToMinutes(v){
+  const m=String(v||'').match(/^(\d{1,2}):(\d{2})$/); if(!m)return 0;
+  return Number(m[1])*60+Number(m[2]);
+}
+function scheduleRange(s){
+  const year=new Date().getFullYear();
+  if(s.type==='applymain'){
+    const sh=hmToMinutes(s.startTime),eh=hmToMinutes(s.endTime);
+    return {start:new Date(year,Number(s.month)-1,Number(s.startDay),Math.floor(sh/60),sh%60).getTime(),end:new Date(year,Number(s.month)-1,Number(s.endDay),Math.floor(eh/60),eh%60).getTime()};
+  }
+  const sh=hmToMinutes(s.startTime),eh=hmToMinutes(s.endTime);
+  return {start:new Date(year,Number(s.month)-1,Number(s.day),Math.floor(sh/60),sh%60).getTime(),end:new Date(year,Number(s.month)-1,Number(s.day),Math.floor(eh/60),eh%60).getTime()};
+}
+function schedulesOverlap(a,b){const A=scheduleRange(a),B=scheduleRange(b);return A.start<B.end&&B.start<A.end;}
+function selectedScheduleObjects(exceptId=''){return [...selectedMains,...selectedParts].filter(id=>id!==exceptId).map(id=>REMOTE_DATA.schedules.find(s=>s.id===id)).filter(Boolean);}
+function hasScheduleConflict(s){return selectedScheduleObjects(s.id).some(chosen=>schedulesOverlap(s,chosen));}
+
+function renderApplySchedules(){
+  const mEl=document.getElementById("applyMainList"),pEl=document.getElementById("applyPartList");
+  if(!mEl||!pEl)return;
+  const mains=REMOTE_DATA.schedules.filter(s=>s.type==="applymain"&&s.status!=="cancelled"&&!isPastMain(s));
+  const parts=REMOTE_DATA.schedules.filter(s=>s.type==="part"&&s.status!=="cancelled"&&!isPastPart(s));
+  const order=["1박2일","2박3일"];
+  const keys=[...new Set(mains.map(s=>String(s.nights||"").replace(/\s+/g,"")))];
+  keys.sort((a,b)=>{const ia=order.indexOf(a),ib=order.indexOf(b);return(ia<0?99:ia)-(ib<0?99:ib)});
+  const pad=n=>String(n).padStart(2,"0"),compactDate=(m,d)=>`${Number(m)}.${pad(d)}(${wd(m,d)})`;
+  mEl.innerHTML=keys.length?keys.map(key=>{
+    const items=mains.filter(s=>String(s.nights||"").replace(/\s+/g,"")===key);
+    return `<div class="apply-program-group"><div class="apply-program-head"><h4>${durationLabel(key)}</h4><span class="apply-duration">${String(key).replace(/(\d)박(\d)일/,"$1박 $2일")}</span></div>${items.map(s=>{
+      const full=isFull(s),sel=selectedMains.includes(s.id),conflict=!sel&&hasScheduleConflict(s),blocked=(full||conflict)&&!sel;
+      const status=(s.status==="planned"?'<span class="status-mini">일정 미확정</span>':'')+capHtml(s);
+      return `<div class="apply-schedule-card ${sel?"sel":""} ${blocked?"blocked":""} ${conflict?"conflict-disabled":""}" aria-disabled="${blocked}" ${blocked?"":`onclick="toggleMain('${s.id}')"`}><div class="schedule-check">${sel?"✓":""}</div><div class="schedule-inline-wrap"><div class="schedule-inline"><span class="date">${compactDate(s.month,s.startDay)}</span><span class="time">${esc(s.startTime||"")}</span><span class="range">~</span><span class="date">${compactDate(s.month,s.endDay)}</span><span class="time">${esc(s.endTime||"")}</span></div><div class="schedule-inline-meta">${status}</div>${conflict?'<small class="conflict-note">선택한 다른 일정과 시간이 겹칩니다.</small>':''}</div></div>`;
+    }).join("")}</div>`;
+  }).join(""):'<div class="empty">현재 선택 가능한 바라지 프로그램 일정이 없습니다.</div>';
+  const cats=[{name:"점심공양지원",label:"점심공양 지원",fallback:"09:00 – 14:00"},{name:"저녁공양봉사",label:"저녁공양 봉사",fallback:"13:30 – 19:30"}];
+  pEl.innerHTML=cats.map(cat=>{
+    const items=parts.filter(s=>s.activity===cat.name);if(!items.length)return"";
+    const first=items[0],time=(first.startTime||first.endTime)?`${esc(first.startTime||"")} – ${esc(first.endTime||"")}`:cat.fallback;
+    return `<div class="part-category"><div class="part-cat-head"><h4>${cat.label}</h4><span>${time}</span></div>${items.map(s=>{
+      const full=isFull(s),sel=selectedParts.includes(s.id),conflict=!sel&&hasScheduleConflict(s),blocked=(full||conflict)&&!sel;
+      const badge=full?'<span class="part-date-badge full">마감</span>':(hasCap(s)?`<span class="part-date-badge">잔여 ${Math.max(0,Number(s.cap)-capCount(s))}자리</span>`:"");
+      return `<div class="part-date-row ${sel?"sel":""} ${blocked?"blocked":""} ${conflict?"conflict-disabled":""}" aria-disabled="${blocked}" ${blocked?"":`onclick="togglePart('${s.id}')"`}><div class="schedule-check">${sel?"✓":""}</div><div class="part-date-main"><b>${s.month}월 ${s.day}일 (${wd(s.month,s.day)})</b>${conflict?'<small class="conflict-note">선택한 일정과 겹쳐 선택할 수 없습니다.</small>':''}</div>${badge}</div>`;
+    }).join("")}</div>`;
+  }).join("")||'<div class="empty">현재 선택 가능한 파트 일일봉사 일정이 없습니다.</div>';
+  updateSectionMode();
+}
+function toggleMain(id){const s=REMOTE_DATA.schedules.find(x=>x.id===id);if(!s)return;const i=selectedMains.indexOf(id);if(i>=0)selectedMains.splice(i,1);else if(!hasScheduleConflict(s))selectedMains.push(id);renderApplySchedules()}
+function togglePart(id){const s=REMOTE_DATA.schedules.find(x=>x.id===id);if(!s)return;const i=selectedParts.indexOf(id);if(i>=0)selectedParts.splice(i,1);else if(!hasScheduleConflict(s))selectedParts.push(id);renderApplySchedules()}
+function updateSectionMode(){
+  const chosen=selectedMains.map(id=>REMOTE_DATA.schedules.find(x=>x.id===id)).filter(Boolean);
+  selectedIsPending=chosen.length>0&&chosen.some(s=>s.status==="planned");
+  pendingScheduleTitle=chosen.map(s=>s.name||formatMain(s)).join(" · ");
+  document.getElementById("confirmedFields").classList.toggle("hidden",selectedIsPending);
+  document.getElementById("pendingNotice").classList.toggle("hidden",!selectedIsPending);
+}
+
+document.addEventListener("click",e=>{
+  const chip=e.target.closest(".radio-chip"); if(!chip)return;
+  const grid=chip.closest(".radio-grid"); if(!grid)return;
+  grid.querySelectorAll(".radio-chip").forEach(c=>c.classList.remove("on"));
+  chip.classList.add("on"); grid.dataset.value=chip.dataset.val;
+});
+function getRadioVal(key){const g=document.querySelector(`.radio-grid[data-key="${key}"]`);return g?(g.dataset.value||""):""}
+function formatPhoneInput(el){
+  let v=el.value.replace(/[^0-9]/g,"").slice(0,11);
+  if(v.length>3&&v.length<=7)v=v.slice(0,3)+"-"+v.slice(3);
+  else if(v.length>7)v=v.slice(0,3)+"-"+v.slice(3,7)+"-"+v.slice(7);
+  el.value=v;
+}
+
+async function submitApply(){
+  const basic={
+    bu:getRadioVal("bu"),ji:document.getElementById("ji").value.trim(),addr:document.getElementById("addr").value.trim(),
+    name:document.getElementById("name").value.trim(),phone:document.getElementById("phone").value.trim(),
+    memberType:getRadioVal("memberType"),gender:getRadioVal("gender")
+  };
+  const missing=["bu","ji","addr","name","phone","memberType","gender"].filter(k=>!basic[k]);
+  const noSchedule=selectedMains.length===0&&selectedParts.length===0;
+  if(missing.length||noSchedule){document.getElementById("errorMsg").style.display="block";showToast("필수 항목을 확인해주세요");return;}
+  let payload;
+  if(selectedIsPending){
+    payload={...basic,kind:"pending",mainSchedules:selectedMains.slice(),mainScheduleTitle:pendingScheduleTitle,submittedAt:new Date().toISOString()};
+  }else{
+    const motive=document.getElementById("motive").value.trim(),route=document.getElementById("route").value.trim();
+    if(!motive||!route){document.getElementById("errorMsg").style.display="block";showToast("신청 동기와 신청 경로를 확인해주세요");return;}
+    payload={...basic,kind:"confirmed",mainSchedules:selectedMains.slice(),partSchedules:selectedParts.slice(),motive,route,submittedAt:new Date().toISOString()};
+  }
+  document.getElementById("errorMsg").style.display="none";
+  if(!confirm("이 시안은 실제 신청 데이터와 연결되어 있습니다. 정말 신청을 접수할까요?"))return;
+  const btn=document.getElementById("submitBtn");const progress=document.getElementById("submitProgress");btn.disabled=true;btn.textContent="신청 접수 중...";if(progress)progress.classList.remove("hidden");
+  try{
+    const res=await fetch(APPSSCRIPTURL,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({action:"applyForm",value:payload})});
+    const json=await res.json();
+    if(!json.ok)throw new Error(json.error||"제출 실패");
+    document.getElementById("formArea").classList.add("hidden");
+    document.getElementById("doneScreen").classList.add("show");
+    document.getElementById("doneTitle").textContent=selectedIsPending?"예약 접수가 완료되었습니다":"신청이 완료되었습니다";
+    document.getElementById("doneDesc").innerHTML=selectedIsPending?"일정이 확정되면 남겨주신 연락처로 안내드립니다.":"신청하신 분은 텔레그램 소통방으로 안내됩니다.";
+    renderGuide(basic.name);if(progress)progress.classList.add("hidden");
+  }catch(e){
+    if(progress)progress.classList.add("hidden");showToast(e.message||"네트워크 오류가 발생했습니다");btn.disabled=false;btn.textContent="신청 제출하기";
+  }
+}
+function scheduleStartKey(s){
+  if(s.startDay!=null) return new Date(new Date().getFullYear(), Number(s.month||1)-1, Number(s.startDay), 0, 0, 0).getTime();
+  return new Date(new Date().getFullYear(), Number(s.month||1)-1, Number(s.day), 0, 0, 0).getTime();
+}
+function selectedGuideItems(){
+  const cdate=(m,d)=>`${Number(m)}.${String(Number(d)).padStart(2,'0')}(${wd(m,d)})`;
+  const mains=selectedMains.map(id=>REMOTE_DATA.schedules.find(s=>s.id===id)).filter(Boolean).map(s=>({
+    type:'main',sortKey:scheduleStartKey(s),kind:'바라지 프로그램',badge:String(s.nights||'').replace(/(\d)박(\d)일/,"$1박 $2일"),
+    line1:`${s.month}월 ${s.startDay}일 (${wd(s.month,s.startDay)})`,time1:esc(s.startTime||''),
+    line2:`${s.month}월 ${s.endDay}일 (${wd(s.month,s.endDay)})`,time2:esc(s.endTime||''),
+    compact1:cdate(s.month,s.startDay),compact2:cdate(s.month,s.endDay)
+  }));
+  const parts=selectedParts.map(id=>REMOTE_DATA.schedules.find(s=>s.id===id)).filter(Boolean).map(s=>({
+    type:'part',sortKey:scheduleStartKey(s),kind:s.activity||'공양봉사',badge:'하루 봉사',
+    line1:`${s.month}월 ${s.day}일 (${wd(s.month,s.day)})`,time1:`${esc(s.startTime||'')} – ${esc(s.endTime||'')}`,
+    compact1:cdate(s.month,s.day)
+  }));
+  return [...mains,...parts].sort((a,b)=>a.sortKey-b.sortKey);
+}
+function renderGuide(name){
+  document.getElementById("guideName").textContent=name?`${name}님, 신청해주셔서 감사합니다.`:"신청해주셔서 감사합니다.";
+  const items=selectedGuideItems();
+  const cards=items.map(it=>it.type==='main'
+    ? `<div class="guide-sched-card"><div class="guide-sched-top"><b>${it.kind}</b><span class="guide-sched-badge">${it.badge}</span></div><div class="guide-inline-date"><span class="g-date">${it.compact1}</span><span class="g-time">${it.time1}</span><span class="g-range">~</span><span class="g-date">${it.compact2}</span><span class="g-time">${it.time2}</span></div></div>`
+    : `<div class="guide-sched-card"><div class="guide-sched-top"><b>${it.kind}</b><span class="guide-sched-badge">${it.badge}</span></div><div class="guide-inline-date"><span class="g-date">${it.compact1}</span><span class="g-time">${it.time1}</span></div></div>`
+  );
+  document.getElementById("guideSchedules").innerHTML=cards.length?cards.join(''):'<div class="empty">선택한 일정</div>';
+}
+function wrapCanvasText(ctx,text,x,y,maxWidth,lineHeight){
+  const chars=[...text];let line="",lines=[];
+  for(const ch of chars){const test=line+ch;if(ctx.measureText(test).width>maxWidth&&line){lines.push(line);line=ch}else line=test}
+  if(line)lines.push(line);lines.forEach((l,i)=>ctx.fillText(l,x,y+i*lineHeight));return y+lines.length*lineHeight;
+}
+function roundRect(ctx,x,y,w,h,r,fill,stroke){ctx.beginPath();ctx.roundRect(x,y,w,h,r);if(fill){ctx.fillStyle=fill;ctx.fill()}if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=2;ctx.stroke()}}
+function saveGuideImage(){
+  const items=selectedGuideItems();
+  const steps=[['01','신청 완료','신청하신 내용이 접수되었습니다.'],['02','신청 일정 확인 연락','일정이 맞는지, 변동사항은 없는지 메시지로 확인드려요.'],['03','텔레그램 소통방 초대','준비물과 세부일정, 변동사항을 소통방에서 함께 나눕니다.'],['04','바라지에서 만나요','건강히 잘 지내다가 약속한 날 만나요.']];
+  const W=1080,outer=68,inner=42,scheduleCardH=156,scheduleGap=18;
+  const scheduleBlockH=100+items.length*(scheduleCardH+scheduleGap)+26,flowRowH=150,flowBlockH=96+steps.length*flowRowH+30,headerH=285,between=34,footerH=104,H=headerH+scheduleBlockH+between+flowBlockH+footerH;
+  const c=document.createElement('canvas');c.width=W;c.height=H;const x=c.getContext('2d');x.textBaseline='alphabetic';x.textAlign='left';x.fillStyle='#F7F2E8';x.fillRect(0,0,W,H);
+  x.fillStyle='#B9652B';x.fillRect(outer,64,8,110);x.fillStyle='#B9652B';x.font='700 40px sans-serif';x.fillText('MY BARAJI',outer+40,104);x.fillStyle='#292720';x.font='700 82px "Gowun Batang", serif';x.fillText('나의 바라지 안내',outer+40,188);x.fillStyle='#756E63';x.font='500 40px sans-serif';wrapCanvasText(x,document.getElementById('guideName').textContent,outer+40,244,820,50);
+  let y=headerH;roundRect(x,outer,y,W-outer*2,scheduleBlockH,30,'#FFFDF8','#DDD2C1');x.fillStyle='#292720';x.font='700 48px "Gowun Batang", serif';x.fillText('신청한 일정',outer+inner,y+62);let sy=y+92;
+  const drawInline=(segments,startX,baseY,maxX)=>{let cx=startX;for(const seg of segments){x.font=seg.font;x.fillStyle=seg.color;const w=x.measureText(seg.text).width;if(cx+w>maxX)break;x.fillText(seg.text,cx,baseY);cx+=w+(seg.gap??12)}};
+  for(const it of items){roundRect(x,outer+inner,sy,W-2*(outer+inner),scheduleCardH,24,'#FFFFFF','#E2D7C6');x.fillStyle='#292720';x.font='700 34px "Gowun Batang", serif';x.fillText(it.kind,outer+inner+28,sy+48);x.font='700 25px sans-serif';const bw=Math.max(144,x.measureText(it.badge).width+58);roundRect(x,W-outer-inner-28-bw,sy+16,bw,48,24,'#E9EEE5',null);x.fillStyle='#5F7057';x.fillText(it.badge,W-outer-inner-28-bw+28,sy+49);
+    if(it.type==='main')drawInline([{text:it.compact1,font:'800 38px sans-serif',color:'#292720',gap:14},{text:it.time1,font:'600 30px sans-serif',color:'#756E63',gap:14},{text:'~',font:'800 32px sans-serif',color:'#B9652B',gap:14},{text:it.compact2,font:'800 38px sans-serif',color:'#292720',gap:14},{text:it.time2,font:'600 30px sans-serif',color:'#756E63',gap:0}],outer+inner+28,sy+112,W-outer-inner-28);else drawInline([{text:it.compact1,font:'800 38px sans-serif',color:'#292720',gap:18},{text:it.time1,font:'600 31px sans-serif',color:'#756E63',gap:0}],outer+inner+28,sy+112,W-outer-inner-28);sy+=scheduleCardH+scheduleGap}
+  y+=scheduleBlockH+between;roundRect(x,outer,y,W-outer*2,flowBlockH,30,'#FFFDF8','#DDD2C1');x.fillStyle='#292720';x.font='700 48px "Gowun Batang", serif';x.fillText('앞으로 이렇게 진행됩니다',outer+inner,y+62);let fy=y+102;
+  steps.forEach((step,i)=>{const[no,title,desc]=step,cx=outer+inner+28;x.beginPath();x.arc(cx,fy+30,31,0,Math.PI*2);x.fillStyle='#FFFFFF';x.fill();x.strokeStyle='#DDD2C1';x.lineWidth=2;x.stroke();x.fillStyle='#B9652B';x.font='700 20px sans-serif';x.textAlign='center';x.fillText(no,cx,fy+38);x.textAlign='left';x.fillStyle='#292720';x.font='700 36px "Gowun Batang", serif';x.fillText(title,cx+60,fy+28);x.fillStyle='#756E63';x.font='500 29px sans-serif';wrapCanvasText(x,desc,cx+60,fy+72,700,40);if(i<steps.length-1){x.strokeStyle='#DDD2C1';x.beginPath();x.moveTo(cx,fy+64);x.lineTo(cx,fy+flowRowH-8);x.stroke()}fy+=flowRowH});
+  x.fillStyle='#B9652B';x.font='700 31px "Gowun Batang", serif';x.fillText('밥은 먹었니? · 군청년 바라지',outer,H-56);x.fillStyle='#A69C8D';x.font='500 23px sans-serif';x.fillText('신청 일정과 이후 진행 흐름을 다시 확인하기 위한 안내 카드입니다.',outer,H-22);
+  c.toBlob(blob=>{if(!blob){showToast('이미지를 만들지 못했습니다. 다시 시도해주세요.');return}const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='군청년바라지_참가안내.png';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1500)},'image/png');
+}
+function archiveWordData(){
+  const defaults=[
+    {source:'법사님 간담회',text:'보이지 않는 마음까지 살피는 일이 바라지의 시작입니다.'},
+    {source:'유수스님 일문일답',text:'누군가를 돕는다고 하지만, 사실은 내 마음을 배우는 시간이기도 합니다.'},
+    {source:'도반의 나누기',text:'따뜻한 한 끼를 준비하는 동안 내 고집도 조금씩 내려놓게 되었습니다.'}
+  ];
+  const words=(REMOTE_DATA.archive_quotes||[]).map(q=>typeof q==='string'?{text:q,source:'말말말'}:q).filter(q=>q&&q.text);
+  return words.length?words:defaults;
+}
+function archiveReviewData(){
+  const defaults=[
+    {text:'처음에는 낯설었는데, 돌아갈 때는 마음이 한결 가벼워졌습니다.',meta:'군청년 후기'},
+    {text:'누군가 저를 기다리고 맞아준다는 느낌이 오래 남았습니다.',meta:'군청년 후기'},
+    {text:'짧은 시간이었지만 다시 힘을 내볼 수 있겠다는 마음이 들었습니다.',meta:'군청년 후기'}
+  ];
+  const reviews=(REMOTE_DATA.soldier_reviews||[]).map(r=>typeof r==='string'?{text:r,meta:'군청년 후기'}:r).filter(r=>r&&r.text);
+  return reviews.length?reviews:defaults;
+}
+function setArchiveVariant(){ /* v0.6에서는 B 균형형으로 확정 */ }
+
+function openLightbox(src,cap){
+  const box=document.getElementById('lightbox');
+  document.getElementById('lightboxImg').src=src; document.getElementById('lightboxCap').textContent=cap||''; box.classList.add('show');
+}
+function closeLightbox(){ const box=document.getElementById('lightbox'); if(box)box.classList.remove('show'); }
+function renderArchive(){
+  const words=archiveWordData();
+  const reviews=archiveReviewData();
+  const wordsB=document.getElementById('archiveWordsB');
+  if(wordsB) wordsB.innerHTML=words.map(q=>`<div class="word-card"><small>${esc(q.source||'말말말')}</small><p>${esc(q.text)}</p></div>`).join('');
+  const soldier=document.getElementById('soldierReviewsB');
+  if(soldier) soldier.innerHTML=reviews.map(r=>`<div class="soldier-review"><p>“${esc(r.text)}”</p>${r.meta?`<small>${esc(r.meta)}</small>`:''}</div>`).join('');
+}
+
+
+initHistory();
+loadRemoteData();
+</script>
+</body>
+</html>
