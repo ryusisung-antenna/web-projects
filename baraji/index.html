@@ -944,7 +944,36 @@ linear-gradient(135deg,#fffdf8,#f2ebde);overflow:hidden;padding:24px}
 const APPSSCRIPTURL = "https://script.google.com/macros/s/AKfycbypbINZxPPOTBCSPZL39LOWgZnqcRaxo0akj9fDN4Rsv6kZ3-dkUfhJ0ctV9CBF87Rs/exec";
 const YTVIDEOID = "eQWuKJ79RMo";
 const WD = ["일","월","화","수","목","금","토"];
-let REMOTE_DATA = {meals:{},menus:[],activities:[],schedules:[],siteconfig:{},reviews:[],archive_quotes:[],soldier_reviews:[]};
+const SCHEDULE_CACHE_KEY = "baraji_apply_schedules_v1";
+// 2026-09-16 apply_schedules 원데이터에서 확인한 마지막 확정 일정.
+// 임의 일정이 아니라 첫 방문에서도 즉시 보여주기 위한 공식 스냅샷이며,
+// 라이브 연결이 완료되면 최신 apply_schedules 데이터로 곧바로 교체된다.
+const INITIAL_CONFIRMED_SCHEDULES = [
+  {id:'m-1787359926675',type:'applymain',name:'1박 2일 바라지',nights:'1박2일',month:10,startDay:15,endDay:16,startTime:'13:30',endTime:'14:30',status:'recruiting'},
+  {id:'m-1788322473551',type:'applymain',name:'1박 2일 바라지',nights:'1박2일',month:10,startDay:21,endDay:22,startTime:'13:30',endTime:'14:30',status:'recruiting'},
+  {id:'m-1788322483683',type:'applymain',name:'1박 2일 바라지',nights:'1박2일',month:10,startDay:22,endDay:23,startTime:'13:30',endTime:'14:30',status:'recruiting'},
+  {id:'m-1788322495837',type:'applymain',name:'2박 3일 바라지',nights:'2박3일',month:10,startDay:21,endDay:23,startTime:'13:30',endTime:'14:30',status:'recruiting'},
+  {id:'p-1788322514271',type:'part',activity:'점심공양지원',month:10,day:15,startTime:'09:00',endTime:'14:00',status:'recruiting'},
+  {id:'p-1788322534657',type:'part',activity:'점심공양지원',month:10,day:16,startTime:'09:00',endTime:'14:00',status:'recruiting'},
+  {id:'p-1788323669849',type:'part',activity:'점심공양지원',month:10,day:21,startTime:'09:00',endTime:'14:00',status:'recruiting'},
+  {id:'p-1788322557262',type:'part',activity:'점심공양지원',month:10,day:22,startTime:'09:00',endTime:'14:00',status:'recruiting'},
+  {id:'p-1788323632405',type:'part',activity:'점심공양지원',month:10,day:23,startTime:'09:00',endTime:'14:00',status:'recruiting'},
+  {id:'p-1788322525568',type:'part',activity:'저녁공양봉사',month:10,day:15,startTime:'13:30',endTime:'19:30',status:'recruiting'},
+  {id:'p-1788322545802',type:'part',activity:'저녁공양봉사',month:10,day:21,startTime:'13:30',endTime:'19:30',status:'recruiting'},
+  {id:'p-1788323623273',type:'part',activity:'저녁공양봉사',month:10,day:22,startTime:'13:30',endTime:'19:30',status:'recruiting'}
+];
+function readScheduleSnapshot(){
+  try{
+    const saved=JSON.parse(localStorage.getItem(SCHEDULE_CACHE_KEY)||"null");
+    return saved&&Array.isArray(saved.schedules)?saved:null;
+  }catch(e){return null;}
+}
+function saveScheduleSnapshot(schedules){
+  try{localStorage.setItem(SCHEDULE_CACHE_KEY,JSON.stringify({savedAt:Date.now(),schedules}));}catch(e){}
+}
+const STORED_SCHEDULE_SNAPSHOT = readScheduleSnapshot();
+const STARTUP_SCHEDULES = STORED_SCHEDULE_SNAPSHOT?STORED_SCHEDULE_SNAPSHOT.schedules:INITIAL_CONFIRMED_SCHEDULES;
+let REMOTE_DATA = {meals:{},menus:[],activities:[],schedules:STARTUP_SCHEDULES.map(s=>({...s})),siteconfig:{},reviews:[],archive_quotes:[],soldier_reviews:[]};
 let SCHEDULE_COUNTS = {};
 let selectedMains = [], selectedParts = [], selectedIsPending = false, pendingScheduleTitle = "";
 let selectedMealProgram = null;
@@ -953,7 +982,7 @@ let fromReturning = false;
 let visitorType = 'first';
 let applyMode = 'both';
 let dataLoaded = false;
-let scheduleLoadState = 'loading';
+let scheduleLoadState = REMOTE_DATA.schedules.length?'checking':'loading';
 let currentView = "entry";
 let viewStack = ["entry"];
 
@@ -1015,7 +1044,7 @@ function setLiveBar(id, ok, text){
 }
 
 async function loadRemoteData(){
-  scheduleLoadState='loading';
+  scheduleLoadState=REMOTE_DATA.schedules.length?'checking':'loading';
   renderApplySchedules();
   try{
     let json,lastError;
@@ -1040,7 +1069,14 @@ async function loadRemoteData(){
     REMOTE_DATA.meals=d.meals||{};
     REMOTE_DATA.menus=d.menus||[];
     REMOTE_DATA.activities=d.activities||[];
-    REMOTE_DATA.schedules=d.apply_schedules||[];
+    if(!Array.isArray(d.apply_schedules))throw new Error('apply_schedules missing');
+    REMOTE_DATA.schedules=d.apply_schedules;
+    saveScheduleSnapshot(REMOTE_DATA.schedules);
+    const liveIds=new Set(REMOTE_DATA.schedules.map(s=>s.id));
+    const previousSelectionCount=selectedMains.length+selectedParts.length;
+    selectedMains=selectedMains.filter(id=>liveIds.has(id));
+    selectedParts=selectedParts.filter(id=>liveIds.has(id));
+    if(previousSelectionCount!==selectedMains.length+selectedParts.length)showToast("변경된 일정에 맞춰 선택을 다시 확인해주세요");
     REMOTE_DATA.siteconfig=d.siteconfig||{};
     REMOTE_DATA.reviews=d.reviews||[];
     REMOTE_DATA.archive_quotes=d.archive_quotes||[];
@@ -1051,8 +1087,8 @@ async function loadRemoteData(){
     setLiveBar("mealLiveBar",true,"현재 공양 메뉴 데이터와 연결되었습니다.");
   }catch(e){
     console.warn('live data load failed',e);
-    scheduleLoadState='error';
-    setLiveBar("scheduleLiveBar",false,"실시간 일정 데이터를 불러오지 못했습니다. 네트워크 연결 후 다시 열어주세요.");
+    scheduleLoadState=REMOTE_DATA.schedules.length?'stale':'error';
+    setLiveBar("scheduleLiveBar",false,REMOTE_DATA.schedules.length?"최근 확정 일정을 표시 중입니다. 최신 상태 확인이 지연되고 있습니다.":"실시간 일정 데이터를 불러오지 못했습니다. 네트워크 연결 후 다시 열어주세요.");
     setLiveBar("mealLiveBar",false,"실시간 메뉴 데이터를 불러오지 못했습니다. 네트워크 연결 후 다시 열어주세요.");
   }
   renderProgramIntros(); renderMeals(); renderApplySchedules(); renderReviews(); renderArchive();
@@ -1258,6 +1294,11 @@ async function submitApply(){
   const missing=["bu","ji","addr","name","phone","memberType","gender"].filter(k=>!basic[k]);
   const noSchedule=selectedMains.length===0&&selectedParts.length===0;
   if(missing.length||noSchedule){document.getElementById("errorMsg").style.display="block";showToast("필수 항목을 확인해주세요");return;}
+  if(scheduleLoadState!=="loaded"){
+    showToast("최신 일정 확인 중입니다. 잠시 후 다시 시도해주세요");
+    loadRemoteData();
+    return;
+  }
   let payload;
   if(selectedIsPending){
     payload={...basic,kind:"pending",mainSchedules:selectedMains.slice(),mainScheduleTitle:pendingScheduleTitle,submittedAt:new Date().toISOString()};
