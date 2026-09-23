@@ -10,7 +10,7 @@
 <title>군청년 바라지 - 10월 홍보 테스트</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500;600;700&family=Gowun+Batang:wght@400;700&family=Pretendard:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=Noto+Serif+KR:wght@500;600;700&family=Pretendard:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#F1F2EC;--paper:#F1F2EC;--paper-2:#FBFBF7;--ink:#2B2E28;--ink-soft:#5A5F54;--line:#DBDBCF;--accent:#5B7355;--warm:#5B7355;--sage:#5B7355;--sage-soft:#8A9B82;--sage-wash:#E6EAE0;--shadow:0 1px 0 rgba(43,46,40,.04), 0 10px 30px -18px rgba(43,46,40,.28);--r:18px;--maxw:560px}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -1837,17 +1837,27 @@ function renderGuide(name){
   );
   host.innerHTML=cards.length?cards.join(""):'<div class="empty-note">선택한 일정</div>';
 }
-function wrapCanvasText(ctx,text,x,y,maxWidth,lineHeight){
-  const chars=[...text],lines=[];
+function canvasTextLines_(ctx,text,maxWidth){
+  const chars=[...String(text||"")],lines=[];
   let line="";
   for(const ch of chars){
     const test=line+ch;
-    if(ctx.measureText(test).width>maxWidth&&line){lines.push(line);line=ch;}
+    if(line&&ctx.measureText(test).width>maxWidth){lines.push(line.trimEnd());line=ch.trimStart();}
     else line=test;
   }
-  if(line) lines.push(line);
-  lines.forEach((l,i)=>ctx.fillText(l,x,y+i*lineHeight));
-  return y+lines.length*lineHeight;
+  if(line)lines.push(line.trimEnd());
+  return lines.length?lines:[""];
+}
+function drawCanvasLines_(ctx,lines,x,y,lineHeight){
+  lines.forEach((line,i)=>ctx.fillText(line,x,y+i*lineHeight));
+}
+function drawSpacedText_(ctx,text,x,y,spacing){
+  let cx=x;
+  [...String(text||"")].forEach((ch,i)=>{
+    ctx.fillText(ch,cx,y);
+    cx+=ctx.measureText(ch).width+(i<String(text).length-1?spacing:0);
+  });
+  return cx;
 }
 function roundRect(ctx,x,y,w,h,r,fill,stroke){
   ctx.beginPath();
@@ -1855,79 +1865,148 @@ function roundRect(ctx,x,y,w,h,r,fill,stroke){
   if(fill){ctx.fillStyle=fill;ctx.fill();}
   if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=2;ctx.stroke();}
 }
-function saveGuideImage(){
+function guideDateParts_(value){
+  const m=String(value||"").match(/^(.*?)(\([^)]*\))$/);
+  return m?{date:m[1],weekday:m[2]}:{date:String(value||""),weekday:""};
+}
+async function saveGuideImage(){
+  // 캔버스는 로딩 시점의 서체를 그대로 굳혀서 저장하므로 두 웹폰트가
+  // 실제로 사용 가능한 상태가 될 때까지 기다린 뒤 이미지를 만든다.
+  await document.fonts.ready;
+  await Promise.all([
+    document.fonts.load('700 92px "Gowun Batang"','나의 바라지 안내'),
+    document.fonts.load('700 44px "IBM Plex Sans KR"','신청 완료'),
+    document.fonts.load('400 38px "IBM Plex Sans KR"','신청하신 내용이 접수되었습니다.')
+  ]);
+
   const items=selectedGuideItems();
+  const completedStepCount=Math.max(1,Number(REMOTE_DATA.siteconfig?.guideCompletedStepCount||1));
   const steps=[
-    ["01","신청 완료","신청하신 내용이 접수되었습니다."],
-    ["02","신청 일정 확인 연락","일정이 맞는지, 변동사항은 없는지 메시지로 확인드려요."],
-    ["03","텔레그램 소통방 초대","준비물과 세부일정, 변동사항을 소통방에서 함께 나눕니다."],
-    ["04","바라지에서 만나요","건강히 잘 지내다가 약속한 날 만나요."]
+    {no:"01",title:"신청 완료",desc:"신청하신 내용이 접수되었습니다."},
+    {no:"02",title:"신청 일정 확인 연락",desc:"일정이 맞는지, 변동사항은 없는지 메시지로 확인드려요."},
+    {no:"03",title:"텔레그램 소통방 초대",desc:"준비물과 세부일정, 변동사항을 소통방에서 함께 나눕니다."},
+    {no:"04",title:"바라지에서 만나요",desc:"건강히 잘 지내다가 약속한 날 만나요."}
   ];
-  const W=1080,outer=68,inner=42,scheduleCardH=166,scheduleGap=18;
-  const scheduleBlockH=100+items.length*(scheduleCardH+scheduleGap)+26;
-  const flowRowH=190,flowBlockH=100+steps.length*flowRowH+24,headerH=285,between=34,footerH=76;
-  const H=headerH+scheduleBlockH+between+flowBlockH+footerH;
+
+  const W=1080,SIDE=64,TOP=88,BOTTOM=64,BLOCK_GAP=56;
+  const COLORS={bg:"#F3F0E8",card:"#FFFDF8",ink:"#1D2620",soft:"#56615A",green:"#3D5C44",greenSoft:"#E4EBE0",line:"#DCD6C8"};
+  const SANS='"IBM Plex Sans KR", sans-serif',SERIF='"Gowun Batang", serif';
+  const HEADER_H=218,SECTION_TITLE_H=43,TICKET_GAP=28,TICKET_H=362;
+  const SERVICE_H=SECTION_TITLE_H+(items.length?28+items.length*TICKET_H+(items.length-1)*TICKET_GAP:0);
+  const FOOTER_H=73;
+
+  // 설명의 실제 줄 수로 각 단계의 높이를 먼저 계산해야 맨 아래에 빈 공간이 남지 않는다.
+  const measure=document.createElement("canvas").getContext("2d");
+  measure.font=`400 38px ${SANS}`;
+  const timelineTextWidth=W-SIDE-(SIDE+60+28);
+  steps.forEach((step,i)=>{
+    step.completed=i<completedStepCount;
+    step.lines=canvasTextLines_(measure,step.desc,timelineTextWidth);
+    step.height=Math.max(60,66+step.lines.length*57);
+  });
+  const TIMELINE_ITEMS_H=steps.reduce((sum,step)=>sum+step.height,0)+(steps.length-1)*40;
+  const TIMELINE_H=SECTION_TITLE_H+32+TIMELINE_ITEMS_H;
+  const H=TOP+HEADER_H+BLOCK_GAP+SERVICE_H+BLOCK_GAP+TIMELINE_H+BLOCK_GAP+FOOTER_H+BOTTOM;
+
   const c=document.createElement("canvas");
   c.width=W;c.height=H;
   const x=c.getContext("2d");
   x.textBaseline="alphabetic";x.textAlign="left";
-  x.fillStyle="#F1F2EC";x.fillRect(0,0,W,H);
-  x.fillStyle="#5B7355";x.fillRect(outer,64,8,110);
-  x.fillStyle="#5B7355";x.font="700 40px sans-serif";x.fillText("MY BARAJI",outer+40,104);
-  x.fillStyle="#2B2E28";x.font='700 82px "Gowun Batang", serif';x.fillText("나의 바라지 안내",outer+40,188);
-  x.fillStyle="#42483F";x.font="600 42px sans-serif";wrapCanvasText(x,document.getElementById("guideName").textContent,outer+40,244,820,52);
+  x.fillStyle=COLORS.bg;x.fillRect(0,0,W,H);
 
-  let y=headerH;
-  roundRect(x,outer,y,W-outer*2,scheduleBlockH,30,"#FBFBF7","#DBDBCF");
-  x.fillStyle="#2B2E28";x.font='700 52px "Gowun Batang", serif';x.fillText("내 봉사",outer+inner,y+64);
-  let sy=y+92;
-  const drawInline=(segments,startX,baseY,maxX)=>{
-    let cx=startX;
-    for(const seg of segments){
-      x.font=seg.font;x.fillStyle=seg.color;
-      const w=x.measureText(seg.text).width;
-      if(cx+w>maxX) break;
-      x.fillText(seg.text,cx,baseY);cx+=w+(seg.gap??12);
-    }
-  };
-  for(const it of items){
-    roundRect(x,outer+inner,sy,W-2*(outer+inner),scheduleCardH,24,"#FFFFFF","#DBDBCF");
-    x.fillStyle="#2B2E28";x.font='700 37px "Gowun Batang", serif';x.fillText(it.kind,outer+inner+28,sy+51);
-    x.font="700 27px sans-serif";
-    const bw=Math.max(144,x.measureText(it.badge).width+58);
-    roundRect(x,W-outer-inner-28-bw,sy+16,bw,48,24,"#E6EAE0",null);
-    x.fillStyle="#4D6848";x.fillText(it.badge,W-outer-inner-28-bw+28,sy+51);
-    if(it.type==="main"){
-      drawInline([
-        {text:it.compact1,font:"800 42px sans-serif",color:"#20231F",gap:14},
-        {text:it.time1,font:"700 35px sans-serif",color:"#42483F",gap:14},
-        {text:"~",font:"800 35px sans-serif",color:"#4D6848",gap:14},
-        {text:it.compact2,font:"800 42px sans-serif",color:"#20231F",gap:14},
-        {text:it.time2,font:"700 35px sans-serif",color:"#42483F",gap:0}
-      ],outer+inner+28,sy+121,W-outer-inner-28);
-    }else{
-      drawInline([
-        {text:it.compact1,font:"800 42px sans-serif",color:"#20231F",gap:18},
-        {text:it.time1,font:"700 36px sans-serif",color:"#42483F",gap:0}
-      ],outer+inner+28,sy+121,W-outer-inner-28);
-    }
-    sy+=scheduleCardH+scheduleGap;
+  // 헤더
+  let y=TOP;
+  x.fillStyle=COLORS.green;x.font=`600 30px ${SANS}`;
+  drawSpacedText_(x,"MY BARAJI",SIDE,y+30,8);
+  const titleTop=y+36+14;
+  x.fillStyle=COLORS.ink;x.font=`700 92px ${SERIF}`;x.fillText("나의 바라지 안내",SIDE,titleTop+91);
+  const nameTop=titleTop+106+14;
+  const greeting=document.getElementById("guideName").textContent||"신청해주셔서 감사합니다.";
+  const nameEnd=greeting.indexOf("님,");
+  let nameX=SIDE;
+  if(nameEnd>0){
+    const person=greeting.slice(0,nameEnd);
+    x.fillStyle=COLORS.ink;x.font=`700 40px ${SANS}`;x.fillText(person,nameX,nameTop+40);
+    nameX+=x.measureText(person).width;
+    x.fillStyle=COLORS.soft;x.font=`500 40px ${SANS}`;x.fillText(greeting.slice(nameEnd),nameX,nameTop+40);
+  }else{
+    x.fillStyle=COLORS.soft;x.font=`500 40px ${SANS}`;x.fillText(greeting,nameX,nameTop+40);
   }
 
-  y+=scheduleBlockH+between;
-  roundRect(x,outer,y,W-outer*2,flowBlockH,30,"#FBFBF7","#DBDBCF");
-  x.fillStyle="#2B2E28";x.font='700 52px "Gowun Batang", serif';x.fillText("향후 진행",outer+inner,y+64);
-  let fy=y+108;
+  // 내 봉사
+  y=TOP+HEADER_H+BLOCK_GAP;
+  x.fillStyle=COLORS.green;x.font=`700 36px ${SANS}`;drawSpacedText_(x,"내 봉사",SIDE,y+36,4);
+  let sy=y+SECTION_TITLE_H+28;
+  const drawDateBlock=(label,dateValue,timeValue,bx,by)=>{
+    const dp=guideDateParts_(dateValue);
+    x.fillStyle=COLORS.soft;x.font=`500 30px ${SANS}`;drawSpacedText_(x,label,bx,by+30,2);
+    x.fillStyle=COLORS.ink;x.font=`700 72px ${SANS}`;x.fillText(dp.date,bx,by+111);
+    const dateW=x.measureText(dp.date).width;
+    if(dp.weekday){x.font=`600 40px ${SANS}`;x.fillText(dp.weekday,bx+dateW+8,by+111);}
+    x.fillStyle=COLORS.green;x.font=`600 44px ${SANS}`;x.fillText(timeValue,bx,by+174);
+  };
+  for(const it of items){
+    const tx=SIDE,tw=W-SIDE*2,bandH=100;
+    roundRect(x,tx,sy+2,tw,TICKET_H,28,COLORS.line,null);
+    x.save();x.beginPath();x.roundRect(tx,sy,tw,TICKET_H,28);x.clip();
+    x.fillStyle=COLORS.card;x.fillRect(tx,sy,tw,TICKET_H);
+    x.fillStyle=COLORS.green;x.fillRect(tx,sy,tw,bandH);x.restore();
+    x.fillStyle=COLORS.card;x.font=`700 40px ${SANS}`;x.fillText(it.kind,tx+40,sy+65);
+    x.font=`600 30px ${SANS}`;
+    const badgeW=x.measureText(it.badge).width+44,badgeH=52,badgeX=tx+tw-40-badgeW,badgeY=sy+24;
+    roundRect(x,badgeX,badgeY,badgeW,badgeH,26,COLORS.card,null);
+    x.fillStyle=COLORS.green;x.fillText(it.badge,badgeX+22,badgeY+37);
+    const blockY=sy+bandH+34;
+    if(it.type==="main"){
+      drawDateBlock("시작",it.compact1,it.time1,tx+40,blockY);
+      drawDateBlock("마침",it.compact2,it.time2,tx+tw-40-330,blockY);
+      const ax=tx+tw/2-32,ay=blockY+77;
+      x.strokeStyle=COLORS.green;x.lineWidth=4;x.lineCap="round";x.lineJoin="round";
+      x.beginPath();x.moveTo(ax,ay+20);x.lineTo(ax+56,ay+20);x.moveTo(ax+44,ay+8);x.lineTo(ax+56,ay+20);x.lineTo(ax+44,ay+32);x.stroke();
+    }else{
+      drawDateBlock("일정",it.compact1,it.time1,tx+40,blockY);
+    }
+    sy+=TICKET_H+TICKET_GAP;
+  }
+
+  // 향후 진행
+  y=TOP+HEADER_H+BLOCK_GAP+SERVICE_H+BLOCK_GAP;
+  x.fillStyle=COLORS.green;x.font=`700 36px ${SANS}`;drawSpacedText_(x,"향후 진행",SIDE,y+36,4);
+  let fy=y+SECTION_TITLE_H+32;
+  const circleX=SIDE,circleCX=circleX+30,contentX=circleX+60+28;
   steps.forEach((step,i)=>{
-    const [no,title,desc]=step,cx=outer+inner+28;
-    x.beginPath();x.arc(cx,fy+30,31,0,Math.PI*2);x.fillStyle="#FFFFFF";x.fill();x.strokeStyle="#DBDBCF";x.lineWidth=2;x.stroke();
-    x.fillStyle="#4D6848";x.font="800 23px sans-serif";x.textAlign="center";x.fillText(no,cx,fy+39);x.textAlign="left";
-    x.fillStyle="#20231F";x.font='700 42px "Gowun Batang", serif';x.fillText(title,cx+60,fy+32);
-    x.fillStyle="#42483F";x.font="600 40px sans-serif";wrapCanvasText(x,desc,cx+60,fy+84,700,52);
-    if(i<steps.length-1){x.strokeStyle="#DBDBCF";x.beginPath();x.moveTo(cx,fy+64);x.lineTo(cx,fy+flowRowH-8);x.stroke();}
-    fy+=flowRowH;
+    const nextY=fy+step.height+(i<steps.length-1?40:0);
+    if(i<steps.length-1){
+      x.strokeStyle=COLORS.line;x.lineWidth=3;x.beginPath();x.moveTo(circleCX,fy+60);x.lineTo(circleCX,nextY);x.stroke();
+    }
+    x.beginPath();x.arc(circleCX,fy+30,30,0,Math.PI*2);
+    if(step.completed){x.fillStyle=COLORS.green;x.fill();}
+    else{x.fillStyle=COLORS.card;x.fill();x.strokeStyle=COLORS.green;x.lineWidth=3;x.stroke();}
+    x.textAlign="center";
+    if(step.completed){
+      x.strokeStyle=COLORS.card;x.lineWidth=5;x.lineCap="round";x.lineJoin="round";
+      x.beginPath();x.moveTo(circleCX-13,fy+30);x.lineTo(circleCX-3,fy+40);x.lineTo(circleCX+15,fy+19);x.stroke();
+    }else{
+      x.fillStyle=COLORS.green;x.font=`700 28px ${SANS}`;x.fillText(step.no,circleCX,fy+40);
+    }
+    x.textAlign="left";
+    x.fillStyle=COLORS.ink;x.font=`700 44px ${SANS}`;x.fillText(step.title,contentX,fy+45);
+    if(step.completed){
+      const titleW=x.measureText(step.title).width,badgeText="완료";
+      x.font=`600 28px ${SANS}`;const completeW=x.measureText(badgeText).width+32;
+      roundRect(x,contentX+titleW+18,fy+7,completeW,44,22,COLORS.greenSoft,null);
+      x.fillStyle=COLORS.green;x.fillText(badgeText,contentX+titleW+34,fy+39);
+    }
+    x.fillStyle=COLORS.soft;x.font=`400 38px ${SANS}`;
+    drawCanvasLines_(x,step.lines,contentX,fy+106,57);
+    fy=nextY;
   });
-  x.fillStyle="#4D6848";x.font='700 32px "Gowun Batang", serif';x.fillText("밥은 먹었니? · 군청년 바라지",outer,H-26);
+
+  // 푸터
+  y=TOP+HEADER_H+BLOCK_GAP+SERVICE_H+BLOCK_GAP+TIMELINE_H+BLOCK_GAP;
+  x.fillStyle=COLORS.line;x.fillRect(SIDE,y,W-SIDE*2,2);
+  x.fillStyle=COLORS.green;x.font=`700 36px ${SERIF}`;x.textAlign="center";
+  x.fillText("밥은 먹었니? · 군청년 바라지",W/2,y+2+28+36);x.textAlign="left";
 
   c.toBlob(blob=>{
     if(!blob){showToast("이미지를 만들지 못했습니다. 다시 시도해주세요.");return;}
