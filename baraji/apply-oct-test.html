@@ -420,6 +420,76 @@ body.admin-on .adm-toolbar{display:flex}
   .part-cat-head{align-items:flex-start;flex-direction:column;gap:2px}
 }
 
+
+/* ===== 2026-09-23 UX refinement ===== */
+.schedule-skeleton-list{display:grid;gap:9px;margin:12px 0 18px}
+.schedule-skeleton-card{
+  min-height:84px;border:1px solid var(--line);border-radius:14px;background:#fff;
+  padding:13px;display:grid;grid-template-columns:22px 1fr;gap:11px;align-items:center;overflow:hidden;position:relative
+}
+.schedule-skeleton-card.compact{min-height:68px}
+.schedule-skeleton-card::after{
+  content:"";position:absolute;inset:0;transform:translateX(-110%);
+  background:linear-gradient(90deg,transparent,rgba(230,234,224,.75),transparent);
+  animation:skeletonShimmer 1.15s ease-in-out infinite
+}
+.schedule-skeleton-card>span{width:20px;height:20px;border:1px solid var(--line);border-radius:6px;background:#F5F6F1}
+.schedule-skeleton-card>div{display:grid;gap:9px}
+.schedule-skeleton-card i{display:block;height:12px;border-radius:8px;background:#ECEEE8;width:78%}
+.schedule-skeleton-card i:last-child{width:54%;height:10px}
+@keyframes skeletonShimmer{100%{transform:translateX(110%)}}
+
+.apply-program-head{align-items:center;margin:0 2px 9px}
+.apply-program-head h4,.part-cat-head h4{
+  font-family:"Gowun Batang",serif;font-size:16.5px;line-height:1.42;font-weight:700;color:var(--ink)
+}
+.apply-duration{font-size:10.5px;line-height:1.2;padding:5px 9px}
+.part-cat-head{align-items:center;margin-bottom:8px}
+.part-cat-head span{font-size:11.5px;line-height:1.35}
+.apply-schedule-card{
+  padding:11px 12px;min-height:76px;align-items:center;gap:10px;margin-bottom:8px
+}
+.apply-schedule-card .schedule-check{align-self:center;margin-top:0}
+.schedule-inline{line-height:1.35;row-gap:3px}
+.schedule-inline-meta{margin-top:5px}
+.part-date-row{padding:10px 12px;min-height:58px;align-items:center;margin:6px 0}
+.part-date-row .schedule-check{align-self:center;margin-top:0}
+.part-category{margin:18px 0 8px;padding-top:15px}
+
+.activity-art-card{
+  position:relative;background:transparent;border:0;box-shadow:none;overflow:hidden;margin-bottom:18px
+}
+.activity-art-card img{
+  width:100%;height:auto;aspect-ratio:auto;object-fit:contain;display:block;background:transparent;border:0
+}
+.activity-art-copy{
+  position:absolute;left:18px;right:18px;top:17px;z-index:2;pointer-events:none;
+  display:grid;grid-template-columns:34px minmax(0,1fr);gap:11px;padding:0
+}
+.activity-art-copy .num{
+  width:31px;height:31px;background:rgba(251,251,247,.9);border-color:rgba(91,115,85,.28);
+  color:var(--sage);font-size:11px;backdrop-filter:blur(2px)
+}
+.activity-art-copy h3{
+  font-size:16px;line-height:1.42;margin:0 0 4px;font-weight:700;color:var(--ink);
+  text-shadow:0 1px 0 rgba(255,255,255,.95)
+}
+.activity-art-copy p{
+  font-size:12.5px;line-height:1.58;margin:0;color:var(--ink-soft);max-width:92%;
+  text-shadow:0 1px 0 rgba(255,255,255,.95)
+}
+
+@media(max-width:600px){
+  .done-screen{padding:38px 0 26px}
+  .guide-card{margin-left:0;margin-right:0;padding:22px 16px}
+  .save-guide-btn{margin-left:0;margin-right:0}
+}
+@media(max-width:380px){
+  .activity-art-copy{left:14px;right:14px;top:14px;grid-template-columns:31px minmax(0,1fr);gap:9px}
+  .activity-art-copy h3{font-size:15px}
+  .activity-art-copy p{font-size:11.8px;line-height:1.52;max-width:96%}
+}
+
 </style>
 </head>
 <body>
@@ -465,7 +535,7 @@ body.admin-on .adm-toolbar{display:flex}
       <h1 class="title" id="secretTitle" onclick="handleSecretTap()">밥은 <span class="warm">먹었니?</span></h1>
       <p class="lead" id="landingSub">군청년 바라지를 모집합니다.<br>지금 신청받고 있는 일정을 확인해보세요.</p>
       <div class="landing-cal-head"><span class="ci"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="16" rx="2"/><path d="M4 9h16M8 3v4M16 3v4"/></svg></span><span id="landingMonthLabel">8월에 예정된 바라지 봉사일정</span></div>
-      <div id="landingSchedList"><div class="loading-note">일정 불러오는 중...</div></div>
+      <div id="landingSchedList"><div class="schedule-skeleton-list" aria-hidden="true"><div class="schedule-skeleton-card"><span></span><div><i></i><i></i></div></div><div class="schedule-skeleton-card"><span></span><div><i></i><i></i></div></div></div></div>
       <div id="landingIntro"></div>
       <div id="landingInlineForm"></div>
       <button class="admin-add-btn hidden" id="addLandingBtn" onclick="showLandingInlineForm()">+ 새 일정 추가</button>
@@ -574,14 +644,14 @@ body.admin-on .adm-toolbar{display:flex}
           <div class="section-title"><span class="num">3</span>참가 일정</div>
 
           <div class="group-label strong">3-1. 바라지 프로그램으로 참여</div>
-          <div class="apply-choice-note" id="mainDesc">공양봉사뿐 아니라 법사님 간담회, 산책, 회관 둘러보기, 군청년 프로그램 참관 등을 함께하는 바라지 일정입니다. 가능한 날짜를 복수 선택할 수 있습니다.</div>
-          <div id="scheduleMain"><div class="loading-note">일정 불러오는 중...</div></div>
+          <div class="apply-choice-note" id="mainDesc">1박 2일 서울여행 또는 2박 3일 행복학교 전체 바라지 일정에 참여하는 방식입니다. 행복학교 바라지는 1박 2일 부분 참여 일정이 열릴 수도 있습니다. 지금 가능한 날짜와 시간을 보고 선택해주세요. 복수 선택도 가능합니다.</div>
+          <div id="scheduleMain"><div class="schedule-skeleton-list" aria-hidden="true"><div class="schedule-skeleton-card"><span></span><div><i></i><i></i></div></div><div class="schedule-skeleton-card"><span></span><div><i></i><i></i></div></div></div></div>
           <div id="mainInlineForm"></div>
           <button class="admin-add-btn hidden" id="addMainBtn" onclick="showMainInlineForm()">+ 바라지 일정 추가</button>
 
           <div class="group-label strong" style="margin-top:24px">3-2. 하루만 공양봉사로 참여</div>
-          <div class="apply-choice-note" id="partDesc">공양간 봉사만 하루 단위로 함께합니다. 점심공양 지원과 저녁공양 봉사를 날짜별로 고를 수 있고, 복수 선택도 가능합니다.</div>
-          <div id="schedulePart"><div class="loading-note">일정 불러오는 중...</div></div>
+          <div class="apply-choice-note" id="partDesc">공양간 봉사만 함께하는 파트봉사입니다. 점심공양 지원과 저녁공양 봉사를 날짜별로 선택할 수 있고, 복수 선택도 가능합니다.</div>
+          <div id="schedulePart"><div class="schedule-skeleton-list" aria-hidden="true"><div class="schedule-skeleton-card compact"><span></span><div><i></i><i></i></div></div><div class="schedule-skeleton-card compact"><span></span><div><i></i><i></i></div></div></div></div>
           <div id="partInlineForm"></div>
           <button class="admin-add-btn hidden" id="addPartBtn" onclick="showPartInlineForm()">+ 파트봉사 일정 추가</button>
         </div>
@@ -654,6 +724,36 @@ let REMOTE_DATA = { meals:{}, menus:[], activities:[], schedules:[], siteconfig:
 let isAdmin = false;
 let ADMIN_PW = "";
 let SCHEDULE_COUNTS = {}; // 정원이 걸린 일정별 "지금까지 신청한 인원수" — 서버(getScheduleCounts)에서 받아온다
+const SESSION_DATA_CACHE_KEY = "baraji_apply_oct_data_v2";
+const SESSION_DATA_CACHE_TTL = 4 * 60 * 1000;
+let DATA_LOAD_STATE = "loading";
+let DATA_LOAD_PROMISE = null;
+
+function readSessionDataCache_(){
+  try{
+    const raw=sessionStorage.getItem(SESSION_DATA_CACHE_KEY);
+    if(!raw)return null;
+    const parsed=JSON.parse(raw);
+    if(!parsed||!parsed.ts||!parsed.data)return null;
+    if(Date.now()-parsed.ts>SESSION_DATA_CACHE_TTL){
+      sessionStorage.removeItem(SESSION_DATA_CACHE_KEY);
+      return null;
+    }
+    return parsed;
+  }catch(e){return null;}
+}
+function writeSessionDataCache_(){
+  try{
+    sessionStorage.setItem(SESSION_DATA_CACHE_KEY,JSON.stringify({
+      ts:Date.now(),data:REMOTE_DATA,counts:SCHEDULE_COUNTS
+    }));
+  }catch(e){}
+}
+function scheduleSkeletonHtml_(count=2,compact=false){
+  return '<div class="schedule-skeleton-list" aria-hidden="true">'+
+    Array.from({length:count},()=>'<div class="schedule-skeleton-card'+(compact?' compact':'')+'"><span></span><div><i></i><i></i></div></div>').join('')+
+    '</div>';
+}
 
 const FALLBACK_ACTIVITIES = [
   {icon:"🍚", title:"군장병들을 위한 공양을 만들어요", desc:"정성껏 준비한 음식이 장병들에겐 어머니의 따뜻한 한 끼가 됩니다."},
@@ -694,39 +794,72 @@ const FALLBACK_DATA = {
   meals: FALLBACK_MEALS
 };
 
-async function loadRemoteData(){
-  try{
-    const res = await fetch(APPSSCRIPTURL+"?t="+Date.now(), {cache:"no-store"}); // t= : 캐시된 옛 응답이 오지 않도록
-    const json = await res.json();
-    if(!json.ok) throw new Error(json.error||"load fail");
-    const d = json.data || {};
-    REMOTE_DATA.meals      = (d.meals && Object.keys(d.meals).length) ? d.meals : FALLBACK_DATA.meals;
-    REMOTE_DATA.menus      = (d.menus && d.menus.length) ? d.menus : [];
-    REMOTE_DATA.activities = (d.activities && d.activities.length) ? d.activities : FALLBACK_DATA.activities;
-    // 일정은 신청앱 전용 칸(apply_schedules)에서 읽는다. 예전엔 메인앱과 같은 'schedules' 칸을
-    // 함께 써서 서로 덮어쓰는 문제가 있었다. 아직 전용 칸이 없으면(첫 전환), 옛 칸에서
-    // 신청앱 형식(type이 있는 것)만 골라서 이어받는다.
-    if(d.apply_schedules && d.apply_schedules.length){
-      REMOTE_DATA.schedules = d.apply_schedules;
-    }else if(d.schedules && d.schedules.length){
-      const mine = d.schedules.filter(x=>x && x.type);
-      REMOTE_DATA.schedules = mine.length ? mine : FALLBACK_DATA.schedules;
-    }else{
-      REMOTE_DATA.schedules = FALLBACK_DATA.schedules;
-    }
-    REMOTE_DATA.siteconfig = d.siteconfig || FALLBACK_DATA.siteconfig;
-  }catch(e){
-    console.warn("Sheets 연동 실패, fallback 데이터 사용", e);
-    REMOTE_DATA = JSON.parse(JSON.stringify(FALLBACK_DATA));
+async function loadRemoteData(force=false){
+  const cached=!force?readSessionDataCache_():null;
+  if(cached){
+    REMOTE_DATA=cached.data||REMOTE_DATA;
+    SCHEDULE_COUNTS=cached.counts||{};
+    DATA_LOAD_STATE="cached";
+    renderAll();
+    return true;
   }
-  renderAll();
-  loadScheduleCounts(); // 정원 카운트는 별도 요청 — 실패해도 나머지 화면엔 영향 없게 분리
+  if(DATA_LOAD_PROMISE)return DATA_LOAD_PROMISE;
+
+  DATA_LOAD_STATE="loading";
+  DATA_LOAD_PROMISE=(async()=>{
+    const countsPromise=fetch(APPSSCRIPTURL+"?action=getScheduleCounts&t="+Date.now(),{cache:"no-store"})
+      .then(r=>r.json())
+      .then(j=>j&&j.ok?(j.data||{}):null)
+      .catch(()=>null);
+    try{
+      const res=await fetch(APPSSCRIPTURL+"?t="+Date.now(),{cache:"no-store"});
+      const json=await res.json();
+      if(!json.ok)throw new Error(json.error||"load fail");
+      const d=json.data||{};
+
+      REMOTE_DATA.meals=(d.meals&&Object.keys(d.meals).length)?d.meals:FALLBACK_DATA.meals;
+      REMOTE_DATA.menus=(d.menus&&d.menus.length)?d.menus:[];
+      REMOTE_DATA.activities=(d.activities&&d.activities.length)?d.activities:FALLBACK_DATA.activities;
+      if(d.apply_schedules&&d.apply_schedules.length){
+        REMOTE_DATA.schedules=d.apply_schedules;
+      }else if(d.schedules&&d.schedules.length){
+        const mine=d.schedules.filter(x=>x&&x.type);
+        REMOTE_DATA.schedules=mine.length?mine:[];
+      }else{
+        REMOTE_DATA.schedules=[];
+      }
+      REMOTE_DATA.siteconfig=d.siteconfig||FALLBACK_DATA.siteconfig;
+      DATA_LOAD_STATE="loaded";
+      renderAll();
+
+      const counts=await countsPromise;
+      if(counts)SCHEDULE_COUNTS=counts;
+      renderApplySchedules();
+      writeSessionDataCache_();
+      return true;
+    }catch(e){
+      console.warn("Sheets 연동 실패",e);
+      REMOTE_DATA={
+        meals:FALLBACK_DATA.meals,menus:[],activities:FALLBACK_DATA.activities,
+        schedules:[],siteconfig:FALLBACK_DATA.siteconfig
+      };
+      DATA_LOAD_STATE="error";
+      renderAll();
+      return false;
+    }finally{
+      DATA_LOAD_PROMISE=null;
+    }
+  })();
+  return DATA_LOAD_PROMISE;
 }
 async function loadScheduleCounts(){
   try{
     const res = await fetch(APPSSCRIPTURL+"?action=getScheduleCounts&t="+Date.now(), {cache:"no-store"});
     const json = await res.json();
-    if(json.ok) SCHEDULE_COUNTS = json.data || {};
+    if(json.ok){
+      SCHEDULE_COUNTS = json.data || {};
+      writeSessionDataCache_();
+    }
   }catch(e){
     console.warn("정원 카운트 불러오기 실패", e);
   }
@@ -794,8 +927,12 @@ function applySiteTexts(){
   if(sc.leadAct2) document.getElementById("act2Lead").textContent = sc.leadAct2;
   if(sc.titleApply) document.getElementById("applyTitle").textContent = sc.titleApply;
   if(sc.leadApply) document.getElementById("applyLead").textContent = sc.leadApply;
-  if(sc.descMain) document.getElementById("mainDesc").textContent = sc.descMain;
-  if(sc.descPart) document.getElementById("partDesc").textContent = sc.descPart;
+  const mainCopyOld="공양봉사뿐 아니라 법사님 간담회, 산책, 회관 둘러보기, 군청년 프로그램 참관 등을 함께하는 바라지 일정입니다. 가능한 날짜를 복수 선택할 수 있습니다.";
+  const mainCopyNew="1박 2일 서울여행 또는 2박 3일 행복학교 전체 바라지 일정에 참여하는 방식입니다. 행복학교 바라지는 1박 2일 부분 참여 일정이 열릴 수도 있습니다. 지금 가능한 날짜와 시간을 보고 선택해주세요. 복수 선택도 가능합니다.";
+  const partCopyOld="공양간 봉사만 하루 단위로 함께합니다. 점심공양 지원과 저녁공양 봉사를 날짜별로 고를 수 있고, 복수 선택도 가능합니다.";
+  const partCopyNew="공양간 봉사만 함께하는 파트봉사입니다. 점심공양 지원과 저녁공양 봉사를 날짜별로 선택할 수 있고, 복수 선택도 가능합니다.";
+  document.getElementById("mainDesc").textContent=(!sc.descMain||sc.descMain===mainCopyOld)?mainCopyNew:sc.descMain;
+  document.getElementById("partDesc").textContent=(!sc.descPart||sc.descPart===partCopyOld)?partCopyNew:sc.descPart;
 }
 async function persistSiteconfig(){
   if(!ADMIN_PW){ showToast("관리자 인증이 필요합니다"); return; }
@@ -874,10 +1011,14 @@ function renderLanding(){
   const mains = REMOTE_DATA.schedules.filter(s => s.type==="main");
   const list = mains.filter(s => s.status !== "cancelled" && !isPastMain(s) && (s.status||"recruiting")==="recruiting");
   const curMonth = list.length ? Math.min(...list.map(s=>s.month)) : new Date().getMonth()+1;
-  document.getElementById("landingMonthLabel").textContent = `${curMonth}월에 예정된 바라지 봉사일정`;
+  document.getElementById("landingMonthLabel").textContent = DATA_LOAD_STATE==="loading" ? "모집 중인 바라지 봉사일정" : `${curMonth}월에 예정된 바라지 봉사일정`;
 
   const el = document.getElementById("landingSchedList");
-  if(!list.length){ el.innerHTML = '<div class="empty-note">현재 모집중인 일정이 없습니다.</div>'; }
+  if(DATA_LOAD_STATE==="loading"&&!REMOTE_DATA.schedules.length){
+    el.innerHTML=scheduleSkeletonHtml_(2);
+  }else if(DATA_LOAD_STATE==="error"&&!REMOTE_DATA.schedules.length){
+    el.innerHTML='<div class="empty-note">일정을 불러오지 못했습니다. 잠시 후 새로고침해주세요.</div>';
+  }else if(!list.length){ el.innerHTML = '<div class="empty-note">현재 모집중인 일정이 없습니다.</div>'; }
   else{
     el.innerHTML = list.map(s => {
       const admBtns = isAdmin ? `
@@ -1390,6 +1531,17 @@ function applyAdminHtml(s,kind){
 function renderApplySchedules(){
   const mEl=document.getElementById("scheduleMain"), pEl=document.getElementById("schedulePart");
   if(!mEl||!pEl) return;
+  if(DATA_LOAD_STATE==="loading"&&!REMOTE_DATA.schedules.length){
+    mEl.innerHTML=scheduleSkeletonHtml_(3);
+    pEl.innerHTML=scheduleSkeletonHtml_(2,true);
+    return;
+  }
+  if(DATA_LOAD_STATE==="error"&&!REMOTE_DATA.schedules.length){
+    const msg='<div class="empty-note">일정을 불러오지 못했습니다. 잠시 후 새로고침해주세요.</div>';
+    mEl.innerHTML=msg;
+    pEl.innerHTML=msg;
+    return;
+  }
   const mains=REMOTE_DATA.schedules.filter(s=>s.type==="applymain"&&s.status!=="cancelled"&&!isPastMain(s));
   const parts=REMOTE_DATA.schedules.filter(s=>s.type==="part"&&s.status!=="cancelled"&&!isPastPart(s));
   const order=["1박2일","2박3일"];
