@@ -464,7 +464,7 @@ body.admin-on .adm-toolbar{display:flex}
 }
 .activity-art-copy{
   position:absolute;left:18px;right:18px;top:17px;z-index:2;pointer-events:none;
-  display:grid;grid-template-columns:34px minmax(0,1fr);gap:11px;padding:0
+  display:block;padding:0
 }
 .activity-art-copy .num{
   width:31px;height:31px;background:rgba(251,251,247,.9);border-color:rgba(91,115,85,.28);
@@ -485,10 +485,25 @@ body.admin-on .adm-toolbar{display:flex}
   .save-guide-btn{margin-left:0;margin-right:0}
 }
 @media(max-width:380px){
-  .activity-art-copy{left:14px;right:14px;top:14px;grid-template-columns:31px minmax(0,1fr);gap:9px}
+  .activity-art-copy{left:14px;right:14px;top:14px}
   .activity-art-copy h3{font-size:15px}
   .activity-art-copy p{font-size:11.8px;line-height:1.52;max-width:96%}
 }
+@media(min-width:601px){
+  .activity-art-copy{left:26px;right:26px;top:25px}
+  .activity-art-copy h3{font-size:21px;line-height:1.45;margin-bottom:7px}
+  .activity-art-copy p{font-size:15px;line-height:1.65;max-width:90%}
+}
+.apply-program-head h4,.part-cat-head h4{
+  font-size:14px;line-height:1.45;font-weight:700;margin:0
+}
+.apply-duration{font-size:10px}
+.apply-section-split{margin-top:16px}
+.apply-section-split .section-title{margin-bottom:10px}
+.section-title .num{width:29px;height:24px;border-radius:13px;font-size:10px}
+.load-retry{display:block;margin:12px auto 0;padding:9px 16px;border:1px solid var(--sage);border-radius:9px;background:#fff;color:var(--sage);font:600 12px "Pretendard",sans-serif;cursor:pointer}
+.submit-progress.is-slow{border-color:var(--sage-soft)}
+.submit-progress.is-uncertain{border-color:#CFA59F;background:#FFF8F7}
 
 </style>
 </head>
@@ -641,15 +656,14 @@ body.admin-on .adm-toolbar{display:flex}
         </div>
 
         <div class="section">
-          <div class="section-title"><span class="num">3</span>참가 일정</div>
-
-          <div class="group-label strong">3-1. 바라지 프로그램으로 참여</div>
+          <div class="section-title"><span class="num">3-1</span>바라지 프로그램으로 참여</div>
           <div class="apply-choice-note" id="mainDesc">1박 2일 서울여행 또는 2박 3일 행복학교 전체 바라지 일정에 참여하는 방식입니다. 행복학교 바라지는 1박 2일 부분 참여 일정이 열릴 수도 있습니다. 지금 가능한 날짜와 시간을 보고 선택해주세요. 복수 선택도 가능합니다.</div>
           <div id="scheduleMain"><div class="schedule-skeleton-list" aria-hidden="true"><div class="schedule-skeleton-card"><span></span><div><i></i><i></i></div></div><div class="schedule-skeleton-card"><span></span><div><i></i><i></i></div></div></div></div>
           <div id="mainInlineForm"></div>
           <button class="admin-add-btn hidden" id="addMainBtn" onclick="showMainInlineForm()">+ 바라지 일정 추가</button>
-
-          <div class="group-label strong" style="margin-top:24px">3-2. 하루만 공양봉사로 참여</div>
+        </div>
+        <div class="section apply-section-split">
+          <div class="section-title"><span class="num">3-2</span>하루만 공양봉사로 참여</div>
           <div class="apply-choice-note" id="partDesc">공양간 봉사만 함께하는 파트봉사입니다. 점심공양 지원과 저녁공양 봉사를 날짜별로 선택할 수 있고, 복수 선택도 가능합니다.</div>
           <div id="schedulePart"><div class="schedule-skeleton-list" aria-hidden="true"><div class="schedule-skeleton-card compact"><span></span><div><i></i><i></i></div></div><div class="schedule-skeleton-card compact"><span></span><div><i></i><i></i></div></div></div></div>
           <div id="partInlineForm"></div>
@@ -754,6 +768,21 @@ function scheduleSkeletonHtml_(count=2,compact=false){
     Array.from({length:count},()=>'<div class="schedule-skeleton-card'+(compact?' compact':'')+'"><span></span><div><i></i><i></i></div></div>').join('')+
     '</div>';
 }
+async function fetchJsonWithTimeout_(url,options={},timeoutMs=18000){
+  const controller=new AbortController();
+  const timer=setTimeout(()=>controller.abort(),timeoutMs);
+  try{
+    const response=await fetch(url,{...options,signal:controller.signal});
+    if(!response.ok)throw new Error(`HTTP ${response.status}`);
+    return await response.json();
+  }finally{clearTimeout(timer);}
+}
+function scheduleLoadMessage_(state){
+  const note=state==="slow"
+    ? "원데이터 응답이 늦어지고 있습니다. 연결을 계속 확인하고 있습니다."
+    : "일정을 불러오지 못했습니다. 네트워크를 확인하고 다시 시도해주세요.";
+  return `<div class="empty-note">${note}${state==="slow"?"":'<button type="button" class="load-retry" onclick="loadRemoteData(true)">일정 다시 불러오기</button>'}</div>`;
+}
 
 const FALLBACK_ACTIVITIES = [
   {icon:"🍚", title:"군장병들을 위한 공양을 만들어요", desc:"정성껏 준비한 음식이 장병들에겐 어머니의 따뜻한 한 끼가 됩니다."},
@@ -795,6 +824,7 @@ const FALLBACK_DATA = {
 };
 
 async function loadRemoteData(force=false){
+  if(DATA_LOAD_PROMISE)return DATA_LOAD_PROMISE;
   const cached=!force?readSessionDataCache_():null;
   if(cached){
     REMOTE_DATA=cached.data||REMOTE_DATA;
@@ -803,17 +833,26 @@ async function loadRemoteData(force=false){
     renderAll();
     return true;
   }
-  if(DATA_LOAD_PROMISE)return DATA_LOAD_PROMISE;
 
   DATA_LOAD_STATE="loading";
+  renderApplySchedules();
   DATA_LOAD_PROMISE=(async()=>{
-    const countsPromise=fetch(APPSSCRIPTURL+"?action=getScheduleCounts&t="+Date.now(),{cache:"no-store"})
-      .then(r=>r.json())
-      .then(j=>j&&j.ok?(j.data||{}):null)
-      .catch(()=>null);
+    const slowTimer=setTimeout(()=>{
+      if(DATA_LOAD_STATE==="loading"){
+        const m=document.getElementById("scheduleMain"),p=document.getElementById("schedulePart");
+        if(m)m.insertAdjacentHTML("beforeend",scheduleLoadMessage_("slow"));
+        if(p)p.insertAdjacentHTML("beforeend",scheduleLoadMessage_("slow"));
+      }
+    },8000);
     try{
-      const res=await fetch(APPSSCRIPTURL+"?t="+Date.now(),{cache:"no-store"});
-      const json=await res.json();
+      let json,lastError;
+      for(let attempt=0;attempt<2;attempt++){
+        try{
+          json=await fetchJsonWithTimeout_(APPSSCRIPTURL,{cache:"no-store"},18000);
+          break;
+        }catch(e){lastError=e;if(attempt===0)await new Promise(r=>setTimeout(r,600));}
+      }
+      if(!json)throw lastError;
       if(!json.ok)throw new Error(json.error||"load fail");
       const d=json.data||{};
 
@@ -831,22 +870,18 @@ async function loadRemoteData(force=false){
       REMOTE_DATA.siteconfig=d.siteconfig||FALLBACK_DATA.siteconfig;
       DATA_LOAD_STATE="loaded";
       renderAll();
-
-      const counts=await countsPromise;
-      if(counts)SCHEDULE_COUNTS=counts;
-      renderApplySchedules();
       writeSessionDataCache_();
+      // 일정 표시를 정원 조회가 끝날 때까지 막지 않는다. 동시에 Apps Script에
+      // 두 요청을 보내면 느려질 수 있으므로 본문 로딩이 끝난 다음 조회한다.
+      loadScheduleCounts();
       return true;
     }catch(e){
       console.warn("Sheets 연동 실패",e);
-      REMOTE_DATA={
-        meals:FALLBACK_DATA.meals,menus:[],activities:FALLBACK_DATA.activities,
-        schedules:[],siteconfig:FALLBACK_DATA.siteconfig
-      };
       DATA_LOAD_STATE="error";
       renderAll();
       return false;
     }finally{
+      clearTimeout(slowTimer);
       DATA_LOAD_PROMISE=null;
     }
   })();
@@ -854,10 +889,10 @@ async function loadRemoteData(force=false){
 }
 async function loadScheduleCounts(){
   try{
-    const res = await fetch(APPSSCRIPTURL+"?action=getScheduleCounts&t="+Date.now(), {cache:"no-store"});
-    const json = await res.json();
+    const json = await fetchJsonWithTimeout_(APPSSCRIPTURL+"?action=getScheduleCounts", {cache:"no-store"},12000);
     if(json.ok){
       SCHEDULE_COUNTS = json.data || {};
+      renderApplySchedules();
       writeSessionDataCache_();
     }
   }catch(e){
@@ -1017,7 +1052,7 @@ function renderLanding(){
   if(DATA_LOAD_STATE==="loading"&&!REMOTE_DATA.schedules.length){
     el.innerHTML=scheduleSkeletonHtml_(2);
   }else if(DATA_LOAD_STATE==="error"&&!REMOTE_DATA.schedules.length){
-    el.innerHTML='<div class="empty-note">일정을 불러오지 못했습니다. 잠시 후 새로고침해주세요.</div>';
+    el.innerHTML=scheduleLoadMessage_("error");
   }else if(!list.length){ el.innerHTML = '<div class="empty-note">현재 모집중인 일정이 없습니다.</div>'; }
   else{
     el.innerHTML = list.map(s => {
@@ -1316,7 +1351,7 @@ function renderActivities(){
     const art = ACTIVITY_ART[i] || "";
     return `<article class="activity-art-card">
       ${art?`<img src="${art}" alt="${esc_(a.title||"바라지 활동")} 일러스트" loading="lazy">`:""}
-      <div class="activity-art-copy"><div class="num">${String(i+1).padStart(2,"0")}</div><div><h3>${esc_(a.title||"")}</h3><p>${esc_(a.desc||"")}</p></div></div>
+      <div class="activity-art-copy"><h3>${esc_(a.title||"")}</h3><p>${esc_(a.desc||"")}</p></div>
     </article>`;
   }).join("");
 }
@@ -1537,7 +1572,7 @@ function renderApplySchedules(){
     return;
   }
   if(DATA_LOAD_STATE==="error"&&!REMOTE_DATA.schedules.length){
-    const msg='<div class="empty-note">일정을 불러오지 못했습니다. 잠시 후 새로고침해주세요.</div>';
+    const msg=scheduleLoadMessage_("error");
     mEl.innerHTML=msg;
     pEl.innerHTML=msg;
     return;
@@ -1678,6 +1713,7 @@ function copyText(text){
   return Promise.resolve(fallbackCopy(text));
 }
 async function submitApply(){
+  if(document.getElementById("submitBtn").disabled)return;
   const basic={
     bu:getRadioVal("bu"),
     ji:document.getElementById("ji").value.trim(),
@@ -1715,14 +1751,26 @@ async function submitApply(){
   btn.disabled=true;
   btn.textContent="신청 접수 중...";
   if(progress) progress.classList.remove("hidden");
+  const progressText=progress&&progress.querySelector("small");
+  const slowTimer=setTimeout(()=>{
+    if(progress){progress.classList.add("is-slow");progressText.textContent="서버 응답이 늦어지고 있습니다. 화면을 닫지 말고 잠시 기다려주세요.";}
+  },10000);
+  const uncertainTimer=setTimeout(()=>{
+    if(progress){progress.classList.add("is-uncertain");progressText.textContent="저장 여부를 확인하는 중입니다. 중복 신청을 막기 위해 제출 버튼을 잠시 잠가둡니다.";}
+  },30000);
   try{
     const res=await fetch(APPSSCRIPTURL,{
       method:"POST",
       headers:{"Content-Type":"text/plain;charset=utf-8"},
       body:JSON.stringify({action:"applyForm",value:payload})
     });
+    if(!res.ok)throw new Error("서버 응답 오류");
     const json=await res.json();
-    if(!json.ok) throw new Error(json.error||"제출 실패");
+    if(!json.ok){
+      const rejected=new Error(json.error||"신청이 접수되지 않았습니다.");
+      rejected.confirmedRejection=true;
+      throw rejected;
+    }
 
     document.getElementById("formArea").classList.add("hidden");
     document.getElementById("doneScreen").classList.add("show");
@@ -1731,12 +1779,26 @@ async function submitApply(){
     renderGuide(basic.name);
     if(progress) progress.classList.add("hidden");
     sessionStorage.removeItem("baraji_selected_schedule");
+    sessionStorage.removeItem(SESSION_DATA_CACHE_KEY);
   }catch(e){
-    if(progress) progress.classList.add("hidden");
-    showToast(e.message||"네트워크 오류가 발생했습니다");
-    btn.disabled=false;
-    btn.textContent="신청 제출하기";
-    loadRemoteData();
+    if(e.confirmedRejection){
+      if(progress) progress.classList.add("hidden");
+      btn.disabled=false;
+      btn.textContent="신청 제출하기";
+      showToast(e.message);
+    }else{
+      // 통신 오류는 서버가 저장한 직후 응답만 유실된 경우와 구별할 수 없다.
+      // 자동 재전송은 중복 접수를 만들 수 있으므로 잠그고 확인을 안내한다.
+      if(progress){
+        progress.classList.add("is-uncertain");
+        progress.querySelector("b").textContent="접수 여부 확인이 필요합니다";
+        progressText.textContent="응답이 끊겨 저장 여부를 알 수 없습니다. 같은 신청을 다시 보내지 말고 운영자에게 이름·연락처로 접수 여부를 확인해주세요.";
+      }
+      btn.textContent="접수 여부 확인 필요";
+    }
+  }finally{
+    clearTimeout(slowTimer);
+    clearTimeout(uncertainTimer);
   }
 }
 function scheduleStartKey(s){
