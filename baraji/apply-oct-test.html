@@ -364,6 +364,7 @@ body.admin-on .adm-toolbar{display:flex}
   margin:22px 0 18px;border:1px solid var(--line);border-radius:20px;
   background:var(--paper-2);padding:22px 17px;text-align:left;box-shadow:var(--shadow)
 }
+.guide-header-card{margin-bottom:12px}
 .guide-card .gc-k{
   font-size:10.5px;font-weight:800;letter-spacing:.18em;color:var(--sage)
 }
@@ -372,7 +373,11 @@ body.admin-on .adm-toolbar{display:flex}
 }
 .gc-name{font-size:14px;color:var(--ink-soft);margin-bottom:18px}
 .complete-subcard{
-  border-top:1px solid var(--line);padding-top:16px;margin-top:16px
+  border:1px solid var(--line);background:var(--paper-2);border-radius:20px;
+  padding:18px 16px;text-align:left;box-shadow:var(--shadow);margin:0 0 12px
+}
+.complete-subcard .gc-k{
+  font-size:9.5px;font-weight:800;letter-spacing:.17em;color:var(--sage);margin-bottom:5px
 }
 .gc-section-title{
   font-family:"Gowun Batang",serif;font-size:16px;font-weight:700;margin:0 0 10px;color:var(--ink)
@@ -482,6 +487,7 @@ body.admin-on .adm-toolbar{display:flex}
 @media(max-width:600px){
   .done-screen{padding:38px 0 26px}
   .guide-card{margin-left:0;margin-right:0;padding:22px 16px}
+  .complete-subcard{margin-left:0;margin-right:0;padding:17px 15px}
   .save-guide-btn{margin-left:0;margin-right:0}
 }
 @media(max-width:380px){
@@ -694,22 +700,24 @@ body.admin-on .adm-toolbar{display:flex}
         <div class="emoji">🙏</div>
         <h2 id="doneTitle">신청이 완료되었습니다</h2>
         <p id="doneDesc">신청해주셔서 감사합니다.</p>
-        <div id="guideCard" class="guide-card">
+        <div id="guideCard" class="guide-card guide-header-card">
           <div class="gc-k">MY BARAJI</div>
           <h3>나의 바라지 안내</h3>
           <div id="guideName" class="gc-name"></div>
-          <div class="complete-subcard">
-            <div class="gc-section-title">신청한 일정</div>
-            <div id="guideSchedules" class="gc-schedules"></div>
-          </div>
-          <div class="complete-subcard">
-            <div class="gc-section-title">앞으로 이렇게 진행됩니다</div>
-            <div class="gc-flow">
-              <div class="flow-step"><div class="flow-no">01</div><div><b>신청 완료</b><small>신청하신 내용이 접수되었습니다.</small></div></div>
-              <div class="flow-step"><div class="flow-no">02</div><div><b>신청 일정 확인 연락</b><small>신청하신 일정이 맞는지, 변동사항은 없는지 메시지로 확인드려요.</small></div></div>
-              <div class="flow-step"><div class="flow-no">03</div><div><b>텔레그램 소통방 초대</b><small>준비물과 세부일정, 변동사항을 소통방에서 함께 나눕니다.</small></div></div>
-              <div class="flow-step"><div class="flow-no">04</div><div><b>바라지에서 만나요</b><small>건강히 잘 지내다가 약속한 날 만나요.</small></div></div>
-            </div>
+        </div>
+        <div class="complete-subcard complete-schedule-block">
+          <div class="gc-k">MY SERVICE</div>
+          <div class="gc-section-title">내 봉사</div>
+          <div id="guideSchedules" class="gc-schedules"></div>
+        </div>
+        <div class="complete-subcard complete-flow-block">
+          <div class="gc-k">NEXT STEP</div>
+          <div class="gc-section-title">향후 진행</div>
+          <div class="gc-flow">
+            <div class="flow-step"><div class="flow-no">01</div><div><b>신청 완료</b><small>신청하신 내용이 접수되었습니다.</small></div></div>
+            <div class="flow-step"><div class="flow-no">02</div><div><b>신청 일정 확인 연락</b><small>신청하신 일정이 맞는지, 변동사항은 없는지 메시지로 확인드려요.</small></div></div>
+            <div class="flow-step"><div class="flow-no">03</div><div><b>텔레그램 소통방 초대</b><small>준비물과 세부일정, 변동사항을 소통방에서 함께 나눕니다.</small></div></div>
+            <div class="flow-step"><div class="flow-no">04</div><div><b>바라지에서 만나요</b><small>건강히 잘 지내다가 약속한 날 만나요.</small></div></div>
           </div>
         </div>
         <button class="save-guide-btn" onclick="saveGuideImage()">나의 참가 안내 이미지로 저장</button>
