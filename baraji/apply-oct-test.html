@@ -1179,7 +1179,6 @@ function renderActivities(){
     </article>`;
   }).join("");
 }
-}
 
 /* ---------- 공양메뉴 (메인앱과 연동: 메인앱에서 편집한 내용을 그대로 표시) ---------- */
 function findMenuByName_(name){
@@ -1205,8 +1204,6 @@ function mealSlotHtml_(key, meals){
   }).join("");
   const art = MEAL_ART[key] || "";
   return `<div class="meal-slot ${art?"has-art":""}"><div class="meal-slot-label">${esc_(m.label||key)}</div>${art?`<img class="meal-art" src="${art}" alt="${esc_(m.label||"공양")} 음식 일러스트" loading="lazy">`:""}${rows || '<div class="empty-note" style="text-align:left;padding:2px 0">아직 메뉴가 정해지지 않았습니다.</div>'}</div>`;
-}
-let selectedMealProgram = null;
 }
 let selectedMealProgram = null;
 function activePrograms_(){
