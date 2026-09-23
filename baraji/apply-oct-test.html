@@ -1,0 +1,2095 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<!-- 파일을 새로 올렸을 때 브라우저가 예전 파일을 계속 쓰지 않도록 -->
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>군청년 바라지 - 10월 홍보 테스트</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500;600;700&family=Gowun+Batang:wght@400;700&family=Pretendard:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F1F2EC;--paper:#F1F2EC;--paper-2:#FBFBF7;--ink:#2B2E28;--ink-soft:#5A5F54;--line:#DBDBCF;--accent:#5B7355;--warm:#5B7355;--sage:#5B7355;--sage-soft:#8A9B82;--sage-wash:#E6EAE0;--shadow:0 1px 0 rgba(43,46,40,.04), 0 10px 30px -18px rgba(43,46,40,.28);--r:18px;--maxw:560px}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:#111}
+body{font-family:"Pretendard",sans-serif;color:var(--ink);line-height:1.65}
+.wrap{max-width:var(--maxw);margin:0 auto;min-height:100vh;background:var(--paper);position:relative;overflow:hidden;display:flex;flex-direction:column}
+
+.choice-stage{position:fixed;inset:0;background:var(--paper);z-index:1001;overflow-y:auto;display:flex;align-items:center}
+.choice-stage.hide{display:none}
+.choice-inner{max-width:var(--maxw);margin:0 auto;padding:36px 26px;width:100%;box-sizing:border-box}
+.s-card{border:1px solid var(--line);border-radius:var(--r);padding:20px;cursor:pointer;margin-bottom:12px;background:var(--paper-2);box-shadow:var(--shadow);display:flex;gap:14px;align-items:center;transition:.15s}
+.s-card.primary{border-color:var(--sage-soft);background:linear-gradient(135deg,var(--sage-wash),var(--paper-2) 65%)}
+.s-ic{flex:none;width:44px;height:44px;border-radius:50%;background:var(--paper);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;color:var(--ink-soft)}
+.s-card.primary .s-ic{background:var(--sage);border-color:var(--sage);color:#fff}
+.s-ic svg{width:20px;height:20px}
+.s-txt b{display:block;font-family:"Gowun Batang",serif;font-size:15px;font-weight:700;margin-bottom:3px}
+.s-txt span{font-size:11.5px;color:var(--ink-soft);line-height:1.5}
+.video-stage{position:fixed;inset:0;background:#000;z-index:1000;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.video-stage.hide{display:none}
+#playerHost{width:100%;height:100%;display:none}
+#playerHost iframe{width:100%;height:100%;display:block;transform:scale(1);transform-origin:center}
+@media (max-width:700px), (hover:none) and (pointer:coarse){
+  #playerHost iframe{transform:scale(2)}
+}
+.video-stage iframe{width:100%;height:100%}
+.skip-btn{position:absolute;bottom:26px;right:18px;background:rgba(255,255,255,.14);color:#fff;border:1px solid rgba(255,255,255,.35);border-radius:20px;padding:8px 16px;font-size:12px;font-family:"Pretendard",sans-serif;cursor:pointer;z-index:1001}
+.video-end-overlay{position:absolute;inset:0;background:rgba(0,0,0,.55);display:none;align-items:center;justify-content:center;z-index:1003;opacity:0;transition:opacity .6s ease}
+.video-end-overlay.show{display:flex;opacity:1}
+.next-btn{background:#fff;color:#111;border:none;border-radius:30px;padding:14px 30px;font-size:15px;font-weight:600;font-family:"Pretendard",sans-serif;cursor:pointer}
+.tap-to-start{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;background:#111;color:#fff;text-align:center;cursor:pointer;z-index:1002;gap:16px}
+.tap-to-start.hide{display:none}
+.tap-to-start .play-circle{width:70px;height:70px;border-radius:50%;background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.5);display:flex;align-items:center;justify-content:center;font-size:24px}
+.tap-to-start p{font-size:13px;color:rgba(255,255,255,.8);margin:0;padding:0 30px}
+
+.page{display:none;flex-direction:column;min-height:100vh}
+.page.active{display:flex;animation:fadeIn .35s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.page-scroll{flex:1;overflow-y:auto;padding:30px 26px 18px;-webkit-overflow-scrolling:touch}
+.page-footer{flex:none;padding:16px 26px calc(16px + env(safe-area-inset-bottom));background:linear-gradient(180deg,rgba(250,249,245,0),var(--paper) 40%);display:flex;flex-direction:column;gap:10px}
+.kicker{font-size:11px;font-weight:600;letter-spacing:.24em;color:var(--ink-soft);margin-bottom:18px;text-transform:uppercase;text-align:center}
+h1.title{font-family:"Gowun Batang",serif;font-size:24px;font-weight:600;margin:0 0 12px;color:var(--ink);line-height:1.5;text-align:center;letter-spacing:-.01em}
+h1.title .warm{color:var(--warm)}
+#secretTitle{cursor:default;-webkit-user-select:none;user-select:none}
+p.lead{font-size:13.5px;color:var(--ink-soft);text-align:center;margin:0 0 26px;line-height:1.75;white-space:pre-wrap}
+.btn-next{display:block;width:100%;padding:16px;text-align:center;background:var(--sage);color:#fff;border:none;border-radius:10px;font-size:14.5px;font-weight:600;letter-spacing:.02em;cursor:pointer;font-family:"Pretendard",sans-serif}
+.btn-outline{display:block;width:100%;padding:15px;text-align:center;background:none;border:1px solid var(--line);color:var(--ink);border-radius:3px;font-size:14px;font-weight:600;cursor:pointer;font-family:"Pretendard",sans-serif}
+.btn-back{display:inline-flex;align-items:center;gap:4px;background:none;border:none;color:var(--ink-soft);font-size:12.5px;padding:2px 0 18px;cursor:pointer}
+.loading-note,.empty-note{color:var(--ink-soft);font-size:13px;padding:10px 0;text-align:center}
+
+/* 랜딩: 캘린더 카드 (이미지2 형식) */
+.landing-cal-head{display:flex;align-items:center;gap:8px;font-weight:700;font-size:14.5px;color:var(--ink);margin-bottom:14px}
+.landing-cal-head .ci{font-size:16px;display:inline-flex;color:var(--ink-soft)}
+.landing-cal-head .ci svg{width:16px;height:16px}
+.cal-card{background:var(--paper-2);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);padding:18px 18px 16px;margin-bottom:12px}
+.cal-card .cc-name{font-family:"Gowun Batang",serif;font-size:16px;font-weight:700;color:var(--ink)}
+.cal-card .cc-name .dur{font-family:"Pretendard",sans-serif;font-size:11.5px;font-weight:600;color:var(--sage);background:var(--sage-wash);border-radius:20px;padding:2px 9px;margin-left:6px;vertical-align:middle}
+.cal-card .cc-date{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--ink);font-weight:600;margin-top:10px;padding-top:10px;border-top:1px solid var(--line)}
+.cal-card .cc-date::before{content:'';flex:none;width:7px;height:7px;border-radius:50%;background:var(--sage)}
+.cal-card .cc-place{font-size:12.5px;color:var(--ink-soft);margin-top:5px;padding-left:13px}
+.cal-admin-row{display:flex;justify-content:space-between;gap:6px;margin-top:12px;padding-top:12px;border-top:1px dashed var(--line)}
+.cal-admin-left,.cal-admin-right{display:flex;gap:5px}
+.sadm-icon{width:30px;height:30px;border-radius:50%;border:1px solid var(--line);background:#fff;font-size:12px;cursor:pointer;color:var(--ink-soft);display:flex;align-items:center;justify-content:center}
+.sadm-icon:hover{border-color:var(--sage);color:var(--sage)}
+.sadm-txt{height:30px;padding:0 13px;border-radius:20px;border:1px solid var(--line);background:#fff;font-size:11.5px;font-weight:600;cursor:pointer;color:var(--ink-soft);white-space:nowrap}
+.sadm-txt:hover{border-color:var(--sage);color:var(--sage)}
+.sadm-txt.del{color:#c0392b;border-color:#c0392b}
+
+.sched-admin-btns{display:flex;gap:4px;flex:none}
+.sadm-btn{width:24px;height:24px;border-radius:5px;border:1px solid var(--line);background:#fff;font-size:10.5px;cursor:pointer;color:var(--ink-soft);display:flex;align-items:center;justify-content:center}
+.sadm-btn.del{color:#c0392b;border-color:#c0392b}
+.admin-add-btn{width:100%;padding:11px;border:1px dashed var(--ink);border-radius:5px;background:none;font-size:12.5px;cursor:pointer;color:var(--ink);margin-top:6px}
+.footer-divider{border:none;border-top:1px solid var(--line);margin:14px 0 8px}
+.admin-tag{font-size:10.5px;color:var(--sage);font-weight:700;letter-spacing:.05em;margin-bottom:6px}
+.btn-recruit-status{display:flex;align-items:center;justify-content:center;gap:6px;width:100%;padding:13px;text-align:center;background:var(--sage-wash);border:1px solid var(--sage-soft);color:var(--sage);border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;font-family:"Pretendard",sans-serif}
+
+/* 인라인 관리자 폼 (팝업 없음) */
+.editable-text{outline:1px dashed #C9BC8F;outline-offset:4px;border-radius:3px;cursor:text}
+.editable-text:focus{outline:1px solid var(--warm);background:#FFFCF3}
+.inline-form{background:var(--sage-wash);border:1px solid var(--sage-soft);border-radius:var(--r);padding:16px;margin:10px 0;box-shadow:var(--shadow)}
+.inline-form .if-row{display:flex;gap:8px;margin-bottom:8px;flex-wrap:wrap}
+.inline-form .if-field{flex:1;min-width:90px}
+.inline-form .if-field label{display:block;font-size:10.5px;color:var(--ink-soft);margin-bottom:4px}
+.inline-form .if-field input,.inline-form .if-field select{width:100%;border:1px solid var(--line);border-radius:8px;padding:9px 10px;font-size:12.5px;font-family:"Pretendard",sans-serif;background:#fff;box-sizing:border-box}
+.inline-form .if-field input:focus,.inline-form .if-field select:focus{outline:none;border-color:var(--sage)}
+.inline-form .if-actions{display:flex;gap:8px;margin-top:10px}
+.inline-form .if-actions button{flex:1;padding:10px;border:none;border-radius:8px;font-size:12.5px;font-weight:600;cursor:pointer;font-family:"Pretendard",sans-serif}
+.if-save{background:var(--sage);color:#fff}
+.if-cancel{background:#fff;color:var(--ink);border:1px solid var(--line) !important}
+
+.act-card{background:var(--paper-2);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);padding:16px 16px 15px;margin-bottom:12px;display:flex;gap:13px;align-items:flex-start}
+.act-card .num{flex:none;width:34px;height:34px;border-radius:50%;background:none;border:1px solid var(--line);color:var(--ink);font-family:"Gowun Batang",serif;font-weight:600;font-size:12px;display:flex;align-items:center;justify-content:center}
+.act-card h3{font-family:"Gowun Batang",serif;font-size:14.5px;font-weight:600;margin:0 0 5px;display:flex;align-items:center;gap:6px}
+.act-icon{display:inline-flex;color:var(--ink-soft);flex:none}
+.act-icon svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.act-card p{font-size:13px;color:var(--ink-soft);margin:0;line-height:1.65}
+
+.day-label{display:block;font-family:"Gowun Batang",serif;font-size:13px;font-weight:600;margin:20px 0 10px;color:var(--ink)}
+.meal-tabs{display:flex;gap:6px;margin:16px 0 6px}
+.meal-tab{flex:1;min-width:0;overflow-wrap:break-word;text-align:center;padding:10px 0;border-radius:8px;border:1px solid var(--line);font-family:"Gowun Batang",serif;font-size:13.5px;font-weight:600;color:var(--ink-soft);cursor:pointer}
+.meal-tab.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.meal-note{text-align:center;font-weight:700;font-size:13px;color:var(--ink);line-height:1.8;white-space:pre-wrap;padding:4px 0}
+.program-intro{border:1px solid var(--line);border-radius:10px;padding:14px 15px;margin-top:12px}
+.pi-h{font-family:"Gowun Batang",serif;font-size:13px;font-weight:700;color:var(--ink);margin-bottom:4px}
+.pi-body{margin:0;font-size:12px;color:var(--ink-soft);line-height:1.65;white-space:pre-wrap}
+.recipe-mini{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);padding:11px 2px}
+.meal-slot .recipe-mini:last-child{border-bottom:none;padding-bottom:0}
+.recipe-mini .rm-left{display:flex;align-items:center;gap:11px}
+.recipe-mini .rm-dot{width:4px;height:4px;border-radius:50%;background:var(--ink-soft);flex:none}
+.recipe-mini .rm-name{font-size:14px;font-weight:500}
+.recipe-mini .rm-arrow{color:var(--ink-soft);font-size:12px}
+.card{background:transparent;border:none;padding:0;margin-bottom:0}
+.meal-slot{margin-top:0;margin-bottom:14px;background:var(--paper-2);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);padding:16px 16px 14px}
+.meal-slot-label{display:flex;align-items:center;gap:8px;font-family:"Gowun Batang",serif;font-size:14px;font-weight:600;color:var(--ink);margin:0 0 10px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+.meal-slot-label::before{content:'';flex:none;width:8px;height:8px;border-radius:50%;background:var(--sage)}
+.meal-slot:first-child .meal-slot-label{margin-top:2px}
+.meta-row{display:flex;margin-bottom:16px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.meta-chip{display:flex;align-items:center;gap:7px;color:var(--ink);font-size:12px;font-weight:600;padding:12px 0;flex:1;min-width:0;justify-content:center;text-align:center}
+
+.modal{position:fixed;inset:0;background:rgba(20,20,18,.55);z-index:1100;display:none;align-items:flex-end;justify-content:center}
+.modal.show{display:flex}
+.modal-box{width:100%;max-width:var(--maxw);background:#fff;border-radius:16px 16px 0 0;padding:22px 22px calc(22px + env(safe-area-inset-bottom));max-height:85vh;overflow-y:auto}
+.modal-box h3{font-family:"Gowun Batang",serif;margin:0 0 4px;font-size:18px}
+.modal-box .mfield{margin:12px 0}
+.modal-box .mfield label{display:block;font-size:12px;font-weight:600;margin-bottom:6px;color:var(--ink)}
+.modal-box .mfield input,.modal-box .mfield select,.modal-box .mfield textarea{width:100%;border:1px solid var(--line);border-radius:6px;padding:10px 11px;font-family:"Pretendard",sans-serif;font-size:13.5px;background:#fff}
+.dish-add-row{display:flex;gap:6px;margin-top:8px}
+.dish-add-row input{flex:1;border:1px solid var(--line);border-radius:5px;padding:8px 9px;font-size:12.5px}
+.dish-add-row button{flex:none;padding:8px 12px;border:none;border-radius:5px;background:var(--ink);color:#fff;font-size:12.5px;cursor:pointer}
+.dish-chip{display:inline-flex;align-items:center;gap:6px;background:var(--paper-2);border-radius:14px;padding:6px 10px 6px 12px;font-size:12.5px;margin:4px 5px 0 0}
+.dish-chip button{border:none;background:none;color:var(--ink-soft);cursor:pointer;font-size:12px}
+.m-actions{display:flex;gap:10px;margin-top:18px}
+.m-actions button{flex:1;padding:12px;border-radius:8px;border:none;font-size:14px;cursor:pointer;font-family:"Pretendard",sans-serif}
+.btn-cancel{background:var(--paper-2);color:var(--ink)}
+.btn-ok{background:var(--ink);color:#fff}
+
+.section{background:var(--paper-2);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);padding:18px 18px 20px;margin-bottom:16px}
+.section-title{font-family:"Gowun Batang",serif;font-weight:600;font-size:14.5px;margin-bottom:14px;display:flex;align-items:center;gap:8px;color:var(--ink)}
+.section-title .num{flex:none;width:22px;height:22px;border-radius:50%;background:var(--sage);color:#fff;font-size:11px;display:flex;align-items:center;justify-content:center;font-family:"Pretendard",sans-serif}
+.field{margin-bottom:16px}
+.field:last-child{margin-bottom:0}
+.field label{display:block;font-size:12.5px;font-weight:600;margin-bottom:8px;color:var(--ink)}
+.field label .req{color:#c0392b;margin-left:2px}
+.field input[type=text],.field input[type=tel],.field textarea{width:100%;border:1px solid var(--line);border-radius:4px;padding:11px 13px;font-family:"Pretendard",sans-serif;font-size:14px;background:#fff;color:var(--ink)}
+.field textarea{resize:vertical;min-height:70px}
+.radio-grid{display:flex;flex-wrap:wrap;gap:8px}
+.radio-chip{border:1px solid var(--line);border-radius:20px;padding:8px 14px;font-size:12.5px;cursor:pointer;background:#fff;transition:.15s}
+.radio-chip.on{background:var(--sage);color:#fff;border-color:var(--sage)}
+.opt-item{display:flex;align-items:center;justify-content:space-between;gap:10px;border:1px solid var(--line);border-radius:14px;padding:14px 14px;margin-bottom:8px;background:var(--paper-2);box-shadow:var(--shadow);transition:transform .15s ease,border-color .15s ease,background .15s ease}
+.opt-item.sel{border-color:var(--sage);background:var(--sage-wash)}
+.opt-item.dragging{transition:none;position:relative;z-index:50;background:#fff;box-shadow:0 6px 18px rgba(0,0,0,.12);border-radius:14px}
+.drag-handle{flex:none;width:26px;height:34px;display:flex;align-items:center;justify-content:center;color:var(--ink-soft);font-size:17px;cursor:grab;touch-action:none;-webkit-user-select:none;user-select:none}
+.drag-handle:active{cursor:grabbing}
+.opt-item.is-full{opacity:.5}
+.opt-item.is-full .opt-radio{border-color:var(--line);background:var(--paper-2);cursor:not-allowed}
+.opt-item.is-full .opt-text{cursor:not-allowed}
+.cap-badge{display:inline-block;margin-left:7px;font-size:11px;font-weight:600;color:var(--ink-soft);border:1px solid var(--line);border-radius:20px;padding:1px 8px;vertical-align:1px}
+.cap-badge.cap-full{color:#B5543E;border-color:#B5543E}
+.opt-item .opt-radio{width:15px;height:15px;border-radius:3px;border:1.4px solid #C7C4B4;flex:none;position:relative;cursor:pointer}
+.opt-item.sel .opt-radio{border-color:var(--sage);background:var(--sage)}
+.opt-item.sel .opt-radio::after{content:"✓";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:10px;color:#fff}
+.opt-item .opt-text{font-size:13.5px;font-weight:500;color:var(--ink);flex:1;min-width:0;overflow-wrap:break-word;cursor:pointer;line-height:1.5}
+.opt-item.sel .opt-text{font-weight:700}
+.opt-item .opt-tag{color:var(--warm);font-size:11.5px;margin-left:4px}
+.opt-admin-btns{display:flex;gap:5px;flex:none}
+.b-icon{width:28px;height:28px;border-radius:50%;border:1px solid var(--line);background:#fff;font-size:11px;font-weight:600;cursor:pointer;color:var(--ink-soft);display:flex;align-items:center;justify-content:center}
+.b-icon:hover{border-color:var(--sage);color:var(--sage)}
+.b-icon.is-closed{background:#B5543E;color:#fff;border-color:#B5543E}
+.b-icon.del{color:#c0392b;border-color:#c0392b}
+.group-label{font-size:12px;color:var(--ink);margin:16px 0 8px;font-weight:700}
+.section-desc{font-size:12px;color:var(--ink-soft);line-height:1.55}
+/* 모집현황 (관리자 전용) */
+/* 모집현황 — 꼭지앱(공양꼭지)과 완전히 동일한 색·서체·간격을 쓴다 */
+#page-recruit{
+  --k-green:#8FB04E; --k-green-deep:#6E8C3A; --k-clay:#C77E4E;
+  --k-ink:#3A352E; --k-ink-soft:#7A7263; --k-ink-faint:#A99F8C;
+  --k-line:#E6DECF; --k-card:#FFFFFF;
+  --k-shadow:0 1px 2px rgba(58,53,46,.04),0 10px 30px rgba(58,53,46,.06);
+  --k-serif:'Gowun Batang',serif;
+  --k-sans:-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Pretendard','Noto Sans KR',sans-serif;
+  background:#FBF8F1;color:var(--k-ink)
+}
+#page-recruit .page-scroll{padding-left:16px;padding-right:16px}
+#page-recruit .title,#page-recruit .lead,#page-recruit .kicker{color:var(--k-ink)}
+.rc-group{margin-bottom:18px}
+.rc-event{font-family:var(--k-serif);font-weight:700;font-size:17px;color:var(--k-green-deep);padding-bottom:8px;border-bottom:2px solid var(--k-green-deep);margin-bottom:10px}
+.rc-mini{background:var(--k-card);border:1px solid var(--k-line);border-radius:10px;padding:11px 13px;margin-bottom:8px;box-shadow:var(--k-shadow)}
+.rc-date{font-family:var(--k-serif);font-weight:700;font-size:12.5px;color:var(--k-ink);display:flex;flex-wrap:wrap;row-gap:3px;justify-content:space-between;align-items:baseline;margin-bottom:4px}
+.rc-date>span:first-child{flex:1 1 auto;min-width:0}
+.rc-total{font-family:var(--k-sans);font-weight:600;font-size:11px;color:var(--k-green-deep);display:inline-flex;align-items:center;gap:6px}
+.rc-date-right{display:flex;align-items:center;gap:7px;flex:none}
+.rc-pill{font-size:10.5px;font-weight:700;border-radius:20px;padding:3px 10px;cursor:pointer;border:1px solid var(--k-line);color:var(--k-ink-soft);background:var(--k-card);font-family:var(--k-sans)}
+.rc-pill.is-closed{background:var(--k-clay);color:#fff;border-color:var(--k-clay)}
+.rc-row{font-size:12px;line-height:1.6;display:flex;gap:6px}
+.rc-row b{flex:none;color:var(--k-clay);font-weight:700;white-space:nowrap}
+.rc-row span{color:var(--k-ink-soft);word-break:keep-all;overflow-wrap:normal}
+.rc-row i{color:var(--k-ink-faint);font-style:normal}
+.rc-fold{border:1px dashed var(--k-green);border-radius:10px;padding:10px 12px;margin-top:10px}
+.rc-fold-head{font-size:12px;font-weight:700;color:var(--k-green-deep);display:flex;justify-content:space-between;align-items:baseline}
+.rc-fold-body{margin-top:7px;font-size:12px;color:var(--k-ink-soft);line-height:1.8}
+.rc-fold-row b{color:var(--k-ink);font-weight:600;margin-right:5px}
+.rc-fold-total{border-top:1px dashed var(--k-green);margin-top:4px;padding-top:6px}
+.rc-fold-total b{color:var(--k-green-deep)}
+.rc-card{border:1px solid var(--k-line);border-radius:12px;padding:12px 13px;margin-bottom:8px;background:var(--k-card);box-shadow:var(--k-shadow)}
+.rc-card-top{display:flex;align-items:baseline;justify-content:space-between;gap:8px}
+.rc-name{font-family:var(--k-serif);font-size:15px;font-weight:700;color:var(--k-ink)}
+.rc-phone{font-size:12px;color:var(--k-ink-soft);text-decoration:underline;text-decoration-color:var(--k-line);text-underline-offset:2px}
+.rc-meta{font-size:12px;color:var(--k-ink-soft);margin-top:2px}
+.rc-tagbox{margin-top:9px;background:var(--sage-wash);border-radius:8px;padding:8px 10px;display:flex;flex-wrap:wrap;gap:5px}
+.rc-tag{font-size:11px;border-radius:20px;padding:2px 9px;background:var(--k-card);color:var(--k-clay);font-weight:600}
+.rc-tag b{color:var(--k-ink);font-weight:700;margin-right:2px}
+.rc-motive{margin-top:7px;font-size:12px;color:var(--k-ink-soft);line-height:1.5}
+.rc-route{margin-top:4px;font-size:11px;color:var(--k-ink-soft);opacity:.85}
+.rc-time{margin-top:6px;font-size:10.5px;color:var(--k-ink-faint)}
+.rc-day-btn{flex:1;min-width:44px;text-align:center;border:1px solid var(--k-line);background:var(--k-card);color:var(--k-ink);border-radius:8px;padding:8px 6px;font-size:13px;font-weight:600;cursor:pointer;font-family:var(--k-sans)}
+.rc-day-btn.on{background:var(--k-green);color:#fff;border-color:var(--k-green)}
+.rc-day-cnt{font-size:11px;opacity:.8;font-weight:500}
+.group-label.strong{font-weight:800}
+.group-label:first-child{margin-top:0}
+.hint{font-size:11.5px;color:var(--ink-soft);margin-top:4px;line-height:1.7}
+.btn-submit{display:block;width:100%;padding:16px;text-align:center;background:var(--sage);color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;font-family:"Pretendard",sans-serif;margin-top:8px}
+.error-msg{color:#c0392b;font-size:12px;margin-top:6px;display:none}
+.done-screen{display:none;text-align:center;padding:60px 20px}
+.done-screen.show{display:block}
+.done-screen .emoji{font-size:50px;margin-bottom:16px}
+.done-screen h2{font-family:"Gowun Batang",serif;font-size:19px;margin-bottom:10px}
+.done-screen p{font-size:13px;color:var(--ink-soft)}
+#formArea.hidden{display:none}
+.pending-notice{background:var(--paper-2);border:1px solid var(--line);border-radius:8px;padding:18px;text-align:center}
+.pending-notice .pe{font-size:26px;margin-bottom:10px}
+.pending-notice h4{font-family:"Gowun Batang",serif;font-size:14.5px;margin:0 0 8px;color:var(--ink)}
+.pending-notice p{font-size:12.5px;color:var(--ink-soft);margin:0;line-height:1.65}
+.toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--ink);color:#fff;padding:12px 20px;border-radius:8px;font-size:13px;opacity:0;transition:.3s;z-index:1300;pointer-events:none;white-space:nowrap}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.hidden{display:none!important}
+
+#adminBadge{display:none;position:fixed;top:8px;right:8px;font-size:10px;background:rgba(0,0,0,.5);color:#fff;padding:4px 8px;border-radius:10px;z-index:1400}
+body.admin-on #adminBadge{display:block}
+.adm-toolbar{display:none;gap:8px;padding:9px 22px;background:#FFF6D8;border-bottom:1px solid #E9DDA8;font-size:11.5px;align-items:center;position:relative;z-index:60}
+body.admin-on .adm-toolbar{display:flex}
+.adm-toolbar button{font-size:11px;padding:5px 10px;border-radius:14px;border:1px solid var(--ink);background:#fff;cursor:pointer}
+
+/* ===== 10월 홍보용 테스트: 기존 신청앱의 결을 유지한 이미지/신청 UI ===== */
+.activity-art-card{
+  background:var(--paper-2);border:1px solid var(--line);border-radius:var(--r);
+  box-shadow:var(--shadow);overflow:hidden;margin-bottom:16px;
+}
+.activity-art-card img{
+  width:100%;display:block;aspect-ratio:1.138/1;object-fit:cover;background:#fff;
+  border-bottom:1px solid var(--line);
+}
+.activity-art-copy{display:grid;grid-template-columns:38px 1fr;gap:13px;padding:16px 16px 17px}
+.activity-art-copy .num{
+  width:34px;height:34px;border-radius:50%;border:1px solid var(--line);
+  display:flex;align-items:center;justify-content:center;
+  font-family:"Gowun Batang",serif;font-size:12px;font-weight:700;color:var(--ink)
+}
+.activity-art-copy h3{
+  font-family:"Gowun Batang",serif;font-size:16px;font-weight:700;
+  margin:1px 0 6px;line-height:1.5
+}
+.activity-art-copy p{font-size:13px;color:var(--ink-soft);line-height:1.7;margin:0}
+
+.meal-art{
+  width:100%;display:block;border-radius:14px;border:1px solid var(--line);
+  margin:0 0 14px;background:#fff
+}
+.meal-slot.has-art{padding:14px}
+.meal-slot.has-art .meal-slot-label{margin-bottom:12px}
+.meal-slot.has-art .recipe-mini{padding-left:2px;padding-right:2px}
+
+.apply-choice-note{
+  font-size:12.5px;color:var(--ink-soft);line-height:1.7;margin:4px 0 16px
+}
+.apply-program-group{margin:18px 0 24px}
+.apply-program-head{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 1px 10px
+}
+.apply-program-head h4{
+  font-family:"Gowun Batang",serif;font-size:17px;margin:0;color:var(--ink)
+}
+.apply-duration{
+  font-size:11px;font-weight:800;color:var(--sage);background:var(--sage-wash);
+  border-radius:99px;padding:4px 9px;white-space:nowrap
+}
+.apply-schedule-card{
+  border:1px solid var(--line);border-radius:14px;background:#fff;padding:14px 13px;
+  margin-bottom:9px;display:grid;grid-template-columns:24px 1fr;gap:10px;align-items:start;
+  cursor:pointer
+}
+.apply-schedule-card.sel{border-color:var(--sage);background:var(--sage-wash)}
+.apply-schedule-card.blocked{opacity:.48;cursor:not-allowed}
+.schedule-check{
+  width:20px;height:20px;border:1.5px solid var(--line);border-radius:6px;margin-top:2px;
+  display:grid;place-items:center;font-size:11px;background:#fff
+}
+.apply-schedule-card.sel .schedule-check,.part-date-row.sel .schedule-check{
+  background:var(--sage);border-color:var(--sage);color:#fff
+}
+.schedule-inline-wrap{min-width:0}
+.schedule-inline{
+  display:flex;align-items:baseline;gap:6px;flex-wrap:wrap;line-height:1.45
+}
+.schedule-inline .date{font-weight:800;font-size:14.5px;color:var(--ink)}
+.schedule-inline .time{font-size:12px;color:var(--ink-soft);font-weight:600}
+.schedule-inline .range{font-size:12px;color:var(--sage);font-weight:800}
+.schedule-inline-meta{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}
+.status-mini,.cap-badge{
+  display:inline-flex;align-items:center;font-size:9.5px;border:1px solid var(--line);
+  color:var(--ink-soft);border-radius:99px;padding:2px 6px;background:#fff
+}
+.cap-badge.cap-full{color:#9C5146;border-color:#CFA59F;background:#FFF8F7}
+.conflict-note{display:block;color:#9C5146;font-size:10.5px;margin-top:6px}
+
+.part-category{margin:20px 0 10px;border-top:1px solid var(--line);padding-top:17px}
+.part-cat-head{display:flex;justify-content:space-between;gap:12px;align-items:baseline;margin-bottom:10px}
+.part-cat-head h4{font-family:"Gowun Batang",serif;font-size:17px;margin:0}
+.part-cat-head span{font-size:11.5px;color:var(--ink-soft);font-weight:700}
+.part-date-row{
+  border:1px solid var(--line);background:#fff;border-radius:13px;padding:12px 13px;margin:7px 0;
+  display:flex;align-items:center;gap:10px;cursor:pointer
+}
+.part-date-row.sel{border-color:var(--sage);background:var(--sage-wash)}
+.part-date-row.blocked{opacity:.48;cursor:not-allowed}
+.part-date-main{flex:1;min-width:0}
+.part-date-main b{font-size:14px}
+.part-date-badge{
+  font-size:9.5px;border-radius:99px;padding:2px 6px;border:1px solid var(--line);
+  color:var(--ink-soft);white-space:nowrap
+}
+.part-date-badge.full{color:#9C5146;border-color:#CFA59F}
+
+.apply-admin-row{display:flex;gap:5px;justify-content:flex-end;margin-top:9px;grid-column:1/-1}
+.apply-admin-row .b-icon{width:auto;padding:0 9px;border-radius:99px;font-size:10px}
+
+.submit-progress{
+  display:flex;align-items:center;gap:11px;border:1px solid var(--line);border-radius:12px;
+  background:var(--paper-2);padding:12px 13px;margin:12px 0;font-size:12px;color:var(--ink-soft)
+}
+.submit-progress.hidden{display:none}
+.submit-progress b{display:block;color:var(--ink);font-size:12.5px}
+.submit-progress small{display:block;margin-top:2px;font-size:10.5px}
+.submit-spinner{
+  width:20px;height:20px;border-radius:50%;border:2px solid var(--line);border-top-color:var(--sage);
+  animation:spin .8s linear infinite;flex:none
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.done-screen.show{display:block}
+.done-screen .emoji{font-size:38px}
+.guide-card{
+  margin:22px 0 18px;border:1px solid var(--line);border-radius:20px;
+  background:var(--paper-2);padding:22px 17px;text-align:left;box-shadow:var(--shadow)
+}
+.guide-card .gc-k{
+  font-size:10.5px;font-weight:800;letter-spacing:.18em;color:var(--sage)
+}
+.guide-card h3{
+  font-family:"Gowun Batang",serif;font-size:24px;line-height:1.35;margin:8px 0 5px;color:var(--ink)
+}
+.gc-name{font-size:14px;color:var(--ink-soft);margin-bottom:18px}
+.complete-subcard{
+  border-top:1px solid var(--line);padding-top:16px;margin-top:16px
+}
+.gc-section-title{
+  font-family:"Gowun Batang",serif;font-size:16px;font-weight:700;margin:0 0 10px;color:var(--ink)
+}
+.gc-schedules{display:grid;gap:9px}
+.guide-sched-card{
+  border:1px solid var(--line);background:#fff;border-radius:13px;padding:13px
+}
+.guide-sched-top{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:7px}
+.guide-sched-top b{font-family:"Gowun Batang",serif;font-size:14px}
+.guide-sched-badge{
+  font-size:9.5px;font-weight:800;color:var(--sage);background:var(--sage-wash);
+  border-radius:99px;padding:3px 7px;white-space:nowrap
+}
+.guide-inline-date{display:flex;align-items:baseline;gap:6px;flex-wrap:wrap}
+.guide-inline-date .g-date{font-size:14px;font-weight:800}
+.guide-inline-date .g-time{font-size:11.5px;color:var(--ink-soft)}
+.guide-inline-date .g-range{font-size:11px;color:var(--sage);font-weight:800}
+.gc-flow{display:grid;gap:0}
+.flow-step{
+  display:grid;grid-template-columns:36px 1fr;gap:11px;position:relative;padding:0 0 18px
+}
+.flow-step:not(:last-child)::before{
+  content:"";position:absolute;left:17px;top:33px;bottom:0;width:1px;background:var(--line)
+}
+.flow-no{
+  width:35px;height:35px;border-radius:50%;background:#fff;border:1px solid var(--line);
+  display:grid;place-items:center;color:var(--sage);font-size:10px;font-weight:800;z-index:1
+}
+.flow-step b{
+  display:block;font-family:"Gowun Batang",serif;font-size:14.5px;margin:2px 0 3px
+}
+.flow-step small{display:block;font-size:11.5px;color:var(--ink-soft);line-height:1.65}
+.save-guide-btn{
+  width:100%;border:1px solid var(--sage);background:var(--sage);color:#fff;border-radius:12px;
+  padding:13px 15px;font-family:"Pretendard",sans-serif;font-size:13px;font-weight:700;cursor:pointer
+}
+.test-live-note{
+  font-size:10.5px;color:var(--ink-soft);text-align:center;margin:-8px 0 17px
+}
+@media(max-width:380px){
+  .activity-art-copy{padding:14px 14px 15px}
+  .activity-art-copy h3{font-size:15px}
+  .schedule-inline .date{font-size:13.5px}
+  .part-cat-head{align-items:flex-start;flex-direction:column;gap:2px}
+}
+
+</style>
+</head>
+<body>
+
+<div id="adminBadge">ADMIN</div>
+<div class="adm-toolbar" id="admToolbar"><span>관리자 모드</span><button onclick="logoutAdmin()">종료</button></div>
+
+<div class="wrap" id="wrap">
+
+  <!-- 처음 들어오면 여기부터 봅니다: 영상을 볼지, 바로 신청안내로 갈지 선택 -->
+  <div class="choice-stage" id="choiceStage">
+    <div class="choice-inner">
+      <div class="kicker">RECRUIT</div>
+      <h1 class="title" id="secretTitle" onclick="handleSecretTap()">밥은 <span class="warm">먹었니?</span></h1>
+      <p class="lead">군청년 바라지, 무엇부터 보시겠어요?</p>
+      <div class="s-card primary" onclick="chooseApply()">
+        <div class="s-ic"><svg class="ic-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0112 0c0 5 2 6 2 6H4s2-1 2-6z"/><path d="M9.5 18a2.5 2.5 0 005 0"/></svg></div>
+        <div class="s-txt"><b>신청안내</b><span>지금 모집 중인 일정을 확인하고 신청합니다</span></div>
+      </div>
+      <div class="s-card" onclick="chooseVideo()">
+        <div class="s-ic"><svg class="ic-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="14" height="12" rx="2"/><path d="M17 10l4-2.5v9L17 14"/></svg></div>
+        <div class="s-txt"><b>홍보영상</b><span>1분 남짓, 바라지 활동을 먼저 볼 수 있어요</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="video-stage hide" id="videoStage">
+    <div class="tap-to-start" id="tapToStart" onclick="startVideo()">
+      <div class="play-circle">▶</div>
+      <p>화면을 눌러 영상을 시작하세요</p>
+    </div>
+    <div id="playerHost"></div>
+    <button class="skip-btn" onclick="skipVideo()">건너뛰기</button>
+    <div class="video-end-overlay" id="videoEndOverlay">
+      <button class="next-btn" onclick="goToPageFlow()">다음으로 →</button>
+    </div>
+  </div>
+
+  <!-- 랜딩 -->
+  <div class="page" id="page-landing">
+    <div class="page-scroll">
+      <div class="kicker">RECRUIT</div>
+      <h1 class="title" id="secretTitle" onclick="handleSecretTap()">밥은 <span class="warm">먹었니?</span></h1>
+      <p class="lead" id="landingSub">군청년 바라지를 모집합니다.<br>지금 신청받고 있는 일정을 확인해보세요.</p>
+      <div class="landing-cal-head"><span class="ci"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="16" rx="2"/><path d="M4 9h16M8 3v4M16 3v4"/></svg></span><span id="landingMonthLabel">8월에 예정된 바라지 봉사일정</span></div>
+      <div id="landingSchedList"><div class="loading-note">일정 불러오는 중...</div></div>
+      <div id="landingIntro"></div>
+      <div id="landingInlineForm"></div>
+      <button class="admin-add-btn hidden" id="addLandingBtn" onclick="showLandingInlineForm()">+ 새 일정 추가</button>
+    </div>
+    <div class="page-footer">
+      <button class="btn-next" onclick="goPage('apply')">바라지 신청하기</button>
+      <button class="btn-outline" onclick="goPage('act1')">바라지 활동들 살펴보기</button>
+      <div class="admin-only hidden" id="recruitStatusWrap">
+        <hr class="footer-divider">
+        <div class="admin-tag">관리자 전용</div>
+        <button class="btn-recruit-status" onclick="goPage('recruit');loadRecruitStatus()">📋 모집현황 보기</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 활동 1p -->
+  <div class="page" id="page-act1">
+    <div class="page-scroll">
+      <button class="btn-back" onclick="goPage('landing')">← 이전</button>
+      <div class="kicker">ACTIVITY</div>
+      <h1 class="title" id="act1Title">이 봉사에서 <span class="warm">우리가 하는 일</span></h1>
+      <p class="lead" id="act1Lead">바라지는 밥을 짓는 시간을 넘어, 함께 나누고 쉬어가는 시간입니다.</p>
+      <div id="activityList"><div class="loading-note">활동 불러오는 중...</div></div>
+    </div>
+    <div class="page-footer"><button class="btn-next" onclick="goPage('act2')">다음</button></div>
+  </div>
+
+  <!-- 활동 2p -->
+  <div class="page" id="page-act2">
+    <div class="page-scroll">
+      <button class="btn-back" onclick="goPage('act1')">← 이전</button>
+      <div class="kicker">MENU</div>
+      <h1 class="title" id="act2Title">이런 <span class="warm">공양을 만들어요</span></h1>
+      <p class="lead" id="act2Lead">군장병들을 위해 정성껏 준비하는 공양 메뉴입니다.</p>
+      <div class="meal-tabs" id="mealTabs"></div>
+      <div id="mealBlocks"><div class="loading-note">메뉴 불러오는 중...</div></div>
+    </div>
+    <div class="page-footer"><button class="btn-next" onclick="goPage('apply')">바라지 신청하기</button></div>
+  </div>
+
+  <!-- 신청서 -->
+  <!-- 모집현황 (관리자 전용, 보기 전용) -->
+  <div class="page" id="page-recruit">
+    <div class="page-scroll">
+      <button class="btn-back" onclick="goPage('landing')">← 이전</button>
+      <div class="kicker">STATUS</div>
+      <h1 class="title">모집 <span class="warm">현황</span></h1>
+      <p class="lead" style="margin-bottom:20px">지금까지 들어온 신청을 모아서 보여줍니다. 배치 조정은 공양꼭지 앱에서 합니다.</p>
+      <div id="rcStateBox"><div class="loading-note">불러오는 중...</div></div>
+      <div id="rcBody" style="display:none">
+        <div id="rcSummary"></div>
+        <div id="rcDayFilter" style="display:flex;gap:6px;margin:14px 0 8px;flex-wrap:wrap"></div>
+        <input type="text" id="rcSearch" placeholder="이름·전화·지회로 찾기" oninput="renderRecruitList()" style="width:100%;box-sizing:border-box;border:1px solid var(--line);background:var(--paper-2);border-radius:8px;padding:9px 11px;font-family:inherit;font-size:14px;color:var(--ink);margin:16px 0 8px">
+        <div class="section-desc" id="rcCount" style="margin-bottom:8px"></div>
+        <div id="rcList"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page" id="page-apply">
+    <div class="page-scroll">
+      <button class="btn-back" onclick="goPage('landing')">← 이전</button>
+      <div class="kicker">APPLY</div>
+      <h1 class="title" id="applyTitle">군청년 바라지 <span class="warm">전국모집</span></h1>
+      <p class="lead" id="applyLead" style="margin-bottom:14px">아들같고 동생같은 군용사들이 마음을 편안히 쉬고 더 행복한 군생활을 해나갈 수 있는 의미있는 시간에 함께 해 주세요.</p>
+      <div class="test-live-note">테스트 페이지 · 제출 전 확인창이 뜨며, 확인하면 실제 신청으로 접수됩니다.</div>
+
+      <div id="formArea">
+        <div class="section">
+          <div class="section-title"><span class="num">1</span>소속지부<span class="req">*</span></div>
+          <div class="field">
+            <div class="radio-grid" data-key="bu">
+              <div class="radio-chip" data-val="서울제주">서울제주</div>
+              <div class="radio-chip" data-val="강원경기동부">강원경기동부</div>
+              <div class="radio-chip" data-val="인천경기서부">인천경기서부</div>
+              <div class="radio-chip" data-val="대전충청">대전충청</div>
+              <div class="radio-chip" data-val="광주전라">광주전라</div>
+              <div class="radio-chip" data-val="대구경북">대구경북</div>
+              <div class="radio-chip" data-val="부산울산">부산울산</div>
+              <div class="radio-chip" data-val="경남">경남</div>
+              <div class="radio-chip" data-val="해외">해외</div>
+              <div class="radio-chip" data-val="국제">국제</div>
+              <div class="radio-chip" data-val="청년">청년</div>
+              <div class="radio-chip" data-val="공동체">공동체</div>
+              <div class="radio-chip" data-val="행복본부">행복본부</div>
+              <div class="radio-chip" data-val="기타">기타</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-title"><span class="num">2</span>기본 정보</div>
+          <div class="field"><label>소속지회 ('지회' 빼고)<span class="req">*</span></label><input type="text" id="ji" placeholder="예) 안양"></div>
+          <div class="field"><label>거주지 (시·군·구 단위까지)<span class="req">*</span></label><input type="text" id="addr" placeholder="예) 경기 안양시"></div>
+          <div class="field"><label>이름<span class="req">*</span></label><input type="text" id="name" placeholder="이름"></div>
+          <div class="field"><label>연락처<span class="req">*</span></label><input type="tel" id="phone" placeholder="010-1234-5678" maxlength="13" oninput="formatPhoneInput(this)"></div>
+          <div class="field"><label>회원구분<span class="req">*</span></label>
+            <div class="radio-grid" data-key="memberType"><div class="radio-chip" data-val="전법">전법</div><div class="radio-chip" data-val="일반">일반</div></div>
+          </div>
+          <div class="field"><label>성별<span class="req">*</span></label>
+            <div class="radio-grid" data-key="gender"><div class="radio-chip" data-val="남">남</div><div class="radio-chip" data-val="여">여</div></div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-title"><span class="num">3</span>참가 일정</div>
+
+          <div class="group-label strong">3-1. 바라지 프로그램으로 참여</div>
+          <div class="apply-choice-note" id="mainDesc">공양봉사뿐 아니라 법사님 간담회, 산책, 회관 둘러보기, 군청년 프로그램 참관 등을 함께하는 바라지 일정입니다. 가능한 날짜를 복수 선택할 수 있습니다.</div>
+          <div id="scheduleMain"><div class="loading-note">일정 불러오는 중...</div></div>
+          <div id="mainInlineForm"></div>
+          <button class="admin-add-btn hidden" id="addMainBtn" onclick="showMainInlineForm()">+ 바라지 일정 추가</button>
+
+          <div class="group-label strong" style="margin-top:24px">3-2. 하루만 공양봉사로 참여</div>
+          <div class="apply-choice-note" id="partDesc">공양간 봉사만 하루 단위로 함께합니다. 점심공양 지원과 저녁공양 봉사를 날짜별로 고를 수 있고, 복수 선택도 가능합니다.</div>
+          <div id="schedulePart"><div class="loading-note">일정 불러오는 중...</div></div>
+          <div id="partInlineForm"></div>
+          <button class="admin-add-btn hidden" id="addPartBtn" onclick="showPartInlineForm()">+ 파트봉사 일정 추가</button>
+        </div>
+
+        <div class="section" id="confirmedFields">
+          <div class="section-title"><span class="num">4</span>바라지 신청</div>
+          <div class="field"><label>바라지 신청 동기<span class="req">*</span></label><textarea id="motive" placeholder="신청 동기를 자유롭게 적어주세요"></textarea></div>
+          <div class="field"><label>바라지 신청 경로<span class="req">*</span></label><input type="text" id="route" placeholder="예) 정토회 홈페이지, 텔레그램 소식채널, 모임, 소개 등"></div>
+        </div>
+
+        <div class="section hidden" id="pendingNotice">
+          <div class="section-title"><span class="num">4</span>일정 확정 전 예약</div>
+          <div class="pending-notice">
+            <div class="pe">🗓️</div>
+            <h4 id="pendingMonthLabel">선택한 일정은 아직 완전히 확정되지 않았습니다</h4>
+            <p>기본정보만 남겨주시면 일정이 확정된 뒤 신청페이지를 안내드리겠습니다.</p>
+          </div>
+        </div>
+
+        <div class="error-msg" id="errorMsg">필수 항목을 모두 입력해주세요.</div>
+        <div id="submitProgress" class="submit-progress hidden"><span class="submit-spinner"></span><div><b>신청을 접수하고 있습니다</b><small>안전하게 저장되는 동안 몇 초 정도 걸릴 수 있어요.</small></div></div>
+        <button class="btn-submit" id="submitBtn" onclick="submitApply()">신청 제출하기</button>
+      </div>
+
+      <div class="done-screen" id="doneScreen">
+        <div class="emoji">🙏</div>
+        <h2 id="doneTitle">신청이 완료되었습니다</h2>
+        <p id="doneDesc">신청해주셔서 감사합니다.</p>
+        <div id="guideCard" class="guide-card">
+          <div class="gc-k">MY BARAJI</div>
+          <h3>나의 바라지 안내</h3>
+          <div id="guideName" class="gc-name"></div>
+          <div class="complete-subcard">
+            <div class="gc-section-title">신청한 일정</div>
+            <div id="guideSchedules" class="gc-schedules"></div>
+          </div>
+          <div class="complete-subcard">
+            <div class="gc-section-title">앞으로 이렇게 진행됩니다</div>
+            <div class="gc-flow">
+              <div class="flow-step"><div class="flow-no">01</div><div><b>신청 완료</b><small>신청하신 내용이 접수되었습니다.</small></div></div>
+              <div class="flow-step"><div class="flow-no">02</div><div><b>신청 일정 확인 연락</b><small>신청하신 일정이 맞는지, 변동사항은 없는지 메시지로 확인드려요.</small></div></div>
+              <div class="flow-step"><div class="flow-no">03</div><div><b>텔레그램 소통방 초대</b><small>준비물과 세부일정, 변동사항을 소통방에서 함께 나눕니다.</small></div></div>
+              <div class="flow-step"><div class="flow-no">04</div><div><b>바라지에서 만나요</b><small>건강히 잘 지내다가 약속한 날 만나요.</small></div></div>
+            </div>
+          </div>
+        </div>
+        <button class="save-guide-btn" onclick="saveGuideImage()">나의 참가 안내 이미지로 저장</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- 메뉴는 이제 바라지 메인앱에서만 편집합니다 -->
+
+<div class="toast" id="toast"></div>
+
+<script>
+const APPSSCRIPTURL = "https://script.google.com/macros/s/AKfycbypbINZxPPOTBCSPZL39LOWgZnqcRaxo0akj9fDN4Rsv6kZ3-dkUfhJ0ctV9CBF87Rs/exec";
+const YTVIDEOID = "eQWuKJ79RMo";
+
+// 클릭했을 때 지연 없이 바로 재생되도록, 유튜브 iframe API를 페이지가 열리자마자 미리 불러둔다
+(function preloadYT(){
+  const tag = document.createElement("script");
+  tag.src = "https://www.youtube.com/iframe_api";
+  document.head.appendChild(tag);
+})();
+
+let REMOTE_DATA = { meals:{}, menus:[], activities:[], schedules:[], siteconfig:{} };
+let isAdmin = false;
+let ADMIN_PW = "";
+let SCHEDULE_COUNTS = {}; // 정원이 걸린 일정별 "지금까지 신청한 인원수" — 서버(getScheduleCounts)에서 받아온다
+
+const FALLBACK_ACTIVITIES = [
+  {icon:"🍚", title:"군장병들을 위한 공양을 만들어요", desc:"정성껏 준비한 음식이 장병들에겐 어머니의 따뜻한 한 끼가 됩니다."},
+  {icon:"🧹", title:"만물에는 다 제자리가 있대요", desc:"우리가 썼던 공간을 청소하고 뒷정리합니다. 보이지 않는 곳을 돌아보는 마음을 연습하게 됩니다."},
+  {icon:"🧘", title:"짧지만 우리도 명상!", desc:"바쁜 손길 사이에서, 일정을 다 마친 후에 잠시 호흡을 바라봅니다."},
+  {icon:"🙏", title:"다같이 아침기도정진에 참여해요", desc:"설법전에서 많은 대중들과 함께 하루를 여는 맑은 정진의 시간을 갖습니다."},
+  {icon:"🌳", title:"우면산 · 대성사 산책", desc:"숲길을 걸으며 몸과 마음을 가볍게 합니다. 용성조사님과의 인연이 깊은 대성사도 방문해요."},
+  {icon:"💬", title:"법사님과의 찐~한 간담회", desc:"무엇이든 내놓아 보세요. 법사님·도반과 둘러앉아 마음을 터놓고 깊은 대화의 자리를 가져요."},
+  {icon:"❓", title:"청년들이 묻고 유수스님이 답하는 일문일답", desc:"청년들의 진솔한 물음과 스님의 명쾌한 답을 곁에서 참관합니다."},
+  {icon:"💭", title:"프로그램 소감 나누기에 참관", desc:"청년들이 무엇을 느꼈는지, 그 변화를 함께 듣습니다."},
+  {icon:"🛏️", title:"정토사회문화회관에서 숙박을 할 수 있어요", desc:"하룻밤 혹은 이틀밤을 머물며 봉사자들과 함께 지냅니다."},
+  {icon:"📷", title:"15층 법당 구경 & 사진", desc:"멋진 법당을 둘러보고 기념 사진을 남길 수 있어요."}
+];
+const FALLBACK_MEALS = {
+  day1_dinner: { label:"1일차 저녁공양", note:"", dishes:[{name:"현미밥",amt:"50인분"},{name:"된장국",amt:"50인분"},{name:"나물무침",amt:"50인분"},{name:"김치",amt:"50인분"}] },
+  day2_dinner: { label:"2일차 저녁공양", note:"", dishes:[{name:"잡곡밥",amt:"50인분"},{name:"미역국",amt:"50인분"},{name:"두부조림",amt:"50인분"},{name:"김치",amt:"50인분"}] },
+  breakfast:   { label:"아침 공양", note:"아침 공양은 이렇게 준비해요", dishes:[{name:"토스트",amt:"50인분"},{name:"계란",amt:"50인분"},{name:"우유",amt:"50인분"}] }
+};
+
+/* ---------- 새 일정 데이터 모델 ----------
+main(8-1, 랜딩용): {id, type:"main", name, month, startDay, startTime, endDay, endTime, nights, place, status}
+part(8-2): {id, type:"part", month, day, startTime, endTime, activity, place, status}
+*/
+const FALLBACK_DATA = {
+  activities: FALLBACK_ACTIVITIES,
+  schedules: [
+    {id:"m-1", type:"main", name:"서울여행 바라지", month:8, startDay:13, startTime:"13:30", endDay:14, endTime:"14:30", nights:"1박2일", place:"정토사회문화회관", status:"recruiting"},
+    {id:"m-2", type:"main", name:"행복학교 바라지", month:8, startDay:19, startTime:"13:30", endDay:21, endTime:"14:30", nights:"2박3일", place:"정토사회문화회관", status:"recruiting"},
+    {id:"m-3", type:"main", name:"청년귀농학교 바라지", month:8, startDay:20, startTime:"13:30", endDay:21, endTime:"14:30", nights:"1박2일", place:"정토사회문화회관", status:"planned"},
+    {id:"p-1", type:"part", month:8, day:13, startTime:"13:30", endTime:"19:30", activity:"저녁공양봉사", place:"정토사회문화회관", status:"recruiting"},
+    {id:"p-2", type:"part", month:8, day:14, startTime:"09:00", endTime:"14:00", activity:"점심공양지원", place:"정토사회문화회관", status:"recruiting"},
+    {id:"p-3", type:"part", month:8, day:19, startTime:"13:30", endTime:"19:30", activity:"저녁공양봉사", place:"정토사회문화회관", status:"recruiting"},
+    {id:"p-4", type:"part", month:8, day:20, startTime:"09:00", endTime:"14:00", activity:"점심공양지원", place:"정토사회문화회관", status:"recruiting"},
+    {id:"p-5", type:"part", month:8, day:20, startTime:"13:30", endTime:"19:30", activity:"저녁공양봉사", place:"정토사회문화회관", status:"recruiting"},
+    {id:"p-6", type:"part", month:8, day:21, startTime:"09:00", endTime:"14:00", activity:"점심공양지원", place:"정토사회문화회관", status:"recruiting"}
+  ],
+  siteconfig: { promoLandingSub: "군청년 바라지를 모집합니다.\n지금 신청받고 있는 일정을 확인해보세요." },
+  meals: FALLBACK_MEALS
+};
+
+async function loadRemoteData(){
+  try{
+    const res = await fetch(APPSSCRIPTURL+"?t="+Date.now(), {cache:"no-store"}); // t= : 캐시된 옛 응답이 오지 않도록
+    const json = await res.json();
+    if(!json.ok) throw new Error(json.error||"load fail");
+    const d = json.data || {};
+    REMOTE_DATA.meals      = (d.meals && Object.keys(d.meals).length) ? d.meals : FALLBACK_DATA.meals;
+    REMOTE_DATA.menus      = (d.menus && d.menus.length) ? d.menus : [];
+    REMOTE_DATA.activities = (d.activities && d.activities.length) ? d.activities : FALLBACK_DATA.activities;
+    // 일정은 신청앱 전용 칸(apply_schedules)에서 읽는다. 예전엔 메인앱과 같은 'schedules' 칸을
+    // 함께 써서 서로 덮어쓰는 문제가 있었다. 아직 전용 칸이 없으면(첫 전환), 옛 칸에서
+    // 신청앱 형식(type이 있는 것)만 골라서 이어받는다.
+    if(d.apply_schedules && d.apply_schedules.length){
+      REMOTE_DATA.schedules = d.apply_schedules;
+    }else if(d.schedules && d.schedules.length){
+      const mine = d.schedules.filter(x=>x && x.type);
+      REMOTE_DATA.schedules = mine.length ? mine : FALLBACK_DATA.schedules;
+    }else{
+      REMOTE_DATA.schedules = FALLBACK_DATA.schedules;
+    }
+    REMOTE_DATA.siteconfig = d.siteconfig || FALLBACK_DATA.siteconfig;
+  }catch(e){
+    console.warn("Sheets 연동 실패, fallback 데이터 사용", e);
+    REMOTE_DATA = JSON.parse(JSON.stringify(FALLBACK_DATA));
+  }
+  renderAll();
+  loadScheduleCounts(); // 정원 카운트는 별도 요청 — 실패해도 나머지 화면엔 영향 없게 분리
+}
+async function loadScheduleCounts(){
+  try{
+    const res = await fetch(APPSSCRIPTURL+"?action=getScheduleCounts&t="+Date.now(), {cache:"no-store"});
+    const json = await res.json();
+    if(json.ok) SCHEDULE_COUNTS = json.data || {};
+  }catch(e){
+    console.warn("정원 카운트 불러오기 실패", e);
+  }
+  renderApplySchedules();
+}
+function renderAll(){ applySiteTexts(); renderLanding(); renderActivities(); renderMeals(); renderApplySchedules(); }
+
+/* ---------- 관리자 모드: 제목 5회 클릭 ---------- */
+let tapCount = 0, tapTimer = null;
+async function handleSecretTap(){
+  tapCount++;
+  clearTimeout(tapTimer);
+  tapTimer = setTimeout(()=>{ tapCount = 0; }, 1500);
+  if(tapCount >= 5){
+    tapCount = 0;
+    if(isAdmin) return;
+    const pw = prompt("관리자 암호를 입력하세요");
+    if(pw === null) return;
+    await verifyAdminPw_(pw);
+  }
+}
+async function verifyAdminPw_(pw){
+  try{
+    const res = await fetch(APPSSCRIPTURL, { method:"POST", headers:{"Content-Type":"text/plain;charset=utf-8"}, body: JSON.stringify({ password: pw, action:"verify" }) });
+    const json = await res.json();
+    if(json.ok){
+      isAdmin = true;
+      ADMIN_PW = pw;
+      localStorage.setItem("baraji_admin_pw", pw);
+      document.body.classList.add("admin-on");
+      refreshAdminUI();
+      showToast("관리자 모드가 활성화되었습니다");
+    }else{
+      showToast("암호가 올바르지 않습니다");
+    }
+  }catch(e){
+    showToast("확인 중 오류가 발생했습니다 — 다시 시도해주세요");
+  }
+}
+function logoutAdmin(){
+  isAdmin = false;
+  ADMIN_PW = "";
+  localStorage.removeItem("baraji_admin_pw");
+  document.body.classList.remove("admin-on");
+  refreshAdminUI();
+  showToast("관리자 모드를 종료했습니다");
+}
+function refreshAdminUI(){
+  document.getElementById("addLandingBtn").classList.toggle("hidden", !isAdmin);
+  document.getElementById("addMainBtn").classList.toggle("hidden", !isAdmin);
+  document.getElementById("addPartBtn").classList.toggle("hidden", !isAdmin);
+  document.getElementById("recruitStatusWrap").classList.toggle("hidden", !isAdmin);
+  enableInlineTextEdit();
+  renderAll();
+}
+
+/* ---------- 페이지별 제목·문구 수정 (관리자) ---------- */
+function applySiteTexts(){
+  const sc = REMOTE_DATA.siteconfig || {};
+  if(sc.titleLanding) document.getElementById("secretTitle").textContent = sc.titleLanding;
+  document.getElementById("landingSub").textContent = sc.promoLandingSub || FALLBACK_DATA.siteconfig.promoLandingSub;
+  if(sc.titleAct1) document.getElementById("act1Title").textContent = sc.titleAct1;
+  if(sc.leadAct1) document.getElementById("act1Lead").textContent = sc.leadAct1;
+  if(sc.titleAct2) document.getElementById("act2Title").textContent = sc.titleAct2;
+  if(sc.leadAct2) document.getElementById("act2Lead").textContent = sc.leadAct2;
+  if(sc.titleApply) document.getElementById("applyTitle").textContent = sc.titleApply;
+  if(sc.leadApply) document.getElementById("applyLead").textContent = sc.leadApply;
+  if(sc.descMain) document.getElementById("mainDesc").textContent = sc.descMain;
+  if(sc.descPart) document.getElementById("partDesc").textContent = sc.descPart;
+}
+async function persistSiteconfig(){
+  if(!ADMIN_PW){ showToast("관리자 인증이 필요합니다"); return; }
+  try{
+    const res = await fetch(APPSSCRIPTURL, { method:"POST", headers:{"Content-Type":"text/plain;charset=utf-8"}, body: JSON.stringify({ password: ADMIN_PW, key:"siteconfig", value: REMOTE_DATA.siteconfig }) });
+    const json = await res.json();
+    if(!json.ok){ showToast("⚠️ 저장 실패 — 다시 시도해주세요 (로그인은 유지됩니다)"); }
+  }catch(e){ showToast("저장 실패 — 네트워크 오류. 다시 시도해주세요 (로그인은 유지됩니다)"); }
+}
+/* ---------- 제목·문구 클릭 편집 (관리자) ---------- */
+const INLINE_TEXT_FIELDS = [
+  { id:"secretTitle", scKey:"titleLanding" },
+  { id:"landingSub",  scKey:"promoLandingSub" },
+  { id:"act1Title",   scKey:"titleAct1" },
+  { id:"act1Lead",    scKey:"leadAct1" },
+  { id:"act2Title",   scKey:"titleAct2" },
+  { id:"act2Lead",    scKey:"leadAct2" },
+  { id:"applyTitle",  scKey:"titleApply" },
+  { id:"applyLead",   scKey:"leadApply" },
+  { id:"mainDesc",    scKey:"descMain" },
+  { id:"partDesc",    scKey:"descPart" },
+];
+const INLINE_MULTILINE_IDS = ["landingSub","act1Lead","act2Lead","applyLead"];
+function enableInlineTextEdit(){
+  INLINE_TEXT_FIELDS.forEach(f=>{
+    const el = document.getElementById(f.id);
+    if(!el) return;
+    el.contentEditable = isAdmin ? "true" : "false";
+    el.classList.toggle("editable-text", isAdmin);
+    if(el.dataset.wired === "1") return;
+    el.dataset.wired = "1";
+    el.addEventListener("blur", ()=>{
+      if(!isAdmin) return;
+      const val = el.innerText.trim();
+      if((REMOTE_DATA.siteconfig[f.scKey]||"") === val) return; // 바뀐 게 없으면 저장 생략
+      REMOTE_DATA.siteconfig[f.scKey] = val;
+      persistSiteconfig();
+      showToast("저장되었습니다");
+    });
+    el.addEventListener("keydown", (e)=>{
+      if(!isAdmin) return;
+      if(e.key === "Enter" && !INLINE_MULTILINE_IDS.includes(f.id)){
+        e.preventDefault(); el.blur();
+      }
+    });
+  });
+}
+{
+  const savedPw = localStorage.getItem("baraji_admin_pw");
+  if(savedPw){
+    isAdmin = true; ADMIN_PW = savedPw; document.body.classList.add("admin-on"); enableInlineTextEdit();
+    // 이 시점엔 REMOTE_DATA가 아직 안 불러와져 있어 renderAll은 못 하지만, 정적으로 존재하는 관리자 전용 버튼들은 바로 보여줄 수 있다
+    ["addLandingBtn","addMainBtn","addPartBtn","recruitStatusWrap"].forEach(id=>{
+      const el=document.getElementById(id); if(el)el.classList.remove("hidden");
+    });
+  }
+}
+
+/* ---------- 날짜 유틸 ---------- */
+const WD = ["일","월","화","수","목","금","토"];
+function wd(month, day){ if(!month||!day) return ""; return WD[new Date(new Date().getFullYear(), month-1, day).getDay()]; }
+function isPastMain(s){
+  if(!s.month || !s.endDay) return false;
+  const end = new Date(new Date().getFullYear(), s.month-1, s.endDay, 23,59,59);
+  return end.getTime() < Date.now();
+}
+function isPastPart(s){
+  if(!s.month || !s.day) return false;
+  const end = new Date(new Date().getFullYear(), s.month-1, s.day, 23,59,59);
+  return end.getTime() < Date.now();
+}
+function isPast(s){ return s.type==="part" ? isPastPart(s) : isPastMain(s); }
+
+/* ---------- 랜딩: 이미지2 형식 카드 ---------- */
+function renderLanding(){
+  const mains = REMOTE_DATA.schedules.filter(s => s.type==="main");
+  const list = mains.filter(s => s.status !== "cancelled" && !isPastMain(s) && (s.status||"recruiting")==="recruiting");
+  const curMonth = list.length ? Math.min(...list.map(s=>s.month)) : new Date().getMonth()+1;
+  document.getElementById("landingMonthLabel").textContent = `${curMonth}월에 예정된 바라지 봉사일정`;
+
+  const el = document.getElementById("landingSchedList");
+  if(!list.length){ el.innerHTML = '<div class="empty-note">현재 모집중인 일정이 없습니다.</div>'; }
+  else{
+    el.innerHTML = list.map(s => {
+      const admBtns = isAdmin ? `
+        <div class="cal-admin-row">
+          <div class="cal-admin-left"><button class="sadm-icon" onclick="moveSchedule('${s.id}',-1)">↑</button><button class="sadm-icon" onclick="moveSchedule('${s.id}',1)">↓</button></div>
+          <div class="cal-admin-right"><button class="sadm-txt" onclick="showLandingInlineForm('${s.id}')">수정</button><button class="sadm-txt del" onclick="deleteSchedule('${s.id}')">삭제</button></div>
+        </div>` : "";
+      return `
+      <div class="cal-card">
+        <div class="cc-name">${s.name||"바라지"} <span class="dur">${s.nights||""}</span></div>
+        <div class="cc-date">${s.month}월 ${s.startDay}일(${wd(s.month,s.startDay)})–${s.endDay}일(${wd(s.month,s.endDay)})</div>
+        <div class="cc-place">${s.place||""}</div>
+        ${admBtns}
+      </div>
+      <div id="landingInlineForm-${s.id}"></div>`;
+    }).join("");
+  }
+  if(!isAdmin) closeAllInlineForms_();
+  renderLandingIntro();
+}
+const PROGRAM_INTRO_DEFAULTS = {
+  seohaeng: "정토사회문화회관에서 하룻밤 머물며 군장병들의 식사를 함께 준비하는 1박2일 프로그램입니다.",
+  happy: "2박3일 동안 공양 봉사와 함께 법사님과의 간담회, 산책 등 다양한 활동이 이어지는 프로그램입니다.",
+};
+function renderLandingIntro(){
+  const el = document.getElementById("landingIntro");
+  if(!el) return;
+  const active = activePrograms_();
+  el.innerHTML = active.map(p => {
+    const key = "intro_" + p.id;
+    const text = REMOTE_DATA.siteconfig[key] || PROGRAM_INTRO_DEFAULTS[p.id] || "";
+    const label = p.label.split(" ")[0] + " 바라지란";
+    return `<div class="program-intro"><div class="pi-h">${esc_(label)}</div><div class="pi-body" data-sckey="${key}">${esc_(text)}</div></div>`;
+  }).join("");
+  wireProgramIntros_();
+}
+function wireProgramIntros_(){
+  document.querySelectorAll(".pi-body").forEach(el=>{
+    const key = el.dataset.sckey;
+    el.contentEditable = isAdmin ? "true" : "false";
+    el.classList.toggle("editable-text", isAdmin);
+    el.onblur = function(){
+      if(!isAdmin) return;
+      const val = el.innerText.trim();
+      if((REMOTE_DATA.siteconfig[key]||"") === val) return;
+      REMOTE_DATA.siteconfig[key] = val;
+      persistSiteconfig();
+      showToast("저장되었습니다");
+    };
+  });
+}
+
+/* ---------- 랜딩 인라인 폼 (8-1 main 형식) ---------- */
+function mainInlineFormHtml(s, targetId, formType){
+  const isLanding = formType === "main";
+  s = s || {name:"", month:8, startDay:"", startTime:"13:30", endDay:"", endTime:"14:30", nights:"1박2일", place:"정토사회문화회관", status:"recruiting"};
+  return `
+    <div class="inline-form" id="${targetId}">
+      ${isLanding?`<div class="if-row">
+        <div class="if-field"><label>프로그램명</label><input type="text" id="if_name" value="${s.name||""}" placeholder="예) 서울여행 바라지"></div>
+      </div>`:""}
+      <div class="if-row">
+        <div class="if-field"><label>월</label><input type="text" id="if_month" value="${s.month||""}" placeholder="8"></div>
+        <div class="if-field"><label>시작일</label><input type="text" id="if_sday" value="${s.startDay||""}" placeholder="13"></div>
+        <div class="if-field"><label>시작시간</label><input type="text" id="if_stime" value="${s.startTime||""}" placeholder="13:30"></div>
+      </div>
+      <div class="if-row">
+        <div class="if-field"><label>종료일</label><input type="text" id="if_eday" value="${s.endDay||""}" placeholder="14"></div>
+        <div class="if-field"><label>종료시간</label><input type="text" id="if_etime" value="${s.endTime||""}" placeholder="14:30"></div>
+        <div class="if-field"><label>숙박</label>
+          <select id="if_nights">
+            <option value="1박2일" ${s.nights==="1박2일"?"selected":""}>1박2일</option>
+            <option value="2박3일" ${s.nights==="2박3일"?"selected":""}>2박3일</option>
+            <option value="당일" ${s.nights==="당일"?"selected":""}>당일</option>
+          </select>
+        </div>
+      </div>
+      ${isLanding?`<div class="if-row">
+        <div class="if-field"><label>장소</label><input type="text" id="if_place" value="${s.place||"정토사회문화회관"}"></div>
+        <div class="if-field"><label>상태</label>
+          <select id="if_status">
+            <option value="recruiting" ${s.status==="recruiting"?"selected":""}>지금 신청받는 일정</option>
+            <option value="planned" ${s.status==="planned"?"selected":""}>향후 예정(미확정)</option>
+          </select>
+        </div>
+      </div>`:""}
+      ${!isLanding?`<div class="if-row">
+        <div class="if-field"><label>정원(선택)</label><input type="text" id="if_cap" value="${s.cap||""}" placeholder="비우면 무제한, 예) 10"></div>
+      </div>`:""}
+      <div class="if-actions">
+        <button class="if-cancel" onclick="hideInlineForm('${targetId}')">취소</button>
+        <button class="if-save" onclick="saveMainInline('${s.id||""}','${targetId}','${formType}')">저장</button>
+      </div>
+    </div>`;
+}
+function closeAllInlineForms_(){
+  document.getElementById("landingInlineForm").innerHTML = "";
+  document.getElementById("mainInlineForm").innerHTML = "";
+  document.getElementById("partInlineForm").innerHTML = "";
+  document.querySelectorAll("[id^='landingInlineForm-'], [id^='mainInlineForm-'], [id^='partInlineForm-']").forEach(el=>el.innerHTML="");
+}
+function showLandingInlineForm(id){
+  closeAllInlineForms_();
+  const s = id ? REMOTE_DATA.schedules.find(x=>x.id===id) : null;
+  const target = id ? document.getElementById("landingInlineForm-"+id) : document.getElementById("landingInlineForm");
+  if(target) target.innerHTML = mainInlineFormHtml(s, "landingInlineFormBox", "main");
+}
+function showMainInlineForm(id){
+  closeAllInlineForms_();
+  const s = id ? REMOTE_DATA.schedules.find(x=>x.id===id) : null;
+  const target = id ? document.getElementById("mainInlineForm-"+id) : document.getElementById("mainInlineForm");
+  if(target) target.innerHTML = mainInlineFormHtml(s, "mainInlineFormBox", "applymain");
+}
+function hideInlineForm(targetId){
+  const el = document.getElementById(targetId);
+  if(el) el.remove();
+}
+function saveMainInline(existingId, targetId, formType){
+  const isLanding = formType === "main";
+  const name = isLanding ? document.getElementById("if_name").value.trim() : "";
+  const month = parseInt(document.getElementById("if_month").value,10);
+  const startDay = parseInt(document.getElementById("if_sday").value,10);
+  const startTime = document.getElementById("if_stime").value.trim();
+  const endDay = parseInt(document.getElementById("if_eday").value,10);
+  const endTime = document.getElementById("if_etime").value.trim();
+  const nights = document.getElementById("if_nights").value;
+  const place = isLanding ? document.getElementById("if_place").value.trim() : "정토사회문화회관";
+  const status = isLanding ? document.getElementById("if_status").value : "recruiting";
+  const capRaw = isLanding ? "" : document.getElementById("if_cap").value.trim();
+  const cap = capRaw ? parseInt(capRaw,10) : null; // 비우면 무제한(null)
+  if((isLanding && !name) || !month || !startDay || !endDay){ showToast(isLanding?"프로그램명/월/시작일/종료일을 입력해주세요":"월/시작일/종료일을 입력해주세요"); return; }
+  if(existingId){
+    const s = REMOTE_DATA.schedules.find(x=>x.id===existingId);
+    if(isLanding) Object.assign(s, {name, month, startDay, startTime, endDay, endTime, nights, place, status});
+    else Object.assign(s, {month, startDay, startTime, endDay, endTime, nights, cap});
+  }else{
+    REMOTE_DATA.schedules.push({ id:"m-"+Date.now(), type:formType||"main", name, month, startDay, startTime, endDay, endTime, nights, place, status, cap });
+  }
+  hideInlineForm(targetId);
+  renderAll();
+  persistData();
+  showToast("일정이 저장되었습니다");
+}
+
+/* ---------- 8-2 파트 인라인 폼 ---------- */
+const PART_ACTIVITY_DEFAULTS = {
+  "저녁공양봉사": { startTime:"13:30", endTime:"19:30" },
+  "점심공양지원": { startTime:"09:00", endTime:"14:00" },
+};
+function applyPartActivityDefaults(){
+  const d = PART_ACTIVITY_DEFAULTS[document.getElementById("pf_activity").value];
+  if(!d) return;
+  document.getElementById("pf_stime").value = d.startTime;
+  document.getElementById("pf_etime").value = d.endTime;
+}
+function partInlineFormHtml(s, targetId){
+  s = s || {month:8, day:"", startTime:"13:30", endTime:"19:30", activity:"저녁공양봉사"};
+  return `
+    <div class="inline-form" id="${targetId}">
+      <div class="if-row">
+        <div class="if-field"><label>월</label><input type="text" id="pf_month" value="${s.month||""}" placeholder="8"></div>
+        <div class="if-field"><label>일</label><input type="text" id="pf_day" value="${s.day||""}" placeholder="13"></div>
+      </div>
+      <div class="if-row">
+        <div class="if-field"><label>활동명</label>
+          <select id="pf_activity" onchange="applyPartActivityDefaults()">
+            <option value="점심공양지원" ${s.activity==="점심공양지원"?"selected":""}>점심공양지원</option>
+            <option value="저녁공양봉사" ${s.activity==="저녁공양봉사"?"selected":""}>저녁공양봉사</option>
+          </select>
+        </div>
+      </div>
+      <div class="if-row">
+        <div class="if-field"><label>시작시간</label><input type="text" id="pf_stime" value="${s.startTime||""}" placeholder="13:30"></div>
+        <div class="if-field"><label>종료시간</label><input type="text" id="pf_etime" value="${s.endTime||""}" placeholder="19:30"></div>
+      </div>
+      <div class="if-row">
+        <div class="if-field"><label>정원(선택)</label><input type="text" id="pf_cap" value="${s.cap||""}" placeholder="비우면 무제한, 예) 10"></div>
+      </div>
+      <div class="if-actions">
+        <button class="if-cancel" onclick="hideInlineForm('${targetId}')">취소</button>
+        <button class="if-save" onclick="savePartInline('${s.id||""}','${targetId}')">저장</button>
+      </div>
+    </div>`;
+}
+function showPartInlineForm(id){
+  closeAllInlineForms_();
+  const s = id ? REMOTE_DATA.schedules.find(x=>x.id===id) : null;
+  const target = id ? document.getElementById("partInlineForm-"+id) : document.getElementById("partInlineForm");
+  if(target) target.innerHTML = partInlineFormHtml(s, "partInlineFormBox");
+}
+function savePartInline(existingId, targetId){
+  const month = parseInt(document.getElementById("pf_month").value,10);
+  const day = parseInt(document.getElementById("pf_day").value,10);
+  const startTime = document.getElementById("pf_stime").value.trim();
+  const endTime = document.getElementById("pf_etime").value.trim();
+  const activity = document.getElementById("pf_activity").value;
+  const place = "정토사회문화회관";
+  const status = "recruiting";
+  const capRaw = document.getElementById("pf_cap").value.trim();
+  const cap = capRaw ? parseInt(capRaw,10) : null; // 비우면 무제한(null)
+  if(!month || !day || !activity){ showToast("월/일/활동명을 입력해주세요"); return; }
+  if(existingId){
+    const s = REMOTE_DATA.schedules.find(x=>x.id===existingId);
+    Object.assign(s, {month, day, startTime, endTime, activity, place, status, cap});
+  }else{
+    REMOTE_DATA.schedules.push({ id:"p-"+Date.now(), type:"part", month, day, startTime, endTime, activity, place, status, cap });
+  }
+  hideInlineForm(targetId);
+  renderAll();
+  persistData();
+  showToast("일정이 저장되었습니다");
+}
+
+function deleteSchedule(id){
+  if(!confirm("이 일정을 삭제할까요?")) return;
+  REMOTE_DATA.schedules = REMOTE_DATA.schedules.filter(x=>x.id!==id);
+  renderAll();
+  persistData();
+  showToast("일정이 삭제되었습니다");
+}
+function moveSchedule(id, dir){
+  const arr = REMOTE_DATA.schedules;
+  const cur = arr.find(x=>x.id===id);
+  if(!cur) return;
+  // 배열엔 main/applymain/part가 섞여 있어서, 같은 타입끼리의 순서만 바꾼다
+  const sameType = arr.filter(x=>x.type===cur.type);
+  const idx = sameType.findIndex(x=>x.id===id);
+  const swapIdx = idx + dir;
+  if(idx<0 || swapIdx<0 || swapIdx>=sameType.length) return;
+  const other = sameType[swapIdx];
+  const realIdxA = arr.findIndex(x=>x.id===cur.id);
+  const realIdxB = arr.findIndex(x=>x.id===other.id);
+  [arr[realIdxA], arr[realIdxB]] = [arr[realIdxB], arr[realIdxA]];
+  renderAll();
+  persistData();
+}
+async function persistData(){
+  if(!ADMIN_PW){ showToast("관리자 인증이 필요합니다"); return; }
+  // 예전엔 일정 저장과 메뉴 저장을 동시에(병렬로) 보냈는데, 구글 앱스크립트가
+  // 같은 스크립트로 거의 동시에 들어온 요청을 처리하다가 가끔 하나를 실패시키는
+  // 경우가 있었습니다. 그리고 그 실패 하나 때문에 무조건 관리자를 강제
+  // 로그아웃시켜서, 방금 고친 내용이 실제로는 저장되지 않은 채로 화면에만
+  // 남아있다가 나중에 서버의 옛날 값으로 되돌아가 보이는 문제가 있었습니다.
+  // 이제는 순서대로 보내서 충돌 가능성을 줄이고, 실패해도 로그아웃시키지 않고
+  // 다시 시도할 수 있게 안내만 합니다.
+  try{
+    const r1 = await fetch(APPSSCRIPTURL, { method:"POST", headers:{"Content-Type":"text/plain;charset=utf-8"}, body: JSON.stringify({ password: ADMIN_PW, key:"apply_schedules", value: REMOTE_DATA.schedules }) });
+    const j1 = await r1.json();
+    if(!j1.ok){
+      showToast("⚠️ 일정 저장 실패 — 다시 시도해주세요 (로그인은 유지됩니다)");
+      return;
+    }
+    const r2 = await fetch(APPSSCRIPTURL, { method:"POST", headers:{"Content-Type":"text/plain;charset=utf-8"}, body: JSON.stringify({ password: ADMIN_PW, key:"meals", value: REMOTE_DATA.meals }) });
+    const j2 = await r2.json();
+    if(!j2.ok){
+      showToast("⚠️ 메뉴 저장 실패 — 방금 고친 일정은 저장됐습니다. 메뉴만 다시 시도해주세요");
+      return;
+    }
+    showToast("저장되었습니다");
+  }catch(e){
+    showToast("저장 실패 — 네트워크 오류. 다시 시도해주세요 (로그인은 유지됩니다)");
+  }
+}
+
+/* ---------- 활동 ---------- */
+const ACTIVITY_ICONS = {
+  bowl:    `<svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 0016 0z"/><path d="M4 12h16M9 12V8M15 12V8"/></svg>`,
+  broom:   `<svg viewBox="0 0 24 24"><path d="M14 3l6 6-8 8-6-2z"/><path d="M9 15l-5 5M6 21l-2-2"/></svg>`,
+  lotus:   `<svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3"/><path d="M5 20c0-3.3 3.1-6 7-6s7 2.7 7 6"/></svg>`,
+  sunrise: `<svg viewBox="0 0 24 24"><circle cx="12" cy="14" r="4"/><path d="M4 18h16M12 4v3M5.6 8.6l1.8 1.8M18.4 8.6l-1.8 1.8"/></svg>`,
+  trail:   `<svg viewBox="0 0 24 24"><path d="M12 3C7 3 4 7 4 12c0 5 3 9 8 9M12 3c5 0 8 4 8 9c0 5-3 9-8 9M4 12h16"/></svg>`,
+  chat:    `<svg viewBox="0 0 24 24"><path d="M5 5h14v10H9l-4 4z"/></svg>`,
+  qa:      `<svg viewBox="0 0 24 24"><path d="M9 9a3 3 0 116 0c0 2-3 2.5-3 5"/><path d="M12 17h.01"/><circle cx="12" cy="12" r="9"/></svg>`,
+  note:    `<svg viewBox="0 0 24 24"><path d="M6 3h9l3 3v15H6z"/><path d="M9 9h6M9 13h6M9 17h4"/></svg>`,
+  home:    `<svg viewBox="0 0 24 24"><path d="M4 11l8-7 8 7"/><path d="M6 10v10h12V10"/></svg>`,
+  camera:  `<svg viewBox="0 0 24 24"><path d="M4 8h3l2-2h6l2 2h3v11H4z"/><circle cx="12" cy="13" r="3.2"/></svg>`,
+};
+const ACTIVITY_ART = [
+  "assets/media-3abf81b9cfac.jpg",
+  "assets/media-2cac4c074d1a.jpg",
+  "assets/media-257ab904c06f.jpg",
+  "assets/media-59ecb37acbcb.jpg",
+  "assets/media-5e02ad795e81.jpg",
+  "assets/media-01e678a8fc34.jpg",
+  "assets/media-597405d9157f.jpg",
+  "assets/media-ad98264f5453.jpg",
+  "assets/media-85fb01793750.jpg",
+  "assets/media-2a810142ad37.jpg"
+];
+function renderActivities(){
+  const el = document.getElementById("activityList");
+  const list = REMOTE_DATA.activities.length ? REMOTE_DATA.activities : FALLBACK_ACTIVITIES;
+  if(!list.length){ el.innerHTML = '<div class="empty-note">등록된 활동이 없습니다.</div>'; return; }
+  el.innerHTML = list.map((a,i) => {
+    const art = ACTIVITY_ART[i] || "";
+    return `<article class="activity-art-card">
+      ${art?`<img src="${art}" alt="${esc_(a.title||"바라지 활동")} 일러스트" loading="lazy">`:""}
+      <div class="activity-art-copy"><div class="num">${String(i+1).padStart(2,"0")}</div><div><h3>${esc_(a.title||"")}</h3><p>${esc_(a.desc||"")}</p></div></div>
+    </article>`;
+  }).join("");
+}
+}
+
+/* ---------- 공양메뉴 (메인앱과 연동: 메인앱에서 편집한 내용을 그대로 표시) ---------- */
+function findMenuByName_(name){
+  return (REMOTE_DATA.menus||[]).find(m=>m.name===name);
+}
+function esc_(s){ return String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
+const PROGRAMS = [
+  { id:'seohaeng', label:'서울여행 (1박 2일)', meals:['dinner1','morning'], nights:'1박2일' },
+  { id:'happy', label:'행복학교 (2박 3일)', meals:['dinner1','morning','dinner2'], nights:'2박3일' },
+];
+const MEAL_ART = {
+  dinner1:"assets/media-acf13f070848.jpg",
+  dinner2:"assets/media-8a4819b1881e.jpg"
+};
+function mealSlotHtml_(key, meals){
+  const m = meals[key];
+  if(!m) return "";
+  const names = m.menus || (m.dishes||[]).map(d=>d.name) || [];
+  const rows = names.map(name => {
+    const mm = findMenuByName_(name);
+    const emoji = mm ? (mm.emoji||"") : "";
+    return `<div class="recipe-mini"><div class="rm-left"><span class="rm-dot"></span><span class="rm-name">${emoji?emoji+" ":""}${esc_(name)}</span></div></div>`;
+  }).join("");
+  const art = MEAL_ART[key] || "";
+  return `<div class="meal-slot ${art?"has-art":""}"><div class="meal-slot-label">${esc_(m.label||key)}</div>${art?`<img class="meal-art" src="${art}" alt="${esc_(m.label||"공양")} 음식 일러스트" loading="lazy">`:""}${rows || '<div class="empty-note" style="text-align:left;padding:2px 0">아직 메뉴가 정해지지 않았습니다.</div>'}</div>`;
+}
+let selectedMealProgram = null;
+}
+let selectedMealProgram = null;
+function activePrograms_(){
+  // 랜딩(밥은 먹었니)에 지금 모집중인 main 일정들의 '숙박' 값을 기준으로 어느 프로그램이 활성 상태인지 판단
+  const mains = REMOTE_DATA.schedules.filter(s => s.type==="main" && s.status!=="cancelled" && !isPastMain(s) && (s.status||"recruiting")==="recruiting");
+  const activeNights = new Set(mains.map(s=>s.nights));
+  const active = PROGRAMS.filter(p => activeNights.has(p.nights));
+  return active.length ? active : PROGRAMS; // 매칭되는 게 하나도 없으면 안전하게 전체 다 보여줌
+}
+function renderMeals(){
+  const el = document.getElementById("mealBlocks");
+  const tabsEl = document.getElementById("mealTabs");
+  const meals = REMOTE_DATA.meals || {};
+  if(!Object.keys(meals).length){ tabsEl.innerHTML=""; el.innerHTML = '<div class="empty-note">등록된 메뉴가 없습니다.</div>'; return; }
+
+  const active = activePrograms_();
+  if(!selectedMealProgram || !active.some(p=>p.id===selectedMealProgram)) selectedMealProgram = active[0].id;
+
+  tabsEl.innerHTML = active.length > 1 ? active.map(p => {
+    const shortLabel = p.label.split(" ")[0]; // "서울여행 (1박 2일)" → "서울여행"
+    return `<div class="meal-tab ${p.id===selectedMealProgram?'on':''}" onclick="selectMealProgram('${p.id}')">${esc_(shortLabel)}</div>`;
+  }).join("") : "";
+
+  const SKIP_SLOT_KEYS = ["morning"]; // 아침은 카드로 안 보여주고, 아래 안내문구로 대신함
+  const prog = active.find(p=>p.id===selectedMealProgram) || active[0];
+  const slots = prog.meals.filter(key=>!SKIP_SLOT_KEYS.includes(key)).map(key=>mealSlotHtml_(key, meals)).join("");
+
+  el.innerHTML = `<div class="card" style="border-bottom:none;margin-bottom:0;padding-bottom:0">${slots}</div>`
+    + `<div class="meal-note" id="mealNote" style="margin-top:14px">${esc_(REMOTE_DATA.siteconfig.mealNote || "아침은 토스트, 시리얼 등을 간단히 준비합니다.\n점심은 회관 대중공양팀에서 준비해주십니다.")}</div>`;
+  wireMealNote_();
+}
+function selectMealProgram(id){
+  selectedMealProgram = id;
+  renderMeals();
+}
+function wireMealNote_(){
+  const el = document.getElementById("mealNote");
+  if(!el) return;
+  el.contentEditable = isAdmin ? "true" : "false";
+  el.classList.toggle("editable-text", isAdmin);
+  el.onblur = function(){
+    if(!isAdmin) return;
+    const val = el.innerText.trim();
+    if((REMOTE_DATA.siteconfig.mealNote||"") === val) return;
+    REMOTE_DATA.siteconfig.mealNote = val;
+    persistSiteconfig();
+    showToast("저장되었습니다");
+  };
+}
+
+/* ---------- 신청서: 8-1/8-2 옵션 리스트 (이미지1 형식) ---------- */
+let selectedMains = [], selectedParts = [], selectedIsPending = false, pendingScheduleTitle = "";
+function mainApplyTitle(s){
+  return `${s.month}/${s.startDay}(${wd(s.month,s.startDay)}) ${s.startTime} ~ ${s.month}/${s.endDay}(${wd(s.month,s.endDay)}) ${s.endTime} (${s.nights})`;
+}
+function partApplyTitle(s){
+  return `${s.month}/${s.day}(${wd(s.month,s.day)}) ${s.startTime} ~ ${s.endTime} : ${s.activity}`;
+}
+function isClosed(s){ return s && s.closed === true; }
+// ★ 정원(cap)이 걸린 일정: 지금까지 신청한 인원(SCHEDULE_COUNTS)이 정원 이상이면 자동으로 마감 취급
+function hasCap(s){ return !!(s && s.cap && Number(s.cap) > 0); }
+function capCount(s){ return (s && SCHEDULE_COUNTS[s.id]) || 0; }
+function isCapFull(s){ return hasCap(s) && capCount(s) >= Number(s.cap); }
+function isFull(s){ return isClosed(s) || isCapFull(s); } // 선택을 막아야 하는지 여부(수동 마감 + 정원 마감 모두 포함)
+function closedBadge(s){ return isFull(s) ? `<span class="cap-badge cap-full">마감</span>` : ""; }
+// 정원이 걸려있고 아직 마감 전이면 "잔여 n자리"를 보여준다
+function capRemainBadge(s){
+  if(!hasCap(s) || isFull(s)) return "";
+  const remain = Math.max(0, Number(s.cap) - capCount(s));
+  return `<span class="cap-badge">잔여 ${remain}자리</span>`;
+}
+function toggleClosed(id){
+  const s = REMOTE_DATA.schedules.find(x=>x.id===id);
+  if(!s) return;
+  s.closed = !s.closed;
+  renderAll();
+  persistData();
+  showToast(s.closed ? "마감 처리했습니다" : "마감을 해제했습니다");
+}
+// 손잡이(⠿)를 붙잡고 위아래로 끌면 순서가 바뀐다 — 마우스/터치 둘 다 지원
+function applyScheduleOrder_(type, idOrder){
+  const arr = REMOTE_DATA.schedules;
+  const others = arr.filter(x=>x.type!==type);
+  const reordered = idOrder.map(id=>arr.find(x=>x.id===id)).filter(Boolean);
+  REMOTE_DATA.schedules = others.concat(reordered);
+  renderAll();
+  persistData();
+}
+function enableDragReorder(containerId, type){
+  const container = document.getElementById(containerId);
+  if(!container || container.dataset.dragBound)return;
+  container.dataset.dragBound = "1";
+  container.addEventListener("pointerdown", ev=>{
+    const handle = ev.target.closest(".drag-handle");
+    if(!handle)return;
+    ev.preventDefault();
+    const dragEl = handle.closest(".opt-item");
+    const rows = [...container.querySelectorAll(".opt-item")];
+    const startIndex = rows.indexOf(dragEl);
+    let curIndex = startIndex;
+    const rowH = dragEl.offsetHeight;
+    const startY = ev.clientY;
+    dragEl.classList.add("dragging");
+    dragEl.setPointerCapture(ev.pointerId);
+
+    function onMove(e){
+      const dy = e.clientY - startY;
+      dragEl.style.transform = `translateY(${dy}px)`;
+      let steps = Math.round(dy / rowH);
+      let newIndex = Math.min(rows.length-1, Math.max(0, startIndex + steps));
+      if(newIndex !== curIndex){
+        rows.forEach((row,i)=>{
+          if(row===dragEl)return;
+          if(curIndex < newIndex){
+            row.style.transform = (i>curIndex && i<=newIndex) ? `translateY(-${rowH}px)` : "";
+          }else{
+            row.style.transform = (i>=newIndex && i<curIndex) ? `translateY(${rowH}px)` : "";
+          }
+        });
+        curIndex = newIndex;
+      }
+    }
+    function onUp(e){
+      dragEl.releasePointerCapture(e.pointerId);
+      document.removeEventListener("pointermove", onMove);
+      document.removeEventListener("pointerup", onUp);
+      dragEl.classList.remove("dragging");
+      dragEl.style.transform = "";
+      rows.forEach(row=>{ row.style.transform = ""; });
+      if(curIndex !== startIndex){
+        const ids = rows.map(r=>r.dataset.id);
+        const moved = ids.splice(startIndex,1)[0];
+        ids.splice(curIndex,0,moved);
+        applyScheduleOrder_(type, ids);
+        showToast("순서를 바꿨습니다");
+      }
+    }
+    document.addEventListener("pointermove", onMove);
+    document.addEventListener("pointerup", onUp, {once:true});
+  });
+}
+function durationLabel(nights){
+  const n=String(nights||"").replace(/\s+/g,"");
+  if(n==="1박2일") return "1박 2일 봉사";
+  if(n==="2박3일") return "2박 3일 봉사";
+  return nights ? String(nights).replace(/(\d)박(\d)일/,"$1박 $2일") : "바라지 일정";
+}
+function hmToMinutes(v){
+  const m=String(v||"").match(/^(\d{1,2}):(\d{2})$/);
+  return m ? Number(m[1])*60+Number(m[2]) : 0;
+}
+function scheduleRange(s){
+  const year=new Date().getFullYear();
+  if(s.type==="applymain"){
+    const sh=hmToMinutes(s.startTime), eh=hmToMinutes(s.endTime);
+    return {start:new Date(year,Number(s.month)-1,Number(s.startDay),Math.floor(sh/60),sh%60).getTime(),end:new Date(year,Number(s.month)-1,Number(s.endDay),Math.floor(eh/60),eh%60).getTime()};
+  }
+  const sh=hmToMinutes(s.startTime), eh=hmToMinutes(s.endTime);
+  return {start:new Date(year,Number(s.month)-1,Number(s.day),Math.floor(sh/60),sh%60).getTime(),end:new Date(year,Number(s.month)-1,Number(s.day),Math.floor(eh/60),eh%60).getTime()};
+}
+function schedulesOverlap(a,b){
+  const A=scheduleRange(a), B=scheduleRange(b);
+  return A.start < B.end && B.start < A.end;
+}
+function selectedScheduleObjects(exceptId){
+  return [...selectedMains,...selectedParts].filter(id=>id!==exceptId).map(id=>REMOTE_DATA.schedules.find(s=>s.id===id)).filter(Boolean);
+}
+function hasScheduleConflict(s){
+  return selectedScheduleObjects(s.id).some(chosen=>schedulesOverlap(s,chosen));
+}
+function scheduleStatusHtml(s){
+  return (s.status==="planned"?'<span class="status-mini">일정 미확정</span>':"") + closedBadge(s) + capRemainBadge(s);
+}
+function applyAdminHtml(s,kind){
+  if(!isAdmin) return "";
+  const closed=isClosed(s);
+  const edit=kind==="main"?`showMainInlineForm('${s.id}')`:`showPartInlineForm('${s.id}')`;
+  return `<div class="apply-admin-row">
+    <button class="b-icon ${closed?"is-closed":""}" onclick="event.stopPropagation();toggleClosed('${s.id}')">${closed?"마감":"모집"}</button>
+    <button class="b-icon" onclick="event.stopPropagation();${edit}">수정</button>
+    <button class="b-icon del" onclick="event.stopPropagation();deleteSchedule('${s.id}')">삭제</button>
+  </div>`;
+}
+function renderApplySchedules(){
+  const mEl=document.getElementById("scheduleMain"), pEl=document.getElementById("schedulePart");
+  if(!mEl||!pEl) return;
+  const mains=REMOTE_DATA.schedules.filter(s=>s.type==="applymain"&&s.status!=="cancelled"&&!isPastMain(s));
+  const parts=REMOTE_DATA.schedules.filter(s=>s.type==="part"&&s.status!=="cancelled"&&!isPastPart(s));
+  const order=["1박2일","2박3일"];
+  const keys=[...new Set(mains.map(s=>String(s.nights||"").replace(/\s+/g,"")))];
+  keys.sort((a,b)=>{
+    const ia=order.indexOf(a), ib=order.indexOf(b);
+    return (ia<0?99:ia)-(ib<0?99:ib);
+  });
+  const pad=n=>String(n).padStart(2,"0");
+  const compactDate=(m,d)=>`${Number(m)}.${pad(d)}(${wd(m,d)})`;
+
+  mEl.innerHTML=keys.length?keys.map(key=>{
+    const items=mains.filter(s=>String(s.nights||"").replace(/\s+/g,"")===key);
+    return `<div class="apply-program-group">
+      <div class="apply-program-head"><h4>${durationLabel(key)}</h4><span class="apply-duration">${String(key).replace(/(\d)박(\d)일/,"$1박 $2일")}</span></div>
+      ${items.map(s=>{
+        const sel=selectedMains.includes(s.id), conflict=!sel&&hasScheduleConflict(s), blocked=(isFull(s)||conflict)&&!sel;
+        return `<div class="apply-schedule-card ${sel?"sel":""} ${blocked?"blocked":""}" data-id="${s.id}" aria-disabled="${blocked}" ${blocked?"":`onclick="toggleMain('${s.id}')"`}>
+          <div class="schedule-check">${sel?"✓":""}</div>
+          <div class="schedule-inline-wrap">
+            <div class="schedule-inline"><span class="date">${compactDate(s.month,s.startDay)}</span><span class="time">${esc_(s.startTime||"")}</span><span class="range">~</span><span class="date">${compactDate(s.month,s.endDay)}</span><span class="time">${esc_(s.endTime||"")}</span></div>
+            <div class="schedule-inline-meta">${scheduleStatusHtml(s)}</div>
+            ${conflict?'<small class="conflict-note">선택한 다른 일정과 시간이 겹칩니다.</small>':""}
+          </div>
+          ${applyAdminHtml(s,"main")}
+        </div><div id="mainInlineForm-${s.id}"></div>`;
+      }).join("")}
+    </div>`;
+  }).join(""):'<div class="empty-note">현재 선택 가능한 바라지 프로그램 일정이 없습니다.</div>';
+
+  const cats=[
+    {name:"점심공양지원",label:"점심공양 지원",fallback:"09:00 – 14:00"},
+    {name:"저녁공양봉사",label:"저녁공양 봉사",fallback:"13:30 – 19:30"}
+  ];
+  const partHtml=cats.map(cat=>{
+    const items=parts.filter(s=>s.activity===cat.name);
+    if(!items.length) return "";
+    const first=items[0];
+    const time=(first.startTime||first.endTime)?`${esc_(first.startTime||"")} – ${esc_(first.endTime||"")}`:cat.fallback;
+    return `<div class="part-category">
+      <div class="part-cat-head"><h4>${cat.label}</h4><span>${time}</span></div>
+      ${items.map(s=>{
+        const sel=selectedParts.includes(s.id), conflict=!sel&&hasScheduleConflict(s), blocked=(isFull(s)||conflict)&&!sel;
+        const badge=isFull(s)?'<span class="part-date-badge full">마감</span>':(hasCap(s)?`<span class="part-date-badge">잔여 ${Math.max(0,Number(s.cap)-capCount(s))}자리</span>`:"");
+        return `<div class="part-date-row ${sel?"sel":""} ${blocked?"blocked":""}" data-id="${s.id}" aria-disabled="${blocked}" ${blocked?"":`onclick="togglePart('${s.id}')"`}>
+          <div class="schedule-check">${sel?"✓":""}</div>
+          <div class="part-date-main"><b>${s.month}월 ${s.day}일 (${wd(s.month,s.day)})</b>${conflict?'<small class="conflict-note">선택한 일정과 겹쳐 선택할 수 없습니다.</small>':""}</div>
+          ${badge}
+          ${applyAdminHtml(s,"part")}
+        </div><div id="partInlineForm-${s.id}"></div>`;
+      }).join("")}
+    </div>`;
+  }).join("");
+  pEl.innerHTML=partHtml||'<div class="empty-note">현재 선택 가능한 파트 일일봉사 일정이 없습니다.</div>';
+
+  const pre=sessionStorage.getItem("baraji_selected_schedule");
+  if(pre&&mains.some(s=>s.id===pre)&&!selectedMains.includes(pre)) selectedMains.push(pre);
+  updateSectionMode();
+  if(!isAdmin){
+    const mf=document.getElementById("mainInlineForm"), pf=document.getElementById("partInlineForm");
+    if(mf) mf.innerHTML="";
+    if(pf) pf.innerHTML="";
+  }
+}
+function toggleMain(id){
+  const s=REMOTE_DATA.schedules.find(x=>x.id===id);
+  if(!s) return;
+  const i=selectedMains.indexOf(id);
+  if(i>=0) selectedMains.splice(i,1);
+  else if(!isFull(s)&&!hasScheduleConflict(s)) selectedMains.push(id);
+  renderApplySchedules();
+}
+function togglePart(id){
+  const s=REMOTE_DATA.schedules.find(x=>x.id===id);
+  if(!s) return;
+  const i=selectedParts.indexOf(id);
+  if(i>=0) selectedParts.splice(i,1);
+  else if(!isFull(s)&&!hasScheduleConflict(s)) selectedParts.push(id);
+  renderApplySchedules();
+}
+function updateSectionMode(){
+  const chosen=selectedMains.map(id=>REMOTE_DATA.schedules.find(x=>x.id===id)).filter(Boolean);
+  selectedIsPending=chosen.length>0&&chosen.some(s=>s.status==="planned");
+  pendingScheduleTitle=chosen.map(s=>s.name||mainApplyTitle(s)).join(" · ");
+  const confirmed=document.getElementById("confirmedFields");
+  const pending=document.getElementById("pendingNotice");
+  if(confirmed) confirmed.classList.toggle("hidden",selectedIsPending);
+  if(pending) pending.classList.toggle("hidden",!selectedIsPending);
+  if(selectedIsPending){
+    const label=document.getElementById("pendingMonthLabel");
+    if(label) label.textContent=`"${pendingScheduleTitle}" 은 아직 일정이 완전히 확정되지 않은 상태입니다`;
+  }
+}
+
+/* ---------- 라디오 칩 ---------- */
+document.addEventListener("click", e=>{
+  const chip = e.target.closest(".radio-chip");
+  if(!chip) return;
+  const grid = chip.closest(".radio-grid");
+  grid.querySelectorAll(".radio-chip").forEach(c=>c.classList.remove("on"));
+  chip.classList.add("on");
+  grid.dataset.value = chip.dataset.val;
+});
+function getRadioVal(key){
+  const grid = document.querySelector(`.radio-grid[data-key="${key}"]`);
+  return grid ? (grid.dataset.value || "") : "";
+}
+
+/* ---------- 전화번호 자동 하이픈 ---------- */
+function formatPhoneInput(el){
+  let v = el.value.replace(/[^0-9]/g,"").slice(0,11);
+  if(v.length > 3 && v.length <= 7){ v = v.slice(0,3) + "-" + v.slice(3); }
+  else if(v.length > 7){ v = v.slice(0,3) + "-" + v.slice(3,7) + "-" + v.slice(7); }
+  el.value = v;
+}
+
+/* ---------- 제출 ---------- */
+function showToast(msg){
+  const t = document.getElementById("toast");
+  t.textContent = msg; t.classList.add("show");
+  setTimeout(()=>t.classList.remove("show"), 1800);
+}
+function fallbackCopy(text){
+  const ta=document.createElement("textarea");
+  ta.value=text; ta.style.position="fixed"; ta.style.opacity="0";
+  document.body.appendChild(ta); ta.select();
+  try{ document.execCommand("copy"); }catch(e){}
+  document.body.removeChild(ta);
+}
+function copyText(text){
+  if(navigator.clipboard && window.isSecureContext){
+    return navigator.clipboard.writeText(text).then(()=>true).catch(()=>fallbackCopy(text));
+  }
+  return Promise.resolve(fallbackCopy(text));
+}
+async function submitApply(){
+  const basic={
+    bu:getRadioVal("bu"),
+    ji:document.getElementById("ji").value.trim(),
+    addr:document.getElementById("addr").value.trim(),
+    name:document.getElementById("name").value.trim(),
+    phone:document.getElementById("phone").value.trim(),
+    memberType:getRadioVal("memberType"),
+    gender:getRadioVal("gender")
+  };
+  const missing=["bu","ji","addr","name","phone","memberType","gender"].filter(k=>!basic[k]);
+  const noSchedule=selectedMains.length===0&&selectedParts.length===0;
+  if(missing.length||noSchedule){
+    document.getElementById("errorMsg").style.display="block";
+    showToast("필수 항목을 확인해주세요");
+    return;
+  }
+  let payload;
+  if(selectedIsPending){
+    payload={...basic,kind:"pending",mainSchedules:selectedMains.slice(),mainScheduleTitle:pendingScheduleTitle,submittedAt:new Date().toISOString()};
+  }else{
+    const motive=document.getElementById("motive").value.trim();
+    const route=document.getElementById("route").value.trim();
+    if(!motive||!route){
+      document.getElementById("errorMsg").style.display="block";
+      showToast("신청 동기와 신청 경로를 확인해주세요");
+      return;
+    }
+    payload={...basic,kind:"confirmed",mainSchedules:selectedMains.slice(),partSchedules:selectedParts.slice(),motive,route,submittedAt:new Date().toISOString()};
+  }
+  document.getElementById("errorMsg").style.display="none";
+  if(!confirm("이 테스트 페이지는 실제 신청 데이터와 연결되어 있습니다. 정말 신청을 접수할까요?")) return;
+
+  const btn=document.getElementById("submitBtn");
+  const progress=document.getElementById("submitProgress");
+  btn.disabled=true;
+  btn.textContent="신청 접수 중...";
+  if(progress) progress.classList.remove("hidden");
+  try{
+    const res=await fetch(APPSSCRIPTURL,{
+      method:"POST",
+      headers:{"Content-Type":"text/plain;charset=utf-8"},
+      body:JSON.stringify({action:"applyForm",value:payload})
+    });
+    const json=await res.json();
+    if(!json.ok) throw new Error(json.error||"제출 실패");
+
+    document.getElementById("formArea").classList.add("hidden");
+    document.getElementById("doneScreen").classList.add("show");
+    document.getElementById("doneTitle").textContent=selectedIsPending?"예약 접수가 완료되었습니다":"신청이 완료되었습니다";
+    document.getElementById("doneDesc").innerHTML=selectedIsPending?"일정이 확정되면 남겨주신 연락처로 안내드립니다.":"신청하신 분은 텔레그램 소통방으로 안내됩니다.";
+    renderGuide(basic.name);
+    if(progress) progress.classList.add("hidden");
+    sessionStorage.removeItem("baraji_selected_schedule");
+  }catch(e){
+    if(progress) progress.classList.add("hidden");
+    showToast(e.message||"네트워크 오류가 발생했습니다");
+    btn.disabled=false;
+    btn.textContent="신청 제출하기";
+    loadRemoteData();
+  }
+}
+function scheduleStartKey(s){
+  if(s.startDay!=null) return new Date(new Date().getFullYear(),Number(s.month||1)-1,Number(s.startDay),0,0,0).getTime();
+  return new Date(new Date().getFullYear(),Number(s.month||1)-1,Number(s.day),0,0,0).getTime();
+}
+function selectedGuideItems(){
+  const cdate=(m,d)=>`${Number(m)}.${String(Number(d)).padStart(2,"0")}(${wd(m,d)})`;
+  const mains=selectedMains.map(id=>REMOTE_DATA.schedules.find(s=>s.id===id)).filter(Boolean).map(s=>({
+    type:"main",sortKey:scheduleStartKey(s),kind:"바라지 프로그램",badge:String(s.nights||"").replace(/(\d)박(\d)일/,"$1박 $2일"),
+    compact1:cdate(s.month,s.startDay),time1:esc_(s.startTime||""),
+    compact2:cdate(s.month,s.endDay),time2:esc_(s.endTime||"")
+  }));
+  const parts=selectedParts.map(id=>REMOTE_DATA.schedules.find(s=>s.id===id)).filter(Boolean).map(s=>({
+    type:"part",sortKey:scheduleStartKey(s),kind:s.activity||"공양봉사",badge:"하루 봉사",
+    compact1:cdate(s.month,s.day),time1:`${esc_(s.startTime||"")} – ${esc_(s.endTime||"")}`
+  }));
+  return [...mains,...parts].sort((a,b)=>a.sortKey-b.sortKey);
+}
+function renderGuide(name){
+  const nameEl=document.getElementById("guideName");
+  if(nameEl) nameEl.textContent=name?`${name}님, 신청해주셔서 감사합니다.`:"신청해주셔서 감사합니다.";
+  const host=document.getElementById("guideSchedules");
+  if(!host) return;
+  const cards=selectedGuideItems().map(it=>it.type==="main"
+    ? `<div class="guide-sched-card"><div class="guide-sched-top"><b>${it.kind}</b><span class="guide-sched-badge">${it.badge}</span></div><div class="guide-inline-date"><span class="g-date">${it.compact1}</span><span class="g-time">${it.time1}</span><span class="g-range">~</span><span class="g-date">${it.compact2}</span><span class="g-time">${it.time2}</span></div></div>`
+    : `<div class="guide-sched-card"><div class="guide-sched-top"><b>${it.kind}</b><span class="guide-sched-badge">${it.badge}</span></div><div class="guide-inline-date"><span class="g-date">${it.compact1}</span><span class="g-time">${it.time1}</span></div></div>`
+  );
+  host.innerHTML=cards.length?cards.join(""):'<div class="empty-note">선택한 일정</div>';
+}
+function wrapCanvasText(ctx,text,x,y,maxWidth,lineHeight){
+  const chars=[...text],lines=[];
+  let line="";
+  for(const ch of chars){
+    const test=line+ch;
+    if(ctx.measureText(test).width>maxWidth&&line){lines.push(line);line=ch;}
+    else line=test;
+  }
+  if(line) lines.push(line);
+  lines.forEach((l,i)=>ctx.fillText(l,x,y+i*lineHeight));
+  return y+lines.length*lineHeight;
+}
+function roundRect(ctx,x,y,w,h,r,fill,stroke){
+  ctx.beginPath();
+  ctx.roundRect(x,y,w,h,r);
+  if(fill){ctx.fillStyle=fill;ctx.fill();}
+  if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=2;ctx.stroke();}
+}
+function saveGuideImage(){
+  const items=selectedGuideItems();
+  const steps=[
+    ["01","신청 완료","신청하신 내용이 접수되었습니다."],
+    ["02","신청 일정 확인 연락","일정이 맞는지, 변동사항은 없는지 메시지로 확인드려요."],
+    ["03","텔레그램 소통방 초대","준비물과 세부일정, 변동사항을 소통방에서 함께 나눕니다."],
+    ["04","바라지에서 만나요","건강히 잘 지내다가 약속한 날 만나요."]
+  ];
+  const W=1080,outer=68,inner=42,scheduleCardH=156,scheduleGap=18;
+  const scheduleBlockH=100+items.length*(scheduleCardH+scheduleGap)+26;
+  const flowRowH=150,flowBlockH=96+steps.length*flowRowH+30,headerH=285,between=34,footerH=104;
+  const H=headerH+scheduleBlockH+between+flowBlockH+footerH;
+  const c=document.createElement("canvas");
+  c.width=W;c.height=H;
+  const x=c.getContext("2d");
+  x.textBaseline="alphabetic";x.textAlign="left";
+  x.fillStyle="#F1F2EC";x.fillRect(0,0,W,H);
+  x.fillStyle="#5B7355";x.fillRect(outer,64,8,110);
+  x.fillStyle="#5B7355";x.font="700 40px sans-serif";x.fillText("MY BARAJI",outer+40,104);
+  x.fillStyle="#2B2E28";x.font='700 82px "Gowun Batang", serif';x.fillText("나의 바라지 안내",outer+40,188);
+  x.fillStyle="#5A5F54";x.font="500 40px sans-serif";wrapCanvasText(x,document.getElementById("guideName").textContent,outer+40,244,820,50);
+
+  let y=headerH;
+  roundRect(x,outer,y,W-outer*2,scheduleBlockH,30,"#FBFBF7","#DBDBCF");
+  x.fillStyle="#2B2E28";x.font='700 48px "Gowun Batang", serif';x.fillText("신청한 일정",outer+inner,y+62);
+  let sy=y+92;
+  const drawInline=(segments,startX,baseY,maxX)=>{
+    let cx=startX;
+    for(const seg of segments){
+      x.font=seg.font;x.fillStyle=seg.color;
+      const w=x.measureText(seg.text).width;
+      if(cx+w>maxX) break;
+      x.fillText(seg.text,cx,baseY);cx+=w+(seg.gap??12);
+    }
+  };
+  for(const it of items){
+    roundRect(x,outer+inner,sy,W-2*(outer+inner),scheduleCardH,24,"#FFFFFF","#DBDBCF");
+    x.fillStyle="#2B2E28";x.font='700 34px "Gowun Batang", serif';x.fillText(it.kind,outer+inner+28,sy+48);
+    x.font="700 25px sans-serif";
+    const bw=Math.max(144,x.measureText(it.badge).width+58);
+    roundRect(x,W-outer-inner-28-bw,sy+16,bw,48,24,"#E6EAE0",null);
+    x.fillStyle="#5B7355";x.fillText(it.badge,W-outer-inner-28-bw+28,sy+49);
+    if(it.type==="main"){
+      drawInline([
+        {text:it.compact1,font:"800 38px sans-serif",color:"#2B2E28",gap:14},
+        {text:it.time1,font:"600 30px sans-serif",color:"#5A5F54",gap:14},
+        {text:"~",font:"800 32px sans-serif",color:"#5B7355",gap:14},
+        {text:it.compact2,font:"800 38px sans-serif",color:"#2B2E28",gap:14},
+        {text:it.time2,font:"600 30px sans-serif",color:"#5A5F54",gap:0}
+      ],outer+inner+28,sy+112,W-outer-inner-28);
+    }else{
+      drawInline([
+        {text:it.compact1,font:"800 38px sans-serif",color:"#2B2E28",gap:18},
+        {text:it.time1,font:"600 31px sans-serif",color:"#5A5F54",gap:0}
+      ],outer+inner+28,sy+112,W-outer-inner-28);
+    }
+    sy+=scheduleCardH+scheduleGap;
+  }
+
+  y+=scheduleBlockH+between;
+  roundRect(x,outer,y,W-outer*2,flowBlockH,30,"#FBFBF7","#DBDBCF");
+  x.fillStyle="#2B2E28";x.font='700 48px "Gowun Batang", serif';x.fillText("앞으로 이렇게 진행됩니다",outer+inner,y+62);
+  let fy=y+102;
+  steps.forEach((step,i)=>{
+    const [no,title,desc]=step,cx=outer+inner+28;
+    x.beginPath();x.arc(cx,fy+30,31,0,Math.PI*2);x.fillStyle="#FFFFFF";x.fill();x.strokeStyle="#DBDBCF";x.lineWidth=2;x.stroke();
+    x.fillStyle="#5B7355";x.font="700 20px sans-serif";x.textAlign="center";x.fillText(no,cx,fy+38);x.textAlign="left";
+    x.fillStyle="#2B2E28";x.font='700 36px "Gowun Batang", serif';x.fillText(title,cx+60,fy+28);
+    x.fillStyle="#5A5F54";x.font="500 29px sans-serif";wrapCanvasText(x,desc,cx+60,fy+72,700,40);
+    if(i<steps.length-1){x.strokeStyle="#DBDBCF";x.beginPath();x.moveTo(cx,fy+64);x.lineTo(cx,fy+flowRowH-8);x.stroke();}
+    fy+=flowRowH;
+  });
+  x.fillStyle="#5B7355";x.font='700 31px "Gowun Batang", serif';x.fillText("밥은 먹었니? · 군청년 바라지",outer,H-56);
+  x.fillStyle="#8A9B82";x.font="500 23px sans-serif";x.fillText("신청 일정과 이후 진행 흐름을 다시 확인하는 안내 카드입니다.",outer,H-22);
+
+  c.toBlob(blob=>{
+    if(!blob){showToast("이미지를 만들지 못했습니다. 다시 시도해주세요.");return;}
+    const url=URL.createObjectURL(blob),a=document.createElement("a");
+    a.href=url;a.download="군청년바라지_참가안내.png";document.body.appendChild(a);a.click();a.remove();
+    setTimeout(()=>URL.revokeObjectURL(url),1500);
+  },"image/png");
+}
+
+/* ---------- 페이지 전환 / 영상 ---------- */
+function goPage(name, skipHistory){
+  document.querySelectorAll(".page").forEach(s=>s.classList.remove("active"));
+  document.getElementById("page-"+name).classList.add("active");
+  window.scrollTo(0,0);
+  // 브라우저 히스토리에 이 화면을 기록해둔다. 이게 없으면 페이지를 아무리 옮겨다녀도
+  // 뒤로가기를 눌렀을 때 이 앱 안에서 돌아가지 않고, 앱에 들어오기 전 화면으로
+  // 곧장 튕겨나가버립니다.
+  if(!skipHistory){
+    history.pushState({ page: name }, "", "#" + name);
+  }
+}
+// 뒤로가기·앞으로가기를 눌렀을 때, 앱 밖으로 나가는 대신 그 화면으로 이동한다
+window.addEventListener("popstate", function(e){
+  const name = (e.state && e.state.page) || "landing";
+  goPage(name, true); // 이미 히스토리에 있는 상태이므로 다시 쌓지 않는다
+});
+// 처음 열었을 때도 현재 화면을 히스토리에 기록해둔다 (그래야 한 번 더 뒤로가기 했을 때 자연스럽다)
+history.replaceState({ page: "landing" }, "", location.pathname + location.search);
+let ytPlayer = null;
+// 처음 들어왔을 때 "신청안내" 또는 "홍보영상" 중 고르는 화면의 선택 처리
+function chooseApply(){
+  document.getElementById("choiceStage").classList.add("hide");
+  goPage("landing");
+}
+function chooseVideo(){
+  document.getElementById("choiceStage").classList.add("hide");
+  document.getElementById("videoStage").classList.remove("hide");
+  // "홍보영상 보기"를 누른 이 클릭 자체가 사용자 제스처이므로, 한 번 더 탭하게 하지 않고
+  // 바로 영상을 시작한다. tap-to-start 화면은 자동재생이 막혔을 때만 대비용으로 남겨둔다.
+  startVideo();
+}
+function startVideo(){
+  document.getElementById("tapToStart").classList.add("hide");
+  const host = document.getElementById("playerHost");
+  host.style.display = "block";
+  const div = document.createElement("div");
+  div.id = "ytIframe";
+  host.appendChild(div);
+
+  function createPlayer(){
+    ytPlayer = new YT.Player("ytIframe", {
+      videoId: YTVIDEOID,
+      playerVars: {
+        autoplay: 1, playsinline: 1, rel: 0, modestbranding: 1,
+        cc_load_policy: 0, iv_load_policy: 3,
+        origin: location.origin
+      },
+      events: {
+        onReady: function(e){ e.target.playVideo(); },
+        onStateChange: function(e){ if(e.data === YT.PlayerState.ENDED) showVideoEndOverlay(); }
+      }
+    });
+  }
+  if(window.YT && window.YT.Player){
+    createPlayer();
+  }else{
+    window.onYouTubeIframeAPIReady = createPlayer;
+    const tag = document.createElement("script");
+    tag.src = "https://www.youtube.com/iframe_api";
+    document.head.appendChild(tag);
+  }
+}
+let videoEndTimer = null;
+function showVideoEndOverlay(){
+  document.getElementById("videoEndOverlay").classList.add("show");
+  clearTimeout(videoEndTimer);
+  videoEndTimer = setTimeout(goToPageFlow, 4000); // 안 눌러도 4초 후 자동으로 넘어감
+}
+function skipVideo(){ clearTimeout(videoEndTimer); goToPageFlow(); }
+function goToPageFlow(){
+  clearTimeout(videoEndTimer);
+  try{ if(ytPlayer && ytPlayer.stopVideo) ytPlayer.stopVideo(); }catch(e){}
+  const host=document.getElementById("playerHost");
+  if(host) host.innerHTML=""; // iframe 자체를 제거해서 백그라운드 재생/소리를 확실히 끊는다
+  document.getElementById("videoStage").classList.add("hide");
+  goPage("landing");
+}
+
+/* ================= 모집현황 (관리자 전용 · 보기 전용) ================= */
+let RC_APPS=[], RC_OV={removed:{},added:{}}, RC_LOADED=false;
+let rcDayFilter="";
+const RC_DAY_BUTTONS=["수","목","금"];
+function rcExtractDays_(text){
+  const days=[];const re=/\(([월화수목금토일])\)/g;let m;
+  while(m=re.exec(text||"")){if(!days.includes(m[1]))days.push(m[1]);}
+  return days;
+}
+function rcApplicationDays_(a){
+  return rcExtractDays_(a.scheduleText).concat(rcExtractDays_(a.partText));
+}
+function rcRenderDayFilter(base){
+  const el=document.getElementById("rcDayFilter");if(!el)return;
+  el.innerHTML=RC_DAY_BUTTONS.map(d=>{
+    const cnt=base.filter(a=>rcApplicationDays_(a).includes(d)).length;
+    const on=rcDayFilter===d;
+    return `<button class="rc-day-btn ${on?'on':''}" onclick="rcSetDayFilter('${d}')">${d}<br><span class="rc-day-cnt">${cnt}명</span></button>`;
+  }).join("")+(rcDayFilter?`<button class="rc-day-btn" onclick="rcSetDayFilter('')">전체보기</button>`:"");
+}
+function rcSetDayFilter(d){ rcDayFilter=(rcDayFilter===d)?"":d; renderRecruitList(); }
+
+function rcClean_(n){ return String(n||"").trim()||"(이름없음)"; }
+function rcPushUniq_(arr,n){ if(!arr.includes(n))arr.push(n); }
+function rcWeekday_(m,d){ return ["일","월","화","수","목","금","토"][new Date(new Date().getFullYear(),m-1,d).getDay()]; }
+function rcIsPast_(m,d){
+  const x=new Date(new Date().getFullYear(),m-1,d,23,59,59);
+  const t=new Date();t.setHours(0,0,0,0);
+  return x<t;
+}
+function rcParseDate_(s){
+  if(!s)return 0;
+  const d=new Date(s); if(!isNaN(d.getTime()))return d.getTime();
+  const m=String(s).match(/(\d{4})\D+(\d{1,2})\D+(\d{1,2})\D+(오전|오후)?\s*(\d{1,2}):(\d{2}):(\d{2})/);
+  if(m){ let h=parseInt(m[5],10); if(m[4]==="오후"&&h<12)h+=12; if(m[4]==="오전"&&h===12)h=0;
+    return new Date(+m[1],+m[2]-1,+m[3],h,+m[6],+m[7]).getTime(); }
+  return 0;
+}
+// 두 시트(3월모집·신청현황)의 서로 다른 표기를 모두 읽는다
+function rcSplitEntries_(text){
+  if(!text)return [];
+  return String(text).split(/[\n,]/).map(s=>s.trim()).filter(s=>s&&/\d{1,2}\s*\/\s*\d{1,2}\s*\(/.test(s));
+}
+function rcMainDates_(app){
+  return rcSplitEntries_(app.scheduleText).map(seg=>{
+    const m=seg.match(/(\d{1,2})\s*\/\s*(\d{1,2})\s*\(/); if(!m)return null;
+    const month=+m[1],day=+m[2];
+    const nm=seg.match(/(\d+)\s*박/);
+    const nights=nm?parseInt(nm[1],10):1;
+    const dutyDays=[]; for(let i=0;i<Math.max(nights,1);i++)dutyDays.push(day+i);
+    return {month,day,dutyDays};
+  }).filter(Boolean);
+}
+function rcPartDates_(app){
+  const known=[...new Set((REMOTE_DATA.schedules||[]).filter(s=>s.type==="part").map(s=>s.activity).filter(Boolean))];
+  return rcSplitEntries_(app.partText).map(seg=>{
+    const m=seg.match(/(\d{1,2})\s*\/\s*(\d{1,2})\s*\(/); if(!m)return null;
+    const month=+m[1],day=+m[2];
+    let activity="";
+    for(const a of known){ if(seg.includes(a)){activity=a;break;} }
+    if(!activity){
+      const c=seg.lastIndexOf(":");
+      const tail=(c>=0?seg.slice(c+1):seg.slice(seg.indexOf(")")+1)).trim();
+      if(tail&&!/^\d+$/.test(tail))activity=tail;
+    }
+    return {month,day,activity};
+  }).filter(Boolean);
+}
+function rcOvKey_(name,slot){ return `${name}@${slot}`; }
+function rcApplyOv_(autoNames,slotKey){
+  let out=autoNames.filter(n=>!RC_OV.removed[rcOvKey_(n,slotKey)]);
+  Object.keys(RC_OV.added||{}).forEach(k=>{
+    if(!RC_OV.added[k])return;
+    const i=k.lastIndexOf("@"); const name=k.slice(0,i), sk=k.slice(i+1);
+    if(sk===slotKey&&!RC_OV.removed[k]&&!out.includes(name))out.push(name);
+  });
+  return out;
+}
+function rcBuildSummary_(){
+  const scheds=REMOTE_DATA.schedules||[];
+  const mainEvents=scheds.filter(s=>s.type==="main"&&s.status!=="cancelled");
+  const applyMains=scheds.filter(s=>s.type==="applymain"&&s.status!=="cancelled");
+  const parts=scheds.filter(s=>s.type==="part"&&s.status!=="cancelled");
+
+  return mainEvents.map(ev=>{
+    const evApplyMains=applyMains.filter(a=>a.month===ev.month&&a.startDay>=ev.startDay&&a.startDay<=ev.endDay);
+    const evParts=parts.filter(p=>p.month===ev.month&&p.day>=ev.startDay&&p.day<=ev.endDay);
+
+    const partRaw=new Map();
+    evParts.forEach(p=>{
+      const act=p.activity||"파트봉사";
+      partRaw.set(`${p.month}/${p.day}/${act}`,{month:p.month,day:p.day,activity:act,names:[]});
+    });
+    RC_APPS.forEach(app=>{
+      rcPartDates_(app).forEach(x=>{
+        const key=`${x.month}/${x.day}/${x.activity||"파트봉사"}`;
+        if(partRaw.has(key))rcPushUniq_(partRaw.get(key).names,rcClean_(app.name));
+      });
+    });
+
+    const barijiRaw=new Map();
+    RC_APPS.forEach(app=>{
+      rcMainDates_(app).forEach(x=>{
+        if(x.month!==ev.month||x.day<ev.startDay||x.day>ev.endDay)return;
+        x.dutyDays.forEach(day=>{
+          const dk=`${x.month}/${day}`;
+          if(!barijiRaw.has(dk))barijiRaw.set(dk,{month:x.month,day,names:[]});
+          rcPushUniq_(barijiRaw.get(dk).names,rcClean_(app.name));
+        });
+      });
+    });
+    evApplyMains.forEach(a=>{
+      const dd=(a.nights==="2박3일")?[a.startDay,a.startDay+1]:[a.startDay];
+      dd.forEach(day=>{ const dk=`${a.month}/${day}`; if(!barijiRaw.has(dk))barijiRaw.set(dk,{month:a.month,day,names:[]}); });
+    });
+
+    const slotMap=new Map();
+    partRaw.forEach((v,k)=>slotMap.set(k,{month:v.month,day:v.day,activity:v.activity,key:k,hasPart:true,파트raw:v.names,바라지raw:null,바라지Key:null}));
+    barijiRaw.forEach((v,dk)=>{
+      const bKey=`bariji/${dk}`;
+      let target=null;
+      for(const [pk,ps] of partRaw){ if(ps.month===v.month&&ps.day===v.day&&ps.activity.includes("저녁")){target=pk;break;} }
+      if(target){ const s=slotMap.get(target); s.바라지raw=v.names; s.바라지Key=bKey; }
+      else{
+        const key=`${dk}/`;
+        if(!slotMap.has(key))slotMap.set(key,{month:v.month,day:v.day,activity:"",key,hasPart:false,파트raw:[],바라지raw:null,바라지Key:null});
+        const s=slotMap.get(key); s.바라지raw=(s.바라지raw||[]).concat(v.names); s.바라지Key=bKey;
+      }
+    });
+
+    function scheduleIdsForSlot_(month,day,activity){
+      const ids=[];
+      if(activity){
+        evParts.forEach(p=>{ if(p.month===month&&p.day===day&&(p.activity||"파트봉사")===activity)ids.push(p.id); });
+      }
+      if(!activity||activity.includes("저녁")){
+        evApplyMains.forEach(a=>{
+          const dd=(a.nights==="2박3일")?[a.startDay,a.startDay+1]:[a.startDay];
+          if(a.month===month&&dd.includes(day))ids.push(a.id);
+        });
+      }
+      return ids;
+    }
+
+    const slots=[...slotMap.values()].filter(s=>!rcIsPast_(s.month,s.day)).map(s=>({
+      month:s.month,day:s.day,activity:s.activity,hasPart:s.hasPart,
+      파트:rcApplyOv_(s.파트raw||[],s.key),
+      바라지:s.바라지raw!==null?rcApplyOv_(s.바라지raw,s.바라지Key):null,
+      scheduleIds:scheduleIdsForSlot_(s.month,s.day,s.activity)
+    })).sort((x,y)=>(x.month*100+x.day)-(y.month*100+y.day));
+
+    const foldEntries=[...barijiRaw.entries()].filter(([dk,v])=>!rcIsPast_(v.month,v.day))
+      .sort((a,b)=>{const[am,ad]=a[0].split("/").map(Number),[bm,bd]=b[0].split("/").map(Number);return(am*100+ad)-(bm*100+bd);});
+    const foldByKey={};
+    const fold=foldEntries.map(([dk,v])=>{
+      const item={label:`${v.month}/${v.day}~${v.month}/${v.day+1} 바라지`,names:rcApplyOv_(v.names,`bariji/${dk}`),total:false};
+      foldByKey[`bariji/${dk}`]=item;
+      return item;
+    });
+    evApplyMains.forEach(a=>{
+      if(a.nights!=="2박3일"||rcIsPast_(a.month,a.startDay))return;
+      const nightKeys=[];for(let d=a.startDay;d<a.endDay;d++)nightKeys.push(`bariji/${a.month}/${d}`);
+      const lists=nightKeys.map(k=>(foldByKey[k]?foldByKey[k].names:[]));
+      const names=lists.length?lists.reduce((x,y)=>x.filter(n=>y.includes(n))):[];
+      fold.push({label:`${a.month}/${a.startDay}~${a.month}/${a.endDay} 바라지`,names,total:true});
+    });
+
+    return {name:ev.name||"(이름 없는 행사)",slots,fold};
+  }).filter(g=>g.slots.length);
+}
+function rcEsc_(s){ return String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
+function rcPhoneLink_(phone){
+  if(!phone)return "";
+  const digits=String(phone).replace(/[^\d+]/g,"");
+  const safe=rcEsc_(phone).replace(/'/g,"&#39;");
+  return `<a class="rc-phone" href="sms:${digits}" onclick="copyText('${safe}')">${rcEsc_(phone)}</a>`;
+}
+
+// 구글 앱스크립트는 동시에 여러 요청이 몰리면 가끔 일시적으로 거절한다.
+// 그럴 때 바로 실패로 처리하지 않고 잠깐 쉬었다 한 번 더 시도한다.
+async function rcFetchRetry_(url,tries=2){
+  let lastErr;
+  for(let i=0;i<tries;i++){
+    try{
+      const res=await fetch(url,{cache:"no-store"});
+      if(res.ok)return res;
+      lastErr=new Error("HTTP "+res.status);
+    }catch(e){ lastErr=e; }
+    if(i<tries-1)await new Promise(r=>setTimeout(r,700));
+  }
+  throw lastErr;
+}
+async function loadRecruitStatus(){
+  const box=document.getElementById("rcStateBox"), body=document.getElementById("rcBody");
+  if(!box)return;
+  body.style.display="none";
+  box.innerHTML=`<div class="loading-note">불러오는 중...</div>`;
+  try{
+    const pw=ADMIN_PW;
+    if(!pw){ box.innerHTML=`<div class="empty-note">관리자 인증이 필요합니다.</div>`; return; }
+    const [appRes,ovRes]=await Promise.all([
+      rcFetchRetry_(APPSSCRIPTURL+"?action=listApplications&pw="+encodeURIComponent(pw)+"&t="+Date.now()),
+      rcFetchRetry_(APPSSCRIPTURL+"?action=getRecruitOverrides&pw="+encodeURIComponent(pw)+"&t="+Date.now())
+    ]);
+    const text=await appRes.text();
+    if(text==="UNAUTHORIZED"){ box.innerHTML=`<div class="empty-note">권한이 없습니다. 관리자 모드를 다시 확인해주세요.</div>`; return; }
+    const json=JSON.parse(text);
+    if(!json.ok)throw new Error("NOTREADY");
+    RC_APPS=json.data||[];
+    try{
+      const ovText=await ovRes.text();
+      RC_OV=(ovText==="UNAUTHORIZED")?{removed:{},added:{}}:(JSON.parse(ovText).data||{removed:{},added:{}});
+    }catch(e){ RC_OV={removed:{},added:{}}; }
+    if(!RC_OV.removed)RC_OV.removed={};
+    if(!RC_OV.added)RC_OV.added={};
+    RC_LOADED=true;
+    box.innerHTML="";
+    body.style.display="block";
+    renderRecruitSummaryView();
+    renderRecruitList();
+  }catch(e){
+    box.innerHTML=`<div class="empty-note">불러오지 못했습니다.</div><button class="admin-add-btn" onclick="loadRecruitStatus()" style="margin-top:8px">다시 시도</button>`;
+  }
+}
+async function rcToggleClosed_(ids,closed){
+  if(!ADMIN_PW){ showToast("관리자 인증이 필요합니다"); return; }
+  try{
+    const res=await fetch(APPSSCRIPTURL,{method:"POST",body:JSON.stringify({action:"setSchedulesClosed",pw:ADMIN_PW,ids,closed})});
+    const json=await res.json();
+    if(!json.ok){ showToast("실패했습니다"); return; }
+    ids.forEach(id=>{ const s=REMOTE_DATA.schedules.find(x=>x.id===id); if(s)s.closed=closed; });
+    renderRecruitSummaryView();
+    renderApplySchedules();
+    showToast(closed?"마감 처리했습니다":"마감을 해제했습니다");
+  }catch(e){ showToast("실패했습니다 — 네트워크 오류"); }
+}
+function renderRecruitSummaryView(){
+  const el=document.getElementById("rcSummary"); if(!el)return;
+  const groups=rcBuildSummary_();
+  if(!groups.length){ el.innerHTML=""; return; }
+  el.innerHTML=groups.map(g=>{
+    const minis=g.slots.map(s=>{
+      const label=`${s.month}/${s.day}(${rcWeekday_(s.month,s.day)})${s.activity?` · ${rcEsc_(s.activity)}`:""}`;
+      const lines=[];
+      if(s.바라지!==null)lines.push(`<div class="rc-row"><b>바라지</b><span>${s.바라지.length?rcEsc_(s.바라지.join(", ")):'<i>아직 없음</i>'}</span></div>`);
+      if(s.hasPart)lines.push(`<div class="rc-row"><b>파트</b><span>${s.파트.length?rcEsc_(s.파트.join(", ")):'<i>아직 없음</i>'}</span></div>`);
+      const total=(s.바라지?s.바라지.length:0)+s.파트.length;
+      const allClosed=s.scheduleIds.length>0&&s.scheduleIds.every(id=>{const sc=REMOTE_DATA.schedules.find(x=>x.id===id);return sc&&sc.closed===true;});
+      const closePill=s.scheduleIds.length?`<span class="rc-pill ${allClosed?'is-closed':''}" onclick='rcToggleClosed_(${JSON.stringify(s.scheduleIds)},${!allClosed})'>${allClosed?"마감":"마감하기"}</span>`:"";
+      return `<div class="rc-mini"><div class="rc-date"><span>${label}</span><span class="rc-date-right"><span class="rc-total">총 ${total}명</span>${closePill}</span></div>${lines.join("")}</div>`;
+    }).join("");
+    const uniq=[]; g.fold.filter(f=>!f.total).forEach(f=>f.names.forEach(n=>rcPushUniq_(uniq,n)));
+    const foldBody=g.fold.map(f=>{
+      const namesHtml=f.names.length?rcEsc_(f.names.join(", ")):(f.total?"아직 없음":"<i>아직 없음</i>");
+      return `<div class="rc-fold-row${f.total?" rc-fold-total":""}"><b>${rcEsc_(f.label)}</b><span>${namesHtml}</span></div>`;
+    }).join("");
+    return `<div class="rc-group"><div class="rc-event">${rcEsc_(g.name)}</div>${minis}
+      <div class="rc-fold"><div class="rc-fold-head">바라지 신청자만 보기<span class="rc-total">총 ${uniq.length}명</span></div><div class="rc-fold-body">${foldBody}</div></div></div>`;
+  }).join("");
+}
+function renderRecruitList(){
+  if(!RC_LOADED)return;
+  const q=(document.getElementById("rcSearch").value||"").trim().toLowerCase();
+  // 지난 일정만 있는 신청은 숨긴다
+  const upcoming=RC_APPS.filter(a=>{
+    const all=rcMainDates_(a).concat(rcPartDates_(a));
+    if(!all.length)return true;
+    return all.some(x=>!rcIsPast_(x.month,x.day));
+  });
+  rcRenderDayFilter(upcoming);
+  let list=upcoming.filter(a=>!q||[a.name,a.phone,a.bu,a.ji].some(v=>(v||"").toLowerCase().includes(q)));
+  if(rcDayFilter)list=list.filter(a=>rcApplicationDays_(a).includes(rcDayFilter));
+  list=list.slice().sort((a,b)=>rcParseDate_(b.submittedAt)-rcParseDate_(a.submittedAt));
+  const hidden=RC_APPS.length-upcoming.length;
+  document.getElementById("rcCount").innerHTML=`총 <b>${upcoming.length}</b>명 신청 · 지금 <b>${list.length}</b>명 표시${hidden?` · 지난 일정 ${hidden}명은 숨김`:""}`;
+  document.getElementById("rcList").innerHTML=list.map(a=>{
+    const tags=[];
+    (a.scheduleText||"").split("\n").filter(Boolean).forEach(l=>tags.push(`<span class="rc-tag"><b>바라지</b> ${rcEsc_(l)}</span>`));
+    (a.partText||"").split("\n").filter(Boolean).forEach(l=>tags.push(`<span class="rc-tag"><b>파트</b> ${rcEsc_(l)}</span>`));
+    const when=a.submittedAt?new Date(rcParseDate_(a.submittedAt)).toLocaleString("ko-KR",{month:"numeric",day:"numeric",hour:"2-digit",minute:"2-digit"}):"";
+    return `<div class="rc-card">
+      <div class="rc-card-top"><span class="rc-name">${rcEsc_(rcClean_(a.name))}</span>${rcPhoneLink_(a.phone)}</div>
+      <div class="rc-meta">${rcEsc_(a.bu||"")} ${rcEsc_(a.ji||"")} · ${rcEsc_(a.memberType||"")} ${rcEsc_(a.gender||"")}${a.addr?` · ${rcEsc_(a.addr)}`:""}</div>
+      ${tags.length?`<div class="rc-tagbox">${tags.join("")}</div>`:""}
+      ${a.motive?`<div class="rc-motive">${rcEsc_(a.motive)}</div>`:""}
+      ${a.route?`<div class="rc-route">신청경로: ${rcEsc_(a.route)}</div>`:""}
+      ${when?`<div class="rc-time">신청 ${when}${a.source?` · ${rcEsc_(a.source)}`:""}</div>`:""}
+    </div>`;
+  }).join("")||`<div class="empty-note">표시할 신청이 없습니다.</div>`;
+}
+
+loadRemoteData();
+</script>
+</body>
+</html>
