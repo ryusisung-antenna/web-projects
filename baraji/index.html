@@ -1216,7 +1216,7 @@ let isAdmin = false;
 /* =========================================================
    3. 로컬 저장 / 시트 동기화
    ========================================================= */
-const BUILD_TAG = '2026-11-14-happy-1820'; // 이 파일의 버전 — 화면 맨 아래에서 확인할 수 있습니다
+const BUILD_TAG = '2026-11-14-happy-1820-syncfix'; // 이 파일의 버전 — 화면 맨 아래에서 확인할 수 있습니다
 const DATA_VERSION = 3; // 기본 데이터를 크게 바꿀 때마다 올려주세요. 오래된 기기 캐시를 자동으로 무시하게 됩니다.
 function loadLocalShared(){
   try{
@@ -1501,6 +1501,11 @@ async function applyLatestData(d){
     if(menus_ && menus_.length) MENUS = menus_;
     if(meals_ && Object.keys(meals_).length) MEALS = meals_;
     if(timetables_ && Object.keys(timetables_).length) Object.assign(TIMETABLES, timetables_);
+    // 지난 행사 날짜가 적힌 메모만 현재 행사에 맞는 공통 문구로 바꾼다.
+    const happyDays = TIMETABLES['stay-1921'] && TIMETABLES['stay-1921'].days;
+    if(happyDays) happyDays.forEach(day => (day.rows||[]).forEach(row => {
+      if(/^(?:\*|<[^>]+>)*\s*(?:10\/21-10\/22|12\/17-12\/18) 바라지 귀가/.test(row.note||'')) row.note = '1박 2일 바라지 귀가';
+    }));
     if(prep_ && prep_.length) PREPGROUPS = prep_;
     if(acts_ && acts_.length) ACTIVITIES = acts_;
     // 이 파일은 행복학교 전용이라 PROGRAM_ID를 클라우드 값으로 바꾸지 않습니다.
@@ -2616,7 +2621,6 @@ function menuMiniHTML(name){
 }
 function menuListHTML(mealKey){
   if(!dataLoaded) return LOADING;
-  if(!isAdmin) return '<p class="empty-note">11월 18–20일 공양 메뉴는 확인 중입니다. 확정된 내용은 담당자 안내를 확인해 주세요.</p>';
   const printBtn = isAdmin ? `<div class="admin-add-btn" onclick="printRecipes()">🖨️ 전체 레시피 인쇄용으로 저장 (냉장고 부착용)</div>` : '';
   const meal = MEALS[mealKey];
   if(!meal || !meal.menus || !meal.menus.length) return '<p class="empty-note">메뉴 정보가 아직 등록되지 않았습니다.</p>' + ceBtn('meals','메뉴 수정하기') + printBtn;
@@ -3022,7 +3026,7 @@ function ttRowsForDay(stayKey, dayIdx){
 // 날짜 라벨은 코스별로 다르므로(예: 1920코스의 1일차=19일, 2021코스의 1일차=20일)
 // 코스+일차별로 따로 저장합니다. 관리자가 안 고쳤으면 그 코스에 저장된 day.day 문구를 씁니다.
 function _guideDynamicDayLabel(stayKey, dayIdx){
-  if(textEditMode || !GUIDE_OPTIONS_FROM_APPLY || !selectedApplySchedule || selectedApplySchedule.type === 'part') return null;
+  if(!GUIDE_OPTIONS_FROM_APPLY || !selectedApplySchedule || selectedApplySchedule.type === 'part') return null;
   const selectedStayKey = PAGE_TO_STAYKEY[selectedRoute];
   if(!selectedStayKey || selectedStayKey !== stayKey) return null;
   const start = Number(selectedApplySchedule.startDay);
@@ -3048,25 +3052,24 @@ function _guideEnsureContext(pageId, text){
   el.style.display = text ? 'block' : 'none';
 }
 function applyLinkedEventHeader(){
-  if(textEditMode) return;
   const year = new Date().getFullYear();
   const month = GUIDE_EVENT_ANCHOR ? Number(GUIDE_EVENT_ANCHOR.month) : 11;
   const el = document.querySelector('#page-select [data-editable-key="selectKicker"]');
-  if(el) el.textContent = `${year}년 ${month}월 군청년 바라지`;
+  if(el && subappTextOverrides.selectKicker === undefined) el.textContent = `${year}년 ${month}월 군청년 바라지`;
 
   const introTitleEl = document.getElementById('introTitle');
-  if(introTitleEl) introTitleEl.textContent = `${year}년 ${month}월 군청년 행복학교 바라지`;
+  if(introTitleEl && subappTextOverrides.introTitle === undefined) introTitleEl.textContent = `${year}년 ${month}월 군청년 행복학교 바라지`;
   const introBodyEl = document.getElementById('introBody');
-  if(introBodyEl && (/서울여행|서행/.test(introBodyEl.textContent) || /^(7|8|9|10)월/.test(introBodyEl.textContent.trim()))){
+  if(introBodyEl && subappTextOverrides.introBody === undefined && (/서울여행|서행/.test(introBodyEl.textContent) || /^(7|8|9|10)월/.test(introBodyEl.textContent.trim()))){
     introBodyEl.innerHTML = PROGRAM_INFO.intro.map(t=>`<p>${t}</p>`).join('');
   }
   const nextHeading = document.querySelector('[data-editable-key="hdgNextMore"]');
-  if(nextHeading) nextHeading.textContent = '다음 바라지 봉사일정';
+  if(nextHeading && subappTextOverrides.hdgNextMore === undefined) nextHeading.textContent = '다음 바라지 봉사일정';
 }
 function applySelectedScheduleContext(){
   document.querySelectorAll('.guide-linked-schedule').forEach(el=>{ el.style.display='none'; });
   applyLinkedEventHeader();
-  if(textEditMode || !GUIDE_OPTIONS_FROM_APPLY || !selectedApplySchedule || !selectedRoute) return;
+  if(!GUIDE_OPTIONS_FROM_APPLY || !selectedApplySchedule || !selectedRoute) return;
   const s = selectedApplySchedule;
 
   if(s.type === 'part'){
@@ -3075,13 +3078,13 @@ function applySelectedScheduleContext(){
     const timeKey = selectedRoute === 'page-dinner' ? 'dinnerTime' : 'lunchTime';
     const timeEl = document.querySelector(`[data-editable-key="${timeKey}"]`);
     const tr = _guideTimeRange(s);
-    if(timeEl && tr) timeEl.textContent = tr;
+    if(timeEl && tr && subappTextOverrides[timeKey] === undefined) timeEl.textContent = tr;
     return;
   }
 
   const titleKey = { 'page-stay1':'stay1Title', 'page-stay2':'stay2Title', 'page-stay3':'stay3Title' }[selectedRoute];
   const titleEl = titleKey && document.querySelector(`[data-editable-key="${titleKey}"]`);
-  if(titleEl){
+  if(titleEl && subappTextOverrides[titleKey] === undefined){
     const nights = _guidePrettyNights(s.nights) || '전체';
     titleEl.textContent = `${nights} 바라지 · ${_guideStayDateRange(s)}`;
   }
@@ -3105,17 +3108,17 @@ function applySelectedScheduleContext(){
     if(page){
       const d1 = page.querySelector('[data-editable-key="dinnerLabel1"]');
       const d2 = page.querySelector('[data-editable-key="dinnerLabel2"]');
-      if(d1) d1.textContent = `1일차(${Number(s.startDay)}일) 저녁공양`;
-      if(d2 && Number(s.endDay||s.startDay) > Number(s.startDay)) d2.textContent = `2일차(${Number(s.startDay)+1}일) 저녁공양`;
+      if(d1 && subappTextOverrides.dinnerLabel1 === undefined) d1.textContent = `1일차(${Number(s.startDay)}일) 저녁공양`;
+      if(d2 && subappTextOverrides.dinnerLabel2 === undefined && Number(s.endDay||s.startDay) > Number(s.startDay)) d2.textContent = `2일차(${Number(s.startDay)+1}일) 저녁공양`;
     }
   }
 }
 
 function dayLabel(stayKey, dayIdx){
-  const dynamic = _guideDynamicDayLabel(stayKey, dayIdx);
-  if(dynamic) return dynamic;
   const key = `calDay_${stayKey}_${dayIdx}`;
   if(subappTextOverrides[key] !== undefined) return subappTextOverrides[key];
+  const dynamic = _guideDynamicDayLabel(stayKey, dayIdx);
+  if(dynamic) return dynamic;
   const t = resolveTimetable(stayKey);
   if(t && t.days && t.days[dayIdx] && t.days[dayIdx].day) return t.days[dayIdx].day;
   return `${dayIdx+1}일차`;
@@ -3123,7 +3126,6 @@ function dayLabel(stayKey, dayIdx){
 
 function ttRowsHTMLByStayKey(stayKey){
   if(!dataLoaded) return LOADING;
-  if(!isAdmin) return '<p class="empty-note">11월 18–20일 상세 시간표는 확인 중입니다. 확정된 내용은 담당자 안내를 확인해 주세요.</p>';
   const t = resolveTimetable(stayKey);
   if(!t || !t.days) return '<p class="empty-note">일정 정보가 아직 등록되지 않았습니다.</p>';
   const isDerived = !!DERIVED_STAY[stayKey];
@@ -3145,7 +3147,6 @@ function ttRowsHTMLByStayKey(stayKey){
 }
 function ttFullHTML(stayKey){
   if(!dataLoaded) return LOADING;
-  if(!isAdmin) return '<p class="empty-note">11월 18–20일 상세 시간표는 확인 중입니다. 확정된 내용은 담당자 안내를 확인해 주세요.</p>';
   const t = resolveTimetable(stayKey);
   if(!t || !t.days) return '<p class="empty-note">일정 정보가 아직 등록되지 않았습니다.</p>';
   return t.days.map((day,idx)=>`
@@ -3241,7 +3242,6 @@ function renderMoreSchedule(){
   const noteEl = document.getElementById('moreScheduleNote');
   if(!box) return;
   if(!dataLoaded){ box.innerHTML = LOADING; return; }
-  if(!isAdmin){ box.innerHTML = '<p class="empty-note">11월 18–20일 상세 시간표는 확인 중입니다. 확정된 내용은 담당자 안내를 확인해 주세요.</p>'; return; }
   // "전체 활동" 화면은 지금 어느 코스에서 들어왔는지(cameFromRoute)를 우선 따르고,
   // 없으면 지금 고른 프로그램의 기본 코스를 보여줍니다.
   const stayKey = PAGE_TO_STAYKEY[cameFromRoute] || defaultStayKeyForProgram(PROGRAM_ID);
@@ -3617,6 +3617,21 @@ function loadTextOverrides(){
 function switchTextOverrides(){
   if(!TEXT_BY[PROGRAM_ID]) TEXT_BY[PROGRAM_ID] = {};
   subappTextOverrides = TEXT_BY[PROGRAM_ID];
+  // 지난 행사에서 저장된 날짜 문구만 버린다. 이후 관리자가 새로 쓴 문구는 그대로 사용한다.
+  const old = {
+    selectKicker:'2026년 10월 군청년 바라지',
+    stay1Title:'1박 2일 바라지 · 19일(수)–20일(목)',
+    stay2Title:'1박 2일 바라지 · 20일(목)–21일(금)',
+    stay3Title:'2박 3일 바라지 · 19일(수)–21일(금)',
+    calDay0:'13일(목) - 1일차', calDay1:'14일(금) - 2일차',
+    hdgNextMore:'9월에 예정된 바라지 봉사일정',
+    dinnerLabel1:'1일차 저녁공양', dinnerLabel2:'2일차 저녁공양'
+  };
+  Object.keys(old).forEach(k=>{ if(subappTextOverrides[k]===old[k]) delete subappTextOverrides[k]; });
+  if(/^<p>10월의 군청년 프로그램은/.test(subappTextOverrides.introBody||'')) delete subappTextOverrides.introBody;
+  ['calDay_stay-1920_0','calDay_stay-1920_1','calDay_stay-1921_0','calDay_stay-1921_1','calDay_stay-1921_2','calDay_stay-2021_0','calDay_stay-2021_1'].forEach(k=>{
+    if(/^\d일차 - [월화수목금토일]요일$/.test(subappTextOverrides[k]||'')) delete subappTextOverrides[k];
+  });
   CALENDAR_DAYS.forEach((_,i)=>{
     CALENDAR_DAYS[i] = (subappTextOverrides['calDay'+i] !== undefined)
       ? subappTextOverrides['calDay'+i] : DEFAULT_CALENDAR_DAYS[i];
